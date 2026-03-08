@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giuliana Lopes Galvão — Senior UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --plum: #6B4FA0;
+    --plum-light: #8B6FC0;
+    --plum-pale: #D4C8EF;
+    --plum-ghost: #F2EEF9;
+    --warm-cream: #FAF7F2;
+    --warm-stone: #EDE8E0;
+    --ink: #1C1917;
+    --ink-soft: #4A4542;
+    --ink-muted: #8A8480;
+    --accent-gold: #C4975A;
+    --accent-rose: #C4837A;
+    --white: #FFFFFF;
+  }
+
+  /* ─── DARK MODE ─── */
+  :root {
+    --mode-transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+  }
+
+  body.dark-mode {
+    --warm-cream: #0e0c14;
+    --warm-stone: #1e1a2a;
+    --ink: rgba(255,255,255,0.88);
+    --ink-soft: rgba(255,255,255,0.55);
+    --ink-muted: rgba(255,255,255,0.3);
+    --white: #0e0c14;
+    --plum-ghost: #1a1525;
+    background: #0e0c14;
+    color: rgba(255,255,255,0.88);
+  }
+  body.dark-mode nav {
+    background: rgba(14,12,20,0.92);
+    border-bottom-color: rgba(255,255,255,0.07);
+  }
+  body.dark-mode .lang-toggle {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.1);
+  }
+  body.dark-mode .lang-btn { color: rgba(255,255,255,0.4); }
+  body.dark-mode .lang-btn.active { background: var(--plum); color: #fff; }
+  body.dark-mode .nav-name { color: rgba(255,255,255,0.88); }
+  body.dark-mode .nav-links a { color: rgba(255,255,255,0.4); }
+  body.dark-mode .hero-headline { color: rgba(255,255,255,0.88); }
+  body.dark-mode .hero-sub { color: rgba(255,255,255,0.5); }
+  body.dark-mode .stat-card {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  body.dark-mode .stat-number { color: rgba(255,255,255,0.88); }
+  body.dark-mode .stat-label { color: rgba(255,255,255,0.35); }
+  body.dark-mode .btn-secondary { color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.25); }
+  body.dark-mode .case-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
+  body.dark-mode .case-title { color: rgba(255,255,255,0.8); }
+  body.dark-mode .case-desc { color: rgba(255,255,255,0.4); }
+  body.dark-mode footer { background: #07060e; border-color: rgba(255,255,255,0.06); }
+
+  /* ─── DARK MODE TOGGLE BUTTON ─── */
+  .dark-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--warm-stone);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    transition: all 0.3s;
+    color: var(--ink);
+    margin-left: 12px;
+    flex-shrink: 0;
+  }
+  .dark-toggle:hover { background: var(--warm-stone); transform: scale(1.08); }
+  body.dark-mode .dark-toggle {
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  /* ─── PARTICLE CANVAS — full page fixed background ─── */
+  #particle-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* All page content sits above the canvas */
+  nav, section, footer { position: relative; z-index: 2; }
+  #hero { position: relative; z-index: 1; }
+  #work, #about, #process, #contact { z-index: 3; }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── LANG TOGGLE ─── */
+  .lang-toggle {
+    display: flex;
+    gap: 2px;
+    background: rgba(250,247,242,0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--warm-stone);
+    border-radius: 20px;
+    padding: 4px;
+  }
+  .lang-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    border-radius: 16px;
+    border: none;
+    background: transparent;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-btn.active {
+    background: var(--plum);
+    color: var(--white);
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 99;
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    background: rgba(250,247,242,0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--warm-stone); }
+  .nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links {
+    margin-left: auto;
+    margin-right: 24px;
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--plum); }
+
+  /* ─── HERO ─── */
+  #hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 140vh;
+    position: relative;
+    overflow: visible;
+    background: var(--warm-cream);
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 100px 72px 80px 80px;
+    background: var(--warm-cream);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    align-self: start;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--plum);
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 300;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--plum);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 420px;
+    margin-bottom: 40px;
+  }
+  [lang-pt] .hero-sub { display: none; }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--plum);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 14px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover {
+    background: var(--plum-light);
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--ink-muted);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--plum); border-color: var(--plum); }
+
+  .hero-right {
+    position: relative;
+    background: var(--warm-cream);
+    overflow: hidden;
+  }
+
+  /* Hero photo — fills the tall column, scrolls naturally */
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--warm-cream);
+  }
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    display: block;
+  }
+  /* Blend photo edges — top very subtle */
+  .hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background:
+      linear-gradient(to left, transparent 55%, var(--warm-cream) 100%),
+      linear-gradient(to bottom, transparent 45%, var(--warm-cream) 100%),
+      linear-gradient(to top, transparent 92%, var(--warm-cream) 100%),
+      linear-gradient(to right, transparent 80%, var(--warm-cream) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 56px;
+  }
+
+  .stat-card {
+    background: var(--white);
+    padding: 28px 24px;
+    border: none;
+  }
+  .stat-card:first-child { border-radius: 24px 4px 4px 4px; }
+  .stat-card:nth-child(2) { border-radius: 4px 24px 4px 4px; }
+  .stat-card:nth-child(3) { border-radius: 4px 4px 4px 24px; }
+  .stat-card:last-child { border-radius: 4px 4px 24px 4px; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--plum);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  /* ─── SECTION WRAPPER ─── */
+  section { padding: 120px 80px; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--plum);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 64px;
+  }
+  .section-title em { font-style: italic; color: var(--plum); }
+
+  /* ─── ABOUT ─── */
+  #about {
+    background: var(--ink);
+    color: var(--white);
+  }
+  #about .section-label { color: var(--plum-pale); }
+  #about .section-label::before { background: var(--plum-pale); }
+  #about .section-title { color: var(--white); }
+  #about .section-title em { color: var(--plum-pale); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 24px;
+  }
+  .about-text p strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .about-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--plum-pale);
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .about-more:hover {
+    color: var(--white);
+    gap: 12px;
+  }
+
+  .about-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .aside-block-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--plum-pale);
+    margin-bottom: 20px;
+  }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .skill-chip {
+    font-size: 13px;
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.05);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .skill-chip:hover {
+    border-color: var(--plum-pale);
+    color: var(--white);
+    background: rgba(107,79,160,0.2);
+  }
+  .skill-chip.ai {
+    border-color: rgba(107,79,160,0.5);
+    background: rgba(107,79,160,0.15);
+    color: var(--plum-pale);
+  }
+
+  .personal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .personal-tag {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .personal-tag span { font-size: 16px; }
+
+  /* ─── CASES ─── */
+  #work { background: var(--warm-cream); }
+
+  .cases-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .case-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--warm-stone);
+    text-decoration: none;
+    color: inherit;
+  }
+  .case-card:first-child { border-radius: 24px 4px 4px 4px; }
+  .case-card:nth-child(2) { border-radius: 4px 24px 4px 4px; }
+  .case-card.case-wide {
+    grid-column: 1 / -1;
+    border-radius: 4px;
+  }
+  .case-card:nth-last-child(1):nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .case-inner {
+    padding: 52px 48px;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .case-card:hover .case-inner { transform: translateY(-4px); }
+
+  .case-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .case-card:hover .case-bg { opacity: 1; }
+
+  .case-bg-1 { background: linear-gradient(135deg, #6B4FA0 0%, #8B6FC0 100%); }
+  .case-bg-2 { background: linear-gradient(135deg, #4A3870 0%, #6B4FA0 100%); }
+  .case-bg-3 { background: linear-gradient(135deg, #C4975A 0%, #D4A96A 100%); }
+  .case-bg-4 { background: linear-gradient(135deg, #3A5A4A 0%, #4A7A5A 100%); }
+  .case-bg-5 { background: linear-gradient(135deg, #5A3A6A 0%, #7A4A8A 100%); }
+  .case-bg-6 { background: linear-gradient(135deg, #2A3A5A 0%, #3A4A6A 100%); }
+  .case-bg-7 { background: linear-gradient(135deg, #6A3A3A 0%, #8A4A4A 100%); }
+
+  .case-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .case-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .case-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 10px;
+    background: rgba(107,79,160,0.12);
+    color: var(--plum);
+    transition: background 0.3s, color 0.3s;
+  }
+  .case-tag.new {
+    background: var(--plum);
+    color: var(--white);
+  }
+  .case-card:hover .case-tag {
+    background: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85);
+  }
+  .case-card:hover .case-tag.new {
+    background: rgba(255,255,255,0.95);
+    color: var(--plum);
+  }
+
+  .case-arrow {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--plum-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--plum);
+    font-size: 16px;
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+  .case-card:hover .case-arrow {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.5);
+    color: var(--white);
+    transform: rotate(45deg);
+  }
+
+  .case-bottom { }
+  .case-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+  .case-card:hover .case-eyebrow { color: rgba(255,255,255,0.6); }
+
+  .case-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 14px;
+    transition: color 0.3s;
+  }
+  .case-card:hover .case-title { color: var(--white); }
+
+  .case-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 420px;
+    transition: color 0.3s;
+  }
+  .case-card:hover .case-desc { color: rgba(255,255,255,0.75); }
+
+  .case-featured {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 8px;
+    transition: color 0.3s;
+  }
+  .case-featured::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+  }
+  .case-card:hover .case-featured { color: rgba(255,215,100,0.9); }
+
+  /* ─── PROCESS ─── */
+  #process {
+    background: var(--plum-ghost);
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .process-step {
+    background: var(--white);
+    padding: 44px 36px;
+    position: relative;
+  }
+  .process-step:first-child { border-radius: 24px 4px 4px 24px; }
+  .process-step:last-child { border-radius: 4px 24px 24px 4px; }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--plum-pale);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  .step-tools {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .step-tool {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--plum);
+    background: var(--plum-ghost);
+    padding: 3px 9px;
+    border-radius: 8px;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--ink);
+    color: var(--white);
+    text-align: center;
+    padding: 120px 80px;
+  }
+
+  #contact .section-label {
+    justify-content: center;
+    color: var(--plum-pale);
+  }
+  #contact .section-label::before { background: var(--plum-pale); }
+  #contact .section-title {
+    color: var(--white);
+    max-width: 640px;
+    margin: 0 auto 48px;
+  }
+  #contact .section-title em { color: var(--plum-pale); }
+
+  .contact-links {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.25s;
+    letter-spacing: 0.02em;
+  }
+  .contact-link.primary {
+    background: var(--plum);
+    color: var(--white);
+  }
+  .contact-link.primary:hover {
+    background: var(--plum-light);
+    transform: translateY(-2px);
+  }
+  .contact-link.outline {
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.75);
+  }
+  .contact-link.outline:hover {
+    border-color: var(--plum-pale);
+    color: var(--white);
+    transform: translateY(-2px);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 32px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+  footer a {
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--plum-pale); }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 100px 24px 40px; position: relative; height: auto; }
+    .hero-right { min-height: 60vh; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .cases-grid { grid-template-columns: 1fr; }
+    .case-card:first-child,
+    .case-card:nth-child(2) { border-radius: 4px; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .process-step:first-child,
+    .process-step:last-child { border-radius: 4px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    .lang-toggle { top: 16px; right: 16px; }
+  }
+
+  /* ─── LANG SWITCHING ─── */
+  .en { display: block; }
+  .pt { display: none; }
+  .lang-pt .en { display: none; }
+  .lang-pt .pt { display: block; }
+  .lang-pt .en-inline { display: none; }
+  .lang-pt .pt-inline { display: inline; }
+  .en-inline { display: inline; }
+  .pt-inline { display: none; }
+
+  /* For flex items that need lang switching */
+  .en.flex-item { display: flex; }
+  .pt.flex-item { display: none; }
+  .lang-pt .en.flex-item { display: none; }
+  .lang-pt .pt.flex-item { display: flex; }
+
+  /* ─── METHODOLOGY TABS ─── */
+  .meth-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 2px;
+    flex-wrap: wrap;
+  }
+  .meth-tab {
+    flex: 1;
+    min-width: 140px;
+    background: var(--white);
+    border: none;
+    padding: 24px 20px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .meth-tab:hover { background: var(--plum-ghost); }
+  .meth-tab.active {
+    background: var(--plum-ghost);
+    border-bottom-color: var(--plum);
+  }
+  .meth-tab-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--plum);
+  }
+  .meth-tab-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .meth-panel { display: none; }
+  .meth-panel.active { display: block; }
+
+  .meth-panel-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    background: var(--white);
+    padding: 52px;
+  }
+
+  .meth-panel-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 16px;
+  }
+  .meth-panel-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .meth-panel-title em { font-style: italic; color: var(--plum); }
+  .meth-panel-desc {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+  .meth-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .meth-tool {
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 16px;
+    border: 1px solid var(--plum-pale);
+    color: var(--plum);
+    background: var(--plum-ghost);
+  }
+  .meth-outputs-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+  }
+  .meth-output-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .meth-output-list li {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.55;
+  }
+  .meth-output-list li.pt { display: none; }
+  .lang-pt .meth-output-list li.en { display: none; }
+  .lang-pt .meth-output-list li.pt { display: flex; }
+
+  .meth-output-list li::before {
+    content: '→';
+    color: var(--plum);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .meth-quote {
+    padding: 20px 24px;
+    border-left: 2px solid var(--plum-pale);
+    background: var(--plum-ghost);
+    border-radius: 0 8px 8px 0;
+  }
+  .meth-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .meth-tabs { flex-direction: column; }
+    .meth-panel-inner { grid-template-columns: 1fr; gap: 32px; padding: 32px 24px; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- DARK MODE TOGGLE -->
+
+<!-- LANG TOGGLE -->
+
+<nav id="navbar">
+  <a href="#hero" class="nav-name">Giuliana Lopes Galvão</a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="en-inline">About</a><a href="about.html" class="pt-inline">Sobre</a></li>
+    <li><a href="#work" class="en-inline">Work</a><a href="#work" class="pt-inline">Trabalhos</a></li>
+    <li><a href="#process" class="en-inline">Process</a><a href="#process" class="pt-inline">Processo</a></li>
+    <li><a href="#contact" class="en-inline">Contact</a><a href="#contact" class="pt-inline">Contato</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
+  <button class="dark-toggle" id="darkToggle" onclick="toggleDarkMode()" title="Toggle dark/light mode" style="display:none">☀️</button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<canvas id="particle-canvas" style="display:none"></canvas>
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag reveal">
+      <span class="en-inline">Senior UX Designer · Brasil</span>
+      <span class="pt-inline">UX Designer Sênior · Brasil</span>
+    </div>
+
+    <h1 class="hero-headline reveal reveal-delay-1">
+      <span class="en">I follow the problem,<br>not the <em>method.</em></span>
+      <span class="pt">Sigo o problema,<br>não o <em>método.</em></span>
+    </h1>
+
+    <p class="hero-sub reveal reveal-delay-2">
+      <span class="en">Senior UX Designer with 8 years of experience. Curious by nature, adaptive by choice — I use research, methodology, and AI as a utility belt, not a script.</span>
+      <span class="pt">UX Designer Sênior com 8 anos de experiência. Curiosa por natureza, adaptável por escolha — uso pesquisa, metodologia e IA como cinto de utilidades, não como roteiro.</span>
+    </p>
+
+    <div class="hero-stats reveal reveal-delay-2">
+      <div class="stat-card">
+        <div class="stat-num">8</div>
+        <div class="stat-label en">Years of experience</div>
+        <div class="stat-label pt">Anos de experiência</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">&lt;&gt;</div>
+        <div class="stat-label en">Design + Code</div>
+        <div class="stat-label pt">Design + Código</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">AI</div>
+        <div class="stat-label en">Integrated in workflow</div>
+        <div class="stat-label pt">Integrada no fluxo</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">C1</div>
+        <div class="stat-label en">English proficiency</div>
+        <div class="stat-label pt">Proficiência em inglês</div>
+      </div>
+    </div>
+
+    <div class="hero-actions reveal reveal-delay-3">
+      <a href="#work" class="btn-primary">
+        <span class="en-inline">See my work</span>
+        <span class="pt-inline">Ver projetos</span>
+        ↓
+      </a>
+      <a href="#contact" class="btn-secondary">
+        <span class="en-inline">Get in touch</span>
+        <span class="pt-inline">Entrar em contato</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo">
+      <img id="heroPhoto" src="images/giuliana-branco-1.png" alt="Giuliana Lopes Galvão">
+    </div>
+  </div>
+</section>
+
+<!-- ─── WORK ─── -->
+<section id="work">
+  <div class="section-label reveal">
+    <span class="en-inline">Selected Work</span>
+    <span class="pt-inline">Projetos Selecionados</span>
+  </div>
+  <h2 class="section-title reveal">
+    <span class="en">Cases that shaped<br><em>real decisions.</em></span>
+    <span class="pt">Cases que moldaram<br><em>decisões reais.</em></span>
+  </h2>
+
+  <div class="cases-grid">
+
+    <!-- NEUROOT — featured -->
+    <a href="neuroot-case.html" class="case-card reveal">
+      <div class="case-bg case-bg-1"></div>
+      <div class="case-inner">
+        <div class="case-top">
+          <div class="case-tags">
+            <span class="case-tag new">New</span>
+            <span class="case-tag">UX + AI</span>
+            <span class="case-tag">Product Design</span>
+            <span class="case-tag">Mobile PWA</span>
+            <span class="case-tag">React + Supabase</span>
+          </div>
+          <div class="case-arrow">↗</div>
+        </div>
+        <div class="case-bottom">
+          <div class="case-featured en">Personal project — app in development</div>
+          <div class="case-featured pt">Projeto pessoal — app em desenvolvimento</div>
+          <h3 class="case-title">Neuroot</h3>
+          <p class="case-desc en">A post-burnout recovery app designed from personal experience. No user research — just lived truth, Behavioral Activation methodology, and neuroplasticity as a foundation. One practice a day. A defined end. Built with Figma Make, Claude Code, and Claude API. The name grew from roots → neurons → a new beginning.</p>
+          <p class="case-desc pt">App de recuperação pós-burnout criado a partir da própria experiência. Sem pesquisa com usuários — só verdade vivida, Ativação Comportamental e neuroplasticidade como base. Uma prática por dia. Um fim definido. Construído com Figma Make, Claude Code e Claude API. O nome nasceu de raízes → neurônios → um recomeço.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- PETROBRAS PCD -->
+    <a href="petrobras-case.html" class="case-card reveal">
+      <div class="case-bg" style="background: linear-gradient(135deg, #0A2A3A 0%, #0E4B6B 100%);"></div>
+      <div class="case-inner">
+        <div class="case-top">
+          <div class="case-tags">
+            <span class="case-tag new">New</span>
+            <span class="case-tag">UX Research</span>
+            <span class="case-tag">Usability Testing</span>
+            <span class="case-tag">Accessibility</span>
+          </div>
+          <div class="case-arrow">↗</div>
+        </div>
+        <div class="case-bottom">
+          <div class="case-eyebrow en">Oil & Gas · Petrobras</div>
+          <div class="case-eyebrow pt">Energia · Petrobras</div>
+          <h3 class="case-title">Petrobras —<br><em>PCD Usability Testing</em></h3>
+          <p class="case-desc en">28 remote sessions with people with disabilities. An honest diagnosis of how Petrobras' institutional website fails — and how it can truly include.</p>
+          <p class="case-desc pt">28 sessões remotas com pessoas com deficiência. Um diagnóstico honesto de como o site institucional da Petrobras falha — e como pode incluir de verdade.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- TECHBACK BB -->
+    <a href="techback-case.html" class="case-card reveal reveal-delay-1">
+      <div class="case-bg case-bg-4"></div>
+      <div class="case-inner">
+        <div class="case-top">
+          <div class="case-tags">
+            <span class="case-tag">Service Design</span>
+            <span class="case-tag">UX Research</span>
+          </div>
+          <div class="case-arrow">↗</div>
+        </div>
+        <div class="case-bottom">
+          <div class="case-eyebrow en">Smart Waste · Banco do Brasil</div>
+          <div class="case-eyebrow pt">Resíduo Inteligente · Banco do Brasil</div>
+          <h3 class="case-title">TechBack BB —<br>Smart Waste Journey</h3>
+          <p class="case-desc en">End-to-end service design for a sustainable technology waste program.</p>
+          <p class="case-desc pt">Service design ponta a ponta para programa de descarte sustentável de tecnologia.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- INVESTE BRASIL -->
+    <a href="#" class="case-card reveal">
+      <div class="case-bg case-bg-5"></div>
+      <div class="case-inner">
+        <div class="case-top">
+          <div class="case-tags">
+            <span class="case-tag">Web Design</span>
+            <span class="case-tag">Discovery</span>
+          </div>
+          <div class="case-arrow">↗</div>
+        </div>
+        <div class="case-bottom">
+          <div class="case-eyebrow en">Investment Platform</div>
+          <div class="case-eyebrow pt">Plataforma de Investimentos</div>
+          <h3 class="case-title">Investe Brasil —<br>Website Design</h3>
+          <p class="case-desc en">Full website design project for an investment-focused platform, from discovery to UI.</p>
+          <p class="case-desc pt">Projeto completo de design de site para plataforma de investimentos, do discovery à UI.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- CPFL -->
+    <a href="#" class="case-card reveal reveal-delay-1">
+      <div class="case-bg case-bg-6"></div>
+      <div class="case-inner">
+        <div class="case-top">
+          <div class="case-tags">
+            <span class="case-tag">Product Discovery</span>
+            <span class="case-tag">Strategy</span>
+          </div>
+          <div class="case-arrow">↗</div>
+        </div>
+        <div class="case-bottom">
+          <div class="case-eyebrow en">Energy Sector</div>
+          <div class="case-eyebrow pt">Setor de Energia</div>
+          <h3 class="case-title">CPFL Solutions —<br>Website Strategy</h3>
+          <p class="case-desc en">Strategic UX diagnosis and redesign of enterprise website for CPFL's B2B solutions arm.</p>
+          <p class="case-desc pt">Diagnóstico estratégico de UX e redesign do site corporativo do braço de soluções B2B da CPFL.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- BANCO PAN -->
+    <a href="#" class="case-card reveal reveal-delay-1">
+      <div class="case-bg case-bg-2"></div>
+      <div class="case-inner">
+        <div class="case-top">
+          <div class="case-tags">
+            <span class="case-tag">UX Research</span>
+            <span class="case-tag">Intranet</span>
+            <span class="case-tag">Enterprise</span>
+          </div>
+          <div class="case-arrow">↗</div>
+        </div>
+        <div class="case-bottom">
+          <div class="case-eyebrow en">Fintech · Banco PAN</div>
+          <div class="case-eyebrow pt">Fintech · Banco PAN</div>
+          <h3 class="case-title">Banco PAN —<br>Intranet Redesign</h3>
+          <p class="case-desc en">Complete redesign of an enterprise intranet for a major Brazilian fintech bank.</p>
+          <p class="case-desc pt">Redesign completo da intranet corporativa de um grande banco fintech brasileiro.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- BB INFLUENCER GAMIFICATION -->
+    <a href="#" class="case-card reveal">
+      <div class="case-bg case-bg-7"></div>
+      <div class="case-inner">
+        <div class="case-top">
+          <div class="case-tags">
+            <span class="case-tag">Gamification</span>
+            <span class="case-tag">UX Design</span>
+            <span class="case-tag">Social Media</span>
+          </div>
+          <div class="case-arrow">↗</div>
+        </div>
+        <div class="case-bottom">
+          <div class="case-eyebrow en">Banking · Banco do Brasil</div>
+          <div class="case-eyebrow pt">Bancário · Banco do Brasil</div>
+          <h3 class="case-title">Banco do Brasil —<br><em>Influencer School Gamification</em></h3>
+          <p class="case-desc en">Gamified learning experience design for BB's influencer school program, combining engagement mechanics with brand education.</p>
+          <p class="case-desc pt">Design de experiência de aprendizado gamificado para o programa de escola de influenciadores do BB, combinando mecânicas de engajamento com educação de marca.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- PREVISUL -->
+    <a href="previsul-case.html" class="case-card reveal">
+      <div class="case-bg" style="background: linear-gradient(135deg, #3A5080 0%, #5A7AAA 100%);"></div>
+      <div class="case-inner">
+        <div class="case-top">
+          <div class="case-tags">
+            <span class="case-tag">Service Design</span>
+            <span class="case-tag">End-to-End</span>
+            <span class="case-tag">UX Research</span>
+          </div>
+          <div class="case-arrow">↗</div>
+        </div>
+        <div class="case-bottom">
+          <div class="case-eyebrow en">Insurance · Previsul</div>
+          <div class="case-eyebrow pt">Seguros · Previsul</div>
+          <h3 class="case-title">Previsul —<br><em>End-to-End Service Design</em></h3>
+          <p class="case-desc en">Full redesign of the insurance claims journey — from the 0800 call to final payment. 150+ screens, 40+ pain points, 22 stakeholders. Two connected products delivered.</p>
+          <p class="case-desc pt">Redesign completo da jornada de sinistros — do atendimento 0800 ao pagamento final. 150+ telas, 40+ pontos de dor, 22 stakeholders. Dois produtos conectados entregues.</p>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="section-label reveal">
+    <span class="en-inline">About</span>
+    <span class="pt-inline">Sobre</span>
+  </div>
+  <h2 class="section-title reveal">
+    <span class="en">The designer behind<br><em>the work.</em></span>
+    <span class="pt">A designer por trás<br><em>do trabalho.</em></span>
+  </h2>
+
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p class="en">
+        I'm a <strong>Senior UX Designer with 8 years of experience</strong>, with a background in graphic design. I'm deeply curious, and I move with the world — not against it. My focus is always on the human problem first. The method comes after. I don't limit myself to a single framework because every problem deserves its own approach.
+      </p>
+      <p class="pt">
+        Sou <strong>UX Designer Sênior com 8 anos de experiência</strong>, com origem no design gráfico. Sou muito curiosa e me adapto rapidamente às mudanças do mundo. Meu foco é sempre o problema humano primeiro — o método vem depois. Não me limito a uma única abordagem porque cada problema merece a sua.
+      </p>
+
+      <p class="en">
+        What people call <strong>"owner mindset"</strong> is how I naturally work. I've led strategic projects for enterprise clients like <strong>Banco do Brasil, Petrobras, CPFL, Vivo, GPA, and Carrefour</strong>. Research, methodology, and tooling are always at my side, not as a cage, but as a <em>utility belt.</em>
+      </p>
+      <p class="pt">
+        O que as pessoas chamam de <strong>"pensamento de dono"</strong> é como eu trabalho naturalmente. Liderei projetos estratégicos para grandes empresas como <strong>Banco do Brasil, Petrobras, CPFL, Vivo, GPA e Carrefour</strong>. Pesquisa, metodologia e ferramentas estão sempre do meu lado, não como uma prisão, mas como um <em>cinto de utilidades.</em>
+      </p>
+
+      <p class="en">
+        I never stop. I finished my postgraduate studies, started an IBM AI course, and I'm now walking the path of <strong>design engineering</strong> — because AI arrived and changed everything. Those who embrace it have a superpower. I'm one of them.
+      </p>
+      <p class="pt">
+        Nunca paro. Terminei a pós, comecei um curso de IA pela IBM, e agora estou trilhando o caminho de <strong>design engineering</strong> — porque a IA chegou e mudou tudo. Quem abraçar isso tem um superpoder. Eu sou uma dessas pessoas.
+      </p>
+      <a href="about.html" class="about-more reveal">
+        <span class="en-inline">More about me</span>
+        <span class="pt-inline">Mais sobre mim</span>
+        <span>&rarr;</span>
+      </a>
+    </div>
+
+    <div class="about-aside reveal reveal-delay-1">
+      <div>
+        <div class="aside-block-title en">Expertise</div>
+        <div class="aside-block-title pt">Especialidades</div>
+        <div class="skills-list">
+          <span class="skill-chip">UX Research</span>
+          <span class="skill-chip">Product Discovery</span>
+          <span class="skill-chip">Service Design</span>
+          <span class="skill-chip">Information Architecture</span>
+          <span class="skill-chip">Usability Testing</span>
+          <span class="skill-chip">Design Sprints</span>
+          <span class="skill-chip">Lean Inception</span>
+          <span class="skill-chip">UX Strategy</span>
+          <span class="skill-chip">Workshop Facilitation</span>
+          <span class="skill-chip">Design Engineering</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="aside-block-title en">Tools</div>
+        <div class="aside-block-title pt">Ferramentas</div>
+
+        <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;font-family:'DM Mono',monospace;">
+          <span class="en-inline">Design & Engineering</span>
+          <span class="pt-inline">Design & Engenharia</span>
+        </p>
+        <div class="skills-list" style="margin-bottom:20px;">
+          <span class="skill-chip">Figma</span>
+          <span class="skill-chip">Framer</span>
+          <span class="skill-chip">Miro</span>
+          <span class="skill-chip">Maze</span>
+          <span class="skill-chip">Hotjar</span>
+          <span class="skill-chip">Clarity</span>
+          <span class="skill-chip">Notion</span>
+          <span class="skill-chip">GitHub</span>
+          <span class="skill-chip">Vercel</span>
+        </div>
+
+        <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;font-family:'DM Mono',monospace;">AI</p>
+        <div class="skills-list">
+          <span class="skill-chip ai">Claude Code</span>
+          <span class="skill-chip ai">Claude API</span>
+          <span class="skill-chip ai">ChatGPT</span>
+          <span class="skill-chip ai">Gemini</span>
+          <span class="skill-chip ai">Figma Make</span>
+          <span class="skill-chip ai">Cursor</span>
+          <span class="skill-chip ai">Lovable</span>
+          <span class="skill-chip ai">Kling AI</span>
+          <span class="skill-chip ai">Miro AI</span>
+          <span class="skill-chip ai">Framer AI</span>
+        </div>
+        <p style="font-size:12px;color:var(--ink-muted);margin-top:12px;line-height:1.6;">
+          <span class="en-inline">IBM AI for Designers — in progress</span>
+          <span class="pt-inline">IBM IA para Designers — em curso</span>
+        </p>
+      </div>
+
+      <div>
+        <div class="aside-block-title en">Beyond design</div>
+        <div class="aside-block-title pt">Além do design</div>
+        <div class="personal-tags">
+          <span class="personal-tag"><span>🎤</span> <span class="en-inline">Singer</span><span class="pt-inline">Cantora</span></span>
+          <span class="personal-tag"><span>🥋</span> <span class="en-inline">Martial arts</span><span class="pt-inline">Artes marciais</span></span>
+          <span class="personal-tag"><span>✈️</span> <span class="en-inline">Traveler</span><span class="pt-inline">Viajante</span></span>
+          <span class="personal-tag"><span>🐱</span> <span class="en-inline">Cat mom</span><span class="pt-inline">Mãe de gato</span></span>
+          <span class="personal-tag"><span>🔮</span> <span class="en-inline">Future curious</span><span class="pt-inline">Curiosa sobre o futuro</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section id="process">
+  <div class="section-label reveal">
+    <span class="en-inline">Methodology</span>
+    <span class="pt-inline">Metodologia</span>
+  </div>
+  <h2 class="section-title reveal">
+    <span class="en">How I think<br>before I <em>build.</em></span>
+    <span class="pt">Como penso<br>antes de <em>construir.</em></span>
+  </h2>
+
+  <p class="reveal" style="font-size:17px;font-weight:300;line-height:1.75;color:var(--ink-soft);max-width:600px;margin-bottom:64px;">
+    <span class="en">My process starts with human exploration — and only moves to execution when the problem is sharp enough for AI to help. Design Thinking defines the field. Shape Up defines the game. AI plays fast.</span>
+    <span class="pt">Meu processo começa com exploração humana — e só avança para execução quando o problema está nítido o suficiente para a IA ajudar. O Design Thinking define o campo. O Shape Up define o jogo. A IA joga rápido.</span>
+  </p>
+
+  <!-- TAB BUTTONS -->
+  <div class="meth-tabs reveal">
+    <button class="meth-tab active" onclick="showStep(0)">
+      <span class="meth-tab-num">01</span>
+      <span class="meth-tab-name en">Design Thinking</span>
+      <span class="meth-tab-name pt">Design Thinking</span>
+    </button>
+    <button class="meth-tab" onclick="showStep(1)">
+      <span class="meth-tab-num">02</span>
+      <span class="meth-tab-name en">Shape Up</span>
+      <span class="meth-tab-name pt">Shape Up</span>
+    </button>
+    <button class="meth-tab" onclick="showStep(2)">
+      <span class="meth-tab-num">03</span>
+      <span class="meth-tab-name en">PRD</span>
+      <span class="meth-tab-name pt">PRD</span>
+    </button>
+    <button class="meth-tab" onclick="showStep(3)">
+      <span class="meth-tab-num">04</span>
+      <span class="meth-tab-name en">Prompt Frames</span>
+      <span class="meth-tab-name pt">Prompt Frames</span>
+    </button>
+    <button class="meth-tab" onclick="showStep(4)">
+      <span class="meth-tab-num">05</span>
+      <span class="meth-tab-name en">AI Executes</span>
+      <span class="meth-tab-name pt">IA Executa</span>
+    </button>
+  </div>
+
+  <!-- PANELS -->
+  <div class="meth-panel active" id="mstep-0">
+    <div class="meth-panel-inner">
+      <div class="meth-panel-left">
+        <div class="meth-panel-tag en">Human exploration first</div>
+        <div class="meth-panel-tag pt">Exploração humana primeiro</div>
+        <h3 class="meth-panel-title en">Understanding<br>the <em>right</em> problem.</h3>
+        <h3 class="meth-panel-title pt">Entendendo<br>o problema <em>certo.</em></h3>
+        <p class="meth-panel-desc en">Before any shaping or building, I use Design Thinking to make sure we're solving the right problem — not just the visible one. This phase lives in empathy, context, and systemic understanding.</p>
+        <p class="meth-panel-desc pt">Antes de qualquer moldagem ou construção, uso o Design Thinking para garantir que estamos resolvendo o problema certo. Essa fase vive na empatia, no contexto e na compreensão sistêmica.</p>
+        <div class="meth-tools">
+          <span class="meth-tool">User Interviews</span><span class="meth-tool">Desk Research</span><span class="meth-tool">Personas</span><span class="meth-tool">Journey Maps</span><span class="meth-tool">Double Diamond</span>
+        </div>
+      </div>
+      <div class="meth-panel-right">
+        <div class="meth-outputs-label en">Outputs</div>
+        <div class="meth-outputs-label pt">Outputs</div>
+        <ul class="meth-output-list">
+          <li class="en">A well-framed problem that earns the right to be solved</li>
+          <li class="pt">Um problema bem enquadrado que merece ser resolvido</li>
+          <li class="en">Validated user profiles with real behavioral evidence</li>
+          <li class="pt">Perfis de usuário validados com evidência comportamental real</li>
+          <li class="en">Systemic understanding of context and pain points</li>
+          <li class="pt">Compreensão sistêmica do contexto e dos pontos de dor</li>
+        </ul>
+        <div class="meth-quote">
+          <p class="en">"Design Thinking defines the field. Without it, everything downstream is guesswork dressed as strategy."</p>
+          <p class="pt">"O Design Thinking define o campo. Sem ele, tudo que vem depois é chute com roupagem de estratégia."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meth-panel" id="mstep-1">
+    <div class="meth-panel-inner">
+      <div class="meth-panel-left">
+        <div class="meth-panel-tag en">Decision before execution</div>
+        <div class="meth-panel-tag pt">Decisão antes da execução</div>
+        <h3 class="meth-panel-title en">Shaping the work<br>before <em>building it.</em></h3>
+        <h3 class="meth-panel-title pt">Moldando o trabalho<br>antes de <em>construir.</em></h3>
+        <p class="meth-panel-desc en">Shape Up replaces infinite backlogs with intentional bets. I use it to define appetite (how much time is worth investing), identify rabbit holes, and set explicit no-gos — before a single line of code.</p>
+        <p class="meth-panel-desc pt">O Shape Up substitui backlogs infinitos por apostas intencionais. Uso para definir apetite, identificar rabbit holes e estabelecer no-gos explícitos — antes de uma linha de código.</p>
+        <div class="meth-tools">
+          <span class="meth-tool">Appetite</span><span class="meth-tool">Betting Table</span><span class="meth-tool">Rabbit Holes</span><span class="meth-tool">No-gos</span><span class="meth-tool">Scoping</span>
+        </div>
+      </div>
+      <div class="meth-panel-right">
+        <div class="meth-outputs-label en">Outputs</div>
+        <div class="meth-outputs-label pt">Outputs</div>
+        <ul class="meth-output-list">
+          <li class="en">Defined appetite — the time we're willing to invest</li>
+          <li class="pt">Apetite definido — o tempo que estamos dispostos a investir</li>
+          <li class="en">Explicit no-gos — what won't be built, no discussion needed</li>
+          <li class="pt">No-gos explícitos — o que não será construído, sem discussão</li>
+          <li class="en">Known risks surfaced before building begins</li>
+          <li class="pt">Riscos mapeados antes de começar a construir</li>
+        </ul>
+        <div class="meth-quote">
+          <p class="en">"Shape Up defines the game. It turns a discovery into a buildable decision."</p>
+          <p class="pt">"O Shape Up define o jogo. É o que transforma uma descoberta em uma decisão construível."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meth-panel" id="mstep-2">
+    <div class="meth-panel-inner">
+      <div class="meth-panel-left">
+        <div class="meth-panel-tag en">Engineering decisions, not UI specs</div>
+        <div class="meth-panel-tag pt">Engenharia de decisão, não spec de tela</div>
+        <h3 class="meth-panel-title en">The PRD as a<br><em>decision artifact.</em></h3>
+        <h3 class="meth-panel-title pt">O PRD como<br><em>artefato de decisão.</em></h3>
+        <p class="meth-panel-desc en">The PRD I write isn't a spec document — it's a decision artifact. It describes logic, intent, and limits. Five blocks: problem, appetite, solution direction, rabbit holes, no-gos. AI fails when logic is missing, not when UI is missing.</p>
+        <p class="meth-panel-desc pt">O PRD que escrevo não é um documento de especificação — é um artefato de decisão. Descreve lógica, intenção e limites. Cinco blocos: problema, apetite, direção da solução, rabbit holes, no-gos.</p>
+        <div class="meth-tools">
+          <span class="meth-tool">Problem Framing</span><span class="meth-tool">Appetite Block</span><span class="meth-tool">Solution Direction</span><span class="meth-tool">No-gos</span>
+        </div>
+      </div>
+      <div class="meth-panel-right">
+        <div class="meth-outputs-label en">The 5 PRD blocks</div>
+        <div class="meth-outputs-label pt">Os 5 blocos do PRD</div>
+        <ul class="meth-output-list">
+          <li class="en"><strong>Block 1</strong> — What is the problem?</li>
+          <li class="pt"><strong>Bloco 1</strong> — Qual é o problema?</li>
+          <li class="en"><strong>Block 2</strong> — What's the appetite?</li>
+          <li class="pt"><strong>Bloco 2</strong> — Qual é o apetite?</li>
+          <li class="en"><strong>Block 3</strong> — Solution direction (logic, not UI)</li>
+          <li class="pt"><strong>Bloco 3</strong> — Direção da solução (lógica, não UI)</li>
+          <li class="en"><strong>Block 4</strong> — Rabbit holes</li>
+          <li class="pt"><strong>Bloco 4</strong> — Rabbit holes</li>
+          <li class="en"><strong>Block 5</strong> — No-gos</li>
+          <li class="pt"><strong>Bloco 5</strong> — No-gos</li>
+        </ul>
+        <div class="meth-quote">
+          <p class="en">"If the PRD is weak, everything breaks — including the AI."</p>
+          <p class="pt">"Se o PRD está fraco, tudo quebra — incluindo a IA."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meth-panel" id="mstep-3">
+    <div class="meth-panel-inner">
+      <div class="meth-panel-left">
+        <div class="meth-panel-tag en">Translating decisions into AI instructions</div>
+        <div class="meth-panel-tag pt">Traduzindo decisões em instruções para IA</div>
+        <h3 class="meth-panel-title en">Context +<br><em>limits + criteria.</em></h3>
+        <h3 class="meth-panel-title pt">Contexto +<br><em>limites + critério.</em></h3>
+        <p class="meth-panel-desc en">A prompt frame isn't a loose request — it's a reusable instruction structure built on PRD decisions. It gives the AI a clear problem, explicit boundaries, and a success criterion.</p>
+        <p class="meth-panel-desc pt">Um prompt frame não é um pedido solto — é uma estrutura de instrução reutilizável construída sobre as decisões do PRD. Dá à IA um problema claro, limites explícitos e um critério de sucesso.</p>
+        <div class="meth-tools">
+          <span class="meth-tool">Context Layer</span><span class="meth-tool">Constraints</span><span class="meth-tool">Success Criteria</span><span class="meth-tool">Role Definition</span>
+        </div>
+      </div>
+      <div class="meth-panel-right">
+        <div class="meth-outputs-label en">Anatomy of a prompt frame</div>
+        <div class="meth-outputs-label pt">Anatomia de um prompt frame</div>
+        <ul class="meth-output-list">
+          <li class="en"><strong>Context</strong> — What the AI needs to know to reason correctly</li>
+          <li class="pt"><strong>Contexto</strong> — O que a IA precisa saber para raciocinar</li>
+          <li class="en"><strong>Problem</strong> — The specific task drawn from the PRD</li>
+          <li class="pt"><strong>Problema</strong> — A tarefa específica extraída do PRD</li>
+          <li class="en"><strong>Limits</strong> — What the AI cannot do, invent, or assume</li>
+          <li class="pt"><strong>Limites</strong> — O que a IA não pode fazer ou assumir</li>
+          <li class="en"><strong>Criteria</strong> — How we know the output is good enough</li>
+          <li class="pt"><strong>Critério</strong> — Como sabemos que o output é bom</li>
+        </ul>
+        <div class="meth-quote">
+          <p class="en">"AI performs well when the problem is clear and limits are explicit. That comes from the PRD."</p>
+          <p class="pt">"A IA performa bem quando o problema é claro e os limites são explícitos. Isso vem do PRD."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meth-panel" id="mstep-4">
+    <div class="meth-panel-inner">
+      <div class="meth-panel-left">
+        <div class="meth-panel-tag en">Fast execution on well-decided foundations</div>
+        <div class="meth-panel-tag pt">Execução rápida sobre bases bem decididas</div>
+        <h3 class="meth-panel-title en">AI executes.<br><em>I direct.</em></h3>
+        <h3 class="meth-panel-title pt">A IA executa.<br><em>Eu dirijo.</em></h3>
+        <p class="meth-panel-desc en">With a shaped problem, a clear PRD, and precise prompt frames, AI becomes a focused executor. I write the prompts, review the output, direct iterations, catch errors. Building alone with AI is a new design skill.</p>
+        <p class="meth-panel-desc pt">Com um problema moldado, PRD claro e prompt frames precisos, a IA se torna uma executora focada. Escrevo os prompts, reviso o output, dirijo as iterações. Construir sozinha com IA é uma nova habilidade de design.</p>
+        <div class="meth-tools">
+          <span class="meth-tool">Claude Code</span><span class="meth-tool">Claude API</span><span class="meth-tool">Figma Make</span><span class="meth-tool">Cursor</span><span class="meth-tool">Vercel</span>
+        </div>
+      </div>
+      <div class="meth-panel-right">
+        <div class="meth-outputs-label en">What AI helps me ship</div>
+        <div class="meth-outputs-label pt">O que a IA me ajuda a entregar</div>
+        <ul class="meth-output-list">
+          <li class="en">Functional prototypes from design decisions, not wireframes</li>
+          <li class="pt">Protótipos funcionais a partir de decisões de design</li>
+          <li class="en">Conversational onboarding flows with real intelligence</li>
+          <li class="pt">Fluxos de onboarding conversacional com inteligência real</li>
+          <li class="en">Dynamic microcopy that carries product philosophy</li>
+          <li class="pt">Microcopy dinâmica que carrega a filosofia do produto</li>
+          <li class="en">Iteration cycles that compress weeks into days</li>
+          <li class="pt">Ciclos de iteração que comprimem semanas em dias</li>
+        </ul>
+        <div class="meth-quote">
+          <p class="en">"AI plays fast — but only what's already been well decided."</p>
+          <p class="pt">"A IA joga rápido — mas só o que já foi bem decidido."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="section-label reveal">
+    <span class="en-inline">Contact</span>
+    <span class="pt-inline">Contato</span>
+  </div>
+  <h2 class="section-title reveal">
+    <span class="en">Let's build something<br><em>worth using.</em></span>
+    <span class="pt">Vamos construir algo<br><em>que valha a pena usar.</em></span>
+  </h2>
+  <div class="contact-links reveal reveal-delay-1">
+    <a href="/cdn-cgi/l/email-protection#1a7d736f76756a7f697d5a7d777b737634797577" class="contact-link primary">
+      ✉ <span class="__cf_email__" data-cfemail="1a7d736f76756a7f697d5a7d777b737634797577">[email&#160;protected]</span>
+    </a>
+    <a href="https://linkedin.com/in/giulianalg" target="_blank" class="contact-link outline">
+      LinkedIn ↗
+    </a>
+    <a href="https://giusportfolio.framer.website" target="_blank" class="contact-link outline">
+      <span class="en-inline">Current portfolio ↗</span>
+      <span class="pt-inline">Portfólio atual ↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Giuliana Lopes Galvão</p>
+  <p class="en">Available for immediate start · C1 English · Remote-ready</p>
+  <p class="pt">Disponível para início imediato · Inglês C1 · Pronta para trabalho remoto</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── LANG TOGGLE ───
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.body.classList.toggle('lang-pt', lang === 'pt');
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+}
+
+// ─── METHODOLOGY TABS ───
+function showStep(index) {
+  document.querySelectorAll('.meth-tab').forEach((t,i) => t.classList.toggle('active', i === index));
+  document.querySelectorAll('.meth-panel').forEach((p,i) => p.classList.toggle('active', i === index));
+}
+
+// ─── NAV SCROLL ───
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ─── SCROLL REVEAL ───
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// ─── DARK MODE ───
+let isDark = false;
+function toggleDarkMode() {
+  isDark = !isDark;
+  document.body.classList.toggle('dark-mode', isDark);
+  document.getElementById('darkToggle').textContent = isDark ? '🌙' : '☀️';
+}
+
+// ─── RANDOM HERO PHOTO ───
+(function() {
+  const photos = ['images/giuliana-branco-1.png', 'images/giuliana-branco-2.png'];
+  const img = document.getElementById('heroPhoto');
+  if (img) img.src = photos[Math.floor(Math.random() * photos.length)];
+})();
+
+
+/* ─── PARTICLES (backlog — commented out) ───
+(function() {
+  const canvas = document.getElementById('particle-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let mouse = { x: 0.5, y: 0.5 };
+  let target = { x: 0.5, y: 0.5 };
+  let particles = [];
+  let animId;
+
+  function cfg() {
+    return isDark ? {
+      count: 65, color: [130, 90, 200],
+      opMin: 0.10, opMax: 0.32,
+      sMin: 4, sMax: 24, glow: 0.25
+    } : {
+      count: 65, color: [155, 110, 205],
+      opMin: 0.07, opMax: 0.20,
+      sMin: 4, sMax: 22, glow: 0.18
+    };
+  }
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  class P {
+    constructor() { this.reset(true); }
+    reset(randomY) {
+      const c = cfg();
+      this.x     = Math.random() * canvas.width;
+      this.y     = randomY ? Math.random() * canvas.height : -30;
+      this.drawX = this.x;
+      this.drawY = this.y;
+      this.r     = c.sMin + Math.random() * (c.sMax - c.sMin);
+      this.depth = 0.4 + Math.random() * 2.2;
+      this.vx    = (Math.random() - 0.5) * 0.18;
+      this.vy    = (Math.random() - 0.5) * 0.10;
+      this.pulseS = 0.003 + Math.random() * 0.007;
+      this.pulseP = Math.random() * Math.PI * 2;
+      this.baseOp = c.opMin + Math.random() * (c.opMax - c.opMin);
+      this.op    = this.baseOp;
+    }
+    update(t) {
+      const c = cfg();
+      this.x += this.vx;
+      this.y += this.vy;
+      this.drawX = this.x + (mouse.x - 0.5) * this.depth * 65;
+      this.drawY = this.y + (mouse.y - 0.5) * this.depth * 40;
+      this.op = this.baseOp * (0.6 + 0.4 * Math.sin(t * this.pulseS + this.pulseP));
+      this.op = Math.max(0.01, Math.min(1, this.op));
+      const pad = 80;
+      if (this.x < -pad) this.x = canvas.width + pad;
+      if (this.x > canvas.width  + pad) this.x = -pad;
+      if (this.y < -pad) this.y = canvas.height + pad;
+      if (this.y > canvas.height + pad) this.y = -pad;
+    }
+    draw() {
+      const c   = cfg();
+      const [r, g, b] = c.color;
+      const x   = this.drawX;
+      const y   = this.drawY;
+      const op  = this.op;
+      const rad = this.r;
+      ctx.save();
+      const gr = ctx.createRadialGradient(x, y, 0, x, y, rad * 4.5);
+      gr.addColorStop(0,   `rgba(${r},${g},${b},${(op * c.glow).toFixed(3)})`);
+      gr.addColorStop(0.5, `rgba(${r},${g},${b},${(op * c.glow * 0.3).toFixed(3)})`);
+      gr.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+      ctx.beginPath();
+      ctx.arc(x, y, rad * 4.5, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fillStyle = gr;
+      ctx.fill();
+      const cr = ctx.createRadialGradient(x, y, 0, x, y, rad);
+      cr.addColorStop(0,   `rgba(${r},${g},${b},${op.toFixed(3)})`);
+      cr.addColorStop(0.45,`rgba(${r},${g},${b},${(op * 0.55).toFixed(3)})`);
+      cr.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+      ctx.beginPath();
+      ctx.arc(x, y, rad, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fillStyle = cr;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: cfg().count }, () => new P());
+  }
+
+  function loop(t) {
+    animId = requestAnimationFrame(loop);
+    mouse.x += (target.x - mouse.x) * 0.055;
+    mouse.y += (target.y - mouse.y) * 0.055;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(t); p.draw(); });
+  }
+
+  window.addEventListener('mousemove', e => {
+    target.x = e.clientX / window.innerWidth;
+    target.y = e.clientY / window.innerHeight;
+  });
+  window.addEventListener('resize', () => { resize(); particles.forEach(p => p.reset(true)); });
+  window.addEventListener('deviceorientation', e => {
+    if (e.gamma != null) {
+      target.x = 0.5 + (e.gamma / 45) * 0.5;
+      target.y = 0.5 + ((e.beta - 30) / 60) * 0.4;
+    }
+  });
+
+  init();
+  requestAnimationFrame(loop);
+})();
+*/
+
+</script>
+</body>
+</html>

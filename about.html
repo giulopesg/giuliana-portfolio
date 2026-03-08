@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Giuliana Lopes Galvão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #6B4FA0;
+    --plum-mid: #8B6BBE;
+    --plum-pale: #C4AEE0;
+    --plum-ghost: #F4F0FA;
+    --cream: #FAF7F2;
+    --warm-stone: #EDE8DF;
+    --ink: #1A1614;
+    --ink-soft: #4A4240;
+    --ink-muted: #8A8280;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.4s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    padding: 16px 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.88);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--plum-pale); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+    background: #000000;
+  }
+
+  /* Left: photo column */
+  .hero-photo {
+    position: relative;
+    overflow: hidden;
+    background: #000000;
+  }
+  .hero-photo-img {
+    width: 85%;
+    height: 85%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 8s ease;
+    margin: auto;
+    display: block;
+    -webkit-mask-image: radial-gradient(ellipse 70% 65% at center 40%, black 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 70% 65% at center 40%, black 40%, transparent 100%);
+  }
+  #hero:hover .hero-photo-img { transform: scale(1.03); }
+
+  /* Right: text column */
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px 64px 80px 72px;
+    background: #000000;
+    position: relative;
+  }
+  .hero-text::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(107,79,160,0.3), transparent);
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--plum-pale);
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: rise 0.7s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 5.5vw, 82px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: rgba(255,255,255,0.92);
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: rise 0.8s 0.35s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--plum-pale);
+  }
+
+  .hero-role {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.55);
+    max-width: 420px;
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: rise 0.8s 0.55s forwards;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: rise 0.8s 0.75s forwards;
+  }
+  .hero-stat {
+    padding: 20px 24px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .hero-stat:first-child { border-radius: 12px 4px 4px 4px; }
+  .hero-stat:last-child { border-radius: 4px 4px 12px 4px; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--plum-pale);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    opacity: 0;
+    animation: rise 0.8s 0.9s forwards;
+  }
+  .btn {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.25s;
+  }
+  .btn-primary {
+    background: var(--plum);
+    color: var(--white);
+  }
+  .btn-primary:hover { background: #5a3f8a; transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.7);
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); transform: translateY(-2px); color: var(--white); }
+
+  /* floating label on photo */
+  .hero-photo-label {
+    position: absolute;
+    bottom: 48px;
+    left: 48px;
+    z-index: 10;
+    opacity: 0;
+    animation: rise 0.8s 1.1s forwards;
+  }
+  .hero-photo-label span {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.8;
+  }
+
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── BIO SECTION ── */
+  #bio {
+    padding: 120px 0;
+    background: var(--white);
+    position: relative;
+  }
+  .bio-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 64px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 96px;
+    align-items: start;
+  }
+  .bio-sidebar {
+    position: sticky;
+    top: 120px;
+  }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 20px;
+  }
+  .bio-sidebar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .bio-sidebar-title em { font-style: italic; color: var(--plum); }
+
+  .bio-content {}
+  .bio-para {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+  .bio-para strong { font-weight: 400; color: var(--ink); }
+  .bio-pull {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.45;
+    color: var(--ink);
+    padding: 40px 0 40px 32px;
+    border-left: 2px solid var(--plum-pale);
+    margin: 48px 0;
+  }
+
+  /* personal pills */
+  .bio-personal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 40px;
+  }
+  .bio-pill {
+    font-size: 13px;
+    font-weight: 300;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: var(--plum-ghost);
+    color: var(--plum);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .bio-pill-icon { font-size: 15px; }
+
+  /* ── EXPERTISE ── */
+  #expertise {
+    padding: 120px 0;
+    background: var(--cream);
+  }
+  .expertise-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+  .expertise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 72px;
+  }
+  .expertise-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .expertise-title em { font-style: italic; color: var(--plum); }
+  .expertise-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    max-width: 280px;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .expertise-card {
+    background: var(--white);
+    padding: 44px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .expertise-card:first-child { border-radius: 20px 4px 4px 4px; }
+  .expertise-card:nth-child(3) { border-radius: 4px 20px 4px 4px; }
+  .expertise-card:nth-child(4) { border-radius: 4px 4px 4px 20px; }
+  .expertise-card:last-child { border-radius: 4px 4px 20px 4px; }
+  .expertise-card:hover { transform: translateY(-4px); }
+  .expertise-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--plum), var(--plum-mid));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .expertise-card:hover::before { transform: scaleX(1); }
+
+  .exp-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--plum-pale);
+    margin-bottom: 20px;
+  }
+  .exp-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.25;
+  }
+  .exp-desc {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink-muted);
+  }
+
+  /* ── TIMELINE ── */
+  #timeline {
+    padding: 120px 0;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  #timeline::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,79,160,0.2) 0%, transparent 70%);
+  }
+  .timeline-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+  .timeline-header {
+    margin-bottom: 80px;
+  }
+  .section-tag-light {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--plum-pale);
+    margin-bottom: 20px;
+  }
+  .timeline-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .timeline-title em { font-style: italic; color: var(--plum-mid); }
+
+  .timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 200px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(107,79,160,0.4), transparent);
+  }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 196px;
+    top: 50%;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--plum-mid);
+    transform: translateY(-50%);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .timeline-item:hover::before {
+    transform: translateY(-50%) scale(1.5);
+    background: var(--plum-pale);
+  }
+  .timeline-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--plum-pale);
+    padding-top: 4px;
+    padding-right: 48px;
+  }
+  .timeline-content { padding-left: 40px; }
+  .timeline-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .timeline-company {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--plum-pale);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .timeline-desc {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── EDUCATION ── */
+  #education {
+    padding: 120px 0;
+    background: var(--white);
+  }
+  .edu-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .edu-col-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 48px;
+    line-height: 1.15;
+  }
+  .edu-col-title em { font-style: italic; color: var(--plum); }
+  .edu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .edu-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .edu-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--plum-pale);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .edu-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 3px;
+    line-height: 1.4;
+  }
+  .edu-meta {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* cert pills */
+  .cert-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .cert-item {
+    padding: 16px 20px;
+    background: var(--plum-ghost);
+    border-radius: 8px;
+    border-left: 3px solid var(--plum-pale);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: border-color 0.2s;
+  }
+  .cert-item:hover { border-left-color: var(--plum); }
+  .cert-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .cert-name {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .cert-issuer {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── LANGUAGES ── */
+  .lang-strip {
+    background: var(--plum-ghost);
+    padding: 48px 64px;
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto 0;
+  }
+  .lang-item {}
+  .lang-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .lang-level {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--plum);
+    letter-spacing: 0.06em;
+  }
+  .lang-bar {
+    height: 2px;
+    background: var(--plum-pale);
+    border-radius: 2px;
+    margin-top: 10px;
+    position: relative;
+    width: 120px;
+  }
+  .lang-bar-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--plum);
+    border-radius: 2px;
+  }
+
+  /* ── CONTACT FOOTER ── */
+  #contact-footer {
+    padding: 100px 0 60px;
+    background: var(--cream);
+  }
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .contact-left {}
+  .contact-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 20px;
+  }
+  .contact-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 40px;
+  }
+  .contact-headline em { font-style: italic; color: var(--plum); }
+  .contact-links-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .contact-footer-link {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .cfl-primary {
+    background: var(--plum);
+    color: var(--white);
+  }
+  .cfl-primary:hover { background: #5a3f8a; }
+  .cfl-outline {
+    border: 1px solid var(--plum-pale);
+    color: var(--plum);
+  }
+  .cfl-outline:hover { background: var(--plum-ghost); }
+
+  .contact-right {
+    text-align: right;
+  }
+  .contact-right a {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+  }
+  .contact-right a:hover { color: var(--plum); }
+
+  .page-footer {
+    padding: 28px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--warm-stone);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-copy {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+  }
+  .footer-back {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--plum);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+  }
+  .footer-back:hover { text-decoration: underline; }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+    #hero { grid-template-columns: 1fr; grid-template-rows: 50vh auto; }
+    .hero-text { padding: 40px 28px 60px; }
+    .hero-photo-label { display: none; }
+    .bio-inner, .edu-inner { grid-template-columns: 1fr; gap: 48px; padding: 0 28px; }
+    .bio-sidebar { position: static; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .expertise-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .expertise-sub { text-align: left; }
+    .timeline-inner, .expertise-inner, .contact-inner { padding: 0 28px; }
+    .timeline-list::before { display: none; }
+    .timeline-item { grid-template-columns: 1fr; gap: 4px; }
+    .timeline-item::before { display: none; }
+    .timeline-content { padding-left: 0; padding-top: 8px; }
+    .contact-inner { flex-direction: column; align-items: flex-start; gap: 40px; }
+    .contact-right { text-align: left; }
+    .lang-strip { flex-direction: column; gap: 32px; align-items: flex-start; padding: 40px 28px; }
+    .page-footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='index.html'; return false;" class="nav-logo">← Giuliana Lopes Galvão</a>
+  <div class="nav-links">
+    <a href="#bio">About</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#timeline">Experience</a>
+    <a href="/cdn-cgi/l/email-protection#92f5fbe7fefde2f7e1f5d2f5fff3fbfebcf1fdff" class="active">Contact</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-photo">
+    <img
+      src="images/giuliana-preto-1.png"
+      alt="Giuliana Lopes Galvão"
+      class="hero-photo-img"
+    />
+    <div class="hero-photo-label">
+      <span>Giuliana Lopes Galvão</span>
+      <span>Senior UX Designer</span>
+      <span>Santo André, São Paulo, Brasil</span>
+    </div>
+  </div>
+
+  <div class="hero-text">
+    <div class="hero-eyebrow">About me</div>
+    <h1 class="hero-name">
+      I research,<br>
+      discover,<br>
+      and design —<br>
+      <em>now with AI.</em>
+    </h1>
+    <p class="hero-role">
+      Senior UX Designer specializing in the phases that shape everything: Research, Discovery, and Service Design. I work in complexity — mapping systems, uncovering what's really true, and turning ambiguity into strategic direction.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Years of practice</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">AI tools daily</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num">BR</div>
+        <div class="stat-label">São Paulo based</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num">EN</div>
+        <div class="stat-label">Full professional</div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="/cdn-cgi/l/email-protection#1f78766a73706f7a6c785f78727e7673317c7072" class="btn btn-primary">Get in touch</a>
+      <a href="https://linkedin.com/in/giulianalg" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── BIO ── -->
+<section id="bio">
+  <div class="bio-inner">
+    <div class="bio-sidebar reveal">
+      <div class="section-tag">Who I am</div>
+      <h2 class="bio-sidebar-title">The person<br>behind the<br><em>work.</em></h2>
+    </div>
+    <div class="bio-content">
+      <p class="bio-para reveal">
+        I specialize in the phases that shape everything: <strong>Research, Discovery, and Service Design</strong>. My work lives in complexity — mapping systems, uncovering what's really true, and turning ambiguity into strategic direction that teams can actually act on.
+      </p>
+      <p class="bio-para reveal reveal-delay-1">
+        Over 8 years, I've worked across consultancies, fintechs, and enterprise environments — <strong>leading UX chapters, facilitating Design Sprints and Lean Inceptions</strong> for clients like Banco do Brasil, Petrobras, CPFL, Vivo, GPA, and Carrefour. I help teams make better decisions before anything gets built. The early phases aren't overhead. They're the work.
+      </p>
+
+      <div class="bio-pull reveal reveal-delay-2">
+        "Curiosity isn't separate from my work — it's the engine behind it. I'm genuinely fascinated by how technology, AI, and human behavior are reshaping the way we live and connect."
+      </div>
+
+      <p class="bio-para reveal reveal-delay-1">
+        AI tools like <strong>Claude, Gemini, and ChatGPT</strong> are now woven into how I work — not as shortcuts, but as thinking partners. They speed up synthesis, stress-test ideas, and help me build sharper artifacts. I've built products from scratch using AI-assisted development. That changes how I design.
+      </p>
+      <p class="bio-para reveal reveal-delay-2">
+        Beyond the screen, I'm Giu: <strong>singer since childhood, martial arts practitioner, traveler, and cat mom</strong>. Life has taught me resilience, creativity, and the value of balance — lessons I carry into everything I do.
+      </p>
+
+      <div class="bio-personal reveal">
+        <span class="bio-pill"><span class="bio-pill-icon">🎵</span> Singer since childhood</span>
+        <span class="bio-pill"><span class="bio-pill-icon">🥋</span> Martial arts</span>
+        <span class="bio-pill"><span class="bio-pill-icon">✈️</span> Traveler</span>
+        <span class="bio-pill"><span class="bio-pill-icon">🐱</span> Cat mom</span>
+        <span class="bio-pill"><span class="bio-pill-icon">🤖</span> AI enthusiast</span>
+        <span class="bio-pill"><span class="bio-pill-icon">🔮</span> Future thinker</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERTISE ── -->
+<section id="expertise">
+  <div class="expertise-inner">
+    <div class="expertise-header reveal">
+      <div>
+        <div class="section-tag">What I do</div>
+        <h2 class="expertise-title">Areas of<br><em>expertise.</em></h2>
+      </div>
+      <p class="expertise-sub">Where I spend my deepest attention and create the most strategic value.</p>
+    </div>
+
+    <div class="expertise-grid">
+      <div class="expertise-card reveal">
+        <div class="exp-num">01</div>
+        <div class="exp-title">UX Strategy & Research</div>
+        <div class="exp-desc">Deep-dive discovery work — interviews, desk research, system mapping, and insight synthesis that gives product decisions a solid foundation.</div>
+      </div>
+      <div class="expertise-card reveal reveal-delay-1">
+        <div class="exp-num">02</div>
+        <div class="exp-title">Service Design</div>
+        <div class="exp-desc">End-to-end journey design across touchpoints. Blueprints, orchestration, and systemic thinking to improve complex service ecosystems.</div>
+      </div>
+      <div class="expertise-card reveal reveal-delay-2">
+        <div class="exp-num">03</div>
+        <div class="exp-title">Prototyping & UI Design</div>
+        <div class="exp-desc">From concept to high-fidelity prototype. Design systems, accessible components, and interfaces that communicate intent before a single line of code.</div>
+      </div>
+      <div class="expertise-card reveal">
+        <div class="exp-num">04</div>
+        <div class="exp-title">Workshop Facilitation</div>
+        <div class="exp-desc">Certified Lean Inception Facilitator. Design Sprints, discovery workshops, and collaborative sessions that align teams and accelerate decisions.</div>
+      </div>
+      <div class="expertise-card reveal reveal-delay-1">
+        <div class="exp-num">05</div>
+        <div class="exp-title">AI-Assisted Development</div>
+        <div class="exp-desc">Building functional products using Claude Code, Figma Make, and Cursor. Translating design decisions into working software — solo, with precision.</div>
+      </div>
+      <div class="expertise-card reveal reveal-delay-2">
+        <div class="exp-num">06</div>
+        <div class="exp-title">UX Mentorship</div>
+        <div class="exp-desc">Supporting junior designers with feedback, career guidance, and practice-based learning through structured mentorship programs.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TIMELINE ── -->
+<section id="timeline">
+  <div class="timeline-inner">
+    <div class="timeline-header reveal">
+      <div class="section-tag-light">Career path</div>
+      <h2 class="timeline-title">Where I've<br><em>been.</em></h2>
+    </div>
+
+    <div class="timeline-list">
+      <div class="timeline-item reveal">
+        <div class="timeline-period">2024 — Present</div>
+        <div class="timeline-content">
+          <div class="timeline-role">UX Specialist On-demand</div>
+          <div class="timeline-company">Independent · Strategic Consultant</div>
+          <div class="timeline-desc">Discovery, diagnostics, Design Sprints, Lean Inceptions, and usability testing for enterprise clients. Also building AI-native products from scratch — design, code, and deployment.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-period">2024 — 2025</div>
+        <div class="timeline-content">
+          <div class="timeline-role">UX/UI Mentor</div>
+          <div class="timeline-company">Tech Pro Bem</div>
+          <div class="timeline-desc">Supported junior designers with structured feedback, career development, and practice-based learning.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-period">2019 — 2024</div>
+        <div class="timeline-content">
+          <div class="timeline-role">Senior UX Designer → UX Lead → Experience Lead</div>
+          <div class="timeline-company">Brivia</div>
+          <div class="timeline-desc">Led UX chapters and strategic projects for enterprise clients including Banco do Brasil, Petrobras, CPFL, Vivo, GPA, Carrefour, CNP, and Previsul. Facilitated Design Sprints and Lean Inceptions across complex regulated sectors.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-period">2022</div>
+        <div class="timeline-content">
+          <div class="timeline-role">Senior Product Designer</div>
+          <div class="timeline-company">Nomad</div>
+          <div class="timeline-desc">Designed mobile-first, accessible financial journeys for a fintech audience.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-period">2019</div>
+        <div class="timeline-content">
+          <div class="timeline-role">UX/UI Designer</div>
+          <div class="timeline-company">NiD HUMAN</div>
+          <div class="timeline-desc">UX/UI design for a human-centered design consultancy focused on strategic innovation projects.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-period">2017 — 2019</div>
+        <div class="timeline-content">
+          <div class="timeline-role">UX/UI Analyst & Visual Designer</div>
+          <div class="timeline-company">VG8</div>
+          <div class="timeline-desc">First UX role. Hands-on field research, prototyping, visual design, and usability testing from day one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EDUCATION ── -->
+<section id="education">
+  <div class="edu-inner">
+    <div>
+      <div class="section-tag reveal">Education</div>
+      <h2 class="edu-col-title reveal"><em>Formal</em><br>foundation.</h2>
+      <div class="edu-list">
+        <div class="edu-item reveal reveal-delay-1">
+          <div class="edu-dot"></div>
+          <div>
+            <div class="edu-name">Postgraduate in Future Thinking: Society, Technology & Market</div>
+            <div class="edu-meta">PUCPR · 2024–2025 · In progress</div>
+          </div>
+        </div>
+        <div class="edu-item reveal reveal-delay-2">
+          <div class="edu-dot"></div>
+          <div>
+            <div class="edu-name">BA in Graphic Design</div>
+            <div class="edu-meta">ULBRA · 2010–2014</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-tag reveal">Certifications</div>
+      <h2 class="edu-col-title reveal"><em>Continuous</em><br>learning.</h2>
+      <div class="cert-grid">
+        <div class="cert-item reveal">
+          <div class="cert-icon">🤖</div>
+          <div>
+            <div class="cert-name">AI for Designers</div>
+            <div class="cert-issuer">IxDF · 2025</div>
+          </div>
+        </div>
+        <div class="cert-item reveal reveal-delay-1">
+          <div class="cert-icon">⚡</div>
+          <div>
+            <div class="cert-name">AI for Productivity</div>
+            <div class="cert-issuer">Conquer School · 2024</div>
+          </div>
+        </div>
+        <div class="cert-item reveal reveal-delay-2">
+          <div class="cert-icon">🚀</div>
+          <div>
+            <div class="cert-name">Certified Lean Inception Facilitator®</div>
+            <div class="cert-issuer">2024</div>
+          </div>
+        </div>
+        <div class="cert-item reveal">
+          <div class="cert-icon">🎨</div>
+          <div>
+            <div class="cert-name">User-Centered Design</div>
+            <div class="cert-issuer">PUCRS · 2024</div>
+          </div>
+        </div>
+        <div class="cert-item reveal reveal-delay-1">
+          <div class="cert-icon">🔄</div>
+          <div>
+            <div class="cert-name">Scrum Foundation SFPC™</div>
+            <div class="cert-issuer">2021</div>
+          </div>
+        </div>
+        <div class="cert-item reveal reveal-delay-2">
+          <div class="cert-icon">🧭</div>
+          <div>
+            <div class="cert-name">Workshop de UX Strategy</div>
+            <div class="cert-issuer">UX Unicórnio</div>
+          </div>
+        </div>
+        <div class="cert-item reveal">
+          <div class="cert-icon">💼</div>
+          <div>
+            <div class="cert-name">Executive Certification: Business Development, Leadership & Networking</div>
+            <div class="cert-issuer">Conquer School</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Languages -->
+  <div class="lang-strip reveal" style="margin-top:80px;">
+    <div class="lang-item">
+      <div class="lang-name">Português</div>
+      <div class="lang-level">Native</div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width:100%"></div></div>
+    </div>
+    <div class="lang-item">
+      <div class="lang-name">English</div>
+      <div class="lang-level">Full Professional Proficiency</div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width:88%"></div></div>
+    </div>
+    <div class="lang-item">
+      <div class="lang-name">Español</div>
+      <div class="lang-level">Elementary</div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width:25%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT FOOTER ── -->
+<section id="contact-footer">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="contact-tag reveal">Available for work</div>
+      <h2 class="contact-headline reveal">Let's build<br>something <em>real.</em></h2>
+      <div class="contact-links-row reveal reveal-delay-1">
+        <a href="/cdn-cgi/l/email-protection#f7909e829b9887928490b7909a969e9bd994989a" class="contact-footer-link cfl-primary">✉ <span class="__cf_email__" data-cfemail="701719051c1f0015031730171d11191c5e131f1d">[email&#160;protected]</span></a>
+        <a href="https://linkedin.com/in/giulianalg" target="_blank" class="contact-footer-link cfl-outline">LinkedIn ↗</a>
+        <a href="https://giusportfolio.framer.website" target="_blank" class="contact-footer-link cfl-outline">Current portfolio ↗</a>
+      </div>
+    </div>
+    <div class="contact-right reveal">
+      <p style="font-size:12px;font-weight:300;color:var(--ink-muted);margin-bottom:4px;">+55 (11) 99386 2967</p>
+      <p style="font-size:12px;font-weight:300;color:var(--ink-muted);">Santo André, São Paulo, Brasil</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-copy">Giuliana Lopes Galvão © 2026 · Senior UX Designer</span>
+    <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='index.html'; return false;" class="footer-back">← Back to portfolio</a>
+  </div>
+</section>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// NAV SCROLL
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.reveal, .reveal-delay-1, .reveal-delay-2, .reveal-delay-3').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

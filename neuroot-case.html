@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neuroot — Case Study · Giuliana Lopes Galvão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #6B4FA0;
+    --plum-light: #8B6FC0;
+    --plum-pale: #D4C8EF;
+    --plum-ghost: #F2EEF9;
+    --warm-cream: #FAF7F2;
+    --warm-stone: #EDE8E0;
+    --ink: #1C1917;
+    --ink-soft: #4A4542;
+    --ink-muted: #8A8480;
+    --accent-gold: #C4975A;
+    --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--ink); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+    padding: 24px 64px;
+    display: flex; align-items: center; gap: 24px;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .nav-back {
+    font-size: 13px; color: var(--ink-muted); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--plum); }
+  .nav-divider { width: 1px; height: 16px; background: var(--warm-stone); }
+  .nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: var(--ink); }
+
+  /* ── HERO ── */
+  .case-hero {
+    min-height: 100vh;
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .case-hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 140px 64px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .case-tag-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 40px;
+  }
+  .ctag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 12px;
+    border: 1px solid rgba(107,79,160,0.5);
+    color: var(--plum-pale);
+    background: rgba(107,79,160,0.12);
+  }
+
+  .case-hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--plum-pale); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .case-hero-eyebrow::before {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--plum-pale);
+  }
+
+  .case-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(64px, 8vw, 112px);
+    font-weight: 300; line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .case-hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 300; font-style: italic;
+    color: var(--plum-pale);
+    margin-bottom: 48px;
+    line-height: 1.4;
+  }
+
+  .case-meta-row {
+    display: flex; gap: 48px; flex-wrap: wrap;
+  }
+  .case-meta-item {}
+  .case-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 6px;
+  }
+  .case-meta-value {
+    font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.8);
+  }
+
+  .case-hero-right {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-tree-bg {
+    position: absolute; inset: 0;
+  }
+  .hero-tree-bg svg { width: 100%; height: 100%; }
+
+  .hero-quote-card {
+    position: relative; z-index: 2;
+    max-width: 340px;
+    background: rgba(250,247,242,0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 40px 36px;
+    border-radius: 4px 24px 4px 24px;
+  }
+  .hero-quote-card blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; font-style: italic;
+    color: var(--white); line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .hero-quote-card cite {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--plum-pale); font-style: normal;
+  }
+
+  /* ── CONTENT ── */
+  .case-body { max-width: 1200px; margin: 0 auto; }
+
+  .case-section {
+    padding: 96px 80px;
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .case-section:last-child { border-bottom: none; }
+
+  .cs-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--plum); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cs-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--plum); }
+
+  .cs-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300; line-height: 1.1; letter-spacing: -0.01em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .cs-title em { font-style: italic; color: var(--plum); }
+
+  .cs-body-text {
+    font-size: 17px; font-weight: 300; line-height: 1.8;
+    color: var(--ink-soft); max-width: 680px; margin-bottom: 32px;
+  }
+  .cs-body-text strong { color: var(--ink); font-weight: 500; }
+
+  /* 2-col layout */
+  .cs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .cs-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+
+  /* comparison table */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+  }
+  .compare-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 16px 24px; text-align: left;
+    background: var(--plum-ghost); color: var(--plum);
+    border-bottom: 2px solid var(--plum-pale);
+  }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 8px 0 0; }
+  .compare-table td {
+    padding: 14px 24px; font-size: 14px; font-weight: 300;
+    color: var(--ink-soft); border-bottom: 1px solid var(--warm-stone);
+    vertical-align: top; line-height: 1.55;
+  }
+  .compare-table td:first-child { color: var(--ink-muted); text-decoration: line-through; }
+  .compare-table td:last-child { color: var(--ink-soft); }
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  /* screen cards */
+  .screen-card {
+    background: var(--white);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .screen-card:first-child { border-radius: 24px 4px 4px 4px; }
+  .screen-card:nth-child(2) { border-radius: 4px 24px 4px 4px; }
+  .screen-card:last-child { border-radius: 4px 4px 24px 4px; }
+
+  .screen-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 300; line-height: 1;
+    color: var(--plum-pale); margin-bottom: 20px;
+  }
+  .screen-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px;
+  }
+  .screen-desc {
+    font-size: 14px; font-weight: 300; line-height: 1.7;
+    color: var(--ink-soft); margin-bottom: 20px;
+  }
+  .screen-decision {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; line-height: 1.6;
+    color: var(--plum); background: var(--plum-ghost);
+    padding: 12px 16px; border-radius: 8px;
+    border-left: 2px solid var(--plum-pale);
+  }
+
+  /* callout block */
+  .callout {
+    background: var(--ink);
+    padding: 48px 52px;
+    border-radius: 4px;
+    margin: 48px 0;
+  }
+  .callout p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 300; font-style: italic;
+    color: var(--white); line-height: 1.5;
+    max-width: 700px;
+  }
+  .callout p em { color: var(--plum-pale); font-style: normal; }
+  .callout-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-top: 16px;
+  }
+
+  /* learning pills */
+  .learning-list {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .learning-item {
+    background: var(--white);
+    padding: 28px 32px;
+    display: flex; gap: 24px; align-items: flex-start;
+  }
+  .learning-item:first-child { border-radius: 16px 16px 0 0; }
+  .learning-item:last-child { border-radius: 0 0 16px 16px; }
+  .learning-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300; color: var(--plum-pale);
+    flex-shrink: 0; line-height: 1; width: 32px;
+  }
+  .learning-content {}
+  .learning-title {
+    font-size: 16px; font-weight: 500; color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .learning-desc {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-soft);
+  }
+
+  /* profile cards */
+  .profile-card {
+    background: var(--white);
+    padding: 36px 32px;
+  }
+  .profile-card:first-child { border-radius: 16px 4px 4px 16px; }
+  .profile-card:last-child { border-radius: 4px 16px 16px 4px; }
+  .profile-icon { font-size: 32px; margin-bottom: 16px; }
+  .profile-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 8px; }
+  .profile-desc { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-soft); }
+
+  /* methodology flow in case */
+  .method-flow-bar {
+    display: flex; align-items: center; gap: 0;
+    margin: 48px 0; overflow-x: auto;
+  }
+  .mf-step {
+    flex: 1; background: var(--white);
+    padding: 20px 20px;
+    display: flex; flex-direction: column; gap: 8px;
+    position: relative; min-width: 140px;
+  }
+  .mf-step::after {
+    content: '→';
+    position: absolute; right: -12px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--plum-pale); font-size: 16px;
+    z-index: 2;
+  }
+  .mf-step:last-child::after { display: none; }
+  .mf-step:first-child { border-radius: 16px 0 0 16px; }
+  .mf-step:last-child { border-radius: 0 16px 16px 0; }
+  .mf-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.14em; color: var(--plum);
+  }
+  .mf-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 400; color: var(--ink);
+  }
+  .mf-tool {
+    font-size: 11px; color: var(--ink-muted);
+  }
+
+  /* next steps */
+  .next-steps-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  }
+  .ns-item {
+    background: var(--white); padding: 28px 32px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .ns-item:first-child { border-radius: 16px 4px 4px 4px; }
+  .ns-item:nth-child(2) { border-radius: 4px 16px 4px 4px; }
+  .ns-item:nth-last-child(2) { border-radius: 4px 4px 4px 16px; }
+  .ns-item:last-child { border-radius: 4px 4px 16px 4px; }
+  .ns-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--plum); margin-top: 6px; flex-shrink: 0; }
+  .ns-text { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-soft); }
+
+  /* CTA section */
+  .case-cta {
+    background: var(--plum);
+    padding: 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 32px;
+  }
+  .case-cta-text {}
+  .case-cta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--plum-pale); margin-bottom: 12px;
+  }
+  .case-cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 300; color: var(--white); line-height: 1.15;
+  }
+  .case-cta-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 28px; border-radius: 40px;
+    font-size: 13px; font-weight: 400; text-decoration: none;
+    transition: all 0.25s; letter-spacing: 0.04em;
+  }
+  .cta-btn.white { background: var(--white); color: var(--plum); }
+  .cta-btn.white:hover { background: var(--warm-cream); transform: translateY(-1px); }
+  .cta-btn.outline { border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); }
+  .cta-btn.outline:hover { border-color: var(--white); color: var(--white); transform: translateY(-1px); }
+
+  /* footer */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.35); }
+  footer a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--plum-pale); }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .case-hero { grid-template-columns: 1fr; }
+    .case-hero-left { padding: 120px 24px 60px; }
+    .case-hero-right { display: none; }
+    .case-section { padding: 64px 24px; }
+    .cs-2col, .cs-3col, .next-steps-grid { grid-template-columns: 1fr; }
+    .case-cta { padding: 48px 24px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    .method-flow-bar { flex-direction: column; }
+    .mf-step { border-radius: 0; min-width: unset; }
+    .mf-step::after { display: none; }
+    .profile-card:first-child, .profile-card:last-child { border-radius: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='index.html'; return false;" class="nav-back">← Back to portfolio</a>
+  <div class="nav-divider"></div>
+  <span class="nav-title">Neuroot — Case Study</span>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="case-hero">
+  <div class="case-hero-left">
+    <div class="case-tag-row">
+      <span class="ctag">UX + AI</span>
+      <span class="ctag">Product Design</span>
+      <span class="ctag">Mobile PWA</span>
+      <span class="ctag">React + Supabase</span>
+      <span class="ctag">Claude API</span>
+    </div>
+    <div class="case-hero-eyebrow">Personal project · 2025 – present</div>
+    <h1 class="case-hero-title">Neuroot</h1>
+    <p class="case-hero-subtitle">O caminho do meio.<br>A post-burnout recovery app built with UX + AI methodology.</p>
+    <div class="case-meta-row">
+      <div class="case-meta-item">
+        <div class="case-meta-label">Role</div>
+        <div class="case-meta-value">UX Designer + Builder</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Timeline</div>
+        <div class="case-meta-value">2025 – present</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Platform</div>
+        <div class="case-meta-value">Mobile PWA (React + Supabase)</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Status</div>
+        <div class="case-meta-value">MVP in development</div>
+      </div>
+    </div>
+  </div>
+  <div class="case-hero-right">
+    <div class="hero-tree-bg">
+      <svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <radialGradient id="bg2" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="#2A1F3D"/>
+            <stop offset="100%" stop-color="#1C1917"/>
+          </radialGradient>
+          <radialGradient id="orb3" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#6B4FA0" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#6B4FA0" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="20"/></filter>
+        </defs>
+        <rect width="600" height="800" fill="url(#bg2)"/>
+        <ellipse cx="300" cy="350" rx="280" ry="280" fill="url(#orb3)" filter="url(#glow)"/>
+        <!-- trunk -->
+        <path d="M300 700 C298 630 295 560 300 480 C304 430 312 400 300 350" fill="none" stroke="#6B4FA0" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+        <!-- roots -->
+        <path d="M300 700 C268 718 220 740 175 750 C145 758 115 748 90 735" fill="none" stroke="#6B4FA0" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+        <path d="M300 700 C332 718 380 742 425 750 C455 757 485 748 510 733" fill="none" stroke="#6B4FA0" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+        <path d="M292 670 C262 682 225 688 190 678" fill="none" stroke="#8B6FC0" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
+        <path d="M308 670 C338 683 375 688 408 677" fill="none" stroke="#8B6FC0" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
+        <!-- branches -->
+        <path d="M300 400 C272 372 230 348 188 335 C158 325 130 332 110 322" fill="none" stroke="#6B4FA0" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/>
+        <path d="M302 425 C330 395 368 372 408 360 C438 351 465 358 485 348" fill="none" stroke="#6B4FA0" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/>
+        <path d="M298 375 C272 348 248 322 222 300 C206 284 188 276 172 268" fill="none" stroke="#8B6FC0" stroke-width="1.4" stroke-linecap="round" opacity="0.3"/>
+        <path d="M305 388 C332 358 358 332 388 312 C406 299 428 292 445 283" fill="none" stroke="#8B6FC0" stroke-width="1.4" stroke-linecap="round" opacity="0.3"/>
+        <!-- sub-branches -->
+        <path d="M222 298 C204 280 194 266 180 252 C172 242 166 234 158 226" fill="none" stroke="#8B6FC0" stroke-width="0.8" opacity="0.22"/>
+        <path d="M388 310 C406 290 418 274 432 260 C440 250 446 240 454 232" fill="none" stroke="#8B6FC0" stroke-width="0.8" opacity="0.22"/>
+        <!-- leaf dots -->
+        <circle cx="108" cy="320" r="4.5" fill="#6B4FA0" opacity="0.35"/>
+        <circle cx="92" cy="308" r="3" fill="#8B6FC0" opacity="0.28"/>
+        <circle cx="122" cy="304" r="3.5" fill="#6B4FA0" opacity="0.25"/>
+        <circle cx="486" cy="346" r="4.5" fill="#6B4FA0" opacity="0.35"/>
+        <circle cx="500" cy="334" r="3" fill="#8B6FC0" opacity="0.28"/>
+        <circle cx="472" cy="330" r="3.5" fill="#6B4FA0" opacity="0.25"/>
+        <circle cx="170" cy="266" r="4" fill="#6B4FA0" opacity="0.28"/>
+        <circle cx="155" cy="254" r="2.5" fill="#8B6FC0" opacity="0.22"/>
+        <circle cx="446" cy="280" r="4" fill="#6B4FA0" opacity="0.28"/>
+        <circle cx="460" cy="268" r="2.5" fill="#8B6FC0" opacity="0.22"/>
+        <!-- golden node -->
+        <circle cx="300" cy="350" r="7" fill="#C4975A" opacity="0.6"/>
+        <circle cx="300" cy="350" r="3" fill="#C4975A" opacity="0.9"/>
+        <circle cx="300" cy="350" r="14" fill="none" stroke="#C4975A" stroke-width="1" opacity="0.25"/>
+      </svg>
+    </div>
+    <div class="hero-quote-card">
+      <blockquote>"Not about doing more. About reconnecting with effort without getting hurt."</blockquote>
+      <cite>— Core product promise</cite>
+    </div>
+  </div>
+</header>
+
+<!-- ── BODY ── -->
+<div class="case-body">
+
+  <!-- 01 ORIGIN -->
+  <section class="case-section reveal">
+    <div class="cs-label">01 — Origin</div>
+    <h2 class="cs-title">This started with<br><em>my own burnout.</em></h2>
+    <div class="cs-2col">
+      <div>
+        <p class="cs-body-text">In 2021, I hit burnout. I kept working — I couldn't stop — but something in my system had broken. I understood what needed to be done. I wanted to do it. And my body just wouldn't move.</p>
+        <p class="cs-body-text">I tried every productivity app I knew. Notion, Todoist, habit trackers. They made it worse. Every unchecked box felt like proof that I was failing. Every streak I broke felt like confirmation of a story I was already telling myself: that I couldn't sustain anything anymore.</p>
+        <p class="cs-body-text">Years later, I started using a Notion AI template to create small daily anchors for myself. It helped — but it was static, had no real intelligence, and couldn't adapt to how I was actually feeling. <strong>That gap became Neuroot.</strong></p>
+      </div>
+      <div>
+        <div class="callout">
+          <p>"Uma âncora te impede de mover. <em>Uma raiz te sustenta enquanto você cresce.</em>"</p>
+          <div class="callout-source">The philosophy behind the rebrand from Reanchor → Neuroot</div>
+        </div>
+        <p class="cs-body-text" style="margin-top: 0;">The name evolved from Reanchor — a metaphor of passive stability — to Neuroot, a metaphor of active growth. Roots don't hold you still. They sustain you while you expand. That's the exact image of neuroplasticity: the nervous system rebuilding safe pathways through conscious repetition.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 PROBLEM -->
+  <section class="case-section reveal" style="background: var(--ink);">
+    <div class="cs-label" style="color: var(--plum-pale);">
+      <span style="display:block;width:24px;height:1px;background:var(--plum-pale);flex-shrink:0"></span>
+      02 — The Problem
+    </div>
+    <h2 class="cs-title" style="color: var(--white);">Productivity apps were designed<br>for people whose <em style="color:var(--plum-pale)">brains still work.</em></h2>
+
+    <p class="cs-body-text" style="color: rgba(255,255,255,0.7); max-width: 700px;">Burnout doesn't just cause tiredness. It causes neurological damage. Chronic stress elevates cortisol, which suppresses dopamine production in the mesolimbic system — the brain's reward circuit. The hippocampus loses the ability to distinguish real threats from false alarms. The amygdala becomes hyperactive.</p>
+    <p class="cs-body-text" style="color: rgba(255,255,255,0.7); max-width: 700px; margin-bottom: 48px;">The result: a person who knows exactly what they need to do, wants to do it, and whose nervous system treats every task as a survival threat.</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="background: rgba(107,79,160,0.2); color: rgba(255,255,255,0.5);">What existing apps do</th>
+          <th style="background: rgba(107,79,160,0.25); color: var(--plum-pale);">What a recovering brain needs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">Show backlogs of undone tasks</td>
+          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);">One small action. No debt.</td>
+        </tr>
+        <tr>
+          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">Punish broken streaks</td>
+          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);">No punishment for absence</td>
+        </tr>
+        <tr>
+          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">Measure volume, not safety</td>
+          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);">Safety of effort, not output</td>
+        </tr>
+        <tr>
+          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">Send pressure-based notifications</td>
+          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);">Return to effort as a choice</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 03 USERS -->
+  <section class="case-section reveal">
+    <div class="cs-label">03 — User Profiles</div>
+    <h2 class="cs-title">Three people.<br><em>One nervous system pattern.</em></h2>
+    <div class="cs-3col">
+      <div class="profile-card">
+        <div class="profile-icon">⚡</div>
+        <div class="profile-name">The High-Performer in Transition</div>
+        <p class="profile-desc">Laid off or burned out. Functionally paralyzed. Knows exactly what they should do. Their body refuses to start. Used to achieving — now afraid of effort itself.</p>
+      </div>
+      <div class="profile-card" style="border-radius: 4px;">
+        <div class="profile-icon">🌫</div>
+        <div class="profile-name">The Hidden Functional</div>
+        <p class="profile-desc">Still working, operating at 20% capacity. Looks fine from the outside. Inside, everything takes 10x the energy it should. Afraid to admit it.</p>
+      </div>
+      <div class="profile-card">
+        <div class="profile-icon">🌱</div>
+        <div class="profile-name">The Post-Leave Returner</div>
+        <p class="profile-desc">Medically dismissed, afraid of relapsing. Ready to try again — carefully. Needs a structure that won't punish them for going slowly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 METHOD -->
+  <section class="case-section reveal" style="background: var(--plum-ghost);">
+    <div class="cs-label">04 — The Method</div>
+    <h2 class="cs-title">Behavioral Activation —<br><em>not productivity.</em></h2>
+    <div class="cs-2col">
+      <div>
+        <p class="cs-body-text">Neuroot is built on Behavioral Activation, a clinically validated approach from cognitive behavioral therapy. The core principle: repeated experiences of effort followed by reward — even small ones — rebuild the neural pathways that burnout damaged.</p>
+        <p class="cs-body-text"><strong>This is not gamification. It's not a habit tracker.</strong> It's a tool that teaches the nervous system that acting won't destroy you again.</p>
+        <p class="cs-body-text">The dual philosophical base: <strong>neuroplasticity</strong> (the brain rebuilds safe pathways through repetition) meets <strong>Kung Fu philosophy</strong> (the middle path — neither excess nor deprivation). Both systems arrived at the same truth: conscious repetition transforms who you are. This philosophy is implicit in the product — users feel it without reading it.</p>
+      </div>
+      <div>
+        <div class="callout" style="margin: 0;">
+          <p>"Teach the nervous system that effort is safe. <em>One practice. One day. Stop before you're tired.</em> That's the whole method."</p>
+          <div class="callout-source">The single goal of Neuroot</div>
+        </div>
+        <div style="margin-top: 24px; background: white; padding: 28px 32px; border-radius: 8px;">
+          <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--plum); margin-bottom: 16px;">What the app deliberately doesn't do</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> No streaks or consecutive-day counting</div>
+            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> No notifications that mention absence</div>
+            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> No visible backlog of unfinished days</div>
+            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> No aggressive colors (red/orange removed)</div>
+            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> No gamification of any kind</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 PROCESS -->
+  <section class="case-section reveal">
+    <div class="cs-label">05 — My Process</div>
+    <h2 class="cs-title">Design Thinking → Shape Up<br>→ PRD → <em>AI executes.</em></h2>
+
+    <p class="cs-body-text">This project was built following the methodology I use for every complex product: human exploration first, then decisive shaping, then AI-assisted execution. Each phase gates the next.</p>
+
+    <div class="method-flow-bar">
+      <div class="mf-step">
+        <div class="mf-num">01</div>
+        <div class="mf-name">Design Thinking</div>
+        <div class="mf-tool">Double Diamond · Interviews · Personas</div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-num">02</div>
+        <div class="mf-name">Shape Up</div>
+        <div class="mf-tool">Appetite · Rabbit holes · No-gos</div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-num">03</div>
+        <div class="mf-name">PRD</div>
+        <div class="mf-tool">5 blocks · Decision artifact</div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-num">04</div>
+        <div class="mf-name">Prompt Frames</div>
+        <div class="mf-tool">Context + Limits + Criteria</div>
+      </div>
+      <div class="mf-step">
+        <div class="mf-num">05</div>
+        <div class="mf-name">AI Executes</div>
+        <div class="mf-tool">Claude Code · Claude API · Figma Make</div>
+      </div>
+    </div>
+
+    <div class="cs-2col" style="margin-top: 48px;">
+      <div>
+        <p class="cs-body-text"><strong>Discovery & PRD</strong> — I started with the Notion template I was already using for myself. That template became the first prototype — its limitations became the brief. I documented the problem, user profiles, scientific foundation, no-gos, rabbit holes, and success indicators using the Shape Up methodology.</p>
+        <p class="cs-body-text"><strong>Design with Figma Make</strong> — I used Figma Make to prototype all screens at high fidelity. The visual language emerged from the methodology: no aggressive colors, no red alerts, no urgency. A watercolor tree as the core illustration — rooted, alive, growing slowly.</p>
+      </div>
+      <div>
+        <p class="cs-body-text"><strong>Development with Claude Code</strong> — I built the full app using Claude Code — writing prompts, reviewing code, iterating on behavior — without a technical co-founder. Stack: React + TypeScript, Supabase for auth and database, GitHub for version control, Vercel for deployment.</p>
+        <p class="cs-body-text"><strong>AI in the onboarding</strong> — The Claude API powers a conversational onboarding. Instead of a form, the app opens with a question: <em>"What did you used to do with ease, but now your body freezes just thinking about?"</em> The AI generates personalized practices from the user's answers — already named, timed, and written in the product's voice.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 SCREENS -->
+  <section class="case-section reveal">
+    <div class="cs-label">06 — Key Screens & Decisions</div>
+    <h2 class="cs-title">Every word is a<br><em>product decision.</em></h2>
+    <p class="cs-body-text">Microcopy is product strategy here. The language is the therapy.</p>
+
+    <div class="cs-3col" style="margin-top: 48px;">
+      <div class="screen-card">
+        <div class="screen-num">01</div>
+        <div class="screen-name">Home — Empty State</div>
+        <p class="screen-desc">"There's no practice defined for today." — Not "You haven't done anything yet." The language removes debt. One CTA: "Choose today's practice" — an invitation, never a task.</p>
+        <div class="screen-decision">Copy decision: the app cannot know you were absent. It only knows you came back.</div>
+      </div>
+      <div class="screen-card">
+        <div class="screen-num">02</div>
+        <div class="screen-name">Execution — Timer</div>
+        <p class="screen-desc">Full-screen timer. Limit visible. At the bottom: "Stop when the time ends — even if you haven't finished. Stopping before exhaustion is part of the method."</p>
+        <div class="screen-decision">Button label: "End at the right point." — Not "Done." This is the method in a button label.</div>
+      </div>
+      <div class="screen-card">
+        <div class="screen-num">03</div>
+        <div class="screen-name">Post-Practice Registration</div>
+        <p class="screen-desc">Three axes: Body (Light / Neutral / Heavy), Mind (Clear / Neutral / Tired), Resistance (Less / Same / More). No scores. No percentages. Just observation.</p>
+        <div class="screen-decision">Design decision: data tracks nervous system recalibration over time without turning it into performance metrics.</div>
+      </div>
+      <div class="screen-card">
+        <div class="screen-num">04</div>
+        <div class="screen-name">Practice Completed</div>
+        <p class="screen-desc">"Você fez sua prática hoje." Then: "Executing beyond the plan doesn't accelerate — it only teaches the body that limits don't exist."</p>
+        <div class="screen-decision">The screen actively discourages doing more. That's the product. No buttons. Just presence.</div>
+      </div>
+      <div class="screen-card">
+        <div class="screen-num">05</div>
+        <div class="screen-name">Week View</div>
+        <p class="screen-desc">Shows what happened, never what should have happened. The single weekly question: "Did your body feel less resistant to effort this week?"</p>
+        <div class="screen-decision">Design decision: that's the only metric that matters. Nervous system recalibration, not streak count.</div>
+      </div>
+      <div class="screen-card">
+        <div class="screen-num">06</div>
+        <div class="screen-name">AI Onboarding</div>
+        <p class="screen-desc">No forms. No signup before understanding what the product does. The AI asks one question at a time, responds with brief empathetic context, and generates 3 personalized practices.</p>
+        <div class="screen-decision">The user sees their practices before they ever see the home screen.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 LEARNINGS -->
+  <section class="case-section reveal" style="background: var(--ink);">
+    <div class="cs-label" style="color: var(--plum-pale);">
+      <span style="display:block;width:24px;height:1px;background:var(--plum-pale);"></span>
+      07 — Learnings
+    </div>
+    <h2 class="cs-title" style="color: var(--white);">What building this<br><em style="color:var(--plum-pale)">taught me.</em></h2>
+
+    <div class="learning-list" style="max-width: 800px;">
+      <div class="learning-item">
+        <div class="learning-num">1</div>
+        <div class="learning-content">
+          <div class="learning-title">The hardest part wasn't design or code — it was the PRD.</div>
+          <div class="learning-desc">Defining what the product truly was — and wasn't — took longer than anything else. Every feature idea had to be tested against the core question: does this teach the nervous system that effort is safe, or does it do the opposite?</div>
+        </div>
+      </div>
+      <div class="learning-item">
+        <div class="learning-num">2</div>
+        <div class="learning-content">
+          <div class="learning-title">Microcopy is product strategy.</div>
+          <div class="learning-desc">"End at the right point" instead of "Done." "You've done what you promised" instead of "Congratulations." Every word in this app is a decision about how the brain will receive it. Language is the therapy.</div>
+        </div>
+      </div>
+      <div class="learning-item">
+        <div class="learning-num">3</div>
+        <div class="learning-content">
+          <div class="learning-title">Building alone with AI is a new design skill.</div>
+          <div class="learning-desc">I wrote the prompts, reviewed the output, directed the iterations, and caught the errors. The ability to think in product terms and translate that into precise instructions for AI — that's a skill that didn't exist before this project became possible.</div>
+        </div>
+      </div>
+      <div class="learning-item">
+        <div class="learning-num">4</div>
+        <div class="learning-content">
+          <div class="learning-title">Personal experience is a valid research source.</div>
+          <div class="learning-desc">I was my own first user. That's not a limitation — it's a foundation. The product has depth because the problem has depth. The PRD was grounded in real behavioral evidence, not assumed pain points.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 NEXT STEPS -->
+  <section class="case-section reveal">
+    <div class="cs-label">08 — Next Steps</div>
+    <h2 class="cs-title">What comes<br><em>next.</em></h2>
+    <div class="next-steps-grid">
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Deploy to Vercel and test with 5–10 real users who have experienced burnout</div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Validate the behavioral activation framework with a therapist or psychologist</div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Refine the AI onboarding based on real conversation data from first users</div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Explore the progressive phase system: Day view → 3-day view → Week view</div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Document the full build process as an AI for UX Designers course</div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Consider iOS/Android native wrapper post-validation</div></div>
+    </div>
+  </section>
+
+</div><!-- /case-body -->
+
+<!-- CTA -->
+<div class="case-cta">
+  <div class="case-cta-text">
+    <div class="case-cta-label">Let's work together</div>
+    <div class="case-cta-title">Interested in how I think<br>through complex products?</div>
+  </div>
+  <div class="case-cta-links">
+    <a href="/cdn-cgi/l/email-protection#412628342d2e3124322601262c20282d6f222e2c" class="cta-btn white">✉ Get in touch</a>
+    <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='index.html'; return false;" class="cta-btn outline">← Back to portfolio</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Giuliana Lopes Galvão</p>
+  <p><a href="index.html">Portfolio</a> · <a href="https://linkedin.com/in/giulianalg" target="_blank">LinkedIn</a></p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+window.addEventListener('load', () => {
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      el.classList.add('visible');
+    }
+  });
+});
+</script>
+</body>
+</html>

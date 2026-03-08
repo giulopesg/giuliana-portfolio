@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechBack BB — Smart Waste Journey · Giuliana Lopes Galvão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #6B4FA0;
+    --plum-light: #8B6FC0;
+    --plum-pale: #D4C8EF;
+    --plum-ghost: #F2EEF9;
+    --warm-cream: #FAF7F2;
+    --warm-stone: #EDE8E0;
+    --ink: #1C1917;
+    --ink-soft: #4A4542;
+    --ink-muted: #8A8480;
+    --green-deep: #1A3D2B;
+    --green-mid: #2D6A4A;
+    --green-accent: #4A9B6F;
+    --green-pale: #B7DCC8;
+    --green-ghost: #EAF5EF;
+    --yellow-bright: #F5E642;
+    --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--ink); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+    padding: 24px 64px;
+    display: flex; align-items: center; gap: 24px;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .nav-back {
+    font-size: 13px; color: var(--ink-muted); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--green-deep); }
+  .nav-divider { width: 1px; height: 16px; background: var(--warm-stone); }
+  .nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: var(--ink); }
+
+  /* ── HERO ── */
+  .case-hero {
+    min-height: 100vh;
+    background: var(--green-deep);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+  }
+  .case-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(45,106,74,0.4) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(245,230,66,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  /* grain overlay */
+  .case-hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03; pointer-events: none; z-index: 1;
+  }
+
+  .case-hero-left {
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 140px 64px 80px 80px;
+    position: relative; z-index: 2;
+  }
+
+  .case-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+  .ctag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 12px;
+    border: 1px solid rgba(183,220,200,0.3);
+    color: var(--green-pale);
+    background: rgba(45,106,74,0.25);
+  }
+
+  .case-hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--green-pale); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .case-hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--green-pale); }
+
+  .case-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(60px, 7vw, 100px);
+    font-weight: 300; line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .case-hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 300; font-style: italic;
+    color: var(--green-pale); margin-bottom: 48px; line-height: 1.4;
+  }
+
+  .case-meta-row { display: flex; gap: 48px; flex-wrap: wrap; }
+  .case-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 6px;
+  }
+  .case-meta-value { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.8); }
+
+  .case-hero-right {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 64px 80px 40px;
+    z-index: 2;
+  }
+  .hero-stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; width: 100%; max-width: 380px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 32px 28px;
+  }
+  .hero-stat:nth-child(1) { border-radius: 24px 4px 4px 4px; }
+  .hero-stat:nth-child(2) { border-radius: 4px 24px 4px 4px; }
+  .hero-stat:nth-child(3) { border-radius: 4px 4px 4px 24px; }
+  .hero-stat:nth-child(4) { border-radius: 4px 4px 24px 4px; }
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 300; line-height: 1;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .hero-stat-num span { font-size: 28px; color: var(--green-pale); }
+  .hero-stat-label { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+  /* ── BODY ── */
+  .case-body { max-width: 1200px; margin: 0 auto; }
+  .case-section {
+    padding: 96px 80px;
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .case-section:last-child { border-bottom: none; }
+
+  .cs-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-mid); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cs-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--green-mid); }
+
+  .cs-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300; line-height: 1.1; letter-spacing: -0.01em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .cs-title em { font-style: italic; color: var(--green-mid); }
+
+  .cs-body-text {
+    font-size: 17px; font-weight: 300; line-height: 1.8;
+    color: var(--ink-soft); max-width: 680px; margin-bottom: 28px;
+  }
+  .cs-body-text strong { color: var(--ink); font-weight: 500; }
+
+  .cs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .cs-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+
+  /* ── CHALLENGE CALLOUT ── */
+  .challenge-callout {
+    background: var(--green-deep);
+    border-radius: 4px 32px 4px 32px;
+    padding: 64px 72px;
+    position: relative; overflow: hidden;
+    margin-bottom: 64px;
+  }
+  .challenge-callout::before {
+    content: '"';
+    position: absolute; top: -20px; left: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px; font-weight: 300; line-height: 1;
+    color: rgba(245,230,66,0.08);
+    pointer-events: none;
+  }
+  .challenge-callout p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 300; font-style: italic; line-height: 1.4;
+    color: var(--white); position: relative; z-index: 1;
+  }
+  .challenge-callout p strong {
+    color: var(--yellow-bright); font-style: normal; font-weight: 400;
+  }
+
+  /* ── METHODOLOGY PHASES ── */
+  .phase-flow { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 48px; }
+  .phase-card {
+    padding: 40px 32px; position: relative;
+    background: var(--green-ghost);
+    border: 1px solid var(--green-pale);
+  }
+  .phase-card:first-child { border-radius: 24px 4px 4px 4px; }
+  .phase-card:last-child { border-radius: 4px 4px 24px 4px; }
+  .phase-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px; font-weight: 300; line-height: 1;
+    color: var(--green-pale); margin-bottom: 16px;
+  }
+  .phase-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green-mid); margin-bottom: 12px;
+  }
+  .phase-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400; line-height: 1.3;
+    color: var(--ink); margin-bottom: 12px;
+  }
+  .phase-desc { font-size: 14px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── USER PROFILES ── */
+  .profiles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
+  .profile-card {
+    border: 1px solid var(--warm-stone);
+    border-radius: 4px 24px 4px 24px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .profile-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+  .profile-img-wrap { aspect-ratio: 4/3; overflow: hidden; background: var(--green-ghost); position: relative; }
+  .profile-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .profile-type-badge {
+    position: absolute; bottom: 12px; left: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--green-deep); color: var(--green-pale);
+    padding: 4px 10px; border-radius: 8px;
+  }
+  .profile-body { padding: 24px; }
+  .profile-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400; color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .profile-role { font-size: 12px; font-weight: 300; color: var(--ink-muted); margin-bottom: 16px; }
+  .profile-insight {
+    font-size: 13px; font-weight: 300; color: var(--ink-soft);
+    line-height: 1.6; padding-top: 16px;
+    border-top: 1px solid var(--warm-stone);
+  }
+  .profile-insight strong { color: var(--green-mid); font-weight: 500; }
+
+  /* ── INSIGHTS GRID ── */
+  .insights-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
+  .insight-block {
+    padding: 48px 40px;
+    background: var(--warm-cream);
+    border: 1px solid var(--warm-stone);
+  }
+  .insight-block:first-child { border-radius: 24px 4px 4px 4px; }
+  .insight-block:nth-child(2) { border-radius: 4px 24px 4px 4px; }
+  .insight-block:nth-child(3) { border-radius: 4px 4px 4px 24px; }
+  .insight-block:nth-child(4) { border-radius: 4px 4px 24px 4px; }
+  .insight-block.dark { background: var(--green-deep); border-color: rgba(255,255,255,0.06); }
+  .insight-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300; line-height: 1;
+    color: var(--green-pale); margin-bottom: 12px;
+  }
+  .insight-block.dark .insight-num { color: rgba(183,220,200,0.4); }
+  .insight-title {
+    font-size: 15px; font-weight: 500; color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .insight-block.dark .insight-title { color: var(--white); }
+  .insight-desc { font-size: 14px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; }
+  .insight-block.dark .insight-desc { color: rgba(255,255,255,0.55); }
+
+  /* ── DELIVERABLES ── */
+  .deliverables-list { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; }
+  .deliverable-item {
+    display: grid; grid-template-columns: 56px 1fr;
+    gap: 24px; align-items: start;
+    padding: 32px 32px;
+    border: 1px solid var(--warm-stone);
+    transition: background 0.2s;
+  }
+  .deliverable-item:hover { background: var(--green-ghost); }
+  .deliverable-item:first-child { border-radius: 24px 4px 4px 4px; }
+  .deliverable-item:last-child { border-radius: 4px 4px 24px 4px; }
+  .d-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 300;
+    color: var(--green-pale); line-height: 1;
+  }
+  .d-content {}
+  .d-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+  .d-desc { font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── REPORT SCREENSHOTS ── */
+  .screenshots-scroll {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 48px;
+  }
+  .screenshot-frame {
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--warm-stone);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: zoom-in;
+  }
+  .screenshot-frame:hover { transform: scale(1.02); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+  .screenshot-frame img { width: 100%; display: block; }
+  .screenshot-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em;
+    color: var(--ink-muted); text-align: center;
+    margin-top: 8px;
+  }
+
+  /* ── ROADMAP ── */
+  .roadmap-table {
+    width: 100%; margin-top: 48px;
+    border-collapse: separate; border-spacing: 2px;
+  }
+  .roadmap-table th {
+    padding: 16px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white); background: var(--green-deep);
+    text-align: left;
+  }
+  .roadmap-table th:first-child { border-radius: 16px 4px 4px 4px; }
+  .roadmap-table th:last-child { border-radius: 4px 16px 4px 4px; }
+  .roadmap-table td {
+    padding: 20px 24px;
+    background: var(--warm-cream);
+    border: 1px solid var(--warm-stone);
+    font-size: 13px; font-weight: 300; color: var(--ink-soft);
+    line-height: 1.5; vertical-align: top;
+  }
+  .roadmap-table td.q-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300; color: var(--green-mid);
+    text-align: center; vertical-align: middle;
+  }
+  .roadmap-table td .tag-green {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.1em;
+    padding: 3px 8px; border-radius: 6px;
+    background: var(--green-ghost); color: var(--green-mid);
+    margin-bottom: 6px;
+  }
+
+  /* ── IMPACT CALLOUT ── */
+  .impact-banner {
+    background: var(--yellow-bright);
+    padding: 64px 80px;
+    position: relative; overflow: hidden;
+    margin: 0 -80px;
+  }
+  .impact-banner::before {
+    content: '→';
+    position: absolute; right: 60px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 120px; color: rgba(0,0,0,0.06);
+    font-family: sans-serif;
+  }
+  .impact-banner-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-deep); margin-bottom: 16px; opacity: 0.6;
+  }
+  .impact-banner-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 400; line-height: 1.3;
+    color: var(--green-deep);
+  }
+  .impact-banner-text strong { font-style: italic; font-weight: 300; }
+
+  /* ── FOOTER NAV ── */
+  .case-footer-nav {
+    padding: 64px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--warm-stone);
+  }
+  .footer-nav-link {
+    text-decoration: none; display: flex; flex-direction: column; gap: 8px;
+  }
+  .fnl-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--ink-muted); text-transform: uppercase; }
+  .fnl-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--ink); transition: color 0.2s; }
+  .footer-nav-link:hover .fnl-title { color: var(--green-mid); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(0,0,0,0.92);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; box-shadow: 0 32px 80px rgba(0,0,0,0.6); }
+  .lightbox-close {
+    position: absolute; top: 24px; right: 32px;
+    font-size: 32px; color: rgba(255,255,255,0.6);
+    cursor: pointer; background: none; border: none;
+    transition: color 0.2s;
+  }
+  .lightbox-close:hover { color: var(--white); }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .case-hero { grid-template-columns: 1fr; }
+    .case-hero-right { display: none; }
+    .case-hero-left { padding: 120px 24px 60px; }
+    .case-section { padding: 64px 24px; }
+    .cs-2col, .cs-3col, .phase-flow, .profiles-grid, .insights-2col { grid-template-columns: 1fr; }
+    .screenshots-scroll { grid-template-columns: 1fr 1fr; }
+    .impact-banner { margin: 0; padding: 48px 24px; }
+    .case-footer-nav { padding: 40px 24px; flex-direction: column; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Back to work
+  </a>
+  <div class="nav-divider"></div>
+  <span class="nav-title">TechBack BB — Smart Waste Journey</span>
+</nav>
+
+<!-- HERO -->
+<section class="case-hero">
+  <div class="case-hero-left">
+    <div class="case-tag-row">
+      <span class="ctag">UX Research</span>
+      <span class="ctag">Field Research</span>
+      <span class="ctag">Service Strategy</span>
+      <span class="ctag">Social Impact</span>
+    </div>
+    <div class="case-hero-eyebrow">Banco do Brasil — TechBack</div>
+    <h1 class="case-hero-title">TechBack<br>BB.</h1>
+    <p class="case-hero-subtitle">Smart Waste Journey</p>
+    <div class="case-meta-row">
+      <div>
+        <div class="case-meta-label">Client</div>
+        <div class="case-meta-value">Banco do Brasil</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Year</div>
+        <div class="case-meta-value">2025</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Role</div>
+        <div class="case-meta-value">UX Researcher & Strategist</div>
+      </div>
+      <div>
+        <div class="case-meta-label">HQ</div>
+        <div class="case-meta-value">Brasília, BR</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-hero-right">
+    <div class="hero-stats-grid">
+      <div class="hero-stat">
+        <div class="hero-stat-num">11<span>+</span></div>
+        <div class="hero-stat-label">in-depth interviews conducted in field</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3<span>×</span></div>
+        <div class="hero-stat-label">research phases: plan, field, synthesis</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4<span>+</span></div>
+        <div class="hero-stat-label">distinct user profiles mapped</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1<span>x</span></div>
+        <div class="hero-stat-label">the largest circular economy event in LatAm</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="case-body">
+
+  <!-- 01 THE PROJECT -->
+  <section class="case-section reveal">
+    <div class="cs-label">01 — The Project</div>
+    <div class="cs-2col">
+      <div>
+        <h2 class="cs-title">Reinventing how Brazil deals with <em>electronic waste</em></h2>
+        <p class="cs-body-text">
+          TechBack set out to transform something deeply physical — collection kiosks placed in cities — into a <strong>connected digital ecosystem</strong> that rewards people for doing the right thing with their electronic waste. But to build something that actually works, you have to understand the full chain: citizens, waste-pickers, cooperatives, operators.
+        </p>
+        <p class="cs-body-text">
+          Banco do Brasil brought the ambition and the infrastructure. I was brought in as <strong>UX Researcher and Strategist</strong> to make sure the solution would be grounded in real human behavior — not assumptions.
+        </p>
+      </div>
+      <div>
+        <p class="cs-body-text">
+          The research happened inside <strong>Expocatadores 2024</strong> — the largest circular economy event in Latin America, held in São Paulo in December 2024. TechBack had a physical interactive stand inside the FBB pavilion, which gave us direct access to the people who matter most.
+        </p>
+        <p class="cs-body-text">
+          Three days. Three audiences. One mission: <strong>understand the ecosystem well enough to design something that doesn't exclude the people it claims to serve.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 THE CHALLENGE -->
+  <section class="case-section reveal">
+    <div class="cs-label">02 — The Challenge</div>
+    <div class="challenge-callout">
+      <p>Without listening to waste-pickers, TechBack Digital risks becoming a solution <strong>disconnected from reality.</strong> Technology built on assumptions — not on lived experience — excludes the very people who make the circular economy run.</p>
+    </div>
+    <div class="cs-2col">
+      <div>
+        <p class="cs-body-text">
+          The main challenge was bridging two worlds: <strong>cutting-edge digital technology</strong> and the everyday reality of people who collect and process e-waste for a living. These are often people working without formal headquarters, storing recyclables in their own backyards, navigating a market where electronic materials are worth almost nothing.
+        </p>
+      </div>
+      <div>
+        <p class="cs-body-text">
+          At the same time, we needed to understand citizen behavior — why they discard incorrectly, what would motivate them to change, and how a reward system could genuinely move behavior rather than just feel good on paper. Two very different problems, one research sprint.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 METHODOLOGY -->
+  <section class="case-section reveal">
+    <div class="cs-label">03 — Research Process</div>
+    <h2 class="cs-title">Three phases, <em>one truth</em></h2>
+    <div class="phase-flow">
+      <div class="phase-card">
+        <div class="phase-num">01</div>
+        <div class="phase-name">Planning</div>
+        <div class="phase-title">Interview Design for Expocatadores</div>
+        <p class="phase-desc">Tailored scripts for each audience segment — visitors, waste-pickers, and kiosk operators — with different angles for each profile. Objectives focused on validating TechBack's roadmap and understanding real pain points.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">02</div>
+        <div class="phase-name">Field Research</div>
+        <div class="phase-title">10 interviews + 1 operator at Expocatadores 2024</div>
+        <p class="phase-desc">Conducted in-person at the event across 3 days. Adapted methodology on the spot when participation was lower than expected. Documented field notes, photos, and qualitative observations in real time.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">03</div>
+        <div class="phase-name">Synthesis</div>
+        <div class="phase-title">Strategic Report + Digital Journey</div>
+        <p class="phase-desc">Consolidated all insights into a structured report mapping pains, motivations, and opportunities. Designed a proposed digital journey covering access, engagement, and reward flows — plus strategic product recommendations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 FIELD RESEARCH — REPORT SCREENSHOTS -->
+  <section class="case-section reveal">
+    <div class="cs-label">04 — Field Research</div>
+    <h2 class="cs-title">The report that <em>came from the field</em></h2>
+    <p class="cs-body-text">These are screens from the actual research report delivered to Banco do Brasil — compiled from real interviews conducted at Expocatadores 2024 in São Paulo.</p>
+    <div class="screenshots-scroll">
+      <div>
+        <div class="screenshot-frame" onclick="openLightbox(this)">
+          <img src="images/techback/field-01.png" alt="Report cover — Insights: Expocatadores 2024" loading="lazy">
+        </div>
+        <div class="screenshot-label">Report Cover</div>
+      </div>
+      <div>
+        <div class="screenshot-frame" onclick="openLightbox(this)">
+          <img src="images/techback/field-02.png" alt="Interview plan — Expocatadores" loading="lazy">
+        </div>
+        <div class="screenshot-label">Interview Planning</div>
+      </div>
+      <div>
+        <div class="screenshot-frame" onclick="openLightbox(this)">
+          <img src="images/techback/field-03.png" alt="Visitor insights summary" loading="lazy">
+        </div>
+        <div class="screenshot-label">Visitor Insights</div>
+      </div>
+      <div>
+        <div class="screenshot-frame" onclick="openLightbox(this)">
+          <img src="images/techback/field-04.png" alt="Catador profile — Dilvana" loading="lazy">
+        </div>
+        <div class="screenshot-label">Waste-picker Profile</div>
+      </div>
+      <div>
+        <div class="screenshot-frame" onclick="openLightbox(this)">
+          <img src="images/techback/field-05.png" alt="Main pains — catadores" loading="lazy">
+        </div>
+        <div class="screenshot-label">Main Pain Points</div>
+      </div>
+      <div>
+        <div class="screenshot-frame" onclick="openLightbox(this)">
+          <img src="images/techback/field-06.png" alt="Key insights — catadores" loading="lazy">
+        </div>
+        <div class="screenshot-label">Key Insights</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 USER PROFILES -->
+  <section class="case-section reveal">
+    <div class="cs-label">05 — User Profiles</div>
+    <h2 class="cs-title">The people behind the <em>waste chain</em></h2>
+    <p class="cs-body-text">Each interview surfaced a distinct reality. These aren't personas built from demographics — they're real people, with real names, interviewed at the event.</p>
+
+    <div class="profiles-grid">
+      <!-- Visitors -->
+      <div class="profile-card">
+        <div class="profile-img-wrap">
+          <img src="images/techback/field-07.png" alt="Laura Santos — visitor interview" loading="lazy">
+          <span class="profile-type-badge">Visitor</span>
+        </div>
+        <div class="profile-body">
+          <div class="profile-name">Laura Santos</div>
+          <div class="profile-role">Real estate broker, 55 — São Paulo</div>
+          <p class="profile-insight">Has discarded e-waste before, motivated by environmental awareness — not financial incentives. Wants <strong>scheduling, real-time kiosk availability, and cashback directly to her BB app wallet.</strong></p>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-img-wrap">
+          <img src="images/techback/field-08.png" alt="Audrin — visitor interview" loading="lazy">
+          <span class="profile-type-badge">Visitor</span>
+        </div>
+        <div class="profile-body">
+          <div class="profile-name">Audrin</div>
+          <div class="profile-role">Developer & designer, 54 — brought a discarded laptop to the event</div>
+          <p class="profile-insight">Described the scanning experience as a <strong>key differentiator</strong>. Wants AI photo recognition of items, real-time kiosk status, and an environmental impact dashboard. Believes financial rewards drive initial engagement but environmental awareness sustains it.</p>
+        </div>
+      </div>
+
+      <!-- Catadores -->
+      <div class="profile-card">
+        <div class="profile-img-wrap">
+          <img src="images/techback/field-09.png" alt="Maria Girlene — catadora" loading="lazy">
+          <span class="profile-type-badge">Waste-picker</span>
+        </div>
+        <div class="profile-body">
+          <div class="profile-name">Maria Girlene</div>
+          <div class="profile-role">Pedras de Fogo, PB — collecting since childhood</div>
+          <p class="profile-insight">Operates without formal headquarters, storing materials on her own property. E-waste ends up as common trash <strong>because no local market exists</strong> to buy it. Faces social discrimination. Needs government support and market creation.</p>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-img-wrap">
+          <img src="images/techback/field-10.png" alt="Mateus Alves — catador cooperativa" loading="lazy">
+          <span class="profile-type-badge">Waste-picker</span>
+        </div>
+        <div class="profile-body">
+          <div class="profile-name">Mateus Alves</div>
+          <div class="profile-role">Londrina, PR — 15 years, Cooper Região cooperative</div>
+          <p class="profile-insight">Serves ~208,000 households. Electronic waste has very low market value — described as <strong>"cheap as popcorn."</strong> No reverse logistics infrastructure. People prefer to leave materials at their door rather than bring them to proper points.</p>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-img-wrap">
+          <img src="images/techback/field-11.png" alt="Dilvana Santos — ASCOR" loading="lazy">
+          <span class="profile-type-badge">Waste-picker</span>
+        </div>
+        <div class="profile-body">
+          <div class="profile-name">Dilvana Santos</div>
+          <div class="profile-role">Colatina, ES — President, ASCOR (38 members)</div>
+          <p class="profile-insight">Sources from hospitals, companies, and the public. Faces difficulty finding <strong>reliable buyers</strong> for specific materials (circuit boards, plastics). Does community awareness rounds in neighborhoods to drive correct separation.</p>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-img-wrap">
+          <img src="images/techback/field-12.png" alt="Leonardo César — Reeecicle operator" loading="lazy">
+          <span class="profile-type-badge">Operator</span>
+        </div>
+        <div class="profile-body">
+          <div class="profile-name">Leonardo César</div>
+          <div class="profile-role">Environmental engineer — Reeecicle, Recife + João Pessoa</div>
+          <p class="profile-insight">Homologated by Green Electron. Uses logistics software for optimized routes. Batteries travel to Minas Gerais for specialized processing. Recommends <strong>automatic PEV notifications, cooperative training, and remote monitoring</strong> for the TechBack platform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 KEY INSIGHTS -->
+  <section class="case-section reveal">
+    <div class="cs-label">06 — Key Insights</div>
+    <h2 class="cs-title">What the field <em>actually revealed</em></h2>
+    <div class="insights-2col">
+      <div class="insight-block">
+        <div class="insight-num">01</div>
+        <div class="insight-title">E-waste is a cost, not an income</div>
+        <p class="insight-desc">For waste-pickers, electronic materials generate almost no revenue. Low market value combined with lack of buyers means e-waste often goes to landfill. Financial rewards and cooperative partnerships are essential to change this.</p>
+      </div>
+      <div class="insight-block dark">
+        <div class="insight-num">02</div>
+        <div class="insight-title">Citizens need convenience + reward</div>
+        <p class="insight-desc">Environmental awareness motivates, but friction kills follow-through. Scheduling, real-time kiosk availability, and cashback to familiar channels (like the BB app) are the difference between intent and action.</p>
+      </div>
+      <div class="insight-block dark">
+        <div class="insight-num">03</div>
+        <div class="insight-title">Without catadores, TechBack fails</div>
+        <p class="insight-desc">The full chain depends on waste-pickers and cooperatives. A digital solution that ignores their operational reality — no infrastructure, no formal market, social barriers — is a solution that serves only part of the ecosystem.</p>
+      </div>
+      <div class="insight-block">
+        <div class="insight-num">04</div>
+        <div class="insight-title">Operators need smart infrastructure</div>
+        <p class="insight-desc">PEV operators like Reeecicle need automated notifications when kiosks are full, route optimization, and tools to classify materials in real time. Technology that helps the operator runs smoother for everyone downstream.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 DELIVERABLES -->
+  <section class="case-section reveal">
+    <div class="cs-label">07 — Deliverables</div>
+    <h2 class="cs-title">What I <em>delivered</em> to Banco do Brasil</h2>
+    <div class="deliverables-list">
+      <div class="deliverable-item">
+        <div class="d-num">01</div>
+        <div class="d-content">
+          <div class="d-title">Research Plan & Interview Protocols</div>
+          <p class="d-desc">Tailored scripts for three distinct audiences at Expocatadores 2024 — visitors, waste-pickers, and kiosk operators — each with specific objectives aligned to TechBack's product roadmap.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="d-num">02</div>
+        <div class="d-content">
+          <div class="d-title">10 In-depth Interviews + 1 Kiosk Operator</div>
+          <p class="d-desc">Conducted in-person at the event over three days. Adapted methodology in real time when participation was lower than planned. Full field documentation: notes, photos, and qualitative observations.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="d-num">03</div>
+        <div class="d-content">
+          <div class="d-title">Consolidated Research Report</div>
+          <p class="d-desc">Structured report with user profiles, main pain points, motivations, and strategic opportunities — delivered to BB with clear synthesis and actionable insights per audience segment.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="d-num">04</div>
+        <div class="d-content">
+          <div class="d-title">Proposed Digital User Journey</div>
+          <p class="d-desc">Designed three core flows — access, engagement, and rewards — grounded in research findings and validated against the different user profiles encountered at Expocatadores.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="d-num">05</div>
+        <div class="d-content">
+          <div class="d-title">Strategic Product Recommendations</div>
+          <p class="d-desc">Evidence-based feature recommendations: waste tracking for transparency, scheduled pickups for citizens, AI-powered item recognition, automated PEV notifications, and cooperative training programs. Plus a 2025 roadmap organized by Quick Wins and Long Actions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 ROADMAP SCREENSHOTS -->
+  <section class="case-section reveal">
+    <div class="cs-label">08 — From Insights to Action</div>
+    <h2 class="cs-title">The <em>2025 Roadmap</em> built from field research</h2>
+    <p class="cs-body-text">Every recommendation in the roadmap traces back to something a real person said or showed us at Expocatadores. Research doesn't end at insights — it ends when it shapes what gets built.</p>
+    <div class="screenshots-scroll">
+      <div>
+        <div class="screenshot-frame" onclick="openLightbox(this)">
+          <img src="images/techback/field-13.png" alt="Quick Wins — from learning to action" loading="lazy">
+        </div>
+        <div class="screenshot-label">Quick Wins (1–3 months)</div>
+      </div>
+      <div>
+        <div class="screenshot-frame" onclick="openLightbox(this)">
+          <img src="images/techback/field-14.png" alt="Long Actions — TechBack future" loading="lazy">
+        </div>
+        <div class="screenshot-label">Long Actions (3–12 months)</div>
+      </div>
+      <div>
+        <div class="screenshot-frame" onclick="openLightbox(this)">
+          <img src="images/techback/field-15.png" alt="Roadmap 2025 — TechBack BB" loading="lazy">
+        </div>
+        <div class="screenshot-label">2025 Roadmap</div>
+      </div>
+    </div>
+
+    <table class="roadmap-table" style="margin-top:48px;">
+      <thead>
+        <tr>
+          <th>Quarter</th>
+          <th>Blueprint & Discovery</th>
+          <th>Digital Development</th>
+          <th>Testing & Validation</th>
+          <th>Partnerships</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="q-label">Q1</td>
+          <td><span class="tag-green">Priority</span><br>TechBack Digital blueprint. Waste-picker blueprint review. Deep discovery (parallel).</td>
+          <td>MVP Digital development starts.</td>
+          <td>—</td>
+          <td>Initial cooperative workshops.</td>
+        </tr>
+        <tr>
+          <td class="q-label">Q2</td>
+          <td>—</td>
+          <td>Launch functional MVP. Feature prototyping.</td>
+          <td>Initial testing with cooperatives. Feedback loops.</td>
+          <td>Basic cooperative training.</td>
+        </tr>
+        <tr>
+          <td class="q-label">Q3</td>
+          <td>—</td>
+          <td>MVP iteration with improvements.</td>
+          <td>Controlled expansion. Testing in new areas.</td>
+          <td>Formalize regional partnerships.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 09 IMPACT CALLOUT -->
+  <section class="case-section reveal">
+    <div class="impact-banner">
+      <div class="impact-banner-label">Why this matters</div>
+      <p class="impact-banner-text">
+        This research connected innovation with social impact — laying the groundwork for a solution that works for <strong>citizens, waste-pickers, cooperatives, and operators</strong> alike. Not just for the technology that sits on top.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER NAV -->
+<div style="max-width:1200px;margin:0 auto;">
+  <div class="case-footer-nav">
+    <a href="neuroot-case.html" class="footer-nav-link">
+      <span class="fnl-label">← Previous</span>
+      <span class="fnl-title">Neuroot — Burnout Recovery App</span>
+    </a>
+    <a href="previsul-case.html" class="footer-nav-link" style="text-align:right;">
+      <span class="fnl-label">Next →</span>
+      <span class="fnl-title">Previsul — Service Design</span>
+    </a>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Lightbox
+  function openLightbox(frame) {
+    const img = frame.querySelector('img');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>

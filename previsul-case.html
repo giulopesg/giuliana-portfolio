@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Previsul — End-to-End Service Design · Giuliana Lopes Galvão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #6B4FA0;
+    --plum-light: #8B6FC0;
+    --plum-pale: #D4C8EF;
+    --plum-ghost: #F2EEF9;
+    --warm-cream: #FAF7F2;
+    --warm-stone: #EDE8E0;
+    --ink: #1C1917;
+    --ink-soft: #4A4542;
+    --ink-muted: #8A8480;
+    --blue-deep: #2A3F65;
+    --blue-mid: #3A5A8A;
+    --blue-pale: #C8D8F0;
+    --blue-ghost: #EEF3FB;
+    --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--ink); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+    padding: 24px 64px;
+    display: flex; align-items: center; gap: 24px;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .nav-back {
+    font-size: 13px; color: var(--ink-muted); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--blue-deep); }
+  .nav-divider { width: 1px; height: 16px; background: var(--warm-stone); }
+  .nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: var(--ink); }
+
+  /* ── HERO ── */
+  .case-hero {
+    min-height: 100vh;
+    background: var(--blue-deep);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+  }
+  .case-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(58,90,138,0.4) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(107,79,160,0.2) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .case-hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 140px 64px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .case-tag-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 40px;
+  }
+  .ctag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 12px;
+    border: 1px solid rgba(200,216,240,0.4);
+    color: var(--blue-pale);
+    background: rgba(58,90,138,0.25);
+  }
+
+  .case-hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--blue-pale); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .case-hero-eyebrow::before {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--blue-pale);
+  }
+
+  .case-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(60px, 7vw, 100px);
+    font-weight: 300; line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .case-hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 300; font-style: italic;
+    color: var(--blue-pale);
+    margin-bottom: 48px;
+    line-height: 1.4;
+  }
+
+  .case-meta-row {
+    display: flex; gap: 48px; flex-wrap: wrap;
+  }
+  .case-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 6px;
+  }
+  .case-meta-value {
+    font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.8);
+  }
+
+  /* hero right — stats */
+  .case-hero-right {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 64px 80px 40px;
+    z-index: 2;
+  }
+  .hero-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+    max-width: 380px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 32px 28px;
+  }
+  .hero-stat:nth-child(1) { border-radius: 24px 4px 4px 4px; }
+  .hero-stat:nth-child(2) { border-radius: 4px 24px 4px 4px; }
+  .hero-stat:nth-child(3) { border-radius: 4px 4px 4px 24px; }
+  .hero-stat:nth-child(4) { border-radius: 4px 4px 24px 4px; }
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 300; line-height: 1;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .hero-stat-num span { font-size: 28px; color: var(--blue-pale); }
+  .hero-stat-label {
+    font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.5);
+    line-height: 1.4;
+  }
+
+  /* ── BODY ── */
+  .case-body { max-width: 1200px; margin: 0 auto; }
+
+  .case-section {
+    padding: 96px 80px;
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .case-section:last-child { border-bottom: none; }
+
+  .cs-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--blue-mid); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cs-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--blue-mid); }
+
+  .cs-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300; line-height: 1.1; letter-spacing: -0.01em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .cs-title em { font-style: italic; color: var(--blue-mid); }
+
+  .cs-body-text {
+    font-size: 17px; font-weight: 300; line-height: 1.8;
+    color: var(--ink-soft); max-width: 680px; margin-bottom: 28px;
+  }
+  .cs-body-text strong { color: var(--ink); font-weight: 500; }
+
+  .cs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .cs-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+
+  /* ── PHASE TIMELINE (Double Diamond) ── */
+  .diamond-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin: 48px 0;
+  }
+  .diamond-step {
+    padding: 32px 28px 28px;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .diamond-step:first-child { border-radius: 20px 4px 4px 4px; }
+  .diamond-step:last-child  { border-radius: 4px 20px 20px 4px; }
+  .diamond-step.active { background: var(--blue-deep); }
+  .diamond-step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--blue-pale);
+    opacity: 0.3;
+  }
+  .diamond-step.active::before { background: var(--blue-pale); opacity: 1; }
+  .diamond-phase {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--blue-mid); margin-bottom: 12px;
+  }
+  .diamond-step.active .diamond-phase { color: var(--blue-pale); }
+  .diamond-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px;
+  }
+  .diamond-step.active .diamond-name { color: var(--white); }
+  .diamond-tools {
+    font-size: 12px; font-weight: 300; color: var(--ink-muted);
+    line-height: 1.6;
+  }
+  .diamond-step.active .diamond-tools { color: rgba(255,255,255,0.55); }
+
+  /* ── IMMERSION PARTS ── */
+  .immersion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .immersion-card {
+    background: var(--white);
+    overflow: hidden;
+  }
+  .immersion-card:nth-child(1) { border-radius: 20px 4px 4px 4px; }
+  .immersion-card:nth-child(2) { border-radius: 4px 20px 4px 4px; }
+  .immersion-card:nth-child(3) { border-radius: 4px 4px 4px 20px; }
+  .immersion-card:nth-child(4) { border-radius: 4px 4px 20px 4px; }
+  .immersion-img {
+    width: 100%; height: 220px;
+    object-fit: cover; display: block;
+    background: var(--blue-ghost);
+  }
+  .immersion-body { padding: 28px 28px 32px; }
+  .immersion-part {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--blue-mid); margin-bottom: 8px;
+  }
+  .immersion-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400;
+    color: var(--ink); margin-bottom: 10px;
+  }
+  .immersion-desc {
+    font-size: 13px; font-weight: 300; line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  /* ── PROFILE CARDS ── */
+  .profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .profile-card {
+    background: var(--white);
+    padding: 32px 28px;
+  }
+  .profile-card:first-child { border-radius: 20px 4px 4px 4px; }
+  .profile-card:nth-child(3) { border-radius: 4px 20px 4px 4px; }
+  .profile-card:nth-child(4) { border-radius: 4px 4px 4px 20px; }
+  .profile-card:last-child { border-radius: 4px 4px 20px 4px; }
+  .profile-card.highlight { background: var(--blue-ghost); }
+  .profile-icon { font-size: 28px; margin-bottom: 16px; }
+  .profile-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--blue-mid); margin-bottom: 6px;
+  }
+  .profile-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px;
+  }
+  .profile-desc {
+    font-size: 13px; font-weight: 300; line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .profile-tag {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 8px;
+    background: var(--blue-ghost); color: var(--blue-mid);
+    border: 1px solid var(--blue-pale);
+  }
+
+  /* ── IMAGE GALLERY ── */
+  .img-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .img-gallery.two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+  .gallery-item {
+    overflow: hidden;
+    background: var(--blue-ghost);
+    border-radius: 4px;
+  }
+  .gallery-item:first-child { border-radius: 20px 4px 4px 4px; }
+  .gallery-item:last-child  { border-radius: 4px 4px 20px 4px; }
+  .gallery-item img {
+    width: 100%; height: 240px;
+    object-fit: cover; display: block;
+    transition: transform 0.4s ease;
+  }
+  .gallery-item:hover img { transform: scale(1.03); }
+  .gallery-caption {
+    padding: 12px 16px 16px;
+    font-size: 11px; font-weight: 300; line-height: 1.5;
+    color: var(--ink-muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── BLUEPRINT SECTION ── */
+  .blueprint-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .blueprint-card {
+    background: var(--white);
+    overflow: hidden;
+  }
+  .blueprint-card:nth-child(1) { border-radius: 20px 4px 4px 4px; }
+  .blueprint-card:nth-child(2) { border-radius: 4px 20px 4px 4px; }
+  .blueprint-img {
+    width: 100%; height: 280px;
+    object-fit: cover; display: block;
+    background: var(--blue-ghost);
+  }
+  .blueprint-body { padding: 28px; }
+  .blueprint-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--blue-mid); margin-bottom: 8px;
+  }
+  .blueprint-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400;
+    color: var(--ink); margin-bottom: 16px;
+  }
+  .blueprint-results {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .blueprint-results li {
+    font-size: 13px; font-weight: 300; line-height: 1.6;
+    color: var(--ink-soft); list-style: none;
+    padding-left: 16px; position: relative;
+  }
+  .blueprint-results li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--blue-mid); font-size: 11px;
+  }
+
+  /* ── DELIVERABLES ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .product-card {
+    background: var(--white);
+    overflow: hidden;
+  }
+  .product-card:nth-child(1) { border-radius: 20px 4px 4px 4px; }
+  .product-card:nth-child(2) { border-radius: 4px 20px 4px 4px; }
+  .product-mockup {
+    width: 100%; height: 320px;
+    object-fit: cover; display: block;
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-mid) 100%);
+  }
+  .product-body { padding: 32px 32px 36px; }
+  .product-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px; font-weight: 300; line-height: 1;
+    color: var(--blue-pale); margin-bottom: 12px;
+  }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px;
+  }
+  .product-desc {
+    font-size: 14px; font-weight: 300; line-height: 1.7;
+    color: var(--ink-soft); margin-bottom: 20px;
+  }
+  .product-users {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .product-user-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 8px;
+    background: var(--blue-ghost); color: var(--blue-mid);
+    border: 1px solid var(--blue-pale);
+  }
+
+  /* ── METRICS ROW ── */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 56px;
+  }
+  .metric-box {
+    background: var(--white);
+    padding: 36px 28px;
+    text-align: center;
+  }
+  .metric-box:first-child { border-radius: 20px 4px 4px 20px; }
+  .metric-box:last-child { border-radius: 4px 20px 20px 4px; }
+  .metric-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 300; line-height: 1;
+    color: var(--blue-deep); margin-bottom: 8px;
+  }
+  .metric-num sup { font-size: 28px; color: var(--blue-mid); }
+  .metric-label {
+    font-size: 12px; font-weight: 300; color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--blue-deep);
+    padding: 48px 52px;
+    border-radius: 4px;
+    margin: 48px 0;
+  }
+  .callout p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 300; font-style: italic;
+    color: var(--white); line-height: 1.5;
+    max-width: 720px;
+  }
+  .callout p em { color: var(--blue-pale); font-style: normal; }
+
+  /* ── TESTIMONIAL ── */
+  .testimonial-block {
+    background: var(--blue-ghost);
+    border: 1px solid var(--blue-pale);
+    border-radius: 4px 20px 20px 4px;
+    padding: 48px 56px;
+    margin-top: 48px;
+    position: relative;
+  }
+  .testimonial-block::before {
+    content: '"';
+    position: absolute; top: 20px; left: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 96px; font-weight: 300; line-height: 1;
+    color: var(--blue-pale); opacity: 0.6;
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 300; font-style: italic;
+    color: var(--ink); line-height: 1.6;
+    max-width: 680px; margin-bottom: 24px;
+    position: relative; padding-top: 32px;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .testimonial-dot {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--blue-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: white;
+    font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  }
+  .testimonial-name {
+    font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 2px;
+  }
+  .testimonial-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* ── SCREENS GALLERY ── */
+  .screens-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 40px;
+  }
+  .screen-thumb {
+    overflow: hidden;
+    background: var(--blue-ghost);
+    border-radius: 4px;
+  }
+  .screen-thumb:first-child { border-radius: 20px 4px 4px 4px; }
+  .screen-thumb:last-child { border-radius: 4px 4px 20px 4px; }
+  .screen-thumb img {
+    width: 100%; height: 200px;
+    object-fit: cover; display: block;
+    transition: transform 0.4s ease;
+  }
+  .screen-thumb:hover img { transform: scale(1.04); }
+
+  /* ── DARK SECTION ── */
+  .section-dark {
+    background: var(--ink);
+  }
+  .section-dark .cs-label { color: var(--blue-pale); }
+  .section-dark .cs-label::before { background: var(--blue-pale); }
+  .section-dark .cs-title { color: var(--white); }
+  .section-dark .cs-title em { color: var(--blue-pale); }
+  .section-dark .cs-body-text { color: rgba(255,255,255,0.65); }
+  .section-dark .cs-body-text strong { color: rgba(255,255,255,0.88); }
+
+  /* ── CTA ── */
+  .case-cta {
+    background: var(--blue-deep);
+    padding: 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 32px;
+  }
+  .case-cta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--blue-pale); margin-bottom: 12px;
+  }
+  .case-cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 300; color: var(--white); line-height: 1.15;
+  }
+  .case-cta-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 28px; border-radius: 40px;
+    font-size: 13px; font-weight: 400; text-decoration: none;
+    transition: all 0.25s; letter-spacing: 0.04em;
+  }
+  .cta-btn.white { background: var(--white); color: var(--blue-deep); }
+  .cta-btn.white:hover { background: var(--warm-cream); transform: translateY(-1px); }
+  .cta-btn.outline { border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); }
+  .cta-btn.outline:hover { border-color: var(--white); color: var(--white); transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.35); }
+  footer a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--blue-pale); }
+
+  /* ── REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .case-hero { grid-template-columns: 1fr; }
+    .case-hero-left { padding: 120px 24px 60px; }
+    .case-hero-right { padding: 40px 24px; }
+    .hero-stats-grid { grid-template-columns: 1fr 1fr; }
+    .case-section { padding: 64px 24px; }
+    .cs-2col, .diamond-flow, .immersion-grid, .profiles-grid,
+    .blueprint-cards, .products-grid, .metrics-row, .screens-row { grid-template-columns: 1fr; }
+    .img-gallery, .img-gallery.two-col { grid-template-columns: 1fr 1fr; }
+    .case-cta { padding: 48px 24px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">← Back to portfolio</a>
+  <div class="nav-divider"></div>
+  <span class="nav-title">Previsul — End-to-End Service Design</span>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="case-hero">
+  <div class="case-hero-left">
+    <div class="case-tag-row">
+      <span class="ctag">Service Design</span>
+      <span class="ctag">UX Research</span>
+      <span class="ctag">End-to-End</span>
+      <span class="ctag">Double Diamond</span>
+    </div>
+    <div class="case-hero-eyebrow">Previsul Seguradora · 2019–2020</div>
+    <h1 class="case-hero-title">Previsul.</h1>
+    <p class="case-hero-subtitle">End-to-End Service Design<br>for an Insurance Claim Journey</p>
+    <div class="case-meta-row">
+      <div class="case-meta-item">
+        <div class="case-meta-label">Role</div>
+        <div class="case-meta-value">UX & Service Lead</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Duration</div>
+        <div class="case-meta-value">6 months</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Location</div>
+        <div class="case-meta-value">São Paulo + Porto Alegre</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-hero-right">
+    <div class="hero-stats-grid">
+      <div class="hero-stat">
+        <div class="hero-stat-num">6<span>mo</span></div>
+        <div class="hero-stat-label">months of work</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">22</div>
+        <div class="hero-stat-label">interviews & tests conducted</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">40<span>+</span></div>
+        <div class="hero-stat-label">pain points mapped</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">151</div>
+        <div class="hero-stat-label">screens designed</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── BODY ── -->
+<div class="case-body">
+
+  <!-- 01 O PROJETO -->
+  <section class="case-section reveal">
+    <div class="cs-label">01 — The Project</div>
+    <h2 class="cs-title">Redesigning a journey<br>that was <em>broken for everyone.</em></h2>
+    <div class="cs-2col">
+      <div>
+        <p class="cs-body-text">Previsul is an insurance company with complex operations and several legacy systems. They brought a clear challenge: map the entire insurance claim journey — from the first notice made through the 0800 call center, all the way to the final payment resolution.</p>
+        <p class="cs-body-text">The project started in October 2019 and the UX phase was completed in March 2020. As <strong>UX and Service Lead</strong>, I led discovery, journey mapping, ideation, and interface design — collaborating closely with internal teams, a third-party call center, analysts, and broker agencies across multiple cities.</p>
+      </div>
+      <div>
+        <p class="cs-body-text">The goal was to create a digital solution that simplified communication between all parties — claimants, brokers, analysts, and third-party providers — transforming a bureaucratic, fragmented process into something more <strong>human, clear, and efficient.</strong></p>
+        <p class="cs-body-text">This was not just a UX project. It was a service redesign that touched operations, legacy systems, legal compliance, and emotional experience — all at once.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 O DESAFIO -->
+  <section class="case-section section-dark reveal">
+    <div class="cs-label">02 — The Challenge</div>
+    <h2 class="cs-title">A process fragmented<br>across <em>cities, tools, and people.</em></h2>
+    <div class="cs-2col">
+      <div>
+        <p class="cs-body-text">The main challenge was to unify fragmented processes and tools spread across multiple cities and user profiles — while maintaining accuracy and regulatory compliance.</p>
+        <p class="cs-body-text">Every claim involved at least 4 different parties operating in silos: a third-party call center in Alphaville, internal analysts in Porto Alegre, broker agencies scattered across Brazil, and the claimants themselves — each with different tools, expectations, and levels of information.</p>
+      </div>
+      <div>
+        <p class="cs-body-text">It was also about bringing <strong>empathy to a moment that's inherently stressful.</strong> Someone filing an insurance claim has just experienced a loss. The process should not make it worse.</p>
+        <div class="callout" style="margin-top: 0;">
+          <p>"The process was designed for the system, not for the person in it. Our job was to reverse that."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 METODOLOGIA -->
+  <section class="case-section reveal">
+    <div class="cs-label">03 — Methodology</div>
+    <h2 class="cs-title">Double Diamond —<br><em>four stages, no shortcuts.</em></h2>
+    <p class="cs-body-text">The Double Diamond is the methodology that makes the most sense to me as a product designer. The goal is to move through four macro stages — always expanding before converging, never jumping to solutions before understanding the problem space.</p>
+
+    <div class="diamond-flow">
+      <div class="diamond-step">
+        <div class="diamond-phase">01 — Expand</div>
+        <div class="diamond-name">Immersion</div>
+        <div class="diamond-tools">Stakeholder sessions · On-site visits · Interviews · Field observation</div>
+      </div>
+      <div class="diamond-step active">
+        <div class="diamond-phase">02 — Converge</div>
+        <div class="diamond-name">Diagnosis</div>
+        <div class="diamond-tools">Service Blueprints · Journey maps · Persona profiles · Pain point synthesis</div>
+      </div>
+      <div class="diamond-step">
+        <div class="diamond-phase">03 — Expand</div>
+        <div class="diamond-name">Ideation</div>
+        <div class="diamond-tools">Co-creation workshop · Storyboards · Task flows · Prioritization</div>
+      </div>
+      <div class="diamond-step">
+        <div class="diamond-phase">04 — Converge</div>
+        <div class="diamond-name">Design & Deliver</div>
+        <div class="diamond-tools">Wireframes · Prototypes · Usability tests · 151 screens</div>
+      </div>
+    </div>
+
+    <p class="cs-body-text" style="margin-top: 32px;">After understanding the scenario, I built a detailed plan with weekly views and a to-do list. The client wanted visibility at every step — and it also kept me from going off track in a project this complex.</p>
+  </section>
+
+  <!-- 04 IMERSÃO -->
+  <section class="case-section reveal" style="background: var(--blue-ghost);">
+    <div class="cs-label">04 — Immersion</div>
+    <h2 class="cs-title">I didn't map the journey<br>from a desk. <em>I lived it.</em></h2>
+    <p class="cs-body-text">The immersion phase was structured in four parts — each one revealing a layer of the journey that would have been invisible from the outside. More than 5 hours of video and audio were generated in the field interviews alone.</p>
+
+    <div class="immersion-grid">
+      <div class="immersion-card reveal-delay-1">
+        <img class="immersion-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/CaPvDF0j77sKZtJk.png" alt="First day with stakeholders" loading="lazy">
+        <div class="immersion-body">
+          <div class="immersion-part">Part I — Stakeholders</div>
+          <div class="immersion-title">First day with the client</div>
+          <p class="immersion-desc">I met with Previsul's stakeholders and we drew the claim journey as they understood it. It quickly became clear that wasn't enough — there were multiple characters involved: brokers, policyholders, beneficiaries, analysts, and third parties. I needed to know them all.</p>
+        </div>
+      </div>
+      <div class="immersion-card reveal-delay-2">
+        <img class="immersion-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/7Pq5NOBsCWXS66Av.png" alt="Visit to Alphaville call center" loading="lazy">
+        <div class="immersion-body">
+          <div class="immersion-part">Part II — Alphaville</div>
+          <div class="immersion-title">Inside the 0800 call center</div>
+          <p class="immersion-desc">The first contact a claimant had was a phone call. I went on-site to the third-party company in Alphaville and interviewed everyone in the process: Call Center agents, Backoffice operators, and initial Analysts. Everything was documented and redesigned.</p>
+        </div>
+      </div>
+      <div class="immersion-card reveal-delay-1">
+        <img class="immersion-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/hv7xZbWnGcK1K7zn.png" alt="Visit to Porto Alegre analysts" loading="lazy">
+        <div class="immersion-body">
+          <div class="immersion-part">Part III — Porto Alegre</div>
+          <div class="immersion-title">Meeting the claim analysts</div>
+          <p class="immersion-desc">After the call center, the claim reaches Previsul's own analysts — a long and complex process. I flew to Porto Alegre to observe and interview the analyst team directly, generating over 5 hours of recorded material.</p>
+        </div>
+      </div>
+      <div class="immersion-card reveal-delay-2">
+        <img class="immersion-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/kXnjWc35us5UevAL.png" alt="Broker interviews" loading="lazy">
+        <div class="immersion-body">
+          <div class="immersion-part">Part IV — Brokers</div>
+          <div class="immersion-title">The missing character</div>
+          <p class="immersion-desc">To close the complete journey, one character was still missing: the Broker. I conducted calls and documented the entire broker process across three different insurance agencies — their role, their friction points, and their relationship with the claimant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 PERFIS -->
+  <section class="case-section reveal">
+    <div class="cs-label">05 — User Profiles</div>
+    <h2 class="cs-title">Six roles.<br><em>One broken process.</em></h2>
+    <p class="cs-body-text">The immersion revealed distinct behavioral profiles across the service. Understanding each one — their motivations, anxieties, and working styles — was essential before designing anything.</p>
+
+    <div class="profiles-grid">
+      <div class="profile-card">
+        <div class="profile-icon">📞</div>
+        <div class="profile-company">TMA · Third Party</div>
+        <div class="profile-name">Call Center Agent</div>
+        <p class="profile-desc">Young, early-career. Passive and compliant, calm on the phone. Not proactive — they do exactly what they're told. Dependent on clear scripts.</p>
+        <span class="profile-tag">TMA</span>
+      </div>
+      <div class="profile-card">
+        <div class="profile-icon">📂</div>
+        <div class="profile-company">TMA · Third Party</div>
+        <div class="profile-name">Backoffice Operator</div>
+        <p class="profile-desc">Responsible for gathering all necessary documents. Needs to be more proactive and curious than the call center. Must connect the dots before passing the file forward.</p>
+        <span class="profile-tag">TMA</span>
+      </div>
+      <div class="profile-card">
+        <div class="profile-icon">🔍</div>
+        <div class="profile-company">TMA · Initial Analysis</div>
+        <div class="profile-name">TMA Analyst</div>
+        <p class="profile-desc">Analytical profile. Noticeably higher education level than call center. Calm, perfectionist, attentive. Conducts initial screening before escalating to Previsul.</p>
+        <span class="profile-tag">TMA</span>
+      </div>
+      <div class="profile-card highlight">
+        <div class="profile-icon">⚖️</div>
+        <div class="profile-company">Previsul · Internal</div>
+        <div class="profile-name">Previsul Analyst</div>
+        <p class="profile-desc">Confident when experienced. Knows document lists and policy types by heart. Not sentimental about claims — focuses on fair, accurate analysis. Needs a reliable single source of truth.</p>
+        <span class="profile-tag">Previsul</span>
+      </div>
+      <div class="profile-card highlight">
+        <div class="profile-icon">💼</div>
+        <div class="profile-company">Previsul · Management</div>
+        <div class="profile-name">GESIN Manager</div>
+        <p class="profile-desc">Needs visibility over the full claim pipeline. Requires management features — overview dashboards, team performance, escalation controls. Strategic, not operational.</p>
+        <span class="profile-tag">Previsul</span>
+      </div>
+      <div class="profile-card">
+        <div class="profile-icon">🤝</div>
+        <div class="profile-company">External · Broker</div>
+        <div class="profile-name">Insurance Broker</div>
+        <p class="profile-desc">Flexible, helpful, adaptable to any channel — WhatsApp, email, phone, in-person. Experienced with bureaucracy, tries to shield clients from it. Ready to use any tool that speeds up the process.</p>
+        <span class="profile-tag">External</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 DIAGNÓSTICO -->
+  <section class="case-section reveal">
+    <div class="cs-label">06 — Diagnosis</div>
+    <h2 class="cs-title">Service Blueprints —<br><em>making the invisible visible.</em></h2>
+    <p class="cs-body-text">Only after analyzing the current service experience could we build a map to guide the next stages. The Service Blueprint was used to document the journeys of all audiences involved — pointing out contact points, channels, feelings, pain points, and opportunities.</p>
+
+    <div class="blueprint-cards">
+      <div class="blueprint-card">
+        <img class="blueprint-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/y1KOi683iKdZEIEi.png" alt="Service Blueprint TMA Journey" loading="lazy">
+        <div class="blueprint-body">
+          <div class="blueprint-label">Blueprint 01</div>
+          <div class="blueprint-title">TMA Journey — Third Party Operations</div>
+          <ul class="blueprint-results">
+            <li>Mapping of daily routines across 3 roles</li>
+            <li>Client contact points identified</li>
+            <li>Internal profile documentation</li>
+            <li>Pain points and key insights</li>
+          </ul>
+        </div>
+      </div>
+      <div class="blueprint-card" style="border-radius: 4px 20px 20px 4px;">
+        <img class="blueprint-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/tYLlWV12LblRQTyf.png" alt="Service Blueprint Internal Journey" loading="lazy">
+        <div class="blueprint-body">
+          <div class="blueprint-label">Blueprint 02</div>
+          <div class="blueprint-title">Internal Journey — Previsul Analysts</div>
+          <ul class="blueprint-results">
+            <li>Full analysis and payment workflow mapped</li>
+            <li>Contact points with clients and partners</li>
+            <li>Analyst and broker profiles documented</li>
+            <li>Critical pain points and opportunities</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 IDEAÇÃO -->
+  <section class="case-section reveal" style="background: var(--warm-stone);">
+    <div class="cs-label">07 — Ideation</div>
+    <h2 class="cs-title">Workshop, storyboards,<br><em>and task flows.</em></h2>
+    <div class="cs-2col">
+      <div>
+        <p class="cs-body-text">After understanding all the processes, it was time to show the stakeholders the pain points found — and raise the flag on the most critical ones. A co-creation workshop brought together people from all areas of the claims department, plus special participants from Previsul.</p>
+        <p class="cs-body-text">Together, we discussed the pains and defined the actions needed to solve them. The workshop delivered prioritized pain points, storyboards, and task flows — the foundation for everything that followed.</p>
+      </div>
+      <div>
+        <p class="cs-body-text">After the workshop, we created task flows for all planned products. This was the map that initiated the wireframe phase — ensuring every screen had a clear purpose and a documented user need behind it.</p>
+        <p class="cs-body-text"><strong>Before any pixel was moved to development,</strong> we ran usability tests with actual users in early prototypes — catching issues early, minimizing rework, and validating the direction before the real cost of development began.</p>
+      </div>
+    </div>
+
+    <!-- Workshop images -->
+    <div class="img-gallery two-col" style="margin-top: 48px;">
+      <div class="gallery-item">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/6D0G91BbCYWDOBTx.png" alt="Ideation workshop" loading="lazy">
+        <div class="gallery-caption">Co-creation workshop — pain prioritization and storyboards</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/HvXsQc5p2ywCvPta.png" alt="Task flows" loading="lazy">
+        <div class="gallery-caption">Task flows for all planned products — the map before the wireframes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 OS PRODUTOS -->
+  <section class="case-section reveal">
+    <div class="cs-label">08 — Design & Delivery</div>
+    <h2 class="cs-title">Two connected products.<br><em>One redesigned journey.</em></h2>
+    <p class="cs-body-text">The design phase produced two distinct but deeply connected products — one facing outward toward claimants and brokers, the other facing inward toward analysts and managers. Together, they replaced what was previously handled entirely through the 0800 phone line.</p>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <img class="product-mockup" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/Hfo8eQ6up7Bw4rjK.png" alt="Claims Notice Web Portal mockup" loading="lazy" style="object-fit: cover;">
+        <div class="product-body">
+          <div class="product-num">01</div>
+          <div class="product-name">Claims Notice Web Portal</div>
+          <p class="product-desc">A web channel for clients and brokers to file and track insurance claims online — replacing the 0800-only process. Simple, visual, and designed for the most stressful moments.</p>
+          <div class="product-users">
+            <span class="product-user-tag">Insured</span>
+            <span class="product-user-tag">Beneficiaries</span>
+            <span class="product-user-tag">Brokers</span>
+            <span class="product-user-tag">HR Companies</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" style="border-radius: 4px 20px 20px 4px;">
+        <img class="product-mockup" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/350Wi68cCcxqCjHs.png" alt="Claims Management Tool mockup" loading="lazy" style="object-fit: cover;">
+        <div class="product-body">
+          <div class="product-num">02</div>
+          <div class="product-name">Claims Management Tool</div>
+          <p class="product-desc">A full regulation platform for analysts, managers, and partners — with differentiated access per profile and integration with legacy systems (SNGS and I4PRO). The single source of truth for the entire operation.</p>
+          <div class="product-users">
+            <span class="product-user-tag">Technical Analysts</span>
+            <span class="product-user-tag">GESIN Managers</span>
+            <span class="product-user-tag">Medical Providers</span>
+            <span class="product-user-tag">Call Center</span>
+            <span class="product-user-tag">Legal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen gallery -->
+    <div class="screens-row" style="margin-top: 2px;">
+      <div class="screen-thumb">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/8p1ahT5IyV9ig4ZZ.png" alt="Portal screen" loading="lazy">
+      </div>
+      <div class="screen-thumb">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/FNIq69mhoD9lv2CB.png" alt="Management tool screen" loading="lazy">
+      </div>
+      <div class="screen-thumb">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/6k8JAzDj0WpYehC1.png" alt="Claims screen" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 RESULTADOS -->
+  <section class="case-section section-dark reveal">
+    <div class="cs-label">09 — Result</div>
+    <h2 class="cs-title">From invisible<br><em>to accountable.</em></h2>
+    <div class="cs-2col">
+      <div>
+        <p class="cs-body-text">The outcome was the creation of two connected products that brought visibility to the entire claim process — for clients, brokers, analysts, and managers alike.</p>
+        <p class="cs-body-text">Visibility for clients and brokers. Reduced rework across internal teams. A <strong>single source of truth</strong> for the whole operation — replacing a fragmented, phone-dependent process that left everyone operating blind.</p>
+      </div>
+      <div>
+        <p class="cs-body-text">The prototype delivered to Previsul became the direct basis for the final product development — according to the team that worked with it.</p>
+        <p class="cs-body-text">In total: <strong>151 high-fidelity screens</strong>, <strong>40+ pain points addressed</strong>, and <strong>22 stakeholders and users</strong> engaged across the process.</p>
+      </div>
+    </div>
+
+    <div class="metrics-row" style="margin-top: 56px;">
+      <div class="metric-box">
+        <div class="metric-num" style="color: var(--blue-deep);">6<sup>mo</sup></div>
+        <div class="metric-label">duration of the<br>UX phase</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-num" style="color: var(--blue-deep);">22</div>
+        <div class="metric-label">interviews &<br>tests conducted</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-num" style="color: var(--blue-deep);">40<sup>+</sup></div>
+        <div class="metric-label">pain points<br>mapped & addressed</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-num" style="color: var(--blue-deep);">151</div>
+        <div class="metric-label">high-fidelity<br>screens designed</div>
+      </div>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="testimonial-block" style="margin-top: 64px;">
+      <p class="testimonial-text">Na Previsul Seguradora, tive a oportunidade de trabalhar em conjunto com essa profissional fantástica, que nos entregou um projeto fantástico na leitura da Jornada do Cliente para Sinistros, resultando em um protótipo que, no final, foi usado para o desenvolvimento do produto final. Super recomendo.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-dot">D</div>
+        <div>
+          <div class="testimonial-name">Denny Garbujo</div>
+          <div class="testimonial-role">Insurance Claims Coordinator · Previsul</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 SCREENS GALLERY -->
+  <section class="case-section reveal">
+    <div class="cs-label">10 — Selected Screens</div>
+    <h2 class="cs-title">151 screens.<br><em>Every one with a reason.</em></h2>
+    <p class="cs-body-text">Both products were designed at high fidelity, with prototype-level quality that was directly handed off for development. A selection of screens from both the Portal and the Management Tool:</p>
+
+    <div class="img-gallery" style="margin-top: 48px;">
+      <div class="gallery-item">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/7gxUmtCAaYSSSiDV.png" alt="Screen design" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/JSkfFZOdyVwGfO7h.png" alt="Screen design" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/ej9cIGAtfvwrNXK1.png" alt="Screen design" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/78JQhm2ryIqJ5cVs.png" alt="Screen design" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/9Lrw4WT9Tzu6Sy7Y.png" alt="Screen design" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/tU0N0Autv1Y0J6tJ.png" alt="Screen design" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+</div><!-- /case-body -->
+
+<!-- CTA -->
+<div class="case-cta">
+  <div class="case-cta-text">
+    <div class="case-cta-label">More work</div>
+    <div class="case-cta-title">See the next case<br>or get in touch.</div>
+  </div>
+  <div class="case-cta-links">
+    <a href="neuroot-case.html" class="cta-btn white">Neuroot Case →</a>
+    <a href="index.html#contact" class="cta-btn outline">Get in touch</a>
+  </div>
+</div>
+
+<footer>
+  <p>Giuliana Lopes Galvão · UX Designer · São Paulo</p>
+  <p><a href="index.html">← Back to portfolio</a></p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.reveal, .reveal-delay-1, .reveal-delay-2, .reveal-delay-3').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

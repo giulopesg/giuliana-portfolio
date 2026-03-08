@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petrobras PCD — Testes de Usabilidade · Giuliana Lopes Galvão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #6B4FA0;
+    --plum-light: #8B6FC0;
+    --plum-pale: #D4C8EF;
+    --plum-ghost: #F2EEF9;
+    --warm-cream: #FAF7F2;
+    --warm-stone: #EDE8E0;
+    --ink: #1C1917;
+    --ink-soft: #4A4542;
+    --ink-muted: #8A8480;
+    /* Petrobras accent palette — deep teal + petrol */
+    --petro-deep: #0A2A3A;
+    --petro-mid: #0E4B6B;
+    --petro-bright: #0D7EA6;
+    --petro-pale: #A8D8EA;
+    --petro-ghost: #EAF5FA;
+    --amber: #E8A020;
+    --amber-pale: #FDF0DC;
+    --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--ink); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+    padding: 24px 64px;
+    display: flex; align-items: center; gap: 24px;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .nav-back {
+    font-size: 13px; color: var(--ink-muted); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--petro-bright); }
+  .nav-divider { width: 1px; height: 16px; background: var(--warm-stone); }
+  .nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: var(--ink); }
+
+  /* ── HERO ── */
+  .case-hero {
+    min-height: 100vh;
+    background: var(--petro-deep);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+  }
+  .case-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 90% at 85% 50%, rgba(13,126,166,0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 10% 90%, rgba(232,160,32,0.07) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .case-hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025; pointer-events: none; z-index: 1;
+  }
+
+  .case-hero-left {
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 140px 64px 80px 80px;
+    position: relative; z-index: 2;
+  }
+  .case-hero-right {
+    display: flex; align-items: center; justify-content: center;
+    padding: 140px 80px 80px 40px;
+    position: relative; z-index: 2;
+  }
+
+  .case-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+  .ctag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 12px;
+    border: 1px solid rgba(168,216,234,0.3);
+    color: var(--petro-pale);
+    background: rgba(14,75,107,0.35);
+  }
+  .ctag-amber {
+    border-color: rgba(232,160,32,0.4);
+    color: var(--amber);
+    background: rgba(232,160,32,0.1);
+  }
+
+  .case-hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--petro-pale); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .case-hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--petro-pale); }
+
+  .case-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6vw, 82px);
+    font-weight: 300; line-height: 1.02;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+  .case-hero-title em { font-style: italic; color: var(--petro-pale); }
+
+  .case-hero-lead {
+    font-size: 17px; font-weight: 300; line-height: 1.65;
+    color: rgba(168,216,234,0.7);
+    max-width: 480px; margin-bottom: 56px;
+  }
+
+  .hero-meta-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(168,216,234,0.15);
+  }
+  .hero-meta-item {}
+  .hero-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(168,216,234,0.45); margin-bottom: 8px;
+  }
+  .hero-meta-value {
+    font-size: 14px; font-weight: 400;
+    color: var(--white); line-height: 1.4;
+  }
+
+  /* Hero right — SUS visual */
+  .sus-visual {
+    width: 100%; max-width: 400px;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .sus-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(168,216,234,0.45); margin-bottom: 4px;
+  }
+  .sus-score-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px; font-weight: 300; line-height: 1;
+    color: var(--white);
+  }
+  .sus-score-big span { color: var(--amber); }
+  .sus-scale {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .sus-scale-row {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 12px; color: rgba(168,216,234,0.5);
+    font-family: 'DM Mono', monospace;
+  }
+  .sus-scale-bar {
+    height: 3px; border-radius: 2px; background: rgba(168,216,234,0.12);
+    flex: 1;
+  }
+  .sus-scale-row.active .sus-scale-bar {
+    background: var(--amber);
+  }
+  .sus-scale-row.active {
+    color: var(--amber);
+    font-weight: 500;
+  }
+  .sus-benchmark {
+    font-size: 13px; color: rgba(168,216,234,0.55);
+    padding-top: 16px;
+    border-top: 1px solid rgba(168,216,234,0.1);
+  }
+  .sus-benchmark strong { color: var(--petro-pale); }
+
+  /* ── SECTION SYSTEM ── */
+  .section {
+    padding: 120px 80px;
+    position: relative;
+  }
+  .section-light { background: var(--warm-cream); }
+  .section-stone { background: var(--warm-stone); }
+  .section-petro { background: var(--petro-deep); }
+  .section-white { background: var(--white); }
+
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--petro-bright); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--petro-bright); }
+  .section-eyebrow-light { color: var(--petro-pale); }
+  .section-eyebrow-light::before { background: var(--petro-pale); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 300; line-height: 1.12;
+    color: var(--ink); margin-bottom: 24px;
+  }
+  .section-title-light { color: var(--white); }
+
+  .section-lead {
+    font-size: 17px; font-weight: 300; line-height: 1.7;
+    color: var(--ink-soft); max-width: 640px;
+  }
+  .section-lead-light { color: rgba(168,216,234,0.7); }
+
+  /* ── TWO COL ── */
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: start;
+  }
+  .three-col {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  }
+  .four-col {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+  }
+
+  /* ── OVERVIEW SECTION ── */
+  .overview-grid {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 80px;
+    align-items: start;
+  }
+  .overview-body {
+    font-size: 18px; font-weight: 300; line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .overview-body p + p { margin-top: 20px; }
+
+  .overview-stats {
+    display: flex; flex-direction: column; gap: 0;
+    border: 1px solid var(--warm-stone);
+    border-radius: 16px; overflow: hidden;
+  }
+  .stat-item {
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .stat-item:last-child { border-bottom: none; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px; font-weight: 300; line-height: 1;
+    color: var(--petro-mid); margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 13px; color: var(--ink-muted); font-weight: 300;
+  }
+
+  /* ── METHODOLOGY ── */
+  .method-card {
+    background: var(--petro-ghost);
+    border: 1px solid rgba(13,126,166,0.15);
+    border-radius: 16px;
+    padding: 32px;
+  }
+  .method-card-icon {
+    width: 40px; height: 40px;
+    background: var(--petro-mid);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .method-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400;
+    color: var(--petro-deep); margin-bottom: 12px;
+  }
+  .method-card-body {
+    font-size: 14px; line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  /* ── PARTICIPANTS ── */
+  .participant-section {
+    background: var(--petro-deep);
+    padding: 120px 80px;
+  }
+
+  .disability-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .disability-card {
+    background: rgba(14,75,107,0.6);
+    padding: 36px 28px;
+    border: 1px solid rgba(168,216,234,0.08);
+    transition: background 0.3s;
+  }
+  .disability-card:hover { background: rgba(14,75,107,0.9); }
+  .disability-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 300; line-height: 1;
+    color: var(--petro-bright); margin-bottom: 16px;
+  }
+  .disability-card-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--petro-pale); margin-bottom: 8px;
+  }
+  .disability-card-desc {
+    font-size: 13px; line-height: 1.6;
+    color: rgba(168,216,234,0.55);
+  }
+
+  .participants-visual {
+    margin-top: 64px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  }
+  .group-card {
+    background: rgba(14,75,107,0.3);
+    border: 1px solid rgba(168,216,234,0.1);
+    border-radius: 16px; padding: 32px;
+  }
+  .group-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--petro-bright); margin-bottom: 16px;
+  }
+  .group-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 300;
+    color: var(--white); margin-bottom: 20px;
+  }
+  .group-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .group-list li {
+    display: flex; align-items: baseline; gap: 10px;
+    font-size: 14px; color: rgba(168,216,234,0.7);
+  }
+  .group-list li::before {
+    content: ''; display: block;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--petro-bright);
+    flex-shrink: 0; margin-top: 6px;
+  }
+
+  /* ── TASKS ── */
+  .tasks-section { background: var(--white); padding: 120px 80px; }
+  .task-row {
+    display: grid; grid-template-columns: 80px 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--warm-stone);
+    padding: 32px 0;
+    align-items: start;
+  }
+  .task-row:first-child { border-top: 1px solid var(--warm-stone); }
+  .task-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300;
+    color: var(--petro-bright);
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .task-name {
+    font-size: 16px; font-weight: 500;
+    color: var(--ink); margin-bottom: 6px;
+  }
+  .task-desc {
+    font-size: 14px; font-weight: 300;
+    color: var(--ink-muted); line-height: 1.6;
+  }
+  .task-focus {
+    font-size: 13px; color: var(--petro-mid);
+    line-height: 1.6; padding-left: 20px;
+  }
+
+  /* ── INSIGHTS ── */
+  .insights-section { background: var(--warm-cream); padding: 120px 80px; }
+
+  .insight-block {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .insight-block:last-child { border-bottom: none; }
+  .insight-header {
+    display: flex; align-items: center; gap: 20px;
+    margin-bottom: 28px;
+  }
+  .insight-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .insight-icon-teal { background: var(--petro-ghost); }
+  .insight-icon-amber { background: var(--amber-pale); }
+  .insight-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 4px;
+  }
+  .insight-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 400; color: var(--ink);
+  }
+  .insight-findings {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .finding-pill {
+    background: var(--white);
+    border: 1px solid var(--warm-stone);
+    border-left: 3px solid var(--petro-bright);
+    border-radius: 8px; padding: 16px 20px;
+    font-size: 14px; line-height: 1.6; color: var(--ink-soft);
+  }
+  .finding-pill.amber-accent { border-left-color: var(--amber); }
+
+  /* ── SUS SECTION ── */
+  .sus-section { background: var(--petro-deep); padding: 120px 80px; }
+  .sus-viz-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center; margin-top: 64px;
+  }
+  .sus-big-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 160px; font-weight: 300; line-height: 1;
+    color: var(--white);
+  }
+  .sus-big-num em { font-style: normal; color: var(--amber); }
+  .sus-context {
+    font-size: 17px; font-weight: 300;
+    color: rgba(168,216,234,0.65);
+    line-height: 1.7;
+  }
+  .sus-scale-full {
+    display: flex; flex-direction: column; gap: 12px;
+    margin-top: 32px;
+  }
+  .sus-scale-row-full {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .sus-range {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: rgba(168,216,234,0.4);
+    width: 80px; flex-shrink: 0;
+  }
+  .sus-bar-wrap { flex: 1; height: 6px; background: rgba(168,216,234,0.08); border-radius: 3px; overflow: hidden; }
+  .sus-bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+  .sus-rating {
+    font-size: 12px; color: rgba(168,216,234,0.4);
+    width: 100px; text-align: right;
+    font-family: 'DM Mono', monospace;
+  }
+  .sus-scale-row-full.highlighted .sus-range,
+  .sus-scale-row-full.highlighted .sus-rating { color: var(--amber); }
+  .sus-scale-row-full.highlighted .sus-bar-fill { background: var(--amber); }
+
+  .sus-participants {
+    margin-top: 48px;
+    padding: 28px 32px;
+    background: rgba(14,75,107,0.3);
+    border: 1px solid rgba(168,216,234,0.1);
+    border-radius: 16px;
+  }
+  .sus-participants p {
+    font-size: 15px; color: rgba(168,216,234,0.6);
+    line-height: 1.7;
+  }
+  .sus-participants strong { color: var(--petro-pale); }
+
+  /* ── BACKLOG ── */
+  .backlog-section { background: var(--warm-stone); padding: 120px 80px; }
+  .backlog-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    margin-top: 64px;
+  }
+  .backlog-col {}
+  .backlog-col-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .backlog-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 12px;
+  }
+  .badge-quick {
+    background: var(--petro-ghost);
+    color: var(--petro-mid);
+    border: 1px solid rgba(13,126,166,0.25);
+  }
+  .badge-project {
+    background: var(--amber-pale);
+    color: #8B5500;
+    border: 1px solid rgba(232,160,32,0.3);
+  }
+  .backlog-col-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300; color: var(--ink);
+  }
+  .backlog-item {
+    display: flex; gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(28,25,23,0.08);
+  }
+  .backlog-item:last-child { border-bottom: none; }
+  .backlog-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--ink-muted);
+    padding-top: 2px; flex-shrink: 0;
+  }
+  .backlog-item-text {
+    font-size: 14px; line-height: 1.65; color: var(--ink-soft);
+  }
+  .backlog-item-text strong { color: var(--ink); font-weight: 500; }
+
+  /* ── PARTICIPANT HIGHLIGHT ── */
+  .highlight-section { background: var(--white); padding: 120px 80px; }
+  .participant-card {
+    background: var(--warm-cream);
+    border: 1px solid var(--warm-stone);
+    border-radius: 20px; padding: 40px;
+    display: grid; grid-template-columns: auto 1fr; gap: 32px;
+    align-items: start;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .participant-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(10,42,58,0.08);
+  }
+  .participant-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: var(--petro-ghost);
+    border: 3px solid var(--petro-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; color: var(--petro-mid);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .participant-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .participant-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400; color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .participant-meta {
+    font-size: 13px; color: var(--petro-mid);
+    font-weight: 500; margin-bottom: 12px;
+  }
+  .participant-detail {
+    font-size: 13px; color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+  .participant-insight {
+    margin-top: 16px; padding: 14px 18px;
+    background: var(--white);
+    border-left: 3px solid var(--petro-bright);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px; line-height: 1.65; color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .participants-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    margin-top: 64px;
+  }
+
+  /* ── ROLE ── */
+  .role-section { background: var(--petro-deep); padding: 100px 80px; }
+  .role-content {
+    max-width: 800px; margin: 0 auto; text-align: center;
+  }
+  .role-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 300; font-style: italic;
+    line-height: 1.3; color: var(--white);
+    margin-bottom: 32px;
+  }
+  .role-attribution {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--petro-pale);
+  }
+
+  /* ── FOOTER NAV ── */
+  .case-footer-nav {
+    background: var(--warm-cream);
+    padding: 64px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--warm-stone);
+  }
+  .footer-nav-link {
+    text-decoration: none; display: flex; flex-direction: column; gap: 6px;
+  }
+  .footer-nav-dir {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .footer-nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; color: var(--ink);
+    transition: color 0.2s;
+  }
+  .footer-nav-link:hover .footer-nav-name { color: var(--petro-bright); }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-rise { animation: rise 1s ease forwards; }
+  .hero-rise-2 { animation: rise 1s 0.15s ease forwards; opacity: 0; }
+  .hero-rise-3 { animation: rise 1s 0.3s ease forwards; opacity: 0; }
+  .hero-rise-4 { animation: rise 1s 0.45s ease forwards; opacity: 0; }
+  .hero-rise-r { animation: rise 1s 0.6s ease forwards; opacity: 0; }
+
+  @media (max-width: 1024px) {
+    nav { padding: 20px 32px; }
+    .section { padding: 80px 40px; }
+    .case-hero { grid-template-columns: 1fr; }
+    .case-hero-right { display: none; }
+    .case-hero-left { padding: 140px 40px 80px; }
+    .two-col, .overview-grid { grid-template-columns: 1fr; gap: 40px; }
+    .disability-grid { grid-template-columns: 1fr 1fr; }
+    .four-col { grid-template-columns: 1fr 1fr; }
+    .backlog-grid { grid-template-columns: 1fr; }
+    .task-row { grid-template-columns: 60px 1fr; }
+    .task-focus { display: none; }
+    .participants-grid { grid-template-columns: 1fr; }
+    .case-footer-nav { padding: 48px 40px; }
+    .sus-section, .participant-section, .tasks-section, .insights-section, .backlog-section, .highlight-section, .role-section { padding: 80px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Todos os cases
+  </a>
+  <div class="nav-divider"></div>
+  <span class="nav-title">Petrobras — Usabilidade PCD</span>
+</nav>
+
+<!-- HERO -->
+<section class="case-hero">
+  <div class="case-hero-left">
+    <div class="case-tag-row hero-rise">
+      <span class="ctag">UX Research</span>
+      <span class="ctag">Testes de Usabilidade</span>
+      <span class="ctag ctag-amber">Acessibilidade</span>
+      <span class="ctag">PCDs</span>
+    </div>
+    <div class="case-hero-eyebrow hero-rise-2">Petrobras · Brivia / The Creative Smartech</div>
+    <h1 class="case-hero-title hero-rise-3">
+      Acessibilidade<br>
+      <em>como pauta,</em><br>
+      não como adorno
+    </h1>
+    <p class="case-hero-lead hero-rise-4">
+      28 pessoas com deficiência. 28 sessões remotas. Um diagnóstico honesto de como o site institucional da Petrobras falha — e como pode ser melhorado para incluir de verdade.
+    </p>
+    <div class="hero-meta-grid hero-rise-4">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Cliente</div>
+        <div class="hero-meta-value">Petrobras</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Agência</div>
+        <div class="hero-meta-value">Brivia / The Creative Smartech</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Período</div>
+        <div class="hero-meta-value">Ago–Dez 2025</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Método</div>
+        <div class="hero-meta-value">Testes Remotos Moderados</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Papel</div>
+        <div class="hero-meta-value">UX Researcher</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Participantes</div>
+        <div class="hero-meta-value">28 PCDs · 3 grupos</div>
+      </div>
+    </div>
+  </div>
+  <div class="case-hero-right">
+    <div class="sus-visual hero-rise-r">
+      <div class="sus-label">Resultado SUS Geral</div>
+      <div class="sus-score-big">41<span>.02</span></div>
+      <div class="sus-scale">
+        <div class="sus-scale-row">
+          <div class="sus-scale-bar" style="width:39%"></div>
+          <span>Inaceitável · 0–39</span>
+        </div>
+        <div class="sus-scale-row active">
+          <div class="sus-scale-bar"></div>
+          <span>Ruim · 40–52 ← aqui</span>
+        </div>
+        <div class="sus-scale-row">
+          <div class="sus-scale-bar" style="width:60%"></div>
+          <span>Aceitável · 53–73</span>
+        </div>
+        <div class="sus-scale-row">
+          <div class="sus-scale-bar" style="width:75%"></div>
+          <span>Boa · 74–85</span>
+        </div>
+        <div class="sus-scale-row">
+          <div class="sus-scale-bar" style="width:90%"></div>
+          <span>Excelente · 86–100</span>
+        </div>
+      </div>
+      <div class="sus-benchmark">
+        Benchmark do setor: <strong>68</strong> · Distância: <strong style="color:var(--amber)">-27 pontos</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISÃO GERAL -->
+<section class="section section-light">
+  <div class="overview-grid">
+    <div>
+      <div class="section-eyebrow reveal">01 — O Projeto</div>
+      <h2 class="section-title reveal">O que foi investigado<br>e por quê</h2>
+      <div class="overview-body reveal">
+        <p>A Petrobras, como uma das maiores empresas do Brasil, possui um compromisso declarado com diversidade e inclusão. Mas o site institucional — vitrine desse compromisso — estava sendo acessado por pessoas com deficiência sem qualquer teste sistematizado de acessibilidade real.</p>
+        <p>O objetivo deste projeto foi simples e profundo: entender como PCDs navegam, compreendem e percebem o site da Petrobras, nas páginas mais críticas para oportunidades de trabalho e informação institucional. E transformar esse entendimento em recomendações concretas.</p>
+        <p>Foram 28 sessões remotas moderadas, com participantes recrutados entre surdos, cegos, surdocegos, pessoas com TEA, com deficiência física e deficiência visual — diversidade real, não cota de pesquisa.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="overview-stats">
+        <div class="stat-item">
+          <div class="stat-number">28</div>
+          <div class="stat-label">Participantes com deficiência</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Grupos de teste · nov–dez 2025</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Tarefas por sessão</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">41<small style="font-size:22px">.02</small></div>
+          <div class="stat-label">Score SUS médio — Usabilidade Ruim</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">13</div>
+          <div class="stat-label">Recomendações no backlog</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METODOLOGIA -->
+<section class="section section-white">
+  <div class="section-eyebrow reveal">02 — Metodologia</div>
+  <h2 class="section-title reveal">Como os testes<br>foram conduzidos</h2>
+  <p class="section-lead reveal" style="margin-bottom: 64px;">Testes remotos moderados síncronos, com cada sessão estruturada em três partes: introdução e coleta de perfil, execução de tarefas com observação em tempo real, e questionário SUS adaptado para PCDs.</p>
+
+  <div class="three-col">
+    <div class="method-card reveal">
+      <div class="method-card-icon">📡</div>
+      <div class="method-card-title">Remoto e Moderado</div>
+      <div class="method-card-body">Formato remoto recomendado para garantir o ambiente real dos participantes, com sua própria tecnologia assistiva, e escalabilidade geográfica — participantes de todo o Brasil.</div>
+    </div>
+    <div class="method-card reveal">
+      <div class="method-card-icon">🔍</div>
+      <div class="method-card-title">Ferramentas de Análise</div>
+      <div class="method-card-body">Lookback ou UserTesting.com para gravação. Lighthouse, Axe e WAVE para auditoria de acessibilidade. Otter.ai, Read.ai ou Gemini para transcrição qualitativa das sessões.</div>
+    </div>
+    <div class="method-card reveal">
+      <div class="method-card-icon">📊</div>
+      <div class="method-card-title">SUS Adaptado para PCDs</div>
+      <div class="method-card-body">Escala SUS com 10 perguntas adaptadas ao contexto de acessibilidade, com escala Likert 1–5 (adaptável para 1–3 em perfis cognitivos). Foco em experiência com a própria deficiência como variável.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTICIPANTES -->
+<section class="participant-section">
+  <div class="section-eyebrow section-eyebrow-light reveal">03 — Participantes</div>
+  <h2 class="section-title section-title-light reveal">28 pessoas.<br><em style="font-style:italic; color:var(--petro-pale)">Deficiências reais, contextos reais.</em></h2>
+  <p class="section-lead section-lead-light reveal">Distribuição equilibrada entre tipos de deficiência, refletindo a prevalência real na população brasileira. Sessões entre 05/11/2025 e 02/12/2025.</p>
+
+  <div class="disability-grid reveal">
+    <div class="disability-card">
+      <div class="disability-card-num">7</div>
+      <div class="disability-card-type">Deficiência Auditiva / Surdez</div>
+      <div class="disability-card-desc">Incluindo Pessoas Surdas, usuários de Libras, comunicação por escrita e legendas. Avaliam Libras, WhatsApp, menus visuais.</div>
+    </div>
+    <div class="disability-card">
+      <div class="disability-card-num">6</div>
+      <div class="disability-card-type">Deficiência Visual / Cegueira</div>
+      <div class="disability-card-desc">Cegueira total (leitores de tela NVDA/JAWS) e baixa visão (zoom, alto contraste, modo escuro). 1 participante surdocega.</div>
+    </div>
+    <div class="disability-card">
+      <div class="disability-card-num">9</div>
+      <div class="disability-card-type">TEA / Cognitiva / TDAH</div>
+      <div class="disability-card-desc">TEA 1, TEA+TDAH, deficiências cognitivas e intelectuais. Avaliam linguagem, movimento, hierarquia visual e carga cognitiva.</div>
+    </div>
+    <div class="disability-card">
+      <div class="disability-card-num">5</div>
+      <div class="disability-card-type">Deficiência Física</div>
+      <div class="disability-card-desc">Navegação por teclado, ponteiro de cabeça, controle de voz. Avaliam tamanho de botões, formulários e Tab navigation.</div>
+    </div>
+  </div>
+
+  <div class="participants-visual reveal">
+    <div class="group-card">
+      <div class="group-card-label">Grupo 1 · Testes 1–8</div>
+      <div class="group-card-title">Novembro/2025</div>
+      <ul class="group-list">
+        <li>Andrey Farias · Pessoa Surda</li>
+        <li>Stefany Bianca · Surdocega ⭐</li>
+        <li>Erica Magno · Deficiência Visual</li>
+        <li>Marcel Luís · TEA 1</li>
+        <li>Otto Urbano · TEA 1 ⭐</li>
+        <li>Michelle Sabrina · Pessoa Surda</li>
+        <li>Alinne Rocha · Pessoa Cega ⭐</li>
+        <li>André Fernandes · Deficiência Física</li>
+      </ul>
+    </div>
+    <div class="group-card">
+      <div class="group-card-label">Grupos 2 e 3 · Testes 9–28</div>
+      <div class="group-card-title">Novembro–Dezembro/2025</div>
+      <ul class="group-list">
+        <li>9 participantes com Deficiência Auditiva</li>
+        <li>3 participantes Pessoas Cegas</li>
+        <li>3 participantes com Deficiência Física</li>
+        <li>2 participantes com Deficiência Visual</li>
+        <li>TEA 1+TDAH · TEA+TDAH (múltiplos)</li>
+        <li>Participantes do Brasil inteiro</li>
+        <li>Idade: 18–60 anos</li>
+        <li>Internet ≥3x por semana</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TAREFAS -->
+<section class="tasks-section">
+  <div class="section-eyebrow reveal">04 — Roteiro de Tarefas</div>
+  <h2 class="section-title reveal">6 tarefas,<br>páginas críticas</h2>
+  <p class="section-lead reveal" style="margin-bottom: 56px;">Cada sessão seguiu o mesmo roteiro de 6 tarefas, cobrindo as principais jornadas de usuários PCDs interessados em oportunidades e informações da Petrobras.</p>
+
+  <div class="reveal">
+    <div class="task-row">
+      <div class="task-num">T1</div>
+      <div>
+        <div class="task-name">Navegação básica — Jovem Aprendiz</div>
+        <div class="task-desc">Localizar a página de Jovem Aprendiz a partir da homepage, testando a capacidade de descoberta do menu.</div>
+      </div>
+      <div class="task-focus">Foco: descoberta de menu, hierarquia de navegação, visibilidade de seções</div>
+    </div>
+    <div class="task-row">
+      <div class="task-num">T2</div>
+      <div>
+        <div class="task-name">Carreiras — Processo Seletivo</div>
+        <div class="task-desc">Encontrar um processo seletivo aberto na página de Carreiras.</div>
+      </div>
+      <div class="task-focus">Foco: clareza de informação, carga de texto, vagas vs concursos</div>
+    </div>
+    <div class="task-row">
+      <div class="task-num">T3</div>
+      <div>
+        <div class="task-name">Estágio — Informações</div>
+        <div class="task-desc">Localizar informações sobre vagas de estágio no site.</div>
+      </div>
+      <div class="task-focus">Foco: posicionamento de conteúdo na página, rolagem, ancoragem</div>
+    </div>
+    <div class="task-row">
+      <div class="task-num">T4</div>
+      <div>
+        <div class="task-name">Transição Energética Justa (TEJ)</div>
+        <div class="task-desc">Descobrir o que é a Transição Energética Justa através do site.</div>
+      </div>
+      <div class="task-focus">Foco: linguagem técnica, elementos interativos, legibilidade</div>
+    </div>
+    <div class="task-row">
+      <div class="task-num">T5</div>
+      <div>
+        <div class="task-name">Busca — Benefícios</div>
+        <div class="task-desc">Usar a ferramenta de busca para encontrar "benefícios para empregados".</div>
+      </div>
+      <div class="task-focus">Foco: busca com erros de digitação, resultados, sugestões</div>
+    </div>
+    <div class="task-row">
+      <div class="task-num">T6</div>
+      <div>
+        <div class="task-name">Canal de Contato — Fale Conosco</div>
+        <div class="task-desc">Encontrar como entrar em contato com a Petrobras.</div>
+      </div>
+      <div class="task-focus">Foco: nomenclatura intuitiva, visibilidade de canais, preferências por deficiência</div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTICIPANTES DESTAQUE -->
+<section class="highlight-section">
+  <div class="section-eyebrow reveal">05 — Vozes do Teste</div>
+  <h2 class="section-title reveal">Quem navegou.<br>O que viveu.</h2>
+  <p class="section-lead reveal" style="margin-bottom: 16px;">Cada participante trouxe uma perspectiva única — e insubstituível. Nenhum dado quantitativo substitui ouvir Stefany Bianca apontando "texto branco sobre fundo branco" ou Andrey Farias explicando que o avatar do V-Libras não tem expressão facial.</p>
+
+  <div class="participants-grid">
+    <div class="participant-card reveal">
+      <div class="participant-avatar">AF</div>
+      <div>
+        <div class="participant-name">Andrey Farias</div>
+        <div class="participant-meta">Pessoa Surda · 33 anos · Porto Velho/RO · Teste 1/28</div>
+        <div class="participant-detail">Gestão Hospitalar · Celular + Notebook · Comunica via Libras, WhatsApp, e-mail</div>
+        <div class="participant-insight">
+          O avatar do V-Libras não transmite expressões faciais — elemento essencial para a língua de sinais. Sites como Energisa e UFSC usam intérpretes humanos em vídeo. Por que a Petrobras não pode?
+        </div>
+      </div>
+    </div>
+
+    <div class="participant-card reveal">
+      <div class="participant-avatar">SB</div>
+      <div>
+        <div class="participant-name">Stefany Bianca S. Roberto</div>
+        <div class="participant-meta">Surdocega (ictiose) · 24 anos · São Paulo/SP · Teste 2/28</div>
+        <div class="participant-detail">Administração · Fundo preto + letras amarelas + modo P&B · Comunicação por escrita e legendas</div>
+        <div class="participant-insight">
+          Ao acessar o site, ativou imediatamente modo preto e branco e aumentou a fonte. Mesmo assim: texto branco sobre fundo branco em várias áreas. A busca não sugeriu correção ao digitar errado.
+        </div>
+      </div>
+    </div>
+
+    <div class="participant-card reveal">
+      <div class="participant-avatar">EM</div>
+      <div>
+        <div class="participant-name">Erica Magno</div>
+        <div class="participant-meta">Deficiência Visual · Teste 3/28 · 06/11/2025</div>
+        <div class="participant-detail">Uso de leitor de tela e recursos de magnificação</div>
+        <div class="participant-insight">
+          Menus e itens expansíveis não eram lidos corretamente pelo leitor de tela. Janela de cookies não identificada pelo NVDA. A navegação por leitura linear não seguia uma hierarquia compreensível.
+        </div>
+      </div>
+    </div>
+
+    <div class="participant-card reveal">
+      <div class="participant-avatar">AR</div>
+      <div>
+        <div class="participant-name">Alinne Rocha</div>
+        <div class="participant-meta">Pessoa Cega · Teste 7/28 · 11/11/2025</div>
+        <div class="participant-detail">Leitor de tela (JAWS/NVDA) · Navegação totalmente por teclado e áudio</div>
+        <div class="participant-insight">
+          Falta de ARIA labels e descrições semânticas tornava impossível compreender a estrutura das páginas. Links sem descrição contextual e imagens sem alt text criavam lacunas críticas na experiência.
+        </div>
+      </div>
+    </div>
+
+    <div class="participant-card reveal">
+      <div class="participant-avatar">ML</div>
+      <div>
+        <div class="participant-name">Marcel Luís</div>
+        <div class="participant-meta">TEA 1 · Teste 4/28 · 10/11/2025</div>
+        <div class="participant-detail">Sensibilidade a movimento e sobrecarga visual</div>
+        <div class="participant-insight">
+          Carrosséis e vídeos de fundo na homepage causaram distração severa antes mesmo de começar as tarefas. A linguagem técnica da página TEJ, sem glossário, gerou confusão e abandono da leitura.
+        </div>
+      </div>
+    </div>
+
+    <div class="participant-card reveal">
+      <div class="participant-avatar">AF</div>
+      <div>
+        <div class="participant-name">André Fernandes</div>
+        <div class="participant-meta">Deficiência Física · Teste 8/28 · 12/11/2025</div>
+        <div class="participant-detail">Navegação por teclado · Headset · Sem uso de mouse</div>
+        <div class="participant-insight">
+          Navegação por Tab completamente comprometida em vários pontos. O link "Situação" levava ao topo da página em vez do conteúdo esperado — dead link crítico para quem depende de ancoragem exata.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section class="insights-section">
+  <div class="section-eyebrow reveal">06 — Principais Insights</div>
+  <h2 class="section-title reveal">O que os testes<br>revelaram</h2>
+  <p class="section-lead reveal" style="margin-bottom: 64px;">Cinco eixos de problemas identificados sistematicamente nos 28 testes, com recorrência em múltiplos perfis de deficiência.</p>
+
+  <div class="reveal">
+    <div class="insight-block">
+      <div class="insight-header">
+        <div class="insight-icon insight-icon-teal">🤟</div>
+        <div>
+          <div class="insight-type">Deficiência Auditiva · Surdos</div>
+          <div class="insight-title">V-Libras falha onde importa — nas expressões</div>
+        </div>
+      </div>
+      <div class="insight-findings">
+        <div class="finding-pill">O avatar do V-Libras não transmite expressões faciais — elemento linguístico essencial em Libras que diferencia significados e emoções.</div>
+        <div class="finding-pill">Ícone de Libras difícil de localizar na interface. Canal preferido pelos surdos — WhatsApp — não estava destacado no site.</div>
+        <div class="finding-pill">O termo "Fale Conosco" não foi intuitivo para surdos, que preferem "Ouvidoria" ou "Dúvidas" — termos mais concretos e diretos.</div>
+        <div class="finding-pill amber-accent">Recomendação prioritária: substituir V-Libras por intérprete humano em vídeo, como já fazem Energisa e UFSC.</div>
+      </div>
+    </div>
+
+    <div class="insight-block">
+      <div class="insight-header">
+        <div class="insight-icon insight-icon-teal">👁️</div>
+        <div>
+          <div class="insight-type">Surdocegueira · Baixa Visão</div>
+          <div class="insight-title">Contraste quebrado em múltiplos pontos</div>
+        </div>
+      </div>
+      <div class="insight-findings">
+        <div class="finding-pill">Texto branco sobre fundo branco em várias áreas — falha crítica de contraste que torna conteúdo completamente invisível.</div>
+        <div class="finding-pill">Busca sem sugestão de correção para erros de digitação, criando dead-ends para usuários que dependem de escrita adaptada.</div>
+        <div class="finding-pill amber-accent">Fontes pequenas e cores claras persistiam mesmo após zoom máximo ativado. A interface não foi construída para acomodar adaptações visuais.</div>
+        <div class="finding-pill">Necessidade de fundo escuro com letras amarelas em negrito — padrão de alta acessibilidade já existente mas não suportado pelo site.</div>
+      </div>
+    </div>
+
+    <div class="insight-block">
+      <div class="insight-header">
+        <div class="insight-icon insight-icon-teal">🦯</div>
+        <div>
+          <div class="insight-type">Deficiência Visual · Cegueira</div>
+          <div class="insight-title">Leitores de tela navegando às cegas</div>
+        </div>
+      </div>
+      <div class="insight-findings">
+        <div class="finding-pill">NVDA e JAWS não liam corretamente menus expansíveis, itens de accordion e links clicáveis — estruturas essenciais das páginas principais.</div>
+        <div class="finding-pill">Janela de cookies não identificada pelo leitor de tela — impede consentimento informado e trava a sessão inicial.</div>
+        <div class="finding-pill amber-accent">Ausência de ARIA labels e descrições semânticas em todo o site. Links sem descrição contextual — apenas "clique aqui" ou sem texto.</div>
+        <div class="finding-pill">Imagens sem alt text e elementos decorativos sem atributo role="presentation" polui a experiência de leitura linear.</div>
+      </div>
+    </div>
+
+    <div class="insight-block">
+      <div class="insight-header">
+        <div class="insight-icon insight-icon-amber">🧩</div>
+        <div>
+          <div class="insight-type">TEA · Deficiência Cognitiva</div>
+          <div class="insight-title">Movimento e complexidade como barreiras</div>
+        </div>
+      </div>
+      <div class="insight-findings">
+        <div class="finding-pill amber-accent">Carrosséis e vídeos de fundo causam distração severa antes mesmo das tarefas começarem. O movimento involuntário interrompe o foco cognitivo.</div>
+        <div class="finding-pill">Linguagem técnica da página TEJ sem glossário ou explicação contextual — especialmente termos como "GEE", "pré-sal", "matriz energética".</div>
+        <div class="finding-pill">Excesso de texto sem hierarquia visual clara em Carreiras e Concursos dificultava identificar o que era mais importante.</div>
+        <div class="finding-pill">Ausência de blocos visuais, ícones e resumos expandíveis que facilitariam a navegação para perfis cognitivos variados.</div>
+      </div>
+    </div>
+
+    <div class="insight-block">
+      <div class="insight-header">
+        <div class="insight-icon insight-icon-teal">⌨️</div>
+        <div>
+          <div class="insight-type">Deficiência Física</div>
+          <div class="insight-title">Teclado como único caminho — e ele não funcionava</div>
+        </div>
+      </div>
+      <div class="insight-findings">
+        <div class="finding-pill">Navegação por Tab completamente comprometida em múltiplos pontos — foco visual não aparecia ou saltava de forma imprevisível.</div>
+        <div class="finding-pill">Link "Situação" levava ao topo da página em vez do conteúdo correto — dead link crítico para usuários que não usam mouse.</div>
+        <div class="finding-pill amber-accent">Botões pequenos e formulários sem labels adequadas criavam barreiras para quem usa teclado, ponteiro de cabeça ou controle de voz.</div>
+        <div class="finding-pill">Ausência de "skip to main content" forçava navegação completa do cabeçalho em cada página.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUS -->
+<section class="sus-section">
+  <div class="section-eyebrow section-eyebrow-light reveal">07 — Score SUS</div>
+  <h2 class="section-title section-title-light reveal">O número que<br>sintetiza o diagnóstico</h2>
+
+  <div class="sus-viz-row reveal">
+    <div>
+      <div class="sus-big-num">41<em>.02</em></div>
+      <p class="sus-context" style="margin-top: 24px;">A média SUS de <strong style="color:var(--white)">41.02</strong> coloca o site da Petrobras na faixa "Ruim" da escala de usabilidade — 27 pontos abaixo do benchmark de mercado de 68. 78% dos participantes completaram o questionário pós-teste.</p>
+      <p class="sus-context" style="margin-top: 16px;">A ausência de mensurabilidade por tarefa reflete a realidade dos testes com PCDs: cada participante exigia uma abordagem adaptada, tornando comparações por sucesso/fracasso inadequadas. O valor qualitativo está nos padrões — e eles foram claros.</p>
+    </div>
+    <div>
+      <div class="sus-scale-full">
+        <div class="sus-scale-row-full">
+          <div class="sus-range">0–39</div>
+          <div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:39%; background:rgba(168,216,234,0.2)"></div></div>
+          <div class="sus-rating">Inaceitável</div>
+        </div>
+        <div class="sus-scale-row-full highlighted">
+          <div class="sus-range">40–52 ←</div>
+          <div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:42%"></div></div>
+          <div class="sus-rating">Ruim</div>
+        </div>
+        <div class="sus-scale-row-full">
+          <div class="sus-range">53–73</div>
+          <div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:65%; background:rgba(168,216,234,0.2)"></div></div>
+          <div class="sus-rating">Aceitável</div>
+        </div>
+        <div class="sus-scale-row-full">
+          <div class="sus-range">74–85</div>
+          <div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:80%; background:rgba(168,216,234,0.2)"></div></div>
+          <div class="sus-rating">Boa</div>
+        </div>
+        <div class="sus-scale-row-full">
+          <div class="sus-range">86–100</div>
+          <div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:95%; background:rgba(168,216,234,0.2)"></div></div>
+          <div class="sus-rating">Excelente</div>
+        </div>
+      </div>
+
+      <div class="sus-participants" style="margin-top: 32px;">
+        <p>78% dos participantes responderam o questionário. A escala SUS foi adaptada ao contexto de acessibilidade — perguntas consideravam a deficiência do participante como variável central. Benchmark do setor: <strong>68</strong>. Distância atual: <strong style="color:var(--amber)">-27 pontos</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKLOG -->
+<section class="backlog-section">
+  <div class="section-eyebrow reveal">08 — Backlog de Recomendações</div>
+  <h2 class="section-title reveal">Do diagnóstico<br>à ação</h2>
+  <p class="section-lead reveal" style="margin-bottom: 16px;">13 recomendações priorizadas entre quick wins (impacto imediato) e projetos estruturais (médio e longo prazo).</p>
+
+  <div class="backlog-grid reveal">
+    <div class="backlog-col">
+      <div class="backlog-col-header">
+        <div class="backlog-badge badge-quick">Quick Wins</div>
+        <div class="backlog-col-title">Curto prazo</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">01</div>
+        <div class="backlog-item-text">Melhorar visibilidade de <strong>Carreiras e Concursos</strong> no menu de navegação principal</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">02</div>
+        <div class="backlog-item-text">Ajustar <strong>contraste e fontes</strong> nas páginas principais — eliminar texto branco sobre fundo branco</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">03</div>
+        <div class="backlog-item-text">Corrigir bugs críticos: <strong>link "Situação"</strong> + janela de cookies não lida pelo NVDA</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">04</div>
+        <div class="backlog-item-text">Melhorar ferramenta de <strong>busca com sugestões de correção</strong> para erros de digitação</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">05</div>
+        <div class="backlog-item-text"><strong>Barra de acessibilidade fixa</strong> (fonte/contraste) + ícone de Libras maior e mais visível</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">06</div>
+        <div class="backlog-item-text">Substituir V-Libras por ferramenta com <strong>avatar humano realista ou intérprete em vídeo</strong></div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">07</div>
+        <div class="backlog-item-text">Revisar ou remover <strong>vídeos e imagens em movimento</strong> que distraem do conteúdo principal</div>
+      </div>
+    </div>
+
+    <div class="backlog-col">
+      <div class="backlog-col-header">
+        <div class="backlog-badge badge-project">Projetos</div>
+        <div class="backlog-col-title">Médio e longo prazo</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">08</div>
+        <div class="backlog-item-text">Reestruturar <strong>Carreiras e Concursos</strong> — descrições claras com escolaridade e requisitos por deficiência</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">09</div>
+        <div class="backlog-item-text"><strong>Ferramenta de pesquisa avançada + IA</strong> com filtros por deficiência, localização e escolaridade</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">10</div>
+        <div class="backlog-item-text">Revisar imagens dinâmicas — substituir por estáticas ou <strong>permitir desativar movimento</strong> (crítico para TEA)</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">11</div>
+        <div class="backlog-item-text"><strong>Glossário de termos técnicos</strong> — tooltips ou seção interativa, especialmente na página TEJ</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">12</div>
+        <div class="backlog-item-text"><strong>Design System inclusivo</strong> — voz, teclado, áudio, daltonismo, surdocegueira, Libras, alt text, diretrizes cognitivas</div>
+      </div>
+      <div class="backlog-item">
+        <div class="backlog-num">13</div>
+        <div class="backlog-item-text"><strong>Revisão semântica e ARIA completa</strong> — todos os elementos com labels, descrições e hierarquia acessível em todo o site</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLE -->
+<section class="role-section">
+  <div class="role-content">
+    <div class="section-eyebrow section-eyebrow-light reveal" style="justify-content: center; margin-bottom: 40px;">Papel da Giuliana no projeto</div>
+    <blockquote class="role-quote reveal">
+      "Planejar o método, moderar as sessões, analisar o qualitativo e transformar 28 histórias em um diagnóstico que a Petrobras pudesse usar — esse foi o trabalho."
+    </blockquote>
+    <div class="role-attribution reveal">
+      UX Researcher · Planejamento · Moderação · Análise Qualitativa · Diagnóstico e Backlog
+    </div>
+    <div class="four-col reveal" style="margin-top: 64px; gap: 24px;">
+      <div style="text-align:center; padding: 24px; background: rgba(14,75,107,0.3); border-radius: 12px; border: 1px solid rgba(168,216,234,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">01</div>
+        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;">Planejamento do roteiro e seleção de participantes</div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(14,75,107,0.3); border-radius: 12px; border: 1px solid rgba(168,216,234,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">28</div>
+        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;">Sessões moderadas diretamente</div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(14,75,107,0.3); border-radius: 12px; border: 1px solid rgba(168,216,234,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">5</div>
+        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;">Eixos de análise qualitativa</div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(14,75,107,0.3); border-radius: 12px; border: 1px solid rgba(168,216,234,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">13</div>
+        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;">Recomendações priorizadas no backlog</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER NAV -->
+<div class="case-footer-nav">
+  <a href="techback-case.html" class="footer-nav-link">
+    <div class="footer-nav-dir">← anterior</div>
+    <div class="footer-nav-name">TechBack BB</div>
+  </a>
+  <a href="index.html" class="footer-nav-link" style="text-align: center;">
+    <div class="footer-nav-dir">todos os cases</div>
+    <div class="footer-nav-name">Portfolio</div>
+  </a>
+  <a href="previsul-case.html" class="footer-nav-link" style="text-align: right;">
+    <div class="footer-nav-dir">próximo →</div>
+    <div class="footer-nav-name">Previsul</div>
+  </a>
+</div>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
