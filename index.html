@@ -1142,8 +1142,8 @@
       </div>
     </a>
 
-    <!-- INVESTE BRASIL -->
-    <a href="#" class="case-card reveal">
+    <!-- INVESTE BRASIL (hidden — no case page yet) -->
+    <a href="#" class="case-card reveal" style="display:none;">
       <div class="case-bg case-bg-5"></div>
       <div class="case-inner">
         <div class="case-top">
@@ -1164,28 +1164,30 @@
     </a>
 
     <!-- CPFL -->
-    <a href="#" class="case-card reveal reveal-delay-1">
+    <a href="cpfl-case.html" class="case-card reveal reveal-delay-1">
       <div class="case-bg case-bg-6"></div>
       <div class="case-inner">
         <div class="case-top">
           <div class="case-tags">
-            <span class="case-tag">Product Discovery</span>
+            <span class="case-tag new">New</span>
+            <span class="case-tag">UX Research</span>
+            <span class="case-tag">Stakeholder Interviews</span>
             <span class="case-tag">Strategy</span>
           </div>
           <div class="case-arrow">↗</div>
         </div>
         <div class="case-bottom">
-          <div class="case-eyebrow en">Energy Sector</div>
-          <div class="case-eyebrow pt">Setor de Energia</div>
-          <h3 class="case-title">CPFL Solutions —<br>Website Strategy</h3>
-          <p class="case-desc en">Strategic UX diagnosis and redesign of enterprise website for CPFL's B2B solutions arm.</p>
-          <p class="case-desc pt">Diagnóstico estratégico de UX e redesign do site corporativo do braço de soluções B2B da CPFL.</p>
+          <div class="case-eyebrow en">Energy Sector · Brivia</div>
+          <div class="case-eyebrow pt">Setor de Energia · Brivia</div>
+          <h3 class="case-title">CPFL Soluções —<br><em>Stakeholder Research</em></h3>
+          <p class="case-desc en">14 strategic leaders interviewed across 8 departments. Stakeholder research, competitive analysis, and strategic proposals for a website redesign in the energy sector.</p>
+          <p class="case-desc pt">14 líderes estratégicos entrevistados em 8 departamentos. Pesquisa com stakeholders, análise competitiva e propostas estratégicas para o redesign do site no setor de energia.</p>
         </div>
       </div>
     </a>
 
-    <!-- BANCO PAN -->
-    <a href="#" class="case-card reveal reveal-delay-1">
+    <!-- BANCO PAN (hidden — no case page yet) -->
+    <a href="#" class="case-card reveal reveal-delay-1" style="display:none;">
       <div class="case-bg case-bg-2"></div>
       <div class="case-inner">
         <div class="case-top">
@@ -1206,8 +1208,8 @@
       </div>
     </a>
 
-    <!-- BB INFLUENCER GAMIFICATION -->
-    <a href="#" class="case-card reveal">
+    <!-- BB INFLUENCER GAMIFICATION (hidden — no case page yet) -->
+    <a href="#" class="case-card reveal" style="display:none;">
       <div class="case-bg case-bg-7"></div>
       <div class="case-inner">
         <div class="case-top">
@@ -1621,7 +1623,10 @@ function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
   });
+  localStorage.setItem('lang', lang);
 }
+const savedLang = localStorage.getItem('lang');
+if (savedLang) setLang(savedLang);
 
 // ─── METHODOLOGY TABS ───
 function showStep(index) {

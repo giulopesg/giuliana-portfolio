@@ -42,6 +42,21 @@
     z-index: 9999;
   }
 
+  /* ── LANG SWITCHING ── */
+  .en { display: block; }
+  .pt { display: none; }
+  .lang-pt .en { display: none; }
+  .lang-pt .pt { display: block; }
+  .en-inline { display: inline; }
+  .pt-inline { display: none; }
+  .lang-pt .en-inline { display: none; }
+  .lang-pt .pt-inline { display: inline; }
+
+  /* ── LANG TOGGLE ── */
+  .lang-toggle { display:flex; gap:2px; border-radius:20px; padding:4px; margin-left:auto; }
+  .lang-btn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em; padding:6px 14px; border-radius:16px; border:none; background:transparent; color:rgba(255,255,255,0.5); cursor:pointer; transition:all 0.2s; }
+  .lang-btn.active { background:var(--plum); color:var(--white); }
+
   /* ── NAV ── */
   nav {
     position: fixed;
@@ -49,7 +64,6 @@
     z-index: 100;
     padding: 24px 48px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     transition: background 0.4s, padding 0.4s;
   }
@@ -71,6 +85,7 @@
     display: flex;
     gap: 40px;
     align-items: center;
+    margin-left: auto;
   }
   .nav-links a {
     font-size: 13px;
@@ -776,6 +791,7 @@
     .contact-right { text-align: left; }
     .lang-strip { flex-direction: column; gap: 32px; align-items: flex-start; padding: 40px 28px; }
     .page-footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px; }
+    .nav-links { gap: 20px; }
   }
 </style>
 </head>
@@ -785,10 +801,14 @@
 <nav id="navbar">
   <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='index.html'; return false;" class="nav-logo">← Giuliana Lopes Galvão</a>
   <div class="nav-links">
-    <a href="#bio">About</a>
-    <a href="#expertise">Expertise</a>
-    <a href="#timeline">Experience</a>
-    <a href="/cdn-cgi/l/email-protection#92f5fbe7fefde2f7e1f5d2f5fff3fbfebcf1fdff" class="active">Contact</a>
+    <a href="#bio"><span class="en-inline">About</span><span class="pt-inline">Sobre</span></a>
+    <a href="#expertise"><span class="en-inline">Expertise</span><span class="pt-inline">Especialidades</span></a>
+    <a href="#timeline"><span class="en-inline">Experience</span><span class="pt-inline">Experiência</span></a>
+    <a href="/cdn-cgi/l/email-protection#92f5fbe7fefde2f7e1f5d2f5fff3fbfebcf1fdff" class="active"><span class="en-inline">Contact</span><span class="pt-inline">Contato</span></a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
   </div>
 </nav>
 
@@ -808,36 +828,38 @@
   </div>
 
   <div class="hero-text">
-    <div class="hero-eyebrow">About me</div>
+    <div class="hero-eyebrow">
+      <span class="en-inline">About me</span>
+      <span class="pt-inline">Sobre mim</span>
+    </div>
     <h1 class="hero-name">
-      I research,<br>
-      discover,<br>
-      and design —<br>
-      <em>now with AI.</em>
+      <span class="en">I research,<br>discover,<br>and design —<br><em>now with AI.</em></span>
+      <span class="pt">Eu pesquiso,<br>descubro,<br>e projeto —<br><em>agora com IA.</em></span>
     </h1>
     <p class="hero-role">
-      Senior UX Designer specializing in the phases that shape everything: Research, Discovery, and Service Design. I work in complexity — mapping systems, uncovering what's really true, and turning ambiguity into strategic direction.
+      <span class="en">Senior UX Designer specializing in the phases that shape everything: Research, Discovery, and Service Design. I work in complexity — mapping systems, uncovering what's really true, and turning ambiguity into strategic direction.</span>
+      <span class="pt">UX Designer Sênior especializada nas fases que definem tudo: Pesquisa, Discovery e Service Design. Trabalho na complexidade — mapeando sistemas, descobrindo o que é verdade, e transformando ambiguidade em direção estratégica.</span>
     </p>
     <div class="hero-stats">
       <div class="hero-stat">
         <div class="stat-num">8+</div>
-        <div class="stat-label">Years of practice</div>
+        <div class="stat-label"><span class="en-inline">Years of practice</span><span class="pt-inline">Anos de prática</span></div>
       </div>
       <div class="hero-stat">
         <div class="stat-num">3</div>
-        <div class="stat-label">AI tools daily</div>
+        <div class="stat-label"><span class="en-inline">AI tools daily</span><span class="pt-inline">Ferramentas de IA diárias</span></div>
       </div>
       <div class="hero-stat">
         <div class="stat-num">BR</div>
-        <div class="stat-label">São Paulo based</div>
+        <div class="stat-label"><span class="en-inline">São Paulo based</span><span class="pt-inline">Baseada em São Paulo</span></div>
       </div>
       <div class="hero-stat">
         <div class="stat-num">EN</div>
-        <div class="stat-label">Full professional</div>
+        <div class="stat-label"><span class="en-inline">Full professional</span><span class="pt-inline">Proficiência plena</span></div>
       </div>
     </div>
     <div class="hero-cta">
-      <a href="/cdn-cgi/l/email-protection#1f78766a73706f7a6c785f78727e7673317c7072" class="btn btn-primary">Get in touch</a>
+      <a href="/cdn-cgi/l/email-protection#1f78766a73706f7a6c785f78727e7673317c7072" class="btn btn-primary"><span class="en-inline">Get in touch</span><span class="pt-inline">Entrar em contato</span></a>
       <a href="https://linkedin.com/in/giulianalg" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
     </div>
   </div>
@@ -847,35 +869,61 @@
 <section id="bio">
   <div class="bio-inner">
     <div class="bio-sidebar reveal">
-      <div class="section-tag">Who I am</div>
-      <h2 class="bio-sidebar-title">The person<br>behind the<br><em>work.</em></h2>
+      <div class="section-tag"><span class="en-inline">Who I am</span><span class="pt-inline">Quem eu sou</span></div>
+      <h2 class="bio-sidebar-title">
+        <span class="en">The person<br>behind the<br><em>work.</em></span>
+        <span class="pt">A pessoa<br>por trás do<br><em>trabalho.</em></span>
+      </h2>
     </div>
     <div class="bio-content">
-      <p class="bio-para reveal">
+      <p class="bio-para reveal en">
         I specialize in the phases that shape everything: <strong>Research, Discovery, and Service Design</strong>. My work lives in complexity — mapping systems, uncovering what's really true, and turning ambiguity into strategic direction that teams can actually act on.
       </p>
-      <p class="bio-para reveal reveal-delay-1">
+      <p class="bio-para reveal pt">
+        Sou especialista nas fases que definem tudo: <strong>Pesquisa, Discovery e Service Design</strong>. Meu trabalho vive na complexidade — mapeando sistemas, descobrindo o que é verdade, e transformando ambiguidade em direção estratégica que times podem executar.
+      </p>
+      <p class="bio-para reveal reveal-delay-1 en">
         Over 8 years, I've worked across consultancies, fintechs, and enterprise environments — <strong>leading UX chapters, facilitating Design Sprints and Lean Inceptions</strong> for clients like Banco do Brasil, Petrobras, CPFL, Vivo, GPA, and Carrefour. I help teams make better decisions before anything gets built. The early phases aren't overhead. They're the work.
       </p>
+      <p class="bio-para reveal reveal-delay-1 pt">
+        Em mais de 8 anos, trabalhei em consultorias, fintechs e ambientes enterprise — <strong>liderando chapters de UX, facilitando Design Sprints e Lean Inceptions</strong> para clientes como Banco do Brasil, Petrobras, CPFL, Vivo, GPA e Carrefour. Ajudo times a tomar melhores decisões antes de construir qualquer coisa. As fases iniciais não são overhead. Elas são o trabalho.
+      </p>
 
-      <div class="bio-pull reveal reveal-delay-2">
+      <div class="bio-pull reveal reveal-delay-2 en">
         "Curiosity isn't separate from my work — it's the engine behind it. I'm genuinely fascinated by how technology, AI, and human behavior are reshaping the way we live and connect."
       </div>
+      <div class="bio-pull reveal reveal-delay-2 pt">
+        "A curiosidade não é separada do meu trabalho — é o motor por trás dele. Sou genuinamente fascinada por como tecnologia, IA e comportamento humano estão transformando a forma como vivemos e nos conectamos."
+      </div>
 
-      <p class="bio-para reveal reveal-delay-1">
+      <p class="bio-para reveal reveal-delay-1 en">
         AI tools like <strong>Claude, Gemini, and ChatGPT</strong> are now woven into how I work — not as shortcuts, but as thinking partners. They speed up synthesis, stress-test ideas, and help me build sharper artifacts. I've built products from scratch using AI-assisted development. That changes how I design.
       </p>
-      <p class="bio-para reveal reveal-delay-2">
+      <p class="bio-para reveal reveal-delay-1 pt">
+        Ferramentas de IA como <strong>Claude, Gemini e ChatGPT</strong> agora fazem parte de como eu trabalho — não como atalhos, mas como parceiros de pensamento. Elas aceleram síntese, testam ideias e me ajudam a construir artefatos mais afiados. Já construí produtos do zero usando desenvolvimento assistido por IA. Isso muda a forma como eu projeto.
+      </p>
+      <p class="bio-para reveal reveal-delay-2 en">
         Beyond the screen, I'm Giu: <strong>singer since childhood, martial arts practitioner, traveler, and cat mom</strong>. Life has taught me resilience, creativity, and the value of balance — lessons I carry into everything I do.
       </p>
+      <p class="bio-para reveal reveal-delay-2 pt">
+        Fora da tela, sou Giu: <strong>cantora desde criança, praticante de artes marciais, viajante e mãe de gatos</strong>. A vida me ensinou resiliência, criatividade e o valor do equilíbrio — lições que levo para tudo que faço.
+      </p>
 
-      <div class="bio-personal reveal">
+      <div class="bio-personal reveal en">
         <span class="bio-pill"><span class="bio-pill-icon">🎵</span> Singer since childhood</span>
         <span class="bio-pill"><span class="bio-pill-icon">🥋</span> Martial arts</span>
         <span class="bio-pill"><span class="bio-pill-icon">✈️</span> Traveler</span>
         <span class="bio-pill"><span class="bio-pill-icon">🐱</span> Cat mom</span>
         <span class="bio-pill"><span class="bio-pill-icon">🤖</span> AI enthusiast</span>
         <span class="bio-pill"><span class="bio-pill-icon">🔮</span> Future thinker</span>
+      </div>
+      <div class="bio-personal reveal pt">
+        <span class="bio-pill"><span class="bio-pill-icon">🎵</span> Cantora desde criança</span>
+        <span class="bio-pill"><span class="bio-pill-icon">🥋</span> Artes marciais</span>
+        <span class="bio-pill"><span class="bio-pill-icon">✈️</span> Viajante</span>
+        <span class="bio-pill"><span class="bio-pill-icon">🐱</span> Mãe de gatos</span>
+        <span class="bio-pill"><span class="bio-pill-icon">🤖</span> Entusiasta de IA</span>
+        <span class="bio-pill"><span class="bio-pill-icon">🔮</span> Pensadora do futuro</span>
       </div>
     </div>
   </div>
@@ -886,42 +934,66 @@
   <div class="expertise-inner">
     <div class="expertise-header reveal">
       <div>
-        <div class="section-tag">What I do</div>
-        <h2 class="expertise-title">Areas of<br><em>expertise.</em></h2>
+        <div class="section-tag"><span class="en-inline">What I do</span><span class="pt-inline">O que eu faço</span></div>
+        <h2 class="expertise-title">
+          <span class="en">Areas of<br><em>expertise.</em></span>
+          <span class="pt">Áreas de<br><em>especialidade.</em></span>
+        </h2>
       </div>
-      <p class="expertise-sub">Where I spend my deepest attention and create the most strategic value.</p>
+      <p class="expertise-sub">
+        <span class="en">Where I spend my deepest attention and create the most strategic value.</span>
+        <span class="pt">Onde dedico minha atenção mais profunda e crio o maior valor estratégico.</span>
+      </p>
     </div>
 
     <div class="expertise-grid">
       <div class="expertise-card reveal">
         <div class="exp-num">01</div>
-        <div class="exp-title">UX Strategy & Research</div>
-        <div class="exp-desc">Deep-dive discovery work — interviews, desk research, system mapping, and insight synthesis that gives product decisions a solid foundation.</div>
+        <div class="exp-title"><span class="en-inline">UX Strategy & Research</span><span class="pt-inline">Estratégia UX & Pesquisa</span></div>
+        <div class="exp-desc">
+          <span class="en">Deep-dive discovery work — interviews, desk research, system mapping, and insight synthesis that gives product decisions a solid foundation.</span>
+          <span class="pt">Trabalho de discovery aprofundado — entrevistas, desk research, mapeamento de sistemas e síntese de insights que dão base sólida às decisões de produto.</span>
+        </div>
       </div>
       <div class="expertise-card reveal reveal-delay-1">
         <div class="exp-num">02</div>
         <div class="exp-title">Service Design</div>
-        <div class="exp-desc">End-to-end journey design across touchpoints. Blueprints, orchestration, and systemic thinking to improve complex service ecosystems.</div>
+        <div class="exp-desc">
+          <span class="en">End-to-end journey design across touchpoints. Blueprints, orchestration, and systemic thinking to improve complex service ecosystems.</span>
+          <span class="pt">Design de jornada ponta a ponta em todos os pontos de contato. Blueprints, orquestração e pensamento sistêmico para melhorar ecossistemas de serviço complexos.</span>
+        </div>
       </div>
       <div class="expertise-card reveal reveal-delay-2">
         <div class="exp-num">03</div>
-        <div class="exp-title">Prototyping & UI Design</div>
-        <div class="exp-desc">From concept to high-fidelity prototype. Design systems, accessible components, and interfaces that communicate intent before a single line of code.</div>
+        <div class="exp-title"><span class="en-inline">Prototyping & UI Design</span><span class="pt-inline">Prototipação & UI Design</span></div>
+        <div class="exp-desc">
+          <span class="en">From concept to high-fidelity prototype. Design systems, accessible components, and interfaces that communicate intent before a single line of code.</span>
+          <span class="pt">Do conceito ao protótipo de alta fidelidade. Design systems, componentes acessíveis e interfaces que comunicam intenção antes de uma linha de código.</span>
+        </div>
       </div>
       <div class="expertise-card reveal">
         <div class="exp-num">04</div>
-        <div class="exp-title">Workshop Facilitation</div>
-        <div class="exp-desc">Certified Lean Inception Facilitator. Design Sprints, discovery workshops, and collaborative sessions that align teams and accelerate decisions.</div>
+        <div class="exp-title"><span class="en-inline">Workshop Facilitation</span><span class="pt-inline">Facilitação de Workshops</span></div>
+        <div class="exp-desc">
+          <span class="en">Certified Lean Inception Facilitator. Design Sprints, discovery workshops, and collaborative sessions that align teams and accelerate decisions.</span>
+          <span class="pt">Facilitadora Certificada de Lean Inception. Design Sprints, workshops de discovery e sessões colaborativas que alinham times e aceleram decisões.</span>
+        </div>
       </div>
       <div class="expertise-card reveal reveal-delay-1">
         <div class="exp-num">05</div>
-        <div class="exp-title">AI-Assisted Development</div>
-        <div class="exp-desc">Building functional products using Claude Code, Figma Make, and Cursor. Translating design decisions into working software — solo, with precision.</div>
+        <div class="exp-title"><span class="en-inline">AI-Assisted Development</span><span class="pt-inline">Desenvolvimento Assistido por IA</span></div>
+        <div class="exp-desc">
+          <span class="en">Building functional products using Claude Code, Figma Make, and Cursor. Translating design decisions into working software — solo, with precision.</span>
+          <span class="pt">Construindo produtos funcionais usando Claude Code, Figma Make e Cursor. Traduzindo decisões de design em software funcional — solo, com precisão.</span>
+        </div>
       </div>
       <div class="expertise-card reveal reveal-delay-2">
         <div class="exp-num">06</div>
-        <div class="exp-title">UX Mentorship</div>
-        <div class="exp-desc">Supporting junior designers with feedback, career guidance, and practice-based learning through structured mentorship programs.</div>
+        <div class="exp-title"><span class="en-inline">UX Mentorship</span><span class="pt-inline">Mentoria em UX</span></div>
+        <div class="exp-desc">
+          <span class="en">Supporting junior designers with feedback, career guidance, and practice-based learning through structured mentorship programs.</span>
+          <span class="pt">Apoiando designers juniores com feedback, orientação de carreira e aprendizado baseado em prática através de programas estruturados de mentoria.</span>
+        </div>
       </div>
     </div>
   </div>
@@ -931,25 +1003,34 @@
 <section id="timeline">
   <div class="timeline-inner">
     <div class="timeline-header reveal">
-      <div class="section-tag-light">Career path</div>
-      <h2 class="timeline-title">Where I've<br><em>been.</em></h2>
+      <div class="section-tag-light"><span class="en-inline">Career path</span><span class="pt-inline">Trajetória profissional</span></div>
+      <h2 class="timeline-title">
+        <span class="en">Where I've<br><em>been.</em></span>
+        <span class="pt">Por onde<br><em>passei.</em></span>
+      </h2>
     </div>
 
     <div class="timeline-list">
       <div class="timeline-item reveal">
-        <div class="timeline-period">2024 — Present</div>
+        <div class="timeline-period"><span class="en-inline">2024 — Present</span><span class="pt-inline">2024 — Atual</span></div>
         <div class="timeline-content">
-          <div class="timeline-role">UX Specialist On-demand</div>
-          <div class="timeline-company">Independent · Strategic Consultant</div>
-          <div class="timeline-desc">Discovery, diagnostics, Design Sprints, Lean Inceptions, and usability testing for enterprise clients. Also building AI-native products from scratch — design, code, and deployment.</div>
+          <div class="timeline-role"><span class="en-inline">UX Specialist On-demand</span><span class="pt-inline">Especialista UX On-demand</span></div>
+          <div class="timeline-company"><span class="en-inline">Independent · Strategic Consultant</span><span class="pt-inline">Independente · Consultora Estratégica</span></div>
+          <div class="timeline-desc">
+            <span class="en">Discovery, diagnostics, Design Sprints, Lean Inceptions, and usability testing for enterprise clients. Also building AI-native products from scratch — design, code, and deployment.</span>
+            <span class="pt">Discovery, diagnósticos, Design Sprints, Lean Inceptions e testes de usabilidade para clientes enterprise. Também construindo produtos nativos de IA do zero — design, código e deploy.</span>
+          </div>
         </div>
       </div>
       <div class="timeline-item reveal reveal-delay-1">
         <div class="timeline-period">2024 — 2025</div>
         <div class="timeline-content">
-          <div class="timeline-role">UX/UI Mentor</div>
+          <div class="timeline-role"><span class="en-inline">UX/UI Mentor</span><span class="pt-inline">Mentora UX/UI</span></div>
           <div class="timeline-company">Tech Pro Bem</div>
-          <div class="timeline-desc">Supported junior designers with structured feedback, career development, and practice-based learning.</div>
+          <div class="timeline-desc">
+            <span class="en">Supported junior designers with structured feedback, career development, and practice-based learning.</span>
+            <span class="pt">Apoiei designers juniores com feedback estruturado, desenvolvimento de carreira e aprendizado baseado em prática.</span>
+          </div>
         </div>
       </div>
       <div class="timeline-item reveal reveal-delay-2">
@@ -957,7 +1038,10 @@
         <div class="timeline-content">
           <div class="timeline-role">Senior UX Designer → UX Lead → Experience Lead</div>
           <div class="timeline-company">Brivia</div>
-          <div class="timeline-desc">Led UX chapters and strategic projects for enterprise clients including Banco do Brasil, Petrobras, CPFL, Vivo, GPA, Carrefour, CNP, and Previsul. Facilitated Design Sprints and Lean Inceptions across complex regulated sectors.</div>
+          <div class="timeline-desc">
+            <span class="en">Led UX chapters and strategic projects for enterprise clients including Banco do Brasil, Petrobras, CPFL, Vivo, GPA, Carrefour, CNP, and Previsul. Facilitated Design Sprints and Lean Inceptions across complex regulated sectors.</span>
+            <span class="pt">Liderei chapters de UX e projetos estratégicos para clientes enterprise como Banco do Brasil, Petrobras, CPFL, Vivo, GPA, Carrefour, CNP e Previsul. Facilitei Design Sprints e Lean Inceptions em setores regulados complexos.</span>
+          </div>
         </div>
       </div>
       <div class="timeline-item reveal">
@@ -965,7 +1049,10 @@
         <div class="timeline-content">
           <div class="timeline-role">Senior Product Designer</div>
           <div class="timeline-company">Nomad</div>
-          <div class="timeline-desc">Designed mobile-first, accessible financial journeys for a fintech audience.</div>
+          <div class="timeline-desc">
+            <span class="en">Designed mobile-first, accessible financial journeys for a fintech audience.</span>
+            <span class="pt">Projetei jornadas financeiras mobile-first e acessíveis para público fintech.</span>
+          </div>
         </div>
       </div>
       <div class="timeline-item reveal">
@@ -973,15 +1060,21 @@
         <div class="timeline-content">
           <div class="timeline-role">UX/UI Designer</div>
           <div class="timeline-company">NiD HUMAN</div>
-          <div class="timeline-desc">UX/UI design for a human-centered design consultancy focused on strategic innovation projects.</div>
+          <div class="timeline-desc">
+            <span class="en">UX/UI design for a human-centered design consultancy focused on strategic innovation projects.</span>
+            <span class="pt">Design UX/UI para consultoria de design centrado no ser humano focada em projetos de inovação estratégica.</span>
+          </div>
         </div>
       </div>
       <div class="timeline-item reveal reveal-delay-1">
         <div class="timeline-period">2017 — 2019</div>
         <div class="timeline-content">
-          <div class="timeline-role">UX/UI Analyst & Visual Designer</div>
+          <div class="timeline-role"><span class="en-inline">UX/UI Analyst & Visual Designer</span><span class="pt-inline">Analista UX/UI & Designer Visual</span></div>
           <div class="timeline-company">VG8</div>
-          <div class="timeline-desc">First UX role. Hands-on field research, prototyping, visual design, and usability testing from day one.</div>
+          <div class="timeline-desc">
+            <span class="en">First UX role. Hands-on field research, prototyping, visual design, and usability testing from day one.</span>
+            <span class="pt">Primeira experiência em UX. Pesquisa de campo hands-on, prototipação, design visual e testes de usabilidade desde o primeiro dia.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -992,20 +1085,32 @@
 <section id="education">
   <div class="edu-inner">
     <div>
-      <div class="section-tag reveal">Education</div>
-      <h2 class="edu-col-title reveal"><em>Formal</em><br>foundation.</h2>
+      <div class="section-tag reveal"><span class="en-inline">Education</span><span class="pt-inline">Formação</span></div>
+      <h2 class="edu-col-title reveal">
+        <span class="en"><em>Formal</em><br>foundation.</span>
+        <span class="pt"><em>Base</em><br>acadêmica.</span>
+      </h2>
       <div class="edu-list">
         <div class="edu-item reveal reveal-delay-1">
           <div class="edu-dot"></div>
           <div>
-            <div class="edu-name">Postgraduate in Future Thinking: Society, Technology & Market</div>
-            <div class="edu-meta">PUCPR · 2024–2025 · In progress</div>
+            <div class="edu-name">
+              <span class="en-inline">Postgraduate in Future Thinking: Society, Technology & Market</span>
+              <span class="pt-inline">Pós-graduação em Pensamento do Futuro: Sociedade, Tecnologia e Mercado</span>
+            </div>
+            <div class="edu-meta">
+              <span class="en-inline">PUCPR · 2024–2025 · In progress</span>
+              <span class="pt-inline">PUCPR · 2024–2025 · Em andamento</span>
+            </div>
           </div>
         </div>
         <div class="edu-item reveal reveal-delay-2">
           <div class="edu-dot"></div>
           <div>
-            <div class="edu-name">BA in Graphic Design</div>
+            <div class="edu-name">
+              <span class="en-inline">BA in Graphic Design</span>
+              <span class="pt-inline">Bacharelado em Design Gráfico</span>
+            </div>
             <div class="edu-meta">ULBRA · 2010–2014</div>
           </div>
         </div>
@@ -1013,34 +1118,37 @@
     </div>
 
     <div>
-      <div class="section-tag reveal">Certifications</div>
-      <h2 class="edu-col-title reveal"><em>Continuous</em><br>learning.</h2>
+      <div class="section-tag reveal"><span class="en-inline">Certifications</span><span class="pt-inline">Certificações</span></div>
+      <h2 class="edu-col-title reveal">
+        <span class="en"><em>Continuous</em><br>learning.</span>
+        <span class="pt"><em>Aprendizado</em><br>contínuo.</span>
+      </h2>
       <div class="cert-grid">
         <div class="cert-item reveal">
           <div class="cert-icon">🤖</div>
           <div>
-            <div class="cert-name">AI for Designers</div>
+            <div class="cert-name"><span class="en-inline">AI for Designers</span><span class="pt-inline">IA para Designers</span></div>
             <div class="cert-issuer">IxDF · 2025</div>
           </div>
         </div>
         <div class="cert-item reveal reveal-delay-1">
           <div class="cert-icon">⚡</div>
           <div>
-            <div class="cert-name">AI for Productivity</div>
+            <div class="cert-name"><span class="en-inline">AI for Productivity</span><span class="pt-inline">IA para Produtividade</span></div>
             <div class="cert-issuer">Conquer School · 2024</div>
           </div>
         </div>
         <div class="cert-item reveal reveal-delay-2">
           <div class="cert-icon">🚀</div>
           <div>
-            <div class="cert-name">Certified Lean Inception Facilitator®</div>
+            <div class="cert-name"><span class="en-inline">Certified Lean Inception Facilitator®</span><span class="pt-inline">Facilitadora Certificada de Lean Inception®</span></div>
             <div class="cert-issuer">2024</div>
           </div>
         </div>
         <div class="cert-item reveal">
           <div class="cert-icon">🎨</div>
           <div>
-            <div class="cert-name">User-Centered Design</div>
+            <div class="cert-name"><span class="en-inline">User-Centered Design</span><span class="pt-inline">Design Centrado no Usuário</span></div>
             <div class="cert-issuer">PUCRS · 2024</div>
           </div>
         </div>
@@ -1061,7 +1169,10 @@
         <div class="cert-item reveal">
           <div class="cert-icon">💼</div>
           <div>
-            <div class="cert-name">Executive Certification: Business Development, Leadership & Networking</div>
+            <div class="cert-name">
+              <span class="en-inline">Executive Certification: Business Development, Leadership & Networking</span>
+              <span class="pt-inline">Certificação Executiva: Desenvolvimento de Negócios, Liderança & Networking</span>
+            </div>
             <div class="cert-issuer">Conquer School</div>
           </div>
         </div>
@@ -1073,17 +1184,17 @@
   <div class="lang-strip reveal" style="margin-top:80px;">
     <div class="lang-item">
       <div class="lang-name">Português</div>
-      <div class="lang-level">Native</div>
+      <div class="lang-level"><span class="en-inline">Native</span><span class="pt-inline">Nativo</span></div>
       <div class="lang-bar"><div class="lang-bar-fill" style="width:100%"></div></div>
     </div>
     <div class="lang-item">
       <div class="lang-name">English</div>
-      <div class="lang-level">Full Professional Proficiency</div>
+      <div class="lang-level"><span class="en-inline">Full Professional Proficiency</span><span class="pt-inline">Proficiência Profissional Plena</span></div>
       <div class="lang-bar"><div class="lang-bar-fill" style="width:88%"></div></div>
     </div>
     <div class="lang-item">
       <div class="lang-name">Español</div>
-      <div class="lang-level">Elementary</div>
+      <div class="lang-level"><span class="en-inline">Elementary</span><span class="pt-inline">Elementar</span></div>
       <div class="lang-bar"><div class="lang-bar-fill" style="width:25%"></div></div>
     </div>
   </div>
@@ -1093,12 +1204,18 @@
 <section id="contact-footer">
   <div class="contact-inner">
     <div class="contact-left">
-      <div class="contact-tag reveal">Available for work</div>
-      <h2 class="contact-headline reveal">Let's build<br>something <em>real.</em></h2>
+      <div class="contact-tag reveal">
+        <span class="en-inline">Available for work</span>
+        <span class="pt-inline">Disponível para trabalho</span>
+      </div>
+      <h2 class="contact-headline reveal">
+        <span class="en">Let's build<br>something <em>real.</em></span>
+        <span class="pt">Vamos construir<br>algo <em>real.</em></span>
+      </h2>
       <div class="contact-links-row reveal reveal-delay-1">
         <a href="/cdn-cgi/l/email-protection#f7909e829b9887928490b7909a969e9bd994989a" class="contact-footer-link cfl-primary">✉ <span class="__cf_email__" data-cfemail="701719051c1f0015031730171d11191c5e131f1d">[email&#160;protected]</span></a>
         <a href="https://linkedin.com/in/giulianalg" target="_blank" class="contact-footer-link cfl-outline">LinkedIn ↗</a>
-        <a href="https://giusportfolio.framer.website" target="_blank" class="contact-footer-link cfl-outline">Current portfolio ↗</a>
+        <a href="https://giusportfolio.framer.website" target="_blank" class="contact-footer-link cfl-outline"><span class="en-inline">Current portfolio ↗</span><span class="pt-inline">Portfólio atual ↗</span></a>
       </div>
     </div>
     <div class="contact-right reveal">
@@ -1109,11 +1226,24 @@
 
   <div class="page-footer">
     <span class="footer-copy">Giuliana Lopes Galvão © 2026 · Senior UX Designer</span>
-    <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='index.html'; return false;" class="footer-back">← Back to portfolio</a>
+    <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='index.html'; return false;" class="footer-back"><span class="en-inline">← Back to portfolio</span><span class="pt-inline">← Voltar ao portfólio</span></a>
   </div>
 </section>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── LANG TOGGLE ───
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.body.classList.toggle('lang-pt', lang === 'pt');
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+  localStorage.setItem('lang', lang);
+}
+const savedLang = localStorage.getItem('lang');
+if (savedLang) setLang(savedLang);
+
 // NAV SCROLL
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);

@@ -25,6 +25,21 @@
   html { scroll-behavior: smooth; font-size: 16px; }
   body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--ink); overflow-x: hidden; }
 
+  /* ── LANG SWITCHING ── */
+  .en { display: block; }
+  .pt { display: none; }
+  .lang-pt .en { display: none; }
+  .lang-pt .pt { display: block; }
+  .en-inline { display: inline; }
+  .pt-inline { display: none; }
+  .lang-pt .en-inline { display: none; }
+  .lang-pt .pt-inline { display: inline; }
+
+  /* ── LANG TOGGLE ── */
+  .lang-toggle { display:flex; gap:2px; border-radius:20px; padding:4px; margin-left:auto; }
+  .lang-btn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em; padding:6px 14px; border-radius:16px; border:none; background:transparent; color:var(--ink-muted); cursor:pointer; transition:all 0.2s; }
+  .lang-btn.active { background:var(--plum); color:var(--white); }
+
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 99;
@@ -173,7 +188,7 @@
 
   .cs-body-text {
     font-size: 17px; font-weight: 300; line-height: 1.8;
-    color: var(--ink-soft); max-width: 680px; margin-bottom: 32px;
+    color: var(--ink-soft); max-width: 680px; margin-bottom: 28px;
   }
   .cs-body-text strong { color: var(--ink); font-weight: 500; }
 
@@ -373,6 +388,20 @@
   .cta-btn.outline { border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); }
   .cta-btn.outline:hover { border-color: var(--white); color: var(--white); transform: translateY(-1px); }
 
+  /* footer nav */
+  .case-footer-nav {
+    background: var(--warm-cream);
+    padding: 64px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--warm-stone);
+  }
+  .footer-nav-link {
+    text-decoration: none; display: flex; flex-direction: column; gap: 8px;
+  }
+  .fnl-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--ink-muted); text-transform: uppercase; }
+  .fnl-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--ink); transition: color 0.2s; }
+  .footer-nav-link:hover .fnl-title { color: var(--plum); }
+
   /* footer */
   footer {
     background: var(--ink);
@@ -388,6 +417,33 @@
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
+  /* ── ROLE ── */
+  .role-section { background: var(--ink); padding: 100px 80px; }
+  .role-content { max-width: 800px; margin: 0 auto; text-align: center; }
+  .role-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--plum-pale); margin-bottom: 40px;
+    display: flex; align-items: center; gap: 12px; justify-content: center;
+  }
+  .role-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--plum-pale); }
+  .role-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 300; font-style: italic;
+    line-height: 1.3; color: var(--white);
+    margin-bottom: 32px;
+  }
+  .role-attribution {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--plum-pale);
+  }
+  .role-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    margin-top: 64px;
+  }
+
   @media (max-width: 900px) {
     nav { padding: 18px 24px; }
     .case-hero { grid-template-columns: 1fr; }
@@ -396,7 +452,10 @@
     .case-section { padding: 64px 24px; }
     .cs-2col, .cs-3col, .next-steps-grid { grid-template-columns: 1fr; }
     .case-cta { padding: 48px 24px; }
+    .case-footer-nav { padding: 40px 24px; flex-direction: column; gap: 32px; }
     footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    .role-section { padding: 80px 24px; }
+    .role-stats { grid-template-columns: 1fr 1fr; }
     .method-flow-bar { flex-direction: column; }
     .mf-step { border-radius: 0; min-width: unset; }
     .mf-step::after { display: none; }
@@ -408,9 +467,13 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='index.html'; return false;" class="nav-back">← Back to portfolio</a>
+  <a href="index.html" class="nav-back">← <span class="en-inline">Back to portfolio</span><span class="pt-inline">Voltar ao portfólio</span></a>
   <div class="nav-divider"></div>
   <span class="nav-title">Neuroot — Case Study</span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
 </nav>
 
 <!-- ── HERO ── -->
@@ -423,25 +486,31 @@
       <span class="ctag">React + Supabase</span>
       <span class="ctag">Claude API</span>
     </div>
-    <div class="case-hero-eyebrow">Personal project · 2025 – present</div>
+    <div class="case-hero-eyebrow">
+      <span class="en-inline">Personal project · 2025 – present</span>
+      <span class="pt-inline">Projeto pessoal · 2025 – presente</span>
+    </div>
     <h1 class="case-hero-title">Neuroot</h1>
-    <p class="case-hero-subtitle">O caminho do meio.<br>A post-burnout recovery app built with UX + AI methodology.</p>
+    <p class="case-hero-subtitle">
+      <span class="en">O caminho do meio.<br>A post-burnout recovery app built with UX + AI methodology.</span>
+      <span class="pt">O caminho do meio.<br>Um app de recuperação pós-burnout construído com metodologia UX + IA.</span>
+    </p>
     <div class="case-meta-row">
       <div class="case-meta-item">
-        <div class="case-meta-label">Role</div>
+        <div class="case-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Papel</span></div>
         <div class="case-meta-value">UX Designer + Builder</div>
       </div>
       <div class="case-meta-item">
         <div class="case-meta-label">Timeline</div>
-        <div class="case-meta-value">2025 – present</div>
+        <div class="case-meta-value"><span class="en-inline">2025 – present</span><span class="pt-inline">2025 – presente</span></div>
       </div>
       <div class="case-meta-item">
-        <div class="case-meta-label">Platform</div>
+        <div class="case-meta-label"><span class="en-inline">Platform</span><span class="pt-inline">Plataforma</span></div>
         <div class="case-meta-value">Mobile PWA (React + Supabase)</div>
       </div>
       <div class="case-meta-item">
         <div class="case-meta-label">Status</div>
-        <div class="case-meta-value">MVP in development</div>
+        <div class="case-meta-value"><span class="en-inline">MVP in development</span><span class="pt-inline">MVP em desenvolvimento</span></div>
       </div>
     </div>
   </div>
@@ -449,53 +518,39 @@
     <div class="hero-tree-bg">
       <svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
         <defs>
-          <radialGradient id="bg2" cx="50%" cy="50%" r="70%">
-            <stop offset="0%" stop-color="#2A1F3D"/>
-            <stop offset="100%" stop-color="#1C1917"/>
-          </radialGradient>
-          <radialGradient id="orb3" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#6B4FA0" stop-opacity="0.4"/>
-            <stop offset="100%" stop-color="#6B4FA0" stop-opacity="0"/>
-          </radialGradient>
+          <radialGradient id="bg2" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#2A1F3D"/><stop offset="100%" stop-color="#1C1917"/></radialGradient>
+          <radialGradient id="orb3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#6B4FA0" stop-opacity="0.4"/><stop offset="100%" stop-color="#6B4FA0" stop-opacity="0"/></radialGradient>
           <filter id="glow"><feGaussianBlur stdDeviation="20"/></filter>
         </defs>
         <rect width="600" height="800" fill="url(#bg2)"/>
         <ellipse cx="300" cy="350" rx="280" ry="280" fill="url(#orb3)" filter="url(#glow)"/>
-        <!-- trunk -->
         <path d="M300 700 C298 630 295 560 300 480 C304 430 312 400 300 350" fill="none" stroke="#6B4FA0" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-        <!-- roots -->
         <path d="M300 700 C268 718 220 740 175 750 C145 758 115 748 90 735" fill="none" stroke="#6B4FA0" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
         <path d="M300 700 C332 718 380 742 425 750 C455 757 485 748 510 733" fill="none" stroke="#6B4FA0" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
         <path d="M292 670 C262 682 225 688 190 678" fill="none" stroke="#8B6FC0" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
         <path d="M308 670 C338 683 375 688 408 677" fill="none" stroke="#8B6FC0" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
-        <!-- branches -->
         <path d="M300 400 C272 372 230 348 188 335 C158 325 130 332 110 322" fill="none" stroke="#6B4FA0" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/>
         <path d="M302 425 C330 395 368 372 408 360 C438 351 465 358 485 348" fill="none" stroke="#6B4FA0" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/>
         <path d="M298 375 C272 348 248 322 222 300 C206 284 188 276 172 268" fill="none" stroke="#8B6FC0" stroke-width="1.4" stroke-linecap="round" opacity="0.3"/>
         <path d="M305 388 C332 358 358 332 388 312 C406 299 428 292 445 283" fill="none" stroke="#8B6FC0" stroke-width="1.4" stroke-linecap="round" opacity="0.3"/>
-        <!-- sub-branches -->
         <path d="M222 298 C204 280 194 266 180 252 C172 242 166 234 158 226" fill="none" stroke="#8B6FC0" stroke-width="0.8" opacity="0.22"/>
         <path d="M388 310 C406 290 418 274 432 260 C440 250 446 240 454 232" fill="none" stroke="#8B6FC0" stroke-width="0.8" opacity="0.22"/>
-        <!-- leaf dots -->
-        <circle cx="108" cy="320" r="4.5" fill="#6B4FA0" opacity="0.35"/>
-        <circle cx="92" cy="308" r="3" fill="#8B6FC0" opacity="0.28"/>
-        <circle cx="122" cy="304" r="3.5" fill="#6B4FA0" opacity="0.25"/>
-        <circle cx="486" cy="346" r="4.5" fill="#6B4FA0" opacity="0.35"/>
-        <circle cx="500" cy="334" r="3" fill="#8B6FC0" opacity="0.28"/>
-        <circle cx="472" cy="330" r="3.5" fill="#6B4FA0" opacity="0.25"/>
-        <circle cx="170" cy="266" r="4" fill="#6B4FA0" opacity="0.28"/>
-        <circle cx="155" cy="254" r="2.5" fill="#8B6FC0" opacity="0.22"/>
-        <circle cx="446" cy="280" r="4" fill="#6B4FA0" opacity="0.28"/>
-        <circle cx="460" cy="268" r="2.5" fill="#8B6FC0" opacity="0.22"/>
-        <!-- golden node -->
-        <circle cx="300" cy="350" r="7" fill="#C4975A" opacity="0.6"/>
-        <circle cx="300" cy="350" r="3" fill="#C4975A" opacity="0.9"/>
-        <circle cx="300" cy="350" r="14" fill="none" stroke="#C4975A" stroke-width="1" opacity="0.25"/>
+        <circle cx="108" cy="320" r="4.5" fill="#6B4FA0" opacity="0.35"/><circle cx="92" cy="308" r="3" fill="#8B6FC0" opacity="0.28"/><circle cx="122" cy="304" r="3.5" fill="#6B4FA0" opacity="0.25"/>
+        <circle cx="486" cy="346" r="4.5" fill="#6B4FA0" opacity="0.35"/><circle cx="500" cy="334" r="3" fill="#8B6FC0" opacity="0.28"/><circle cx="472" cy="330" r="3.5" fill="#6B4FA0" opacity="0.25"/>
+        <circle cx="170" cy="266" r="4" fill="#6B4FA0" opacity="0.28"/><circle cx="155" cy="254" r="2.5" fill="#8B6FC0" opacity="0.22"/>
+        <circle cx="446" cy="280" r="4" fill="#6B4FA0" opacity="0.28"/><circle cx="460" cy="268" r="2.5" fill="#8B6FC0" opacity="0.22"/>
+        <circle cx="300" cy="350" r="7" fill="#C4975A" opacity="0.6"/><circle cx="300" cy="350" r="3" fill="#C4975A" opacity="0.9"/><circle cx="300" cy="350" r="14" fill="none" stroke="#C4975A" stroke-width="1" opacity="0.25"/>
       </svg>
     </div>
     <div class="hero-quote-card">
-      <blockquote>"Not about doing more. About reconnecting with effort without getting hurt."</blockquote>
-      <cite>— Core product promise</cite>
+      <blockquote>
+        <span class="en">"Not about doing more. About reconnecting with effort without getting hurt."</span>
+        <span class="pt">"Não sobre fazer mais. Sobre reconectar com o esforço sem se machucar."</span>
+      </blockquote>
+      <cite>
+        <span class="en-inline">— Core product promise</span>
+        <span class="pt-inline">— Promessa central do produto</span>
+      </cite>
     </div>
   </div>
 </header>
@@ -505,20 +560,30 @@
 
   <!-- 01 ORIGIN -->
   <section class="case-section reveal">
-    <div class="cs-label">01 — Origin</div>
-    <h2 class="cs-title">This started with<br><em>my own burnout.</em></h2>
+    <div class="cs-label"><span class="en-inline">01 — Origin</span><span class="pt-inline">01 — Origem</span></div>
+    <h2 class="cs-title">
+      <span class="en">This started with<br><em>my own burnout.</em></span>
+      <span class="pt">Tudo começou com<br><em>meu próprio burnout.</em></span>
+    </h2>
     <div class="cs-2col">
       <div>
-        <p class="cs-body-text">In 2021, I hit burnout. I kept working — I couldn't stop — but something in my system had broken. I understood what needed to be done. I wanted to do it. And my body just wouldn't move.</p>
-        <p class="cs-body-text">I tried every productivity app I knew. Notion, Todoist, habit trackers. They made it worse. Every unchecked box felt like proof that I was failing. Every streak I broke felt like confirmation of a story I was already telling myself: that I couldn't sustain anything anymore.</p>
-        <p class="cs-body-text">Years later, I started using a Notion AI template to create small daily anchors for myself. It helped — but it was static, had no real intelligence, and couldn't adapt to how I was actually feeling. <strong>That gap became Neuroot.</strong></p>
+        <p class="cs-body-text en">In 2021, I hit burnout. I kept working — I couldn't stop — but something in my system had broken. I understood what needed to be done. I wanted to do it. And my body just wouldn't move.</p>
+        <p class="cs-body-text pt">Em 2021, eu tive burnout. Continuei trabalhando — não conseguia parar — mas algo no meu sistema tinha quebrado. Eu entendia o que precisava ser feito. Queria fazer. E meu corpo simplesmente não se movia.</p>
+        <p class="cs-body-text en">I tried every productivity app I knew. Notion, Todoist, habit trackers. They made it worse. Every unchecked box felt like proof that I was failing. Every streak I broke felt like confirmation of a story I was already telling myself: that I couldn't sustain anything anymore.</p>
+        <p class="cs-body-text pt">Tentei todos os apps de produtividade que conhecia. Notion, Todoist, trackers de hábitos. Eles pioraram tudo. Cada caixa desmarcada parecia prova de que eu estava falhando. Cada sequência que eu quebrava parecia confirmar uma história que eu já contava a mim mesma: que eu não conseguia sustentar mais nada.</p>
+        <p class="cs-body-text en">Years later, I started using a Notion AI template to create small daily anchors for myself. It helped — but it was static, had no real intelligence, and couldn't adapt to how I was actually feeling. <strong>That gap became Neuroot.</strong></p>
+        <p class="cs-body-text pt">Anos depois, comecei a usar um template de IA no Notion para criar pequenas âncoras diárias. Ajudou — mas era estático, sem inteligência real, e não se adaptava ao que eu realmente sentia. <strong>Essa lacuna se tornou o Neuroot.</strong></p>
       </div>
       <div>
         <div class="callout">
           <p>"Uma âncora te impede de mover. <em>Uma raiz te sustenta enquanto você cresce.</em>"</p>
-          <div class="callout-source">The philosophy behind the rebrand from Reanchor → Neuroot</div>
+          <div class="callout-source">
+            <span class="en-inline">The philosophy behind the rebrand from Reanchor → Neuroot</span>
+            <span class="pt-inline">A filosofia por trás da mudança de Reanchor → Neuroot</span>
+          </div>
         </div>
-        <p class="cs-body-text" style="margin-top: 0;">The name evolved from Reanchor — a metaphor of passive stability — to Neuroot, a metaphor of active growth. Roots don't hold you still. They sustain you while you expand. That's the exact image of neuroplasticity: the nervous system rebuilding safe pathways through conscious repetition.</p>
+        <p class="cs-body-text en" style="margin-top: 0;">The name evolved from Reanchor — a metaphor of passive stability — to Neuroot, a metaphor of active growth. Roots don't hold you still. They sustain you while you expand. That's the exact image of neuroplasticity: the nervous system rebuilding safe pathways through conscious repetition.</p>
+        <p class="cs-body-text pt" style="margin-top: 0;">O nome evoluiu de Reanchor — uma metáfora de estabilidade passiva — para Neuroot, uma metáfora de crescimento ativo. Raízes não te prendem. Elas te sustentam enquanto você se expande. Essa é a imagem exata da neuroplasticidade: o sistema nervoso reconstruindo caminhos seguros através da repetição consciente.</p>
       </div>
     </div>
   </section>
@@ -527,36 +592,41 @@
   <section class="case-section reveal" style="background: var(--ink);">
     <div class="cs-label" style="color: var(--plum-pale);">
       <span style="display:block;width:24px;height:1px;background:var(--plum-pale);flex-shrink:0"></span>
-      02 — The Problem
+      <span class="en-inline">02 — The Problem</span><span class="pt-inline">02 — O Problema</span>
     </div>
-    <h2 class="cs-title" style="color: var(--white);">Productivity apps were designed<br>for people whose <em style="color:var(--plum-pale)">brains still work.</em></h2>
+    <h2 class="cs-title" style="color: var(--white);">
+      <span class="en">Productivity apps were designed<br>for people whose <em style="color:var(--plum-pale)">brains still work.</em></span>
+      <span class="pt">Apps de produtividade foram projetados<br>para pessoas cujos <em style="color:var(--plum-pale)">cérebros ainda funcionam.</em></span>
+    </h2>
 
-    <p class="cs-body-text" style="color: rgba(255,255,255,0.7); max-width: 700px;">Burnout doesn't just cause tiredness. It causes neurological damage. Chronic stress elevates cortisol, which suppresses dopamine production in the mesolimbic system — the brain's reward circuit. The hippocampus loses the ability to distinguish real threats from false alarms. The amygdala becomes hyperactive.</p>
-    <p class="cs-body-text" style="color: rgba(255,255,255,0.7); max-width: 700px; margin-bottom: 48px;">The result: a person who knows exactly what they need to do, wants to do it, and whose nervous system treats every task as a survival threat.</p>
+    <p class="cs-body-text en" style="color: rgba(255,255,255,0.7); max-width: 700px;">Burnout doesn't just cause tiredness. It causes neurological damage. Chronic stress elevates cortisol, which suppresses dopamine production in the mesolimbic system — the brain's reward circuit. The hippocampus loses the ability to distinguish real threats from false alarms. The amygdala becomes hyperactive.</p>
+    <p class="cs-body-text pt" style="color: rgba(255,255,255,0.7); max-width: 700px;">Burnout não causa apenas cansaço. Causa dano neurológico. O estresse crônico eleva o cortisol, que suprime a produção de dopamina no sistema mesolímbico — o circuito de recompensa do cérebro. O hipocampo perde a capacidade de distinguir ameaças reais de alarmes falsos. A amígdala fica hiperativa.</p>
+    <p class="cs-body-text en" style="color: rgba(255,255,255,0.7); max-width: 700px; margin-bottom: 48px;">The result: a person who knows exactly what they need to do, wants to do it, and whose nervous system treats every task as a survival threat.</p>
+    <p class="cs-body-text pt" style="color: rgba(255,255,255,0.7); max-width: 700px; margin-bottom: 48px;">O resultado: uma pessoa que sabe exatamente o que precisa fazer, quer fazer, e cujo sistema nervoso trata cada tarefa como uma ameaça à sobrevivência.</p>
 
     <table class="compare-table">
       <thead>
         <tr>
-          <th style="background: rgba(107,79,160,0.2); color: rgba(255,255,255,0.5);">What existing apps do</th>
-          <th style="background: rgba(107,79,160,0.25); color: var(--plum-pale);">What a recovering brain needs</th>
+          <th style="background: rgba(107,79,160,0.2); color: rgba(255,255,255,0.5);"><span class="en-inline">What existing apps do</span><span class="pt-inline">O que os apps atuais fazem</span></th>
+          <th style="background: rgba(107,79,160,0.25); color: var(--plum-pale);"><span class="en-inline">What a recovering brain needs</span><span class="pt-inline">O que um cérebro em recuperação precisa</span></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">Show backlogs of undone tasks</td>
-          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);">One small action. No debt.</td>
+          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;"><span class="en-inline">Show backlogs of undone tasks</span><span class="pt-inline">Mostram backlogs de tarefas não feitas</span></td>
+          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);"><span class="en-inline">One small action. No debt.</span><span class="pt-inline">Uma pequena ação. Sem dívida.</span></td>
         </tr>
         <tr>
-          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">Punish broken streaks</td>
-          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);">No punishment for absence</td>
+          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;"><span class="en-inline">Punish broken streaks</span><span class="pt-inline">Punem sequências quebradas</span></td>
+          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);"><span class="en-inline">No punishment for absence</span><span class="pt-inline">Sem punição por ausência</span></td>
         </tr>
         <tr>
-          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">Measure volume, not safety</td>
-          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);">Safety of effort, not output</td>
+          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;"><span class="en-inline">Measure volume, not safety</span><span class="pt-inline">Medem volume, não segurança</span></td>
+          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);"><span class="en-inline">Safety of effort, not output</span><span class="pt-inline">Segurança do esforço, não resultado</span></td>
         </tr>
         <tr>
-          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">Send pressure-based notifications</td>
-          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);">Return to effort as a choice</td>
+          <td style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;"><span class="en-inline">Send pressure-based notifications</span><span class="pt-inline">Enviam notificações baseadas em pressão</span></td>
+          <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);"><span class="en-inline">Return to effort as a choice</span><span class="pt-inline">Retorno ao esforço como escolha</span></td>
         </tr>
       </tbody>
     </table>
@@ -564,50 +634,77 @@
 
   <!-- 03 USERS -->
   <section class="case-section reveal">
-    <div class="cs-label">03 — User Profiles</div>
-    <h2 class="cs-title">Three people.<br><em>One nervous system pattern.</em></h2>
+    <div class="cs-label"><span class="en-inline">03 — User Profiles</span><span class="pt-inline">03 — Perfis de Usuário</span></div>
+    <h2 class="cs-title">
+      <span class="en">Three people.<br><em>One nervous system pattern.</em></span>
+      <span class="pt">Três pessoas.<br><em>Um padrão de sistema nervoso.</em></span>
+    </h2>
     <div class="cs-3col">
       <div class="profile-card">
         <div class="profile-icon">⚡</div>
-        <div class="profile-name">The High-Performer in Transition</div>
-        <p class="profile-desc">Laid off or burned out. Functionally paralyzed. Knows exactly what they should do. Their body refuses to start. Used to achieving — now afraid of effort itself.</p>
+        <div class="profile-name"><span class="en-inline">The High-Performer in Transition</span><span class="pt-inline">O Alto-Performer em Transição</span></div>
+        <p class="profile-desc">
+          <span class="en">Laid off or burned out. Functionally paralyzed. Knows exactly what they should do. Their body refuses to start. Used to achieving — now afraid of effort itself.</span>
+          <span class="pt">Demitido ou em burnout. Funcionalmente paralisado. Sabe exatamente o que deveria fazer. O corpo se recusa a começar. Acostumado a conquistar — agora com medo do próprio esforço.</span>
+        </p>
       </div>
       <div class="profile-card" style="border-radius: 4px;">
         <div class="profile-icon">🌫</div>
-        <div class="profile-name">The Hidden Functional</div>
-        <p class="profile-desc">Still working, operating at 20% capacity. Looks fine from the outside. Inside, everything takes 10x the energy it should. Afraid to admit it.</p>
+        <div class="profile-name"><span class="en-inline">The Hidden Functional</span><span class="pt-inline">O Funcional Escondido</span></div>
+        <p class="profile-desc">
+          <span class="en">Still working, operating at 20% capacity. Looks fine from the outside. Inside, everything takes 10x the energy it should. Afraid to admit it.</span>
+          <span class="pt">Ainda trabalhando, operando a 20% da capacidade. Parece bem por fora. Por dentro, tudo exige 10x mais energia do que deveria. Com medo de admitir.</span>
+        </p>
       </div>
       <div class="profile-card">
         <div class="profile-icon">🌱</div>
-        <div class="profile-name">The Post-Leave Returner</div>
-        <p class="profile-desc">Medically dismissed, afraid of relapsing. Ready to try again — carefully. Needs a structure that won't punish them for going slowly.</p>
+        <div class="profile-name"><span class="en-inline">The Post-Leave Returner</span><span class="pt-inline">O Retornante Pós-Afastamento</span></div>
+        <p class="profile-desc">
+          <span class="en">Medically dismissed, afraid of relapsing. Ready to try again — carefully. Needs a structure that won't punish them for going slowly.</span>
+          <span class="pt">Afastado medicamente, com medo de recaída. Pronto para tentar de novo — com cuidado. Precisa de uma estrutura que não o puna por ir devagar.</span>
+        </p>
       </div>
     </div>
   </section>
 
   <!-- 04 METHOD -->
   <section class="case-section reveal" style="background: var(--plum-ghost);">
-    <div class="cs-label">04 — The Method</div>
-    <h2 class="cs-title">Behavioral Activation —<br><em>not productivity.</em></h2>
+    <div class="cs-label"><span class="en-inline">04 — The Method</span><span class="pt-inline">04 — O Método</span></div>
+    <h2 class="cs-title">
+      <span class="en">Behavioral Activation —<br><em>not productivity.</em></span>
+      <span class="pt">Ativação Comportamental —<br><em>não produtividade.</em></span>
+    </h2>
     <div class="cs-2col">
       <div>
-        <p class="cs-body-text">Neuroot is built on Behavioral Activation, a clinically validated approach from cognitive behavioral therapy. The core principle: repeated experiences of effort followed by reward — even small ones — rebuild the neural pathways that burnout damaged.</p>
-        <p class="cs-body-text"><strong>This is not gamification. It's not a habit tracker.</strong> It's a tool that teaches the nervous system that acting won't destroy you again.</p>
-        <p class="cs-body-text">The dual philosophical base: <strong>neuroplasticity</strong> (the brain rebuilds safe pathways through repetition) meets <strong>Kung Fu philosophy</strong> (the middle path — neither excess nor deprivation). Both systems arrived at the same truth: conscious repetition transforms who you are. This philosophy is implicit in the product — users feel it without reading it.</p>
+        <p class="cs-body-text en">Neuroot is built on Behavioral Activation, a clinically validated approach from cognitive behavioral therapy. The core principle: repeated experiences of effort followed by reward — even small ones — rebuild the neural pathways that burnout damaged.</p>
+        <p class="cs-body-text pt">Neuroot é construído sobre Ativação Comportamental, uma abordagem clinicamente validada da terapia cognitivo-comportamental. O princípio central: experiências repetidas de esforço seguidas de recompensa — mesmo pequenas — reconstroem os caminhos neurais que o burnout danificou.</p>
+        <p class="cs-body-text en"><strong>This is not gamification. It's not a habit tracker.</strong> It's a tool that teaches the nervous system that acting won't destroy you again.</p>
+        <p class="cs-body-text pt"><strong>Isso não é gamificação. Não é um tracker de hábitos.</strong> É uma ferramenta que ensina o sistema nervoso que agir não vai destruir você de novo.</p>
+        <p class="cs-body-text en">The dual philosophical base: <strong>neuroplasticity</strong> (the brain rebuilds safe pathways through repetition) meets <strong>Kung Fu philosophy</strong> (the middle path — neither excess nor deprivation). Both systems arrived at the same truth: conscious repetition transforms who you are. This philosophy is implicit in the product — users feel it without reading it.</p>
+        <p class="cs-body-text pt">A dupla base filosófica: <strong>neuroplasticidade</strong> (o cérebro reconstrói caminhos seguros pela repetição) encontra a <strong>filosofia Kung Fu</strong> (o caminho do meio — nem excesso nem privação). Ambos os sistemas chegaram à mesma verdade: a repetição consciente transforma quem você é. Essa filosofia é implícita no produto — os usuários a sentem sem ler.</p>
       </div>
       <div>
         <div class="callout" style="margin: 0;">
-          <p>"Teach the nervous system that effort is safe. <em>One practice. One day. Stop before you're tired.</em> That's the whole method."</p>
-          <div class="callout-source">The single goal of Neuroot</div>
+          <p>
+            <span class="en">"Teach the nervous system that effort is safe. <em>One practice. One day. Stop before you're tired.</em> That's the whole method."</span>
+            <span class="pt">"Ensine o sistema nervoso que o esforço é seguro. <em>Uma prática. Um dia. Pare antes de cansar.</em> Esse é o método inteiro."</span>
+          </p>
+          <div class="callout-source">
+            <span class="en-inline">The single goal of Neuroot</span>
+            <span class="pt-inline">O único objetivo do Neuroot</span>
+          </div>
         </div>
         <div style="margin-top: 24px; background: white; padding: 28px 32px; border-radius: 8px;">
-          <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--plum); margin-bottom: 16px;">What the app deliberately doesn't do</div>
+          <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--plum); margin-bottom: 16px;">
+            <span class="en-inline">What the app deliberately doesn't do</span>
+            <span class="pt-inline">O que o app deliberadamente não faz</span>
+          </div>
           <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> No streaks or consecutive-day counting</div>
-            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> No notifications that mention absence</div>
-            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> No visible backlog of unfinished days</div>
-            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> No aggressive colors (red/orange removed)</div>
-            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> No gamification of any kind</div>
+            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> <span class="en-inline">No streaks or consecutive-day counting</span><span class="pt-inline">Sem sequências ou contagem de dias consecutivos</span></div>
+            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> <span class="en-inline">No notifications that mention absence</span><span class="pt-inline">Sem notificações que mencionem ausência</span></div>
+            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> <span class="en-inline">No visible backlog of unfinished days</span><span class="pt-inline">Sem backlog visível de dias não finalizados</span></div>
+            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> <span class="en-inline">No aggressive colors (red/orange removed)</span><span class="pt-inline">Sem cores agressivas (vermelho/laranja removidos)</span></div>
+            <div style="font-size: 13px; color: var(--ink-soft); display: flex; gap: 10px;"><span style="color: var(--plum);">✕</span> <span class="en-inline">No gamification of any kind</span><span class="pt-inline">Sem gamificação de nenhum tipo</span></div>
           </div>
         </div>
       </div>
@@ -616,10 +713,11 @@
 
   <!-- 05 PROCESS -->
   <section class="case-section reveal">
-    <div class="cs-label">05 — My Process</div>
-    <h2 class="cs-title">Design Thinking → Shape Up<br>→ PRD → <em>AI executes.</em></h2>
+    <div class="cs-label"><span class="en-inline">05 — My Process</span><span class="pt-inline">05 — Meu Processo</span></div>
+    <h2 class="cs-title">Design Thinking → Shape Up<br>→ PRD → <em><span class="en-inline">AI executes.</span><span class="pt-inline">IA executa.</span></em></h2>
 
-    <p class="cs-body-text">This project was built following the methodology I use for every complex product: human exploration first, then decisive shaping, then AI-assisted execution. Each phase gates the next.</p>
+    <p class="cs-body-text en">This project was built following the methodology I use for every complex product: human exploration first, then decisive shaping, then AI-assisted execution. Each phase gates the next.</p>
+    <p class="cs-body-text pt">Este projeto foi construído seguindo a metodologia que uso para todo produto complexo: exploração humana primeiro, depois shaping decisivo, depois execução assistida por IA. Cada fase habilita a próxima.</p>
 
     <div class="method-flow-bar">
       <div class="mf-step">
@@ -635,74 +733,120 @@
       <div class="mf-step">
         <div class="mf-num">03</div>
         <div class="mf-name">PRD</div>
-        <div class="mf-tool">5 blocks · Decision artifact</div>
+        <div class="mf-tool"><span class="en-inline">5 blocks · Decision artifact</span><span class="pt-inline">5 blocos · Artefato de decisão</span></div>
       </div>
       <div class="mf-step">
         <div class="mf-num">04</div>
         <div class="mf-name">Prompt Frames</div>
-        <div class="mf-tool">Context + Limits + Criteria</div>
+        <div class="mf-tool"><span class="en-inline">Context + Limits + Criteria</span><span class="pt-inline">Contexto + Limites + Critérios</span></div>
       </div>
       <div class="mf-step">
         <div class="mf-num">05</div>
-        <div class="mf-name">AI Executes</div>
+        <div class="mf-name"><span class="en-inline">AI Executes</span><span class="pt-inline">IA Executa</span></div>
         <div class="mf-tool">Claude Code · Claude API · Figma Make</div>
       </div>
     </div>
 
     <div class="cs-2col" style="margin-top: 48px;">
       <div>
-        <p class="cs-body-text"><strong>Discovery & PRD</strong> — I started with the Notion template I was already using for myself. That template became the first prototype — its limitations became the brief. I documented the problem, user profiles, scientific foundation, no-gos, rabbit holes, and success indicators using the Shape Up methodology.</p>
-        <p class="cs-body-text"><strong>Design with Figma Make</strong> — I used Figma Make to prototype all screens at high fidelity. The visual language emerged from the methodology: no aggressive colors, no red alerts, no urgency. A watercolor tree as the core illustration — rooted, alive, growing slowly.</p>
+        <p class="cs-body-text en"><strong>Discovery & PRD</strong> — I started with the Notion template I was already using for myself. That template became the first prototype — its limitations became the brief. I documented the problem, user profiles, scientific foundation, no-gos, rabbit holes, and success indicators using the Shape Up methodology.</p>
+        <p class="cs-body-text pt"><strong>Discovery & PRD</strong> — Comecei com o template de Notion que já usava para mim mesma. Esse template se tornou o primeiro protótipo — suas limitações se tornaram o briefing. Documentei o problema, perfis de usuário, base científica, no-gos, rabbit holes e indicadores de sucesso usando a metodologia Shape Up.</p>
+        <p class="cs-body-text en"><strong>Design with Figma Make</strong> — I used Figma Make to prototype all screens at high fidelity. The visual language emerged from the methodology: no aggressive colors, no red alerts, no urgency. A watercolor tree as the core illustration — rooted, alive, growing slowly.</p>
+        <p class="cs-body-text pt"><strong>Design com Figma Make</strong> — Usei o Figma Make para prototipar todas as telas em alta fidelidade. A linguagem visual emergiu da metodologia: sem cores agressivas, sem alertas vermelhos, sem urgência. Uma árvore em aquarela como ilustração central — enraizada, viva, crescendo devagar.</p>
       </div>
       <div>
-        <p class="cs-body-text"><strong>Development with Claude Code</strong> — I built the full app using Claude Code — writing prompts, reviewing code, iterating on behavior — without a technical co-founder. Stack: React + TypeScript, Supabase for auth and database, GitHub for version control, Vercel for deployment.</p>
-        <p class="cs-body-text"><strong>AI in the onboarding</strong> — The Claude API powers a conversational onboarding. Instead of a form, the app opens with a question: <em>"What did you used to do with ease, but now your body freezes just thinking about?"</em> The AI generates personalized practices from the user's answers — already named, timed, and written in the product's voice.</p>
+        <p class="cs-body-text en"><strong>Development with Claude Code</strong> — I built the full app using Claude Code — writing prompts, reviewing code, iterating on behavior — without a technical co-founder. Stack: React + TypeScript, Supabase for auth and database, GitHub for version control, Vercel for deployment.</p>
+        <p class="cs-body-text pt"><strong>Desenvolvimento com Claude Code</strong> — Construí o app completo usando Claude Code — escrevendo prompts, revisando código, iterando no comportamento — sem cofundador técnico. Stack: React + TypeScript, Supabase para auth e banco de dados, GitHub para controle de versão, Vercel para deploy.</p>
+        <p class="cs-body-text en"><strong>AI in the onboarding</strong> — The Claude API powers a conversational onboarding. Instead of a form, the app opens with a question: <em>"What did you used to do with ease, but now your body freezes just thinking about?"</em> The AI generates personalized practices from the user's answers — already named, timed, and written in the product's voice.</p>
+        <p class="cs-body-text pt"><strong>IA no onboarding</strong> — A API do Claude alimenta um onboarding conversacional. Em vez de um formulário, o app abre com uma pergunta: <em>"O que você costumava fazer com facilidade, mas agora seu corpo congela só de pensar?"</em> A IA gera práticas personalizadas a partir das respostas — já nomeadas, cronometradas e escritas na voz do produto.</p>
       </div>
     </div>
   </section>
 
   <!-- 06 SCREENS -->
   <section class="case-section reveal">
-    <div class="cs-label">06 — Key Screens & Decisions</div>
-    <h2 class="cs-title">Every word is a<br><em>product decision.</em></h2>
-    <p class="cs-body-text">Microcopy is product strategy here. The language is the therapy.</p>
+    <div class="cs-label"><span class="en-inline">06 — Key Screens & Decisions</span><span class="pt-inline">06 — Telas e Decisões Principais</span></div>
+    <h2 class="cs-title">
+      <span class="en">Every word is a<br><em>product decision.</em></span>
+      <span class="pt">Cada palavra é uma<br><em>decisão de produto.</em></span>
+    </h2>
+    <p class="cs-body-text">
+      <span class="en">Microcopy is product strategy here. The language is the therapy.</span>
+      <span class="pt">Microcopy é estratégia de produto aqui. A linguagem é a terapia.</span>
+    </p>
 
     <div class="cs-3col" style="margin-top: 48px;">
       <div class="screen-card">
         <div class="screen-num">01</div>
         <div class="screen-name">Home — Empty State</div>
-        <p class="screen-desc">"There's no practice defined for today." — Not "You haven't done anything yet." The language removes debt. One CTA: "Choose today's practice" — an invitation, never a task.</p>
-        <div class="screen-decision">Copy decision: the app cannot know you were absent. It only knows you came back.</div>
+        <p class="screen-desc">
+          <span class="en">"There's no practice defined for today." — Not "You haven't done anything yet." The language removes debt. One CTA: "Choose today's practice" — an invitation, never a task.</span>
+          <span class="pt">"Não tem prática definida para hoje." — Não "Você ainda não fez nada." A linguagem remove a dívida. Um CTA: "Escolher a prática de hoje" — um convite, nunca uma tarefa.</span>
+        </p>
+        <div class="screen-decision">
+          <span class="en-inline">Copy decision: the app cannot know you were absent. It only knows you came back.</span>
+          <span class="pt-inline">Decisão de copy: o app não pode saber que você esteve ausente. Ele só sabe que você voltou.</span>
+        </div>
       </div>
       <div class="screen-card">
         <div class="screen-num">02</div>
-        <div class="screen-name">Execution — Timer</div>
-        <p class="screen-desc">Full-screen timer. Limit visible. At the bottom: "Stop when the time ends — even if you haven't finished. Stopping before exhaustion is part of the method."</p>
-        <div class="screen-decision">Button label: "End at the right point." — Not "Done." This is the method in a button label.</div>
+        <div class="screen-name"><span class="en-inline">Execution — Timer</span><span class="pt-inline">Execução — Timer</span></div>
+        <p class="screen-desc">
+          <span class="en">Full-screen timer. Limit visible. At the bottom: "Stop when the time ends — even if you haven't finished. Stopping before exhaustion is part of the method."</span>
+          <span class="pt">Timer em tela cheia. Limite visível. Na parte de baixo: "Pare quando o tempo acabar — mesmo que não tenha terminado. Parar antes da exaustão faz parte do método."</span>
+        </p>
+        <div class="screen-decision">
+          <span class="en-inline">Button label: "End at the right point." — Not "Done." This is the method in a button label.</span>
+          <span class="pt-inline">Label do botão: "Encerrar no ponto certo." — Não "Feito." Isso é o método em um label de botão.</span>
+        </div>
       </div>
       <div class="screen-card">
         <div class="screen-num">03</div>
-        <div class="screen-name">Post-Practice Registration</div>
-        <p class="screen-desc">Three axes: Body (Light / Neutral / Heavy), Mind (Clear / Neutral / Tired), Resistance (Less / Same / More). No scores. No percentages. Just observation.</p>
-        <div class="screen-decision">Design decision: data tracks nervous system recalibration over time without turning it into performance metrics.</div>
+        <div class="screen-name"><span class="en-inline">Post-Practice Registration</span><span class="pt-inline">Registro Pós-Prática</span></div>
+        <p class="screen-desc">
+          <span class="en">Three axes: Body (Light / Neutral / Heavy), Mind (Clear / Neutral / Tired), Resistance (Less / Same / More). No scores. No percentages. Just observation.</span>
+          <span class="pt">Três eixos: Corpo (Leve / Neutro / Pesado), Mente (Clara / Neutra / Cansada), Resistência (Menor / Igual / Maior). Sem notas. Sem porcentagens. Apenas observação.</span>
+        </p>
+        <div class="screen-decision">
+          <span class="en-inline">Design decision: data tracks nervous system recalibration over time without turning it into performance metrics.</span>
+          <span class="pt-inline">Decisão de design: dados acompanham a recalibração do sistema nervoso ao longo do tempo sem transformá-los em métricas de performance.</span>
+        </div>
       </div>
       <div class="screen-card">
         <div class="screen-num">04</div>
-        <div class="screen-name">Practice Completed</div>
-        <p class="screen-desc">"Você fez sua prática hoje." Then: "Executing beyond the plan doesn't accelerate — it only teaches the body that limits don't exist."</p>
-        <div class="screen-decision">The screen actively discourages doing more. That's the product. No buttons. Just presence.</div>
+        <div class="screen-name"><span class="en-inline">Practice Completed</span><span class="pt-inline">Prática Concluída</span></div>
+        <p class="screen-desc">
+          <span class="en">"Você fez sua prática hoje." Then: "Executing beyond the plan doesn't accelerate — it only teaches the body that limits don't exist."</span>
+          <span class="pt">"Você fez sua prática hoje." Depois: "Executar além do plano não acelera — apenas ensina o corpo que limites não existem."</span>
+        </p>
+        <div class="screen-decision">
+          <span class="en-inline">The screen actively discourages doing more. That's the product. No buttons. Just presence.</span>
+          <span class="pt-inline">A tela ativamente desencoraja fazer mais. Esse é o produto. Sem botões. Apenas presença.</span>
+        </div>
       </div>
       <div class="screen-card">
         <div class="screen-num">05</div>
-        <div class="screen-name">Week View</div>
-        <p class="screen-desc">Shows what happened, never what should have happened. The single weekly question: "Did your body feel less resistant to effort this week?"</p>
-        <div class="screen-decision">Design decision: that's the only metric that matters. Nervous system recalibration, not streak count.</div>
+        <div class="screen-name"><span class="en-inline">Week View</span><span class="pt-inline">Visão Semanal</span></div>
+        <p class="screen-desc">
+          <span class="en">Shows what happened, never what should have happened. The single weekly question: "Did your body feel less resistant to effort this week?"</span>
+          <span class="pt">Mostra o que aconteceu, nunca o que deveria ter acontecido. A única pergunta semanal: "Seu corpo sentiu menos resistência ao esforço esta semana?"</span>
+        </p>
+        <div class="screen-decision">
+          <span class="en-inline">Design decision: that's the only metric that matters. Nervous system recalibration, not streak count.</span>
+          <span class="pt-inline">Decisão de design: essa é a única métrica que importa. Recalibração do sistema nervoso, não contagem de sequências.</span>
+        </div>
       </div>
       <div class="screen-card">
         <div class="screen-num">06</div>
         <div class="screen-name">AI Onboarding</div>
-        <p class="screen-desc">No forms. No signup before understanding what the product does. The AI asks one question at a time, responds with brief empathetic context, and generates 3 personalized practices.</p>
-        <div class="screen-decision">The user sees their practices before they ever see the home screen.</div>
+        <p class="screen-desc">
+          <span class="en">No forms. No signup before understanding what the product does. The AI asks one question at a time, responds with brief empathetic context, and generates 3 personalized practices.</span>
+          <span class="pt">Sem formulários. Sem cadastro antes de entender o que o produto faz. A IA faz uma pergunta de cada vez, responde com breve contexto empático e gera 3 práticas personalizadas.</span>
+        </p>
+        <div class="screen-decision">
+          <span class="en-inline">The user sees their practices before they ever see the home screen.</span>
+          <span class="pt-inline">O usuário vê suas práticas antes de ver a tela inicial.</span>
+        </div>
       </div>
     </div>
   </section>
@@ -711,37 +855,52 @@
   <section class="case-section reveal" style="background: var(--ink);">
     <div class="cs-label" style="color: var(--plum-pale);">
       <span style="display:block;width:24px;height:1px;background:var(--plum-pale);"></span>
-      07 — Learnings
+      <span class="en-inline">07 — Learnings</span><span class="pt-inline">07 — Aprendizados</span>
     </div>
-    <h2 class="cs-title" style="color: var(--white);">What building this<br><em style="color:var(--plum-pale)">taught me.</em></h2>
+    <h2 class="cs-title" style="color: var(--white);">
+      <span class="en">What building this<br><em style="color:var(--plum-pale)">taught me.</em></span>
+      <span class="pt">O que construir isso<br><em style="color:var(--plum-pale)">me ensinou.</em></span>
+    </h2>
 
     <div class="learning-list" style="max-width: 800px;">
       <div class="learning-item">
         <div class="learning-num">1</div>
         <div class="learning-content">
-          <div class="learning-title">The hardest part wasn't design or code — it was the PRD.</div>
-          <div class="learning-desc">Defining what the product truly was — and wasn't — took longer than anything else. Every feature idea had to be tested against the core question: does this teach the nervous system that effort is safe, or does it do the opposite?</div>
+          <div class="learning-title"><span class="en-inline">The hardest part wasn't design or code — it was the PRD.</span><span class="pt-inline">A parte mais difícil não foi design ou código — foi o PRD.</span></div>
+          <div class="learning-desc">
+            <span class="en">Defining what the product truly was — and wasn't — took longer than anything else. Every feature idea had to be tested against the core question: does this teach the nervous system that effort is safe, or does it do the opposite?</span>
+            <span class="pt">Definir o que o produto realmente era — e não era — levou mais tempo que qualquer outra coisa. Cada ideia de funcionalidade precisava ser testada contra a pergunta central: isso ensina o sistema nervoso que o esforço é seguro, ou faz o oposto?</span>
+          </div>
         </div>
       </div>
       <div class="learning-item">
         <div class="learning-num">2</div>
         <div class="learning-content">
-          <div class="learning-title">Microcopy is product strategy.</div>
-          <div class="learning-desc">"End at the right point" instead of "Done." "You've done what you promised" instead of "Congratulations." Every word in this app is a decision about how the brain will receive it. Language is the therapy.</div>
+          <div class="learning-title"><span class="en-inline">Microcopy is product strategy.</span><span class="pt-inline">Microcopy é estratégia de produto.</span></div>
+          <div class="learning-desc">
+            <span class="en">"End at the right point" instead of "Done." "You've done what you promised" instead of "Congratulations." Every word in this app is a decision about how the brain will receive it. Language is the therapy.</span>
+            <span class="pt">"Encerrar no ponto certo" em vez de "Feito." "Você fez o que prometeu" em vez de "Parabéns." Cada palavra neste app é uma decisão sobre como o cérebro vai recebê-la. A linguagem é a terapia.</span>
+          </div>
         </div>
       </div>
       <div class="learning-item">
         <div class="learning-num">3</div>
         <div class="learning-content">
-          <div class="learning-title">Building alone with AI is a new design skill.</div>
-          <div class="learning-desc">I wrote the prompts, reviewed the output, directed the iterations, and caught the errors. The ability to think in product terms and translate that into precise instructions for AI — that's a skill that didn't exist before this project became possible.</div>
+          <div class="learning-title"><span class="en-inline">Building alone with AI is a new design skill.</span><span class="pt-inline">Construir sozinha com IA é uma nova habilidade de design.</span></div>
+          <div class="learning-desc">
+            <span class="en">I wrote the prompts, reviewed the output, directed the iterations, and caught the errors. The ability to think in product terms and translate that into precise instructions for AI — that's a skill that didn't exist before this project became possible.</span>
+            <span class="pt">Eu escrevi os prompts, revisei o output, direcionei as iterações e identifiquei os erros. A capacidade de pensar em termos de produto e traduzir isso em instruções precisas para IA — essa é uma habilidade que não existia antes deste projeto se tornar possível.</span>
+          </div>
         </div>
       </div>
       <div class="learning-item">
         <div class="learning-num">4</div>
         <div class="learning-content">
-          <div class="learning-title">Personal experience is a valid research source.</div>
-          <div class="learning-desc">I was my own first user. That's not a limitation — it's a foundation. The product has depth because the problem has depth. The PRD was grounded in real behavioral evidence, not assumed pain points.</div>
+          <div class="learning-title"><span class="en-inline">Personal experience is a valid research source.</span><span class="pt-inline">Experiência pessoal é uma fonte de pesquisa válida.</span></div>
+          <div class="learning-desc">
+            <span class="en">I was my own first user. That's not a limitation — it's a foundation. The product has depth because the problem has depth. The PRD was grounded in real behavioral evidence, not assumed pain points.</span>
+            <span class="pt">Eu fui minha própria primeira usuária. Isso não é uma limitação — é uma base. O produto tem profundidade porque o problema tem profundidade. O PRD foi fundamentado em evidência comportamental real, não em pain points assumidos.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -749,38 +908,104 @@
 
   <!-- 08 NEXT STEPS -->
   <section class="case-section reveal">
-    <div class="cs-label">08 — Next Steps</div>
-    <h2 class="cs-title">What comes<br><em>next.</em></h2>
+    <div class="cs-label"><span class="en-inline">08 — Next Steps</span><span class="pt-inline">08 — Próximos Passos</span></div>
+    <h2 class="cs-title">
+      <span class="en">What comes<br><em>next.</em></span>
+      <span class="pt">O que vem<br><em>a seguir.</em></span>
+    </h2>
     <div class="next-steps-grid">
-      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Deploy to Vercel and test with 5–10 real users who have experienced burnout</div></div>
-      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Validate the behavioral activation framework with a therapist or psychologist</div></div>
-      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Refine the AI onboarding based on real conversation data from first users</div></div>
-      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Explore the progressive phase system: Day view → 3-day view → Week view</div></div>
-      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Document the full build process as an AI for UX Designers course</div></div>
-      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text">Consider iOS/Android native wrapper post-validation</div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text"><span class="en">Deploy to Vercel and test with 5–10 real users who have experienced burnout</span><span class="pt">Deploy na Vercel e testar com 5–10 usuários reais que vivenciaram burnout</span></div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text"><span class="en">Validate the behavioral activation framework with a therapist or psychologist</span><span class="pt">Validar o framework de ativação comportamental com terapeuta ou psicólogo</span></div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text"><span class="en">Refine the AI onboarding based on real conversation data from first users</span><span class="pt">Refinar o onboarding de IA com base em dados reais de conversas dos primeiros usuários</span></div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text"><span class="en">Explore the progressive phase system: Day view → 3-day view → Week view</span><span class="pt">Explorar o sistema de fases progressivas: Visão do dia → Visão de 3 dias → Visão semanal</span></div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text"><span class="en">Document the full build process as an AI for UX Designers course</span><span class="pt">Documentar o processo completo de construção como um curso de IA para UX Designers</span></div></div>
+      <div class="ns-item"><div class="ns-dot"></div><div class="ns-text"><span class="en">Consider iOS/Android native wrapper post-validation</span><span class="pt">Considerar wrapper nativo iOS/Android pós-validação</span></div></div>
     </div>
   </section>
 
 </div><!-- /case-body -->
 
+<!-- ROLE -->
+<section class="role-section">
+  <div class="role-content">
+    <div class="role-eyebrow reveal">
+      <span class="en-inline">Giuliana's role in this project</span>
+      <span class="pt-inline">Papel da Giuliana no projeto</span>
+    </div>
+    <blockquote class="role-quote reveal">
+      <span class="en">"Conceiving the product from scratch — PRD, design, code and deploy — using AI as an execution partner, not a shortcut. Every design decision was born from my own experience with burnout."</span>
+      <span class="pt">"Conceber o produto do zero — PRD, design, código e deploy — usando IA como parceira de execução, não como atalho. Cada decisão de design nasceu da própria experiência com burnout."</span>
+    </blockquote>
+    <div class="role-attribution reveal">
+      UX Designer + Builder · PRD · Product Design · AI-Assisted Development · Microcopy Strategy
+    </div>
+    <div class="role-stats reveal">
+      <div style="text-align:center; padding: 24px; background: rgba(107,79,160,0.3); border-radius: 12px; border: 1px solid rgba(212,200,239,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">01</div>
+        <div style="font-size:12px; color:rgba(212,200,239,0.6); line-height:1.5;"><span class="en-inline">Product conceived, designed & built solo</span><span class="pt-inline">Produto concebido, projetado e construído solo</span></div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(107,79,160,0.3); border-radius: 12px; border: 1px solid rgba(212,200,239,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">5</div>
+        <div style="font-size:12px; color:rgba(212,200,239,0.6); line-height:1.5;"><span class="en-inline">Methodology tabs from Design Thinking to AI</span><span class="pt-inline">Etapas metodológicas do Design Thinking à IA</span></div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(107,79,160,0.3); border-radius: 12px; border: 1px solid rgba(212,200,239,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">3</div>
+        <div style="font-size:12px; color:rgba(212,200,239,0.6); line-height:1.5;"><span class="en-inline">AI tools integrated: Claude Code, Claude API, Figma Make</span><span class="pt-inline">Ferramentas de IA integradas: Claude Code, Claude API, Figma Make</span></div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(107,79,160,0.3); border-radius: 12px; border: 1px solid rgba(212,200,239,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">6</div>
+        <div style="font-size:12px; color:rgba(212,200,239,0.6); line-height:1.5;"><span class="en-inline">Key screens designed with intention</span><span class="pt-inline">Telas-chave projetadas com intenção</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <div class="case-cta">
   <div class="case-cta-text">
-    <div class="case-cta-label">Let's work together</div>
-    <div class="case-cta-title">Interested in how I think<br>through complex products?</div>
+    <div class="case-cta-label"><span class="en-inline">Let's work together</span><span class="pt-inline">Vamos trabalhar juntos</span></div>
+    <div class="case-cta-title">
+      <span class="en">Interested in how I think<br>through complex products?</span>
+      <span class="pt">Interessado em como eu penso<br>produtos complexos?</span>
+    </div>
   </div>
   <div class="case-cta-links">
-    <a href="/cdn-cgi/l/email-protection#412628342d2e3124322601262c20282d6f222e2c" class="cta-btn white">✉ Get in touch</a>
-    <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='index.html'; return false;" class="cta-btn outline">← Back to portfolio</a>
+    <a href="/cdn-cgi/l/email-protection#412628342d2e3124322601262c20282d6f222e2c" class="cta-btn white">✉ <span class="en-inline">Get in touch</span><span class="pt-inline">Entrar em contato</span></a>
+    <a href="index.html" class="cta-btn outline">← <span class="en-inline">Back to portfolio</span><span class="pt-inline">Voltar ao portfólio</span></a>
   </div>
+</div>
+
+<!-- FOOTER NAV -->
+<div class="case-footer-nav">
+  <a href="cpfl-case.html" class="footer-nav-link">
+    <span class="fnl-label">← <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
+    <span class="fnl-title">CPFL Soluções</span>
+  </a>
+  <a href="techback-case.html" class="footer-nav-link" style="text-align:right;">
+    <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Próximo</span> →</span>
+    <span class="fnl-title">TechBack BB</span>
+  </a>
 </div>
 
 <footer>
   <p>© 2026 Giuliana Lopes Galvão</p>
-  <p><a href="index.html">Portfolio</a> · <a href="https://linkedin.com/in/giulianalg" target="_blank">LinkedIn</a></p>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── LANG TOGGLE ───
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.body.classList.toggle('lang-pt', lang === 'pt');
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+  localStorage.setItem('lang', lang);
+}
+const savedLang = localStorage.getItem('lang');
+if (savedLang) setLang(savedLang);
+
+// SCROLL REVEAL
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });

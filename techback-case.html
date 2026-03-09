@@ -30,6 +30,16 @@
   html { scroll-behavior: smooth; font-size: 16px; }
   body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--ink); overflow-x: hidden; }
 
+  /* ── LANG SWITCHING ── */
+  .en { display: block; }
+  .pt { display: none; }
+  .lang-pt .en { display: none; }
+  .lang-pt .pt { display: block; }
+  .en-inline { display: inline; }
+  .pt-inline { display: none; }
+  .lang-pt .en-inline { display: none; }
+  .lang-pt .pt-inline { display: inline; }
+
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 99;
@@ -47,6 +57,14 @@
   .nav-back:hover { color: var(--green-deep); }
   .nav-divider { width: 1px; height: 16px; background: var(--warm-stone); }
   .nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: var(--ink); }
+
+  .lang-toggle { display: flex; gap: 2px; border-radius: 20px; padding: 4px; margin-left: auto; }
+  .lang-btn {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+    padding: 6px 14px; border-radius: 16px; border: none;
+    background: transparent; color: var(--ink-muted); cursor: pointer; transition: all 0.2s;
+  }
+  .lang-btn.active { background: var(--green-deep); color: var(--white); }
 
   /* ── HERO ── */
   .case-hero {
@@ -189,7 +207,7 @@
     margin-bottom: 64px;
   }
   .challenge-callout::before {
-    content: '"';
+    content: '\201C';
     position: absolute; top: -20px; left: 40px;
     font-family: 'Cormorant Garamond', serif;
     font-size: 200px; font-weight: 300; line-height: 1;
@@ -375,7 +393,7 @@
     margin: 0 -80px;
   }
   .impact-banner::before {
-    content: '→';
+    content: '\2192';
     position: absolute; right: 60px; top: 50%;
     transform: translateY(-50%);
     font-size: 120px; color: rgba(0,0,0,0.06);
@@ -394,8 +412,38 @@
   }
   .impact-banner-text strong { font-style: italic; font-weight: 300; }
 
+  /* ── CTA ── */
+  .case-cta {
+    max-width: 1200px; margin: 0 auto;
+    padding: 80px;
+    display: flex; align-items: center; justify-content: space-between; gap: 48px;
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .case-cta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-mid); margin-bottom: 12px;
+  }
+  .case-cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 300; line-height: 1.3; color: var(--ink);
+  }
+  .case-cta-links { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
+    text-decoration: none; padding: 14px 28px; border-radius: 32px;
+    transition: all 0.25s; text-transform: uppercase; white-space: nowrap;
+  }
+  .cta-btn.green { background: var(--green-deep); color: var(--white); }
+  .cta-btn.green:hover { background: var(--green-mid); }
+  .cta-btn.outline { border: 1px solid var(--warm-stone); color: var(--ink-soft); background: transparent; }
+  .cta-btn.outline:hover { border-color: var(--green-mid); color: var(--green-mid); }
+
   /* ── FOOTER NAV ── */
   .case-footer-nav {
+    max-width: 1200px; margin: 0 auto;
     padding: 64px 80px;
     display: flex; justify-content: space-between; align-items: center;
     border-top: 1px solid var(--warm-stone);
@@ -406,6 +454,33 @@
   .fnl-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--ink-muted); text-transform: uppercase; }
   .fnl-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--ink); transition: color 0.2s; }
   .footer-nav-link:hover .fnl-title { color: var(--green-mid); }
+
+  /* ── ROLE ── */
+  .role-section { background: var(--green-deep); padding: 100px 80px; }
+  .role-content { max-width: 800px; margin: 0 auto; text-align: center; }
+  .role-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--green-pale); margin-bottom: 40px;
+    display: flex; align-items: center; gap: 12px; justify-content: center;
+  }
+  .role-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--green-pale); }
+  .role-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 300; font-style: italic;
+    line-height: 1.3; color: var(--white);
+    margin-bottom: 32px;
+  }
+  .role-attribution {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--green-pale);
+  }
+  .role-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    margin-top: 64px;
+  }
 
   /* ── SCROLL REVEAL ── */
   .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -429,6 +504,8 @@
   }
   .lightbox-close:hover { color: var(--white); }
 
+  footer { text-align: center; padding: 32px 24px; color: var(--ink-muted); font-size: 13px; border-top: 1px solid var(--warm-stone); }
+
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
     .case-hero { grid-template-columns: 1fr; }
@@ -439,6 +516,10 @@
     .screenshots-scroll { grid-template-columns: 1fr 1fr; }
     .impact-banner { margin: 0; padding: 48px 24px; }
     .case-footer-nav { padding: 40px 24px; flex-direction: column; gap: 32px; }
+    .role-section { padding: 80px 24px; }
+    .role-stats { grid-template-columns: 1fr 1fr; }
+    .case-cta { padding: 48px 24px; flex-direction: column; text-align: center; }
+    .case-cta-links { align-items: center; }
   }
 </style>
 </head>
@@ -448,39 +529,49 @@
 <nav>
   <a href="index.html" class="nav-back">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    Back to work
+    <span class="en-inline">Back to work</span><span class="pt-inline">Voltar ao trabalho</span>
   </a>
   <div class="nav-divider"></div>
-  <span class="nav-title">TechBack BB — Smart Waste Journey</span>
+  <span class="nav-title">
+    <span class="en-inline">TechBack BB — Smart Waste Journey</span>
+    <span class="pt-inline">TechBack BB — Jornada de Resíduos Inteligentes</span>
+  </span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="case-hero">
   <div class="case-hero-left">
     <div class="case-tag-row">
-      <span class="ctag">UX Research</span>
-      <span class="ctag">Field Research</span>
-      <span class="ctag">Service Strategy</span>
-      <span class="ctag">Social Impact</span>
+      <span class="ctag"><span class="en-inline">UX Research</span><span class="pt-inline">Pesquisa UX</span></span>
+      <span class="ctag"><span class="en-inline">Field Research</span><span class="pt-inline">Pesquisa de Campo</span></span>
+      <span class="ctag"><span class="en-inline">Service Strategy</span><span class="pt-inline">Estratégia de Serviço</span></span>
+      <span class="ctag"><span class="en-inline">Social Impact</span><span class="pt-inline">Impacto Social</span></span>
     </div>
     <div class="case-hero-eyebrow">Banco do Brasil — TechBack</div>
     <h1 class="case-hero-title">TechBack<br>BB.</h1>
-    <p class="case-hero-subtitle">Smart Waste Journey</p>
+    <p class="case-hero-subtitle">
+      <span class="en-inline">Smart Waste Journey</span>
+      <span class="pt-inline">Jornada de Resíduos Inteligentes</span>
+    </p>
     <div class="case-meta-row">
       <div>
-        <div class="case-meta-label">Client</div>
+        <div class="case-meta-label"><span class="en-inline">Client</span><span class="pt-inline">Cliente</span></div>
         <div class="case-meta-value">Banco do Brasil</div>
       </div>
       <div>
-        <div class="case-meta-label">Year</div>
+        <div class="case-meta-label"><span class="en-inline">Year</span><span class="pt-inline">Ano</span></div>
         <div class="case-meta-value">2025</div>
       </div>
       <div>
-        <div class="case-meta-label">Role</div>
-        <div class="case-meta-value">UX Researcher & Strategist</div>
+        <div class="case-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Função</span></div>
+        <div class="case-meta-value"><span class="en-inline">UX Researcher & Strategist</span><span class="pt-inline">Pesquisadora UX & Estrategista</span></div>
       </div>
       <div>
-        <div class="case-meta-label">HQ</div>
+        <div class="case-meta-label"><span class="en-inline">HQ</span><span class="pt-inline">Sede</span></div>
         <div class="case-meta-value">Brasília, BR</div>
       </div>
     </div>
@@ -490,19 +581,19 @@
     <div class="hero-stats-grid">
       <div class="hero-stat">
         <div class="hero-stat-num">11<span>+</span></div>
-        <div class="hero-stat-label">in-depth interviews conducted in field</div>
+        <div class="hero-stat-label"><span class="en-inline">in-depth interviews conducted in field</span><span class="pt-inline">entrevistas em profundidade realizadas em campo</span></div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-num">3<span>×</span></div>
-        <div class="hero-stat-label">research phases: plan, field, synthesis</div>
+        <div class="hero-stat-num">3<span>&times;</span></div>
+        <div class="hero-stat-label"><span class="en-inline">research phases: plan, field, synthesis</span><span class="pt-inline">fases de pesquisa: planejamento, campo, síntese</span></div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">4<span>+</span></div>
-        <div class="hero-stat-label">distinct user profiles mapped</div>
+        <div class="hero-stat-label"><span class="en-inline">distinct user profiles mapped</span><span class="pt-inline">perfis de usuário distintos mapeados</span></div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">1<span>x</span></div>
-        <div class="hero-stat-label">the largest circular economy event in LatAm</div>
+        <div class="hero-stat-label"><span class="en-inline">the largest circular economy event in LatAm</span><span class="pt-inline">o maior evento de economia circular da América Latina</span></div>
       </div>
     </div>
   </div>
@@ -513,23 +604,38 @@
 
   <!-- 01 THE PROJECT -->
   <section class="case-section reveal">
-    <div class="cs-label">01 — The Project</div>
+    <div class="cs-label"><span class="en-inline">01 — The Project</span><span class="pt-inline">01 — O Projeto</span></div>
     <div class="cs-2col">
       <div>
-        <h2 class="cs-title">Reinventing how Brazil deals with <em>electronic waste</em></h2>
-        <p class="cs-body-text">
+        <h2 class="cs-title">
+          <span class="en">Reinventing how Brazil deals with <em>electronic waste</em></span>
+          <span class="pt">Reinventando como o Brasil lida com <em>resíduos eletrônicos</em></span>
+        </h2>
+        <p class="cs-body-text en">
           TechBack set out to transform something deeply physical — collection kiosks placed in cities — into a <strong>connected digital ecosystem</strong> that rewards people for doing the right thing with their electronic waste. But to build something that actually works, you have to understand the full chain: citizens, waste-pickers, cooperatives, operators.
         </p>
-        <p class="cs-body-text">
+        <p class="cs-body-text pt">
+          O TechBack se propôs a transformar algo profundamente físico — quiosques de coleta instalados em cidades — em um <strong>ecossistema digital conectado</strong> que recompensa as pessoas por darem o destino correto aos seus resíduos eletrônicos. Mas para construir algo que realmente funcione, é preciso entender toda a cadeia: cidadãos, catadores, cooperativas, operadores.
+        </p>
+        <p class="cs-body-text en">
           Banco do Brasil brought the ambition and the infrastructure. I was brought in as <strong>UX Researcher and Strategist</strong> to make sure the solution would be grounded in real human behavior — not assumptions.
+        </p>
+        <p class="cs-body-text pt">
+          O Banco do Brasil trouxe a ambição e a infraestrutura. Fui convidada como <strong>Pesquisadora UX e Estrategista</strong> para garantir que a solução estivesse fundamentada em comportamento humano real — não em suposições.
         </p>
       </div>
       <div>
-        <p class="cs-body-text">
+        <p class="cs-body-text en">
           The research happened inside <strong>Expocatadores 2024</strong> — the largest circular economy event in Latin America, held in São Paulo in December 2024. TechBack had a physical interactive stand inside the FBB pavilion, which gave us direct access to the people who matter most.
         </p>
-        <p class="cs-body-text">
+        <p class="cs-body-text pt">
+          A pesquisa aconteceu dentro da <strong>Expocatadores 2024</strong> — o maior evento de economia circular da América Latina, realizado em São Paulo em dezembro de 2024. O TechBack tinha um estande físico interativo dentro do pavilhão da FBB, o que nos deu acesso direto às pessoas que mais importam.
+        </p>
+        <p class="cs-body-text en">
           Three days. Three audiences. One mission: <strong>understand the ecosystem well enough to design something that doesn't exclude the people it claims to serve.</strong>
+        </p>
+        <p class="cs-body-text pt">
+          Três dias. Três públicos. Uma missão: <strong>entender o ecossistema bem o suficiente para projetar algo que não exclua as pessoas que diz servir.</strong>
         </p>
       </div>
     </div>
@@ -537,19 +643,26 @@
 
   <!-- 02 THE CHALLENGE -->
   <section class="case-section reveal">
-    <div class="cs-label">02 — The Challenge</div>
+    <div class="cs-label"><span class="en-inline">02 — The Challenge</span><span class="pt-inline">02 — O Desafio</span></div>
     <div class="challenge-callout">
-      <p>Without listening to waste-pickers, TechBack Digital risks becoming a solution <strong>disconnected from reality.</strong> Technology built on assumptions — not on lived experience — excludes the very people who make the circular economy run.</p>
+      <p class="en">Without listening to waste-pickers, TechBack Digital risks becoming a solution <strong>disconnected from reality.</strong> Technology built on assumptions — not on lived experience — excludes the very people who make the circular economy run.</p>
+      <p class="pt">Sem ouvir os catadores, o TechBack Digital corre o risco de se tornar uma solução <strong>desconectada da realidade.</strong> Tecnologia construída sobre suposições — não sobre experiências vividas — exclui justamente as pessoas que fazem a economia circular funcionar.</p>
     </div>
     <div class="cs-2col">
       <div>
-        <p class="cs-body-text">
+        <p class="cs-body-text en">
           The main challenge was bridging two worlds: <strong>cutting-edge digital technology</strong> and the everyday reality of people who collect and process e-waste for a living. These are often people working without formal headquarters, storing recyclables in their own backyards, navigating a market where electronic materials are worth almost nothing.
+        </p>
+        <p class="cs-body-text pt">
+          O principal desafio era conectar dois mundos: <strong>tecnologia digital de ponta</strong> e a realidade cotidiana de pessoas que coletam e processam lixo eletrônico para sobreviver. São frequentemente pessoas que trabalham sem sede formal, armazenando recicláveis em seus próprios quintais, navegando um mercado onde materiais eletrônicos não valem quase nada.
         </p>
       </div>
       <div>
-        <p class="cs-body-text">
+        <p class="cs-body-text en">
           At the same time, we needed to understand citizen behavior — why they discard incorrectly, what would motivate them to change, and how a reward system could genuinely move behavior rather than just feel good on paper. Two very different problems, one research sprint.
+        </p>
+        <p class="cs-body-text pt">
+          Ao mesmo tempo, precisávamos entender o comportamento dos cidadãos — por que descartam incorretamente, o que os motivaria a mudar, e como um sistema de recompensas poderia realmente mudar comportamentos em vez de apenas parecer bom no papel. Dois problemas muito diferentes, um sprint de pesquisa.
         </p>
       </div>
     </div>
@@ -557,153 +670,195 @@
 
   <!-- 03 METHODOLOGY -->
   <section class="case-section reveal">
-    <div class="cs-label">03 — Research Process</div>
-    <h2 class="cs-title">Three phases, <em>one truth</em></h2>
+    <div class="cs-label"><span class="en-inline">03 — Research Process</span><span class="pt-inline">03 — Processo de Pesquisa</span></div>
+    <h2 class="cs-title">
+      <span class="en">Three phases, <em>one truth</em></span>
+      <span class="pt">Três fases, <em>uma verdade</em></span>
+    </h2>
     <div class="phase-flow">
       <div class="phase-card">
         <div class="phase-num">01</div>
-        <div class="phase-name">Planning</div>
-        <div class="phase-title">Interview Design for Expocatadores</div>
-        <p class="phase-desc">Tailored scripts for each audience segment — visitors, waste-pickers, and kiosk operators — with different angles for each profile. Objectives focused on validating TechBack's roadmap and understanding real pain points.</p>
+        <div class="phase-name"><span class="en-inline">Planning</span><span class="pt-inline">Planejamento</span></div>
+        <div class="phase-title"><span class="en-inline">Interview Design for Expocatadores</span><span class="pt-inline">Design de Entrevistas para a Expocatadores</span></div>
+        <p class="phase-desc en">Tailored scripts for each audience segment — visitors, waste-pickers, and kiosk operators — with different angles for each profile. Objectives focused on validating TechBack's roadmap and understanding real pain points.</p>
+        <p class="phase-desc pt">Roteiros personalizados para cada segmento de público — visitantes, catadores e operadores de quiosques — com diferentes ângulos para cada perfil. Objetivos focados em validar o roadmap do TechBack e entender as dores reais.</p>
       </div>
       <div class="phase-card">
         <div class="phase-num">02</div>
-        <div class="phase-name">Field Research</div>
-        <div class="phase-title">10 interviews + 1 operator at Expocatadores 2024</div>
-        <p class="phase-desc">Conducted in-person at the event across 3 days. Adapted methodology on the spot when participation was lower than expected. Documented field notes, photos, and qualitative observations in real time.</p>
+        <div class="phase-name"><span class="en-inline">Field Research</span><span class="pt-inline">Pesquisa de Campo</span></div>
+        <div class="phase-title"><span class="en-inline">10 interviews + 1 operator at Expocatadores 2024</span><span class="pt-inline">10 entrevistas + 1 operador na Expocatadores 2024</span></div>
+        <p class="phase-desc en">Conducted in-person at the event across 3 days. Adapted methodology on the spot when participation was lower than expected. Documented field notes, photos, and qualitative observations in real time.</p>
+        <p class="phase-desc pt">Realizadas presencialmente no evento ao longo de 3 dias. Metodologia adaptada em tempo real quando a participação foi menor que o esperado. Notas de campo, fotos e observações qualitativas documentadas em tempo real.</p>
       </div>
       <div class="phase-card">
         <div class="phase-num">03</div>
-        <div class="phase-name">Synthesis</div>
-        <div class="phase-title">Strategic Report + Digital Journey</div>
-        <p class="phase-desc">Consolidated all insights into a structured report mapping pains, motivations, and opportunities. Designed a proposed digital journey covering access, engagement, and reward flows — plus strategic product recommendations.</p>
+        <div class="phase-name"><span class="en-inline">Synthesis</span><span class="pt-inline">Síntese</span></div>
+        <div class="phase-title"><span class="en-inline">Strategic Report + Digital Journey</span><span class="pt-inline">Relatório Estratégico + Jornada Digital</span></div>
+        <p class="phase-desc en">Consolidated all insights into a structured report mapping pains, motivations, and opportunities. Designed a proposed digital journey covering access, engagement, and reward flows — plus strategic product recommendations.</p>
+        <p class="phase-desc pt">Consolidação de todos os insights em um relatório estruturado mapeando dores, motivações e oportunidades. Desenho de uma jornada digital proposta cobrindo fluxos de acesso, engajamento e recompensas — além de recomendações estratégicas de produto.</p>
       </div>
     </div>
   </section>
 
   <!-- 04 FIELD RESEARCH — REPORT SCREENSHOTS -->
   <section class="case-section reveal">
-    <div class="cs-label">04 — Field Research</div>
-    <h2 class="cs-title">The report that <em>came from the field</em></h2>
-    <p class="cs-body-text">These are screens from the actual research report delivered to Banco do Brasil — compiled from real interviews conducted at Expocatadores 2024 in São Paulo.</p>
+    <div class="cs-label"><span class="en-inline">04 — Field Research</span><span class="pt-inline">04 — Pesquisa de Campo</span></div>
+    <h2 class="cs-title">
+      <span class="en">The report that <em>came from the field</em></span>
+      <span class="pt">O relatório que <em>veio do campo</em></span>
+    </h2>
+    <p class="cs-body-text en">These are screens from the actual research report delivered to Banco do Brasil — compiled from real interviews conducted at Expocatadores 2024 in São Paulo.</p>
+    <p class="cs-body-text pt">Estas são telas do relatório de pesquisa real entregue ao Banco do Brasil — compiladas a partir de entrevistas reais realizadas na Expocatadores 2024 em São Paulo.</p>
     <div class="screenshots-scroll">
       <div>
         <div class="screenshot-frame" onclick="openLightbox(this)">
           <img src="images/techback/field-01.png" alt="Report cover — Insights: Expocatadores 2024" loading="lazy">
         </div>
-        <div class="screenshot-label">Report Cover</div>
+        <div class="screenshot-label"><span class="en-inline">Report Cover</span><span class="pt-inline">Capa do Relatório</span></div>
       </div>
       <div>
         <div class="screenshot-frame" onclick="openLightbox(this)">
           <img src="images/techback/field-02.png" alt="Interview plan — Expocatadores" loading="lazy">
         </div>
-        <div class="screenshot-label">Interview Planning</div>
+        <div class="screenshot-label"><span class="en-inline">Interview Planning</span><span class="pt-inline">Planejamento de Entrevistas</span></div>
       </div>
       <div>
         <div class="screenshot-frame" onclick="openLightbox(this)">
           <img src="images/techback/field-03.png" alt="Visitor insights summary" loading="lazy">
         </div>
-        <div class="screenshot-label">Visitor Insights</div>
+        <div class="screenshot-label"><span class="en-inline">Visitor Insights</span><span class="pt-inline">Insights dos Visitantes</span></div>
       </div>
       <div>
         <div class="screenshot-frame" onclick="openLightbox(this)">
           <img src="images/techback/field-04.png" alt="Catador profile — Dilvana" loading="lazy">
         </div>
-        <div class="screenshot-label">Waste-picker Profile</div>
+        <div class="screenshot-label"><span class="en-inline">Waste-picker Profile</span><span class="pt-inline">Perfil do Catador</span></div>
       </div>
       <div>
         <div class="screenshot-frame" onclick="openLightbox(this)">
           <img src="images/techback/field-05.png" alt="Main pains — catadores" loading="lazy">
         </div>
-        <div class="screenshot-label">Main Pain Points</div>
+        <div class="screenshot-label"><span class="en-inline">Main Pain Points</span><span class="pt-inline">Principais Dores</span></div>
       </div>
       <div>
         <div class="screenshot-frame" onclick="openLightbox(this)">
           <img src="images/techback/field-06.png" alt="Key insights — catadores" loading="lazy">
         </div>
-        <div class="screenshot-label">Key Insights</div>
+        <div class="screenshot-label"><span class="en-inline">Key Insights</span><span class="pt-inline">Insights Principais</span></div>
       </div>
     </div>
   </section>
 
   <!-- 05 USER PROFILES -->
   <section class="case-section reveal">
-    <div class="cs-label">05 — User Profiles</div>
-    <h2 class="cs-title">The people behind the <em>waste chain</em></h2>
-    <p class="cs-body-text">Each interview surfaced a distinct reality. These aren't personas built from demographics — they're real people, with real names, interviewed at the event.</p>
+    <div class="cs-label"><span class="en-inline">05 — User Profiles</span><span class="pt-inline">05 — Perfis de Usuários</span></div>
+    <h2 class="cs-title">
+      <span class="en">The people behind the <em>waste chain</em></span>
+      <span class="pt">As pessoas por trás da <em>cadeia de resíduos</em></span>
+    </h2>
+    <p class="cs-body-text en">Each interview surfaced a distinct reality. These aren't personas built from demographics — they're real people, with real names, interviewed at the event.</p>
+    <p class="cs-body-text pt">Cada entrevista revelou uma realidade distinta. Não são personas construídas a partir de dados demográficos — são pessoas reais, com nomes reais, entrevistadas no evento.</p>
 
     <div class="profiles-grid">
-      <!-- Visitors -->
+      <!-- Laura Santos -->
       <div class="profile-card">
         <div class="profile-img-wrap">
           <img src="images/techback/field-07.png" alt="Laura Santos — visitor interview" loading="lazy">
-          <span class="profile-type-badge">Visitor</span>
+          <span class="profile-type-badge"><span class="en-inline">Visitor</span><span class="pt-inline">Visitante</span></span>
         </div>
         <div class="profile-body">
           <div class="profile-name">Laura Santos</div>
-          <div class="profile-role">Real estate broker, 55 — São Paulo</div>
-          <p class="profile-insight">Has discarded e-waste before, motivated by environmental awareness — not financial incentives. Wants <strong>scheduling, real-time kiosk availability, and cashback directly to her BB app wallet.</strong></p>
+          <div class="profile-role">
+            <span class="en-inline">Real estate broker, 55 — São Paulo</span>
+            <span class="pt-inline">Corretora de imóveis, 55 — São Paulo</span>
+          </div>
+          <p class="profile-insight en">Has discarded e-waste before, motivated by environmental awareness — not financial incentives. Wants <strong>scheduling, real-time kiosk availability, and cashback directly to her BB app wallet.</strong></p>
+          <p class="profile-insight pt">Já descartou lixo eletrônico antes, motivada pela consciência ambiental — não por incentivos financeiros. Quer <strong>agendamento, disponibilidade do quiosque em tempo real e cashback direto na carteira do app BB.</strong></p>
         </div>
       </div>
 
+      <!-- Audrin -->
       <div class="profile-card">
         <div class="profile-img-wrap">
           <img src="images/techback/field-08.png" alt="Audrin — visitor interview" loading="lazy">
-          <span class="profile-type-badge">Visitor</span>
+          <span class="profile-type-badge"><span class="en-inline">Visitor</span><span class="pt-inline">Visitante</span></span>
         </div>
         <div class="profile-body">
           <div class="profile-name">Audrin</div>
-          <div class="profile-role">Developer & designer, 54 — brought a discarded laptop to the event</div>
-          <p class="profile-insight">Described the scanning experience as a <strong>key differentiator</strong>. Wants AI photo recognition of items, real-time kiosk status, and an environmental impact dashboard. Believes financial rewards drive initial engagement but environmental awareness sustains it.</p>
+          <div class="profile-role">
+            <span class="en-inline">Developer & designer, 54 — brought a discarded laptop to the event</span>
+            <span class="pt-inline">Desenvolvedor & designer, 54 — trouxe um laptop descartado ao evento</span>
+          </div>
+          <p class="profile-insight en">Described the scanning experience as a <strong>key differentiator</strong>. Wants AI photo recognition of items, real-time kiosk status, and an environmental impact dashboard. Believes financial rewards drive initial engagement but environmental awareness sustains it.</p>
+          <p class="profile-insight pt">Descreveu a experiência de escaneamento como um <strong>diferencial-chave</strong>. Quer reconhecimento fotográfico por IA dos itens, status do quiosque em tempo real e um dashboard de impacto ambiental. Acredita que recompensas financeiras impulsionam o engajamento inicial, mas a consciência ambiental o sustenta.</p>
         </div>
       </div>
 
-      <!-- Catadores -->
+      <!-- Maria Girlene -->
       <div class="profile-card">
         <div class="profile-img-wrap">
           <img src="images/techback/field-09.png" alt="Maria Girlene — catadora" loading="lazy">
-          <span class="profile-type-badge">Waste-picker</span>
+          <span class="profile-type-badge"><span class="en-inline">Waste-picker</span><span class="pt-inline">Catadora</span></span>
         </div>
         <div class="profile-body">
           <div class="profile-name">Maria Girlene</div>
-          <div class="profile-role">Pedras de Fogo, PB — collecting since childhood</div>
-          <p class="profile-insight">Operates without formal headquarters, storing materials on her own property. E-waste ends up as common trash <strong>because no local market exists</strong> to buy it. Faces social discrimination. Needs government support and market creation.</p>
+          <div class="profile-role">
+            <span class="en-inline">Pedras de Fogo, PB — collecting since childhood</span>
+            <span class="pt-inline">Pedras de Fogo, PB — catadora desde a infância</span>
+          </div>
+          <p class="profile-insight en">Operates without formal headquarters, storing materials on her own property. E-waste ends up as common trash <strong>because no local market exists</strong> to buy it. Faces social discrimination. Needs government support and market creation.</p>
+          <p class="profile-insight pt">Opera sem sede formal, armazenando materiais em sua própria propriedade. O lixo eletrônico acaba como lixo comum <strong>porque não existe mercado local</strong> para comprá-lo. Enfrenta discriminação social. Precisa de apoio governamental e criação de mercado.</p>
         </div>
       </div>
 
+      <!-- Mateus Alves -->
       <div class="profile-card">
         <div class="profile-img-wrap">
           <img src="images/techback/field-10.png" alt="Mateus Alves — catador cooperativa" loading="lazy">
-          <span class="profile-type-badge">Waste-picker</span>
+          <span class="profile-type-badge"><span class="en-inline">Waste-picker</span><span class="pt-inline">Catador</span></span>
         </div>
         <div class="profile-body">
           <div class="profile-name">Mateus Alves</div>
-          <div class="profile-role">Londrina, PR — 15 years, Cooper Região cooperative</div>
-          <p class="profile-insight">Serves ~208,000 households. Electronic waste has very low market value — described as <strong>"cheap as popcorn."</strong> No reverse logistics infrastructure. People prefer to leave materials at their door rather than bring them to proper points.</p>
+          <div class="profile-role">
+            <span class="en-inline">Londrina, PR — 15 years, Cooper Região cooperative</span>
+            <span class="pt-inline">Londrina, PR — 15 anos, cooperativa Cooper Região</span>
+          </div>
+          <p class="profile-insight en">Serves ~208,000 households. Electronic waste has very low market value — described as <strong>"cheap as popcorn."</strong> No reverse logistics infrastructure. People prefer to leave materials at their door rather than bring them to proper points.</p>
+          <p class="profile-insight pt">Atende ~208.000 domicílios. O lixo eletrônico tem valor de mercado muito baixo — descrito como <strong>"barato que nem pipoca."</strong> Sem infraestrutura de logística reversa. As pessoas preferem deixar materiais na porta de casa em vez de levá-los a pontos adequados.</p>
         </div>
       </div>
 
+      <!-- Dilvana Santos -->
       <div class="profile-card">
         <div class="profile-img-wrap">
           <img src="images/techback/field-11.png" alt="Dilvana Santos — ASCOR" loading="lazy">
-          <span class="profile-type-badge">Waste-picker</span>
+          <span class="profile-type-badge"><span class="en-inline">Waste-picker</span><span class="pt-inline">Catadora</span></span>
         </div>
         <div class="profile-body">
           <div class="profile-name">Dilvana Santos</div>
-          <div class="profile-role">Colatina, ES — President, ASCOR (38 members)</div>
-          <p class="profile-insight">Sources from hospitals, companies, and the public. Faces difficulty finding <strong>reliable buyers</strong> for specific materials (circuit boards, plastics). Does community awareness rounds in neighborhoods to drive correct separation.</p>
+          <div class="profile-role">
+            <span class="en-inline">Colatina, ES — President, ASCOR (38 members)</span>
+            <span class="pt-inline">Colatina, ES — Presidente, ASCOR (38 membros)</span>
+          </div>
+          <p class="profile-insight en">Sources from hospitals, companies, and the public. Faces difficulty finding <strong>reliable buyers</strong> for specific materials (circuit boards, plastics). Does community awareness rounds in neighborhoods to drive correct separation.</p>
+          <p class="profile-insight pt">Recebe materiais de hospitais, empresas e da população. Enfrenta dificuldade em encontrar <strong>compradores confiáveis</strong> para materiais específicos (placas de circuito, plásticos). Faz rondas de conscientização em bairros para promover a separação correta.</p>
         </div>
       </div>
 
+      <!-- Leonardo César -->
       <div class="profile-card">
         <div class="profile-img-wrap">
           <img src="images/techback/field-12.png" alt="Leonardo César — Reeecicle operator" loading="lazy">
-          <span class="profile-type-badge">Operator</span>
+          <span class="profile-type-badge"><span class="en-inline">Operator</span><span class="pt-inline">Operador</span></span>
         </div>
         <div class="profile-body">
           <div class="profile-name">Leonardo César</div>
-          <div class="profile-role">Environmental engineer — Reeecicle, Recife + João Pessoa</div>
-          <p class="profile-insight">Homologated by Green Electron. Uses logistics software for optimized routes. Batteries travel to Minas Gerais for specialized processing. Recommends <strong>automatic PEV notifications, cooperative training, and remote monitoring</strong> for the TechBack platform.</p>
+          <div class="profile-role">
+            <span class="en-inline">Environmental engineer — Reeecicle, Recife + João Pessoa</span>
+            <span class="pt-inline">Engenheiro ambiental — Reeecicle, Recife + João Pessoa</span>
+          </div>
+          <p class="profile-insight en">Homologated by Green Electron. Uses logistics software for optimized routes. Batteries travel to Minas Gerais for specialized processing. Recommends <strong>automatic PEV notifications, cooperative training, and remote monitoring</strong> for the TechBack platform.</p>
+          <p class="profile-insight pt">Homologado pela Green Electron. Usa software de logística para rotas otimizadas. Baterias viajam para Minas Gerais para processamento especializado. Recomenda <strong>notificações automáticas de PEV, treinamento de cooperativas e monitoramento remoto</strong> para a plataforma TechBack.</p>
         </div>
       </div>
     </div>
@@ -711,70 +866,85 @@
 
   <!-- 06 KEY INSIGHTS -->
   <section class="case-section reveal">
-    <div class="cs-label">06 — Key Insights</div>
-    <h2 class="cs-title">What the field <em>actually revealed</em></h2>
+    <div class="cs-label"><span class="en-inline">06 — Key Insights</span><span class="pt-inline">06 — Insights Principais</span></div>
+    <h2 class="cs-title">
+      <span class="en">What the field <em>actually revealed</em></span>
+      <span class="pt">O que o campo <em>realmente revelou</em></span>
+    </h2>
     <div class="insights-2col">
       <div class="insight-block">
         <div class="insight-num">01</div>
-        <div class="insight-title">E-waste is a cost, not an income</div>
-        <p class="insight-desc">For waste-pickers, electronic materials generate almost no revenue. Low market value combined with lack of buyers means e-waste often goes to landfill. Financial rewards and cooperative partnerships are essential to change this.</p>
+        <div class="insight-title"><span class="en-inline">E-waste is a cost, not an income</span><span class="pt-inline">Lixo eletrônico é custo, não renda</span></div>
+        <p class="insight-desc en">For waste-pickers, electronic materials generate almost no revenue. Low market value combined with lack of buyers means e-waste often goes to landfill. Financial rewards and cooperative partnerships are essential to change this.</p>
+        <p class="insight-desc pt">Para catadores, materiais eletrônicos geram quase nenhuma receita. Baixo valor de mercado combinado com falta de compradores significa que o lixo eletrônico frequentemente vai para aterros. Recompensas financeiras e parcerias com cooperativas são essenciais para mudar isso.</p>
       </div>
       <div class="insight-block dark">
         <div class="insight-num">02</div>
-        <div class="insight-title">Citizens need convenience + reward</div>
-        <p class="insight-desc">Environmental awareness motivates, but friction kills follow-through. Scheduling, real-time kiosk availability, and cashback to familiar channels (like the BB app) are the difference between intent and action.</p>
+        <div class="insight-title"><span class="en-inline">Citizens need convenience + reward</span><span class="pt-inline">Cidadãos precisam de conveniência + recompensa</span></div>
+        <p class="insight-desc en">Environmental awareness motivates, but friction kills follow-through. Scheduling, real-time kiosk availability, and cashback to familiar channels (like the BB app) are the difference between intent and action.</p>
+        <p class="insight-desc pt">Consciência ambiental motiva, mas a fricção mata a execução. Agendamento, disponibilidade de quiosque em tempo real e cashback em canais familiares (como o app BB) são a diferença entre intenção e ação.</p>
       </div>
       <div class="insight-block dark">
         <div class="insight-num">03</div>
-        <div class="insight-title">Without catadores, TechBack fails</div>
-        <p class="insight-desc">The full chain depends on waste-pickers and cooperatives. A digital solution that ignores their operational reality — no infrastructure, no formal market, social barriers — is a solution that serves only part of the ecosystem.</p>
+        <div class="insight-title"><span class="en-inline">Without catadores, TechBack fails</span><span class="pt-inline">Sem catadores, o TechBack fracassa</span></div>
+        <p class="insight-desc en">The full chain depends on waste-pickers and cooperatives. A digital solution that ignores their operational reality — no infrastructure, no formal market, social barriers — is a solution that serves only part of the ecosystem.</p>
+        <p class="insight-desc pt">Toda a cadeia depende dos catadores e cooperativas. Uma solução digital que ignora sua realidade operacional — sem infraestrutura, sem mercado formal, barreiras sociais — é uma solução que serve apenas parte do ecossistema.</p>
       </div>
       <div class="insight-block">
         <div class="insight-num">04</div>
-        <div class="insight-title">Operators need smart infrastructure</div>
-        <p class="insight-desc">PEV operators like Reeecicle need automated notifications when kiosks are full, route optimization, and tools to classify materials in real time. Technology that helps the operator runs smoother for everyone downstream.</p>
+        <div class="insight-title"><span class="en-inline">Operators need smart infrastructure</span><span class="pt-inline">Operadores precisam de infraestrutura inteligente</span></div>
+        <p class="insight-desc en">PEV operators like Reeecicle need automated notifications when kiosks are full, route optimization, and tools to classify materials in real time. Technology that helps the operator runs smoother for everyone downstream.</p>
+        <p class="insight-desc pt">Operadores de PEV como a Reeecicle precisam de notificações automáticas quando os quiosques estão cheios, otimização de rotas e ferramentas para classificar materiais em tempo real. Tecnologia que ajuda o operador funciona melhor para todos na cadeia.</p>
       </div>
     </div>
   </section>
 
   <!-- 07 DELIVERABLES -->
   <section class="case-section reveal">
-    <div class="cs-label">07 — Deliverables</div>
-    <h2 class="cs-title">What I <em>delivered</em> to Banco do Brasil</h2>
+    <div class="cs-label"><span class="en-inline">07 — Deliverables</span><span class="pt-inline">07 — Entregas</span></div>
+    <h2 class="cs-title">
+      <span class="en">What I <em>delivered</em> to Banco do Brasil</span>
+      <span class="pt">O que eu <em>entreguei</em> ao Banco do Brasil</span>
+    </h2>
     <div class="deliverables-list">
       <div class="deliverable-item">
         <div class="d-num">01</div>
         <div class="d-content">
-          <div class="d-title">Research Plan & Interview Protocols</div>
-          <p class="d-desc">Tailored scripts for three distinct audiences at Expocatadores 2024 — visitors, waste-pickers, and kiosk operators — each with specific objectives aligned to TechBack's product roadmap.</p>
+          <div class="d-title"><span class="en-inline">Research Plan & Interview Protocols</span><span class="pt-inline">Plano de Pesquisa & Protocolos de Entrevista</span></div>
+          <p class="d-desc en">Tailored scripts for three distinct audiences at Expocatadores 2024 — visitors, waste-pickers, and kiosk operators — each with specific objectives aligned to TechBack's product roadmap.</p>
+          <p class="d-desc pt">Roteiros personalizados para três públicos distintos na Expocatadores 2024 — visitantes, catadores e operadores de quiosques — cada um com objetivos específicos alinhados ao roadmap do produto TechBack.</p>
         </div>
       </div>
       <div class="deliverable-item">
         <div class="d-num">02</div>
         <div class="d-content">
-          <div class="d-title">10 In-depth Interviews + 1 Kiosk Operator</div>
-          <p class="d-desc">Conducted in-person at the event over three days. Adapted methodology in real time when participation was lower than planned. Full field documentation: notes, photos, and qualitative observations.</p>
+          <div class="d-title"><span class="en-inline">10 In-depth Interviews + 1 Kiosk Operator</span><span class="pt-inline">10 Entrevistas em Profundidade + 1 Operador de Quiosque</span></div>
+          <p class="d-desc en">Conducted in-person at the event over three days. Adapted methodology in real time when participation was lower than planned. Full field documentation: notes, photos, and qualitative observations.</p>
+          <p class="d-desc pt">Realizadas presencialmente no evento ao longo de três dias. Metodologia adaptada em tempo real quando a participação foi menor que o planejado. Documentação completa de campo: notas, fotos e observações qualitativas.</p>
         </div>
       </div>
       <div class="deliverable-item">
         <div class="d-num">03</div>
         <div class="d-content">
-          <div class="d-title">Consolidated Research Report</div>
-          <p class="d-desc">Structured report with user profiles, main pain points, motivations, and strategic opportunities — delivered to BB with clear synthesis and actionable insights per audience segment.</p>
+          <div class="d-title"><span class="en-inline">Consolidated Research Report</span><span class="pt-inline">Relatório de Pesquisa Consolidado</span></div>
+          <p class="d-desc en">Structured report with user profiles, main pain points, motivations, and strategic opportunities — delivered to BB with clear synthesis and actionable insights per audience segment.</p>
+          <p class="d-desc pt">Relatório estruturado com perfis de usuários, principais dores, motivações e oportunidades estratégicas — entregue ao BB com síntese clara e insights acionáveis por segmento de público.</p>
         </div>
       </div>
       <div class="deliverable-item">
         <div class="d-num">04</div>
         <div class="d-content">
-          <div class="d-title">Proposed Digital User Journey</div>
-          <p class="d-desc">Designed three core flows — access, engagement, and rewards — grounded in research findings and validated against the different user profiles encountered at Expocatadores.</p>
+          <div class="d-title"><span class="en-inline">Proposed Digital User Journey</span><span class="pt-inline">Jornada Digital do Usuário Proposta</span></div>
+          <p class="d-desc en">Designed three core flows — access, engagement, and rewards — grounded in research findings and validated against the different user profiles encountered at Expocatadores.</p>
+          <p class="d-desc pt">Projetei três fluxos principais — acesso, engajamento e recompensas — fundamentados nas descobertas de pesquisa e validados contra os diferentes perfis de usuários encontrados na Expocatadores.</p>
         </div>
       </div>
       <div class="deliverable-item">
         <div class="d-num">05</div>
         <div class="d-content">
-          <div class="d-title">Strategic Product Recommendations</div>
-          <p class="d-desc">Evidence-based feature recommendations: waste tracking for transparency, scheduled pickups for citizens, AI-powered item recognition, automated PEV notifications, and cooperative training programs. Plus a 2025 roadmap organized by Quick Wins and Long Actions.</p>
+          <div class="d-title"><span class="en-inline">Strategic Product Recommendations</span><span class="pt-inline">Recomendações Estratégicas de Produto</span></div>
+          <p class="d-desc en">Evidence-based feature recommendations: waste tracking for transparency, scheduled pickups for citizens, AI-powered item recognition, automated PEV notifications, and cooperative training programs. Plus a 2025 roadmap organized by Quick Wins and Long Actions.</p>
+          <p class="d-desc pt">Recomendações de funcionalidades baseadas em evidências: rastreamento de resíduos para transparência, coletas agendadas para cidadãos, reconhecimento de itens por IA, notificações automáticas de PEV e programas de treinamento para cooperativas. Mais um roadmap 2025 organizado por Ações Rápidas e Ações de Longo Prazo.</p>
         </div>
       </div>
     </div>
@@ -782,31 +952,36 @@
 
   <!-- 08 ROADMAP SCREENSHOTS -->
   <section class="case-section reveal">
-    <div class="cs-label">08 — From Insights to Action</div>
-    <h2 class="cs-title">The <em>2025 Roadmap</em> built from field research</h2>
-    <p class="cs-body-text">Every recommendation in the roadmap traces back to something a real person said or showed us at Expocatadores. Research doesn't end at insights — it ends when it shapes what gets built.</p>
+    <div class="cs-label"><span class="en-inline">08 — From Insights to Action</span><span class="pt-inline">08 — De Insights à Ação</span></div>
+    <h2 class="cs-title">
+      <span class="en">The <em>2025 Roadmap</em> built from field research</span>
+      <span class="pt">O <em>Roadmap 2025</em> construído a partir da pesquisa de campo</span>
+    </h2>
+    <p class="cs-body-text en">Every recommendation in the roadmap traces back to something a real person said or showed us at Expocatadores. Research doesn't end at insights — it ends when it shapes what gets built.</p>
+    <p class="cs-body-text pt">Cada recomendação no roadmap remonta a algo que uma pessoa real disse ou nos mostrou na Expocatadores. Pesquisa não termina nos insights — termina quando molda o que é construído.</p>
     <div class="screenshots-scroll">
       <div>
         <div class="screenshot-frame" onclick="openLightbox(this)">
           <img src="images/techback/field-13.png" alt="Quick Wins — from learning to action" loading="lazy">
         </div>
-        <div class="screenshot-label">Quick Wins (1–3 months)</div>
+        <div class="screenshot-label"><span class="en-inline">Quick Wins (1–3 months)</span><span class="pt-inline">Ações Rápidas (1–3 meses)</span></div>
       </div>
       <div>
         <div class="screenshot-frame" onclick="openLightbox(this)">
           <img src="images/techback/field-14.png" alt="Long Actions — TechBack future" loading="lazy">
         </div>
-        <div class="screenshot-label">Long Actions (3–12 months)</div>
+        <div class="screenshot-label"><span class="en-inline">Long Actions (3–12 months)</span><span class="pt-inline">Ações de Longo Prazo (3–12 meses)</span></div>
       </div>
       <div>
         <div class="screenshot-frame" onclick="openLightbox(this)">
           <img src="images/techback/field-15.png" alt="Roadmap 2025 — TechBack BB" loading="lazy">
         </div>
-        <div class="screenshot-label">2025 Roadmap</div>
+        <div class="screenshot-label">Roadmap 2025</div>
       </div>
     </div>
 
-    <table class="roadmap-table" style="margin-top:48px;">
+    <!-- EN table -->
+    <table class="roadmap-table en" style="margin-top:48px;">
       <thead>
         <tr>
           <th>Quarter</th>
@@ -840,41 +1015,155 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- PT table -->
+    <table class="roadmap-table pt" style="margin-top:48px;">
+      <thead>
+        <tr>
+          <th>Trimestre</th>
+          <th>Blueprint & Discovery</th>
+          <th>Desenvolvimento Digital</th>
+          <th>Testes & Validação</th>
+          <th>Parcerias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="q-label">Q1</td>
+          <td><span class="tag-green">Prioridade</span><br>Blueprint digital do TechBack. Revisão do blueprint dos catadores. Discovery aprofundado (paralelo).</td>
+          <td>Início do desenvolvimento do MVP Digital.</td>
+          <td>—</td>
+          <td>Workshops iniciais com cooperativas.</td>
+        </tr>
+        <tr>
+          <td class="q-label">Q2</td>
+          <td>—</td>
+          <td>Lançamento do MVP funcional. Prototipação de funcionalidades.</td>
+          <td>Testes iniciais com cooperativas. Loops de feedback.</td>
+          <td>Treinamento básico de cooperativas.</td>
+        </tr>
+        <tr>
+          <td class="q-label">Q3</td>
+          <td>—</td>
+          <td>Iteração do MVP com melhorias.</td>
+          <td>Expansão controlada. Testes em novas áreas.</td>
+          <td>Formalizar parcerias regionais.</td>
+        </tr>
+      </tbody>
+    </table>
   </section>
 
   <!-- 09 IMPACT CALLOUT -->
   <section class="case-section reveal">
     <div class="impact-banner">
-      <div class="impact-banner-label">Why this matters</div>
-      <p class="impact-banner-text">
+      <div class="impact-banner-label"><span class="en-inline">Why this matters</span><span class="pt-inline">Por que isso importa</span></div>
+      <p class="impact-banner-text en">
         This research connected innovation with social impact — laying the groundwork for a solution that works for <strong>citizens, waste-pickers, cooperatives, and operators</strong> alike. Not just for the technology that sits on top.
+      </p>
+      <p class="impact-banner-text pt">
+        Esta pesquisa conectou inovação com impacto social — estabelecendo as bases para uma solução que funciona para <strong>cidadãos, catadores, cooperativas e operadores</strong> igualmente. Não apenas para a tecnologia que fica por cima.
       </p>
     </div>
   </section>
 
 </div>
 
-<!-- FOOTER NAV -->
-<div style="max-width:1200px;margin:0 auto;">
-  <div class="case-footer-nav">
-    <a href="neuroot-case.html" class="footer-nav-link">
-      <span class="fnl-label">← Previous</span>
-      <span class="fnl-title">Neuroot — Burnout Recovery App</span>
+<!-- ROLE -->
+<section class="role-section">
+  <div class="role-content">
+    <div class="role-eyebrow reveal">
+      <span class="en-inline">Giuliana's role in this project</span>
+      <span class="pt-inline">O papel da Giuliana neste projeto</span>
+    </div>
+    <blockquote class="role-quote reveal">
+      <span class="en">"Going to the field, listening to waste-pickers and operators, synthesizing 11 interviews into a service strategy that connects social impact with innovation — that was the work."</span>
+      <span class="pt">"Ir a campo, ouvir catadores e operadores, sintetizar 11 entrevistas em uma estratégia de serviço que conecta impacto social com inovação — esse foi o trabalho."</span>
+    </blockquote>
+    <div class="role-attribution reveal">
+      <span class="en-inline">UX Researcher & Strategist · Field Research · User Interviews · Service Blueprint · Stakeholder Mapping · Strategic Roadmap</span>
+      <span class="pt-inline">Pesquisadora UX & Estrategista · Pesquisa de Campo · Entrevistas com Usuários · Blueprint de Serviço · Mapeamento de Stakeholders · Roadmap Estratégico</span>
+    </div>
+    <div class="role-stats reveal">
+      <div style="text-align:center; padding: 24px; background: rgba(45,106,74,0.3); border-radius: 12px; border: 1px solid rgba(183,220,200,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">11+</div>
+        <div style="font-size:12px; color:rgba(183,220,200,0.6); line-height:1.5;"><span class="en-inline">In-depth field interviews conducted</span><span class="pt-inline">Entrevistas em profundidade realizadas em campo</span></div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(45,106,74,0.3); border-radius: 12px; border: 1px solid rgba(183,220,200,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">3</div>
+        <div style="font-size:12px; color:rgba(183,220,200,0.6); line-height:1.5;"><span class="en-inline">Research phases: planning, field, synthesis</span><span class="pt-inline">Fases de pesquisa: planejamento, campo, síntese</span></div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(45,106,74,0.3); border-radius: 12px; border: 1px solid rgba(183,220,200,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">5</div>
+        <div style="font-size:12px; color:rgba(183,220,200,0.6); line-height:1.5;"><span class="en-inline">User profiles mapped across the ecosystem</span><span class="pt-inline">Perfis de usuário mapeados em todo o ecossistema</span></div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(45,106,74,0.3); border-radius: 12px; border: 1px solid rgba(183,220,200,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">1</div>
+        <div style="font-size:12px; color:rgba(183,220,200,0.6); line-height:1.5;"><span class="en-inline">Service blueprint delivered end-to-end</span><span class="pt-inline">Blueprint de serviço entregue de ponta a ponta</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="case-cta">
+  <div class="case-cta-text">
+    <div class="case-cta-label">
+      <span class="en-inline">Let's work together</span>
+      <span class="pt-inline">Vamos trabalhar juntos</span>
+    </div>
+    <div class="case-cta-title">
+      <span class="en">Interested in how I think through complex products?</span>
+      <span class="pt">Interessado em como eu penso produtos complexos?</span>
+    </div>
+  </div>
+  <div class="case-cta-links">
+    <a href="mailto:giulopesg@gmail.com" class="cta-btn green">
+      <span class="en-inline">&#9993; Get in touch</span>
+      <span class="pt-inline">&#9993; Entrar em contato</span>
     </a>
-    <a href="previsul-case.html" class="footer-nav-link" style="text-align:right;">
-      <span class="fnl-label">Next →</span>
-      <span class="fnl-title">Previsul — Service Design</span>
+    <a href="index.html" class="cta-btn outline">
+      <span class="en-inline">&larr; Back to portfolio</span>
+      <span class="pt-inline">&larr; Voltar ao portfólio</span>
     </a>
   </div>
 </div>
 
+<!-- FOOTER NAV -->
+<div class="case-footer-nav">
+  <a href="neuroot-case.html" class="footer-nav-link">
+    <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
+    <span class="fnl-title">Neuroot</span>
+  </a>
+  <a href="petrobras-case.html" class="footer-nav-link" style="text-align:right;">
+    <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Próximo</span> &rarr;</span>
+    <span class="fnl-title">Petrobras</span>
+  </a>
+</div>
+
+<footer>
+  <p>&copy; 2026 Giuliana Lopes Galvão</p>
+</footer>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
   <img id="lightbox-img" src="" alt="">
 </div>
 
 <script>
+  // Lang switching
+  let currentLang = 'en';
+  function setLang(lang) {
+    currentLang = lang;
+    document.body.classList.toggle('lang-pt', lang === 'pt');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+    localStorage.setItem('lang', lang);
+  }
+  const savedLang = localStorage.getItem('lang');
+  if (savedLang) setLang(savedLang);
+
   // Scroll reveal
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });

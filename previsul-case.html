@@ -28,6 +28,16 @@
   html { scroll-behavior: smooth; font-size: 16px; }
   body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--ink); overflow-x: hidden; }
 
+  /* ── LANG SWITCHING ── */
+  .en { display: block; }
+  .pt { display: none; }
+  .lang-pt .en { display: none; }
+  .lang-pt .pt { display: block; }
+  .en-inline { display: inline; }
+  .pt-inline { display: none; }
+  .lang-pt .en-inline { display: none; }
+  .lang-pt .pt-inline { display: inline; }
+
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 99;
@@ -46,6 +56,14 @@
   .nav-divider { width: 1px; height: 16px; background: var(--warm-stone); }
   .nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: var(--ink); }
 
+  .lang-toggle { display: flex; gap: 2px; border-radius: 20px; padding: 4px; margin-left: auto; }
+  .lang-btn {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+    padding: 6px 14px; border-radius: 16px; border: none;
+    background: transparent; color: var(--ink-muted); cursor: pointer; transition: all 0.2s;
+  }
+  .lang-btn.active { background: var(--blue-deep); color: var(--white); }
+
   /* ── HERO ── */
   .case-hero {
     min-height: 100vh;
@@ -57,8 +75,7 @@
   }
   .case-hero::before {
     content: '';
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background:
       radial-gradient(ellipse 60% 80% at 80% 50%, rgba(58,90,138,0.4) 0%, transparent 70%),
       radial-gradient(ellipse 40% 60% at 20% 80%, rgba(107,79,160,0.2) 0%, transparent 60%);
@@ -66,18 +83,12 @@
   }
 
   .case-hero-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    display: flex; flex-direction: column; justify-content: flex-end;
     padding: 140px 64px 80px 80px;
-    position: relative;
-    z-index: 2;
+    position: relative; z-index: 2;
   }
 
-  .case-tag-row {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    margin-bottom: 40px;
-  }
+  .case-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
   .ctag {
     font-family: 'DM Mono', monospace;
     font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
@@ -93,40 +104,30 @@
     color: var(--blue-pale); margin-bottom: 20px;
     display: flex; align-items: center; gap: 12px;
   }
-  .case-hero-eyebrow::before {
-    content: ''; display: block; width: 32px; height: 1px; background: var(--blue-pale);
-  }
+  .case-hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--blue-pale); }
 
   .case-hero-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(60px, 7vw, 100px);
     font-weight: 300; line-height: 0.92;
     letter-spacing: -0.03em;
-    color: var(--white);
-    margin-bottom: 8px;
+    color: var(--white); margin-bottom: 8px;
   }
   .case-hero-subtitle {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(18px, 2vw, 26px);
     font-weight: 300; font-style: italic;
-    color: var(--blue-pale);
-    margin-bottom: 48px;
-    line-height: 1.4;
+    color: var(--blue-pale); margin-bottom: 48px; line-height: 1.4;
   }
 
-  .case-meta-row {
-    display: flex; gap: 48px; flex-wrap: wrap;
-  }
+  .case-meta-row { display: flex; gap: 48px; flex-wrap: wrap; }
   .case-meta-label {
     font-family: 'DM Mono', monospace;
     font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
     color: rgba(255,255,255,0.35); margin-bottom: 6px;
   }
-  .case-meta-value {
-    font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.8);
-  }
+  .case-meta-value { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.8); }
 
-  /* hero right — stats */
   .case-hero-right {
     position: relative;
     display: flex; align-items: center; justify-content: center;
@@ -134,11 +135,8 @@
     z-index: 2;
   }
   .hero-stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    width: 100%;
-    max-width: 380px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; width: 100%; max-width: 380px;
   }
   .hero-stat {
     background: rgba(255,255,255,0.06);
@@ -156,14 +154,10 @@
     color: var(--white); margin-bottom: 8px;
   }
   .hero-stat-num span { font-size: 28px; color: var(--blue-pale); }
-  .hero-stat-label {
-    font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.5);
-    line-height: 1.4;
-  }
+  .hero-stat-label { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.4; }
 
   /* ── BODY ── */
   .case-body { max-width: 1200px; margin: 0 auto; }
-
   .case-section {
     padding: 96px 80px;
     border-bottom: 1px solid var(--warm-stone);
@@ -197,27 +191,21 @@
 
   /* ── PHASE TIMELINE (Double Diamond) ── */
   .diamond-flow {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    margin: 48px 0;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px; margin: 48px 0;
   }
   .diamond-step {
     padding: 32px 28px 28px;
     background: var(--white);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   .diamond-step:first-child { border-radius: 20px 4px 4px 4px; }
   .diamond-step:last-child  { border-radius: 4px 20px 20px 4px; }
   .diamond-step.active { background: var(--blue-deep); }
   .diamond-step::before {
     content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--blue-pale);
-    opacity: 0.3;
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--blue-pale); opacity: 0.3;
   }
   .diamond-step.active::before { background: var(--blue-pale); opacity: 1; }
   .diamond-phase {
@@ -233,22 +221,16 @@
   }
   .diamond-step.active .diamond-name { color: var(--white); }
   .diamond-tools {
-    font-size: 12px; font-weight: 300; color: var(--ink-muted);
-    line-height: 1.6;
+    font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6;
   }
   .diamond-step.active .diamond-tools { color: rgba(255,255,255,0.55); }
 
   /* ── IMMERSION PARTS ── */
   .immersion-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin-top: 48px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; margin-top: 48px;
   }
-  .immersion-card {
-    background: var(--white);
-    overflow: hidden;
-  }
+  .immersion-card { background: var(--white); overflow: hidden; }
   .immersion-card:nth-child(1) { border-radius: 20px 4px 4px 4px; }
   .immersion-card:nth-child(2) { border-radius: 4px 20px 4px 4px; }
   .immersion-card:nth-child(3) { border-radius: 4px 4px 4px 20px; }
@@ -276,15 +258,10 @@
 
   /* ── PROFILE CARDS ── */
   .profiles-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 48px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; margin-top: 48px;
   }
-  .profile-card {
-    background: var(--white);
-    padding: 32px 28px;
-  }
+  .profile-card { background: var(--white); padding: 32px 28px; }
   .profile-card:first-child { border-radius: 20px 4px 4px 4px; }
   .profile-card:nth-child(3) { border-radius: 4px 20px 4px 4px; }
   .profile-card:nth-child(4) { border-radius: 4px 4px 4px 20px; }
@@ -306,8 +283,7 @@
     color: var(--ink-soft);
   }
   .profile-tag {
-    display: inline-block;
-    margin-top: 14px;
+    display: inline-block; margin-top: 14px;
     font-family: 'DM Mono', monospace;
     font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
     padding: 4px 10px; border-radius: 8px;
@@ -317,19 +293,11 @@
 
   /* ── IMAGE GALLERY ── */
   .img-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 48px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; margin-top: 48px;
   }
-  .img-gallery.two-col {
-    grid-template-columns: 1fr 1fr;
-  }
-  .gallery-item {
-    overflow: hidden;
-    background: var(--blue-ghost);
-    border-radius: 4px;
-  }
+  .img-gallery.two-col { grid-template-columns: 1fr 1fr; }
+  .gallery-item { overflow: hidden; background: var(--blue-ghost); border-radius: 4px; }
   .gallery-item:first-child { border-radius: 20px 4px 4px 4px; }
   .gallery-item:last-child  { border-radius: 4px 4px 20px 4px; }
   .gallery-item img {
@@ -348,15 +316,10 @@
 
   /* ── BLUEPRINT SECTION ── */
   .blueprint-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin-top: 48px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; margin-top: 48px;
   }
-  .blueprint-card {
-    background: var(--white);
-    overflow: hidden;
-  }
+  .blueprint-card { background: var(--white); overflow: hidden; }
   .blueprint-card:nth-child(1) { border-radius: 20px 4px 4px 4px; }
   .blueprint-card:nth-child(2) { border-radius: 4px 20px 4px 4px; }
   .blueprint-img {
@@ -375,30 +338,23 @@
     font-size: 20px; font-weight: 400;
     color: var(--ink); margin-bottom: 16px;
   }
-  .blueprint-results {
-    display: flex; flex-direction: column; gap: 6px;
-  }
+  .blueprint-results { display: flex; flex-direction: column; gap: 6px; }
   .blueprint-results li {
     font-size: 13px; font-weight: 300; line-height: 1.6;
     color: var(--ink-soft); list-style: none;
     padding-left: 16px; position: relative;
   }
   .blueprint-results li::before {
-    content: '→'; position: absolute; left: 0;
+    content: '\2192'; position: absolute; left: 0;
     color: var(--blue-mid); font-size: 11px;
   }
 
   /* ── DELIVERABLES ── */
   .products-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin-top: 48px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; margin-top: 48px;
   }
-  .product-card {
-    background: var(--white);
-    overflow: hidden;
-  }
+  .product-card { background: var(--white); overflow: hidden; }
   .product-card:nth-child(1) { border-radius: 20px 4px 4px 4px; }
   .product-card:nth-child(2) { border-radius: 4px 20px 4px 4px; }
   .product-mockup {
@@ -421,9 +377,7 @@
     font-size: 14px; font-weight: 300; line-height: 1.7;
     color: var(--ink-soft); margin-bottom: 20px;
   }
-  .product-users {
-    display: flex; flex-wrap: wrap; gap: 6px;
-  }
+  .product-users { display: flex; flex-wrap: wrap; gap: 6px; }
   .product-user-tag {
     font-family: 'DM Mono', monospace;
     font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
@@ -434,16 +388,10 @@
 
   /* ── METRICS ROW ── */
   .metrics-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    margin-top: 56px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px; margin-top: 56px;
   }
-  .metric-box {
-    background: var(--white);
-    padding: 36px 28px;
-    text-align: center;
-  }
+  .metric-box { background: var(--white); padding: 36px 28px; text-align: center; }
   .metric-box:first-child { border-radius: 20px 4px 4px 20px; }
   .metric-box:last-child { border-radius: 4px 20px 20px 4px; }
   .metric-num {
@@ -453,23 +401,20 @@
   }
   .metric-num sup { font-size: 28px; color: var(--blue-mid); }
   .metric-label {
-    font-size: 12px; font-weight: 300; color: var(--ink-muted);
-    line-height: 1.5;
+    font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.5;
   }
 
   /* ── CALLOUT ── */
   .callout {
     background: var(--blue-deep);
-    padding: 48px 52px;
-    border-radius: 4px;
+    padding: 48px 52px; border-radius: 4px;
     margin: 48px 0;
   }
   .callout p {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(20px, 2.5vw, 30px);
     font-weight: 300; font-style: italic;
-    color: var(--white); line-height: 1.5;
-    max-width: 720px;
+    color: var(--white); line-height: 1.5; max-width: 720px;
   }
   .callout p em { color: var(--blue-pale); font-style: normal; }
 
@@ -479,11 +424,10 @@
     border: 1px solid var(--blue-pale);
     border-radius: 4px 20px 20px 4px;
     padding: 48px 56px;
-    margin-top: 48px;
-    position: relative;
+    margin-top: 48px; position: relative;
   }
   .testimonial-block::before {
-    content: '"';
+    content: '\201C';
     position: absolute; top: 20px; left: 40px;
     font-family: 'Cormorant Garamond', serif;
     font-size: 96px; font-weight: 300; line-height: 1;
@@ -497,9 +441,7 @@
     max-width: 680px; margin-bottom: 24px;
     position: relative; padding-top: 32px;
   }
-  .testimonial-author {
-    display: flex; align-items: center; gap: 16px;
-  }
+  .testimonial-author { display: flex; align-items: center; gap: 16px; }
   .testimonial-dot {
     width: 40px; height: 40px; border-radius: 50%;
     background: var(--blue-mid);
@@ -507,9 +449,7 @@
     font-size: 16px; color: white;
     font-family: 'Cormorant Garamond', serif; font-weight: 400;
   }
-  .testimonial-name {
-    font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 2px;
-  }
+  .testimonial-name { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
   .testimonial-role {
     font-family: 'DM Mono', monospace;
     font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
@@ -518,16 +458,10 @@
 
   /* ── SCREENS GALLERY ── */
   .screens-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 40px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; margin-top: 40px;
   }
-  .screen-thumb {
-    overflow: hidden;
-    background: var(--blue-ghost);
-    border-radius: 4px;
-  }
+  .screen-thumb { overflow: hidden; background: var(--blue-ghost); border-radius: 4px; }
   .screen-thumb:first-child { border-radius: 20px 4px 4px 4px; }
   .screen-thumb:last-child { border-radius: 4px 4px 20px 4px; }
   .screen-thumb img {
@@ -538,9 +472,7 @@
   .screen-thumb:hover img { transform: scale(1.04); }
 
   /* ── DARK SECTION ── */
-  .section-dark {
-    background: var(--ink);
-  }
+  .section-dark { background: var(--ink); }
   .section-dark .cs-label { color: var(--blue-pale); }
   .section-dark .cs-label::before { background: var(--blue-pale); }
   .section-dark .cs-title { color: var(--white); }
@@ -577,16 +509,49 @@
   .cta-btn.outline { border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); }
   .cta-btn.outline:hover { border-color: var(--white); color: var(--white); transform: translateY(-1px); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink);
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding: 28px 80px;
+  /* ── FOOTER NAV ── */
+  .case-footer-nav {
+    max-width: 1200px; margin: 0 auto;
+    padding: 64px 80px;
     display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--warm-stone);
   }
-  footer p { font-size: 13px; color: rgba(255,255,255,0.35); }
-  footer a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
-  footer a:hover { color: var(--blue-pale); }
+  .footer-nav-link {
+    text-decoration: none; display: flex; flex-direction: column; gap: 8px;
+  }
+  .fnl-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--ink-muted); text-transform: uppercase; }
+  .fnl-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--ink); transition: color 0.2s; }
+  .footer-nav-link:hover .fnl-title { color: var(--blue-mid); }
+
+  /* ── FOOTER ── */
+  footer { text-align: center; padding: 32px 24px; color: var(--ink-muted); font-size: 13px; border-top: 1px solid var(--warm-stone); }
+
+  /* ── ROLE ── */
+  .role-section { background: var(--blue-deep); padding: 100px 80px; }
+  .role-content { max-width: 800px; margin: 0 auto; text-align: center; }
+  .role-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--blue-pale); margin-bottom: 40px;
+    display: flex; align-items: center; gap: 12px; justify-content: center;
+  }
+  .role-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--blue-pale); }
+  .role-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 300; font-style: italic;
+    line-height: 1.3; color: var(--white);
+    margin-bottom: 32px;
+  }
+  .role-attribution {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--blue-pale);
+  }
+  .role-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    margin-top: 64px;
+  }
 
   /* ── REVEAL ── */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
@@ -606,8 +571,11 @@
     .cs-2col, .diamond-flow, .immersion-grid, .profiles-grid,
     .blueprint-cards, .products-grid, .metrics-row, .screens-row { grid-template-columns: 1fr; }
     .img-gallery, .img-gallery.two-col { grid-template-columns: 1fr 1fr; }
-    .case-cta { padding: 48px 24px; }
-    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    .case-cta { padding: 48px 24px; flex-direction: column; text-align: center; }
+    .case-cta-links { justify-content: center; }
+    .case-footer-nav { padding: 40px 24px; flex-direction: column; gap: 32px; }
+    .role-section { padding: 80px 24px; }
+    .role-stats { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -615,34 +583,47 @@
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-back">← Back to portfolio</a>
+  <a href="index.html" class="nav-back">
+    <span class="en-inline">&larr; Back to portfolio</span>
+    <span class="pt-inline">&larr; Voltar ao portfólio</span>
+  </a>
   <div class="nav-divider"></div>
-  <span class="nav-title">Previsul — End-to-End Service Design</span>
+  <span class="nav-title">
+    <span class="en-inline">Previsul — End-to-End Service Design</span>
+    <span class="pt-inline">Previsul — Design de Serviço End-to-End</span>
+  </span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
 </nav>
 
 <!-- ── HERO ── -->
 <header class="case-hero">
   <div class="case-hero-left">
     <div class="case-tag-row">
-      <span class="ctag">Service Design</span>
-      <span class="ctag">UX Research</span>
+      <span class="ctag"><span class="en-inline">Service Design</span><span class="pt-inline">Design de Serviço</span></span>
+      <span class="ctag"><span class="en-inline">UX Research</span><span class="pt-inline">Pesquisa UX</span></span>
       <span class="ctag">End-to-End</span>
-      <span class="ctag">Double Diamond</span>
+      <span class="ctag"><span class="en-inline">Double Diamond</span><span class="pt-inline">Diamante Duplo</span></span>
     </div>
-    <div class="case-hero-eyebrow">Previsul Seguradora · 2019–2020</div>
+    <div class="case-hero-eyebrow">Previsul Seguradora &middot; 2019–2020</div>
     <h1 class="case-hero-title">Previsul.</h1>
-    <p class="case-hero-subtitle">End-to-End Service Design<br>for an Insurance Claim Journey</p>
+    <p class="case-hero-subtitle">
+      <span class="en-inline">End-to-End Service Design<br>for an Insurance Claim Journey</span>
+      <span class="pt-inline">Design de Serviço End-to-End<br>para uma Jornada de Sinistros</span>
+    </p>
     <div class="case-meta-row">
       <div class="case-meta-item">
-        <div class="case-meta-label">Role</div>
-        <div class="case-meta-value">UX & Service Lead</div>
+        <div class="case-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Função</span></div>
+        <div class="case-meta-value"><span class="en-inline">UX & Service Lead</span><span class="pt-inline">Líder UX & Serviço</span></div>
       </div>
       <div class="case-meta-item">
-        <div class="case-meta-label">Duration</div>
-        <div class="case-meta-value">6 months</div>
+        <div class="case-meta-label"><span class="en-inline">Duration</span><span class="pt-inline">Duração</span></div>
+        <div class="case-meta-value"><span class="en-inline">6 months</span><span class="pt-inline">6 meses</span></div>
       </div>
       <div class="case-meta-item">
-        <div class="case-meta-label">Location</div>
+        <div class="case-meta-label"><span class="en-inline">Location</span><span class="pt-inline">Localização</span></div>
         <div class="case-meta-value">São Paulo + Porto Alegre</div>
       </div>
     </div>
@@ -652,19 +633,19 @@
     <div class="hero-stats-grid">
       <div class="hero-stat">
         <div class="hero-stat-num">6<span>mo</span></div>
-        <div class="hero-stat-label">months of work</div>
+        <div class="hero-stat-label"><span class="en-inline">months of work</span><span class="pt-inline">meses de trabalho</span></div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">22</div>
-        <div class="hero-stat-label">interviews & tests conducted</div>
+        <div class="hero-stat-label"><span class="en-inline">interviews & tests conducted</span><span class="pt-inline">entrevistas e testes realizados</span></div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">40<span>+</span></div>
-        <div class="hero-stat-label">pain points mapped</div>
+        <div class="hero-stat-label"><span class="en-inline">pain points mapped</span><span class="pt-inline">pontos de dor mapeados</span></div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">151</div>
-        <div class="hero-stat-label">screens designed</div>
+        <div class="hero-stat-label"><span class="en-inline">screens designed</span><span class="pt-inline">telas desenhadas</span></div>
       </div>
     </div>
   </div>
@@ -675,33 +656,47 @@
 
   <!-- 01 O PROJETO -->
   <section class="case-section reveal">
-    <div class="cs-label">01 — The Project</div>
-    <h2 class="cs-title">Redesigning a journey<br>that was <em>broken for everyone.</em></h2>
+    <div class="cs-label"><span class="en-inline">01 — The Project</span><span class="pt-inline">01 — O Projeto</span></div>
+    <h2 class="cs-title">
+      <span class="en">Redesigning a journey<br>that was <em>broken for everyone.</em></span>
+      <span class="pt">Redesenhando uma jornada<br>que estava <em>quebrada para todos.</em></span>
+    </h2>
     <div class="cs-2col">
       <div>
-        <p class="cs-body-text">Previsul is an insurance company with complex operations and several legacy systems. They brought a clear challenge: map the entire insurance claim journey — from the first notice made through the 0800 call center, all the way to the final payment resolution.</p>
-        <p class="cs-body-text">The project started in October 2019 and the UX phase was completed in March 2020. As <strong>UX and Service Lead</strong>, I led discovery, journey mapping, ideation, and interface design — collaborating closely with internal teams, a third-party call center, analysts, and broker agencies across multiple cities.</p>
+        <p class="cs-body-text en">Previsul is an insurance company with complex operations and several legacy systems. They brought a clear challenge: map the entire insurance claim journey — from the first notice made through the 0800 call center, all the way to the final payment resolution.</p>
+        <p class="cs-body-text pt">A Previsul é uma seguradora com operações complexas e diversos sistemas legados. Trouxeram um desafio claro: mapear toda a jornada de sinistros — desde o primeiro aviso feito pelo call center 0800, até a resolução final do pagamento.</p>
+        <p class="cs-body-text en">The project started in October 2019 and the UX phase was completed in March 2020. As <strong>UX and Service Lead</strong>, I led discovery, journey mapping, ideation, and interface design — collaborating closely with internal teams, a third-party call center, analysts, and broker agencies across multiple cities.</p>
+        <p class="cs-body-text pt">O projeto começou em outubro de 2019 e a fase de UX foi concluída em março de 2020. Como <strong>Líder de UX e Serviço</strong>, conduzi discovery, mapeamento de jornada, ideação e design de interface — colaborando de perto com equipes internas, call center terceirizado, analistas e corretoras em múltiplas cidades.</p>
       </div>
       <div>
-        <p class="cs-body-text">The goal was to create a digital solution that simplified communication between all parties — claimants, brokers, analysts, and third-party providers — transforming a bureaucratic, fragmented process into something more <strong>human, clear, and efficient.</strong></p>
-        <p class="cs-body-text">This was not just a UX project. It was a service redesign that touched operations, legacy systems, legal compliance, and emotional experience — all at once.</p>
+        <p class="cs-body-text en">The goal was to create a digital solution that simplified communication between all parties — claimants, brokers, analysts, and third-party providers — transforming a bureaucratic, fragmented process into something more <strong>human, clear, and efficient.</strong></p>
+        <p class="cs-body-text pt">O objetivo era criar uma solução digital que simplificasse a comunicação entre todas as partes — segurados, corretores, analistas e prestadores terceirizados — transformando um processo burocrático e fragmentado em algo mais <strong>humano, claro e eficiente.</strong></p>
+        <p class="cs-body-text en">This was not just a UX project. It was a service redesign that touched operations, legacy systems, legal compliance, and emotional experience — all at once.</p>
+        <p class="cs-body-text pt">Não foi apenas um projeto de UX. Foi um redesign de serviço que tocou operações, sistemas legados, conformidade legal e experiência emocional — tudo ao mesmo tempo.</p>
       </div>
     </div>
   </section>
 
   <!-- 02 O DESAFIO -->
   <section class="case-section section-dark reveal">
-    <div class="cs-label">02 — The Challenge</div>
-    <h2 class="cs-title">A process fragmented<br>across <em>cities, tools, and people.</em></h2>
+    <div class="cs-label"><span class="en-inline">02 — The Challenge</span><span class="pt-inline">02 — O Desafio</span></div>
+    <h2 class="cs-title">
+      <span class="en">A process fragmented<br>across <em>cities, tools, and people.</em></span>
+      <span class="pt">Um processo fragmentado<br>entre <em>cidades, ferramentas e pessoas.</em></span>
+    </h2>
     <div class="cs-2col">
       <div>
-        <p class="cs-body-text">The main challenge was to unify fragmented processes and tools spread across multiple cities and user profiles — while maintaining accuracy and regulatory compliance.</p>
-        <p class="cs-body-text">Every claim involved at least 4 different parties operating in silos: a third-party call center in Alphaville, internal analysts in Porto Alegre, broker agencies scattered across Brazil, and the claimants themselves — each with different tools, expectations, and levels of information.</p>
+        <p class="cs-body-text en">The main challenge was to unify fragmented processes and tools spread across multiple cities and user profiles — while maintaining accuracy and regulatory compliance.</p>
+        <p class="cs-body-text pt">O principal desafio era unificar processos e ferramentas fragmentados espalhados por múltiplas cidades e perfis de usuários — mantendo precisão e conformidade regulatória.</p>
+        <p class="cs-body-text en">Every claim involved at least 4 different parties operating in silos: a third-party call center in Alphaville, internal analysts in Porto Alegre, broker agencies scattered across Brazil, and the claimants themselves — each with different tools, expectations, and levels of information.</p>
+        <p class="cs-body-text pt">Cada sinistro envolvia pelo menos 4 partes diferentes operando em silos: um call center terceirizado em Alphaville, analistas internos em Porto Alegre, corretoras espalhadas pelo Brasil, e os próprios segurados — cada um com ferramentas, expectativas e níveis de informação diferentes.</p>
       </div>
       <div>
-        <p class="cs-body-text">It was also about bringing <strong>empathy to a moment that's inherently stressful.</strong> Someone filing an insurance claim has just experienced a loss. The process should not make it worse.</p>
+        <p class="cs-body-text en">It was also about bringing <strong>empathy to a moment that's inherently stressful.</strong> Someone filing an insurance claim has just experienced a loss. The process should not make it worse.</p>
+        <p class="cs-body-text pt">Também se tratava de trazer <strong>empatia a um momento inerentemente estressante.</strong> Alguém que abre um sinistro acabou de sofrer uma perda. O processo não deveria piorar as coisas.</p>
         <div class="callout" style="margin-top: 0;">
-          <p>"The process was designed for the system, not for the person in it. Our job was to reverse that."</p>
+          <p class="en">"The process was designed for the system, not for the person in it. Our job was to reverse that."</p>
+          <p class="pt">"O processo foi desenhado para o sistema, não para a pessoa dentro dele. Nosso trabalho era inverter isso."</p>
         </div>
       </div>
     </div>
@@ -709,73 +704,90 @@
 
   <!-- 03 METODOLOGIA -->
   <section class="case-section reveal">
-    <div class="cs-label">03 — Methodology</div>
-    <h2 class="cs-title">Double Diamond —<br><em>four stages, no shortcuts.</em></h2>
-    <p class="cs-body-text">The Double Diamond is the methodology that makes the most sense to me as a product designer. The goal is to move through four macro stages — always expanding before converging, never jumping to solutions before understanding the problem space.</p>
+    <div class="cs-label"><span class="en-inline">03 — Methodology</span><span class="pt-inline">03 — Metodologia</span></div>
+    <h2 class="cs-title">
+      <span class="en">Double Diamond —<br><em>four stages, no shortcuts.</em></span>
+      <span class="pt">Diamante Duplo —<br><em>quatro etapas, sem atalhos.</em></span>
+    </h2>
+    <p class="cs-body-text en">The Double Diamond is the methodology that makes the most sense to me as a product designer. The goal is to move through four macro stages — always expanding before converging, never jumping to solutions before understanding the problem space.</p>
+    <p class="cs-body-text pt">O Diamante Duplo é a metodologia que mais faz sentido para mim como designer de produto. O objetivo é percorrer quatro macro etapas — sempre expandindo antes de convergir, nunca pulando para soluções antes de entender o espaço do problema.</p>
 
     <div class="diamond-flow">
       <div class="diamond-step">
-        <div class="diamond-phase">01 — Expand</div>
-        <div class="diamond-name">Immersion</div>
-        <div class="diamond-tools">Stakeholder sessions · On-site visits · Interviews · Field observation</div>
+        <div class="diamond-phase"><span class="en-inline">01 — Expand</span><span class="pt-inline">01 — Expandir</span></div>
+        <div class="diamond-name"><span class="en-inline">Immersion</span><span class="pt-inline">Imersão</span></div>
+        <div class="diamond-tools en">Stakeholder sessions &middot; On-site visits &middot; Interviews &middot; Field observation</div>
+        <div class="diamond-tools pt">Sessões com stakeholders &middot; Visitas in loco &middot; Entrevistas &middot; Observação de campo</div>
       </div>
       <div class="diamond-step active">
-        <div class="diamond-phase">02 — Converge</div>
-        <div class="diamond-name">Diagnosis</div>
-        <div class="diamond-tools">Service Blueprints · Journey maps · Persona profiles · Pain point synthesis</div>
+        <div class="diamond-phase"><span class="en-inline">02 — Converge</span><span class="pt-inline">02 — Convergir</span></div>
+        <div class="diamond-name"><span class="en-inline">Diagnosis</span><span class="pt-inline">Diagnóstico</span></div>
+        <div class="diamond-tools en">Service Blueprints &middot; Journey maps &middot; Persona profiles &middot; Pain point synthesis</div>
+        <div class="diamond-tools pt">Service Blueprints &middot; Mapas de jornada &middot; Perfis de persona &middot; Síntese de dores</div>
       </div>
       <div class="diamond-step">
-        <div class="diamond-phase">03 — Expand</div>
-        <div class="diamond-name">Ideation</div>
-        <div class="diamond-tools">Co-creation workshop · Storyboards · Task flows · Prioritization</div>
+        <div class="diamond-phase"><span class="en-inline">03 — Expand</span><span class="pt-inline">03 — Expandir</span></div>
+        <div class="diamond-name"><span class="en-inline">Ideation</span><span class="pt-inline">Ideação</span></div>
+        <div class="diamond-tools en">Co-creation workshop &middot; Storyboards &middot; Task flows &middot; Prioritization</div>
+        <div class="diamond-tools pt">Workshop de cocriação &middot; Storyboards &middot; Fluxos de tarefas &middot; Priorização</div>
       </div>
       <div class="diamond-step">
-        <div class="diamond-phase">04 — Converge</div>
-        <div class="diamond-name">Design & Deliver</div>
-        <div class="diamond-tools">Wireframes · Prototypes · Usability tests · 151 screens</div>
+        <div class="diamond-phase"><span class="en-inline">04 — Converge</span><span class="pt-inline">04 — Convergir</span></div>
+        <div class="diamond-name"><span class="en-inline">Design & Deliver</span><span class="pt-inline">Design & Entrega</span></div>
+        <div class="diamond-tools en">Wireframes &middot; Prototypes &middot; Usability tests &middot; 151 screens</div>
+        <div class="diamond-tools pt">Wireframes &middot; Protótipos &middot; Testes de usabilidade &middot; 151 telas</div>
       </div>
     </div>
 
-    <p class="cs-body-text" style="margin-top: 32px;">After understanding the scenario, I built a detailed plan with weekly views and a to-do list. The client wanted visibility at every step — and it also kept me from going off track in a project this complex.</p>
+    <p class="cs-body-text en" style="margin-top: 32px;">After understanding the scenario, I built a detailed plan with weekly views and a to-do list. The client wanted visibility at every step — and it also kept me from going off track in a project this complex.</p>
+    <p class="cs-body-text pt" style="margin-top: 32px;">Após entender o cenário, construí um plano detalhado com visões semanais e uma lista de tarefas. O cliente queria visibilidade em cada etapa — e isso também me manteve no caminho certo em um projeto dessa complexidade.</p>
   </section>
 
   <!-- 04 IMERSÃO -->
   <section class="case-section reveal" style="background: var(--blue-ghost);">
-    <div class="cs-label">04 — Immersion</div>
-    <h2 class="cs-title">I didn't map the journey<br>from a desk. <em>I lived it.</em></h2>
-    <p class="cs-body-text">The immersion phase was structured in four parts — each one revealing a layer of the journey that would have been invisible from the outside. More than 5 hours of video and audio were generated in the field interviews alone.</p>
+    <div class="cs-label"><span class="en-inline">04 — Immersion</span><span class="pt-inline">04 — Imersão</span></div>
+    <h2 class="cs-title">
+      <span class="en">I didn't map the journey<br>from a desk. <em>I lived it.</em></span>
+      <span class="pt">Eu não mapeei a jornada<br>de uma mesa. <em>Eu a vivi.</em></span>
+    </h2>
+    <p class="cs-body-text en">The immersion phase was structured in four parts — each one revealing a layer of the journey that would have been invisible from the outside. More than 5 hours of video and audio were generated in the field interviews alone.</p>
+    <p class="cs-body-text pt">A fase de imersão foi estruturada em quatro partes — cada uma revelando uma camada da jornada que seria invisível de fora. Mais de 5 horas de vídeo e áudio foram geradas apenas nas entrevistas de campo.</p>
 
     <div class="immersion-grid">
       <div class="immersion-card reveal-delay-1">
         <img class="immersion-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/CaPvDF0j77sKZtJk.png" alt="First day with stakeholders" loading="lazy">
         <div class="immersion-body">
-          <div class="immersion-part">Part I — Stakeholders</div>
-          <div class="immersion-title">First day with the client</div>
-          <p class="immersion-desc">I met with Previsul's stakeholders and we drew the claim journey as they understood it. It quickly became clear that wasn't enough — there were multiple characters involved: brokers, policyholders, beneficiaries, analysts, and third parties. I needed to know them all.</p>
+          <div class="immersion-part"><span class="en-inline">Part I — Stakeholders</span><span class="pt-inline">Parte I — Stakeholders</span></div>
+          <div class="immersion-title"><span class="en-inline">First day with the client</span><span class="pt-inline">Primeiro dia com o cliente</span></div>
+          <p class="immersion-desc en">I met with Previsul's stakeholders and we drew the claim journey as they understood it. It quickly became clear that wasn't enough — there were multiple characters involved: brokers, policyholders, beneficiaries, analysts, and third parties. I needed to know them all.</p>
+          <p class="immersion-desc pt">Encontrei os stakeholders da Previsul e desenhamos a jornada de sinistros como eles a entendiam. Rapidamente ficou claro que não era suficiente — havia múltiplos personagens envolvidos: corretores, segurados, beneficiários, analistas e terceiros. Eu precisava conhecer todos.</p>
         </div>
       </div>
       <div class="immersion-card reveal-delay-2">
         <img class="immersion-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/7Pq5NOBsCWXS66Av.png" alt="Visit to Alphaville call center" loading="lazy">
         <div class="immersion-body">
-          <div class="immersion-part">Part II — Alphaville</div>
-          <div class="immersion-title">Inside the 0800 call center</div>
-          <p class="immersion-desc">The first contact a claimant had was a phone call. I went on-site to the third-party company in Alphaville and interviewed everyone in the process: Call Center agents, Backoffice operators, and initial Analysts. Everything was documented and redesigned.</p>
+          <div class="immersion-part"><span class="en-inline">Part II — Alphaville</span><span class="pt-inline">Parte II — Alphaville</span></div>
+          <div class="immersion-title"><span class="en-inline">Inside the 0800 call center</span><span class="pt-inline">Dentro do call center 0800</span></div>
+          <p class="immersion-desc en">The first contact a claimant had was a phone call. I went on-site to the third-party company in Alphaville and interviewed everyone in the process: Call Center agents, Backoffice operators, and initial Analysts. Everything was documented and redesigned.</p>
+          <p class="immersion-desc pt">O primeiro contato de um segurado era uma ligação telefônica. Fui até a empresa terceirizada em Alphaville e entrevistei todos no processo: atendentes do Call Center, operadores de Backoffice e Analistas iniciais. Tudo foi documentado e redesenhado.</p>
         </div>
       </div>
       <div class="immersion-card reveal-delay-1">
         <img class="immersion-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/hv7xZbWnGcK1K7zn.png" alt="Visit to Porto Alegre analysts" loading="lazy">
         <div class="immersion-body">
-          <div class="immersion-part">Part III — Porto Alegre</div>
-          <div class="immersion-title">Meeting the claim analysts</div>
-          <p class="immersion-desc">After the call center, the claim reaches Previsul's own analysts — a long and complex process. I flew to Porto Alegre to observe and interview the analyst team directly, generating over 5 hours of recorded material.</p>
+          <div class="immersion-part"><span class="en-inline">Part III — Porto Alegre</span><span class="pt-inline">Parte III — Porto Alegre</span></div>
+          <div class="immersion-title"><span class="en-inline">Meeting the claim analysts</span><span class="pt-inline">Conhecendo os analistas de sinistros</span></div>
+          <p class="immersion-desc en">After the call center, the claim reaches Previsul's own analysts — a long and complex process. I flew to Porto Alegre to observe and interview the analyst team directly, generating over 5 hours of recorded material.</p>
+          <p class="immersion-desc pt">Após o call center, o sinistro chega aos próprios analistas da Previsul — um processo longo e complexo. Voei até Porto Alegre para observar e entrevistar a equipe de analistas diretamente, gerando mais de 5 horas de material gravado.</p>
         </div>
       </div>
       <div class="immersion-card reveal-delay-2">
         <img class="immersion-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/kXnjWc35us5UevAL.png" alt="Broker interviews" loading="lazy">
         <div class="immersion-body">
-          <div class="immersion-part">Part IV — Brokers</div>
-          <div class="immersion-title">The missing character</div>
-          <p class="immersion-desc">To close the complete journey, one character was still missing: the Broker. I conducted calls and documented the entire broker process across three different insurance agencies — their role, their friction points, and their relationship with the claimant.</p>
+          <div class="immersion-part"><span class="en-inline">Part IV — Brokers</span><span class="pt-inline">Parte IV — Corretores</span></div>
+          <div class="immersion-title"><span class="en-inline">The missing character</span><span class="pt-inline">O personagem que faltava</span></div>
+          <p class="immersion-desc en">To close the complete journey, one character was still missing: the Broker. I conducted calls and documented the entire broker process across three different insurance agencies — their role, their friction points, and their relationship with the claimant.</p>
+          <p class="immersion-desc pt">Para fechar a jornada completa, um personagem ainda faltava: o Corretor. Realizei ligações e documentei todo o processo do corretor em três diferentes agências de seguros — seu papel, seus pontos de fricção e sua relação com o segurado.</p>
         </div>
       </div>
     </div>
@@ -783,73 +795,93 @@
 
   <!-- 05 PERFIS -->
   <section class="case-section reveal">
-    <div class="cs-label">05 — User Profiles</div>
-    <h2 class="cs-title">Six roles.<br><em>One broken process.</em></h2>
-    <p class="cs-body-text">The immersion revealed distinct behavioral profiles across the service. Understanding each one — their motivations, anxieties, and working styles — was essential before designing anything.</p>
+    <div class="cs-label"><span class="en-inline">05 — User Profiles</span><span class="pt-inline">05 — Perfis de Usuários</span></div>
+    <h2 class="cs-title">
+      <span class="en">Six roles.<br><em>One broken process.</em></span>
+      <span class="pt">Seis papéis.<br><em>Um processo quebrado.</em></span>
+    </h2>
+    <p class="cs-body-text en">The immersion revealed distinct behavioral profiles across the service. Understanding each one — their motivations, anxieties, and working styles — was essential before designing anything.</p>
+    <p class="cs-body-text pt">A imersão revelou perfis comportamentais distintos ao longo do serviço. Entender cada um — suas motivações, ansiedades e estilos de trabalho — era essencial antes de projetar qualquer coisa.</p>
 
     <div class="profiles-grid">
       <div class="profile-card">
-        <div class="profile-icon">📞</div>
-        <div class="profile-company">TMA · Third Party</div>
-        <div class="profile-name">Call Center Agent</div>
-        <p class="profile-desc">Young, early-career. Passive and compliant, calm on the phone. Not proactive — they do exactly what they're told. Dependent on clear scripts.</p>
+        <div class="profile-icon">&#128222;</div>
+        <div class="profile-company"><span class="en-inline">TMA &middot; Third Party</span><span class="pt-inline">TMA &middot; Terceirizada</span></div>
+        <div class="profile-name"><span class="en-inline">Call Center Agent</span><span class="pt-inline">Atendente de Call Center</span></div>
+        <p class="profile-desc en">Young, early-career. Passive and compliant, calm on the phone. Not proactive — they do exactly what they're told. Dependent on clear scripts.</p>
+        <p class="profile-desc pt">Jovem, início de carreira. Passivo e obediente, calmo ao telefone. Não proativo — faz exatamente o que é instruído. Dependente de roteiros claros.</p>
         <span class="profile-tag">TMA</span>
       </div>
       <div class="profile-card">
-        <div class="profile-icon">📂</div>
-        <div class="profile-company">TMA · Third Party</div>
-        <div class="profile-name">Backoffice Operator</div>
-        <p class="profile-desc">Responsible for gathering all necessary documents. Needs to be more proactive and curious than the call center. Must connect the dots before passing the file forward.</p>
+        <div class="profile-icon">&#128194;</div>
+        <div class="profile-company"><span class="en-inline">TMA &middot; Third Party</span><span class="pt-inline">TMA &middot; Terceirizada</span></div>
+        <div class="profile-name"><span class="en-inline">Backoffice Operator</span><span class="pt-inline">Operador de Backoffice</span></div>
+        <p class="profile-desc en">Responsible for gathering all necessary documents. Needs to be more proactive and curious than the call center. Must connect the dots before passing the file forward.</p>
+        <p class="profile-desc pt">Responsável por reunir toda a documentação necessária. Precisa ser mais proativo e curioso que o call center. Deve conectar os pontos antes de encaminhar o processo.</p>
         <span class="profile-tag">TMA</span>
       </div>
       <div class="profile-card">
-        <div class="profile-icon">🔍</div>
-        <div class="profile-company">TMA · Initial Analysis</div>
-        <div class="profile-name">TMA Analyst</div>
-        <p class="profile-desc">Analytical profile. Noticeably higher education level than call center. Calm, perfectionist, attentive. Conducts initial screening before escalating to Previsul.</p>
+        <div class="profile-icon">&#128269;</div>
+        <div class="profile-company"><span class="en-inline">TMA &middot; Initial Analysis</span><span class="pt-inline">TMA &middot; Análise Inicial</span></div>
+        <div class="profile-name"><span class="en-inline">TMA Analyst</span><span class="pt-inline">Analista TMA</span></div>
+        <p class="profile-desc en">Analytical profile. Noticeably higher education level than call center. Calm, perfectionist, attentive. Conducts initial screening before escalating to Previsul.</p>
+        <p class="profile-desc pt">Perfil analítico. Nível de escolaridade visivelmente maior que o call center. Calmo, perfeccionista, atento. Realiza triagem inicial antes de escalar para a Previsul.</p>
         <span class="profile-tag">TMA</span>
       </div>
       <div class="profile-card highlight">
-        <div class="profile-icon">⚖️</div>
-        <div class="profile-company">Previsul · Internal</div>
-        <div class="profile-name">Previsul Analyst</div>
-        <p class="profile-desc">Confident when experienced. Knows document lists and policy types by heart. Not sentimental about claims — focuses on fair, accurate analysis. Needs a reliable single source of truth.</p>
+        <div class="profile-icon">&#9878;&#65039;</div>
+        <div class="profile-company"><span class="en-inline">Previsul &middot; Internal</span><span class="pt-inline">Previsul &middot; Interno</span></div>
+        <div class="profile-name"><span class="en-inline">Previsul Analyst</span><span class="pt-inline">Analista Previsul</span></div>
+        <p class="profile-desc en">Confident when experienced. Knows document lists and policy types by heart. Not sentimental about claims — focuses on fair, accurate analysis. Needs a reliable single source of truth.</p>
+        <p class="profile-desc pt">Confiante quando experiente. Conhece listas de documentos e tipos de apólice de cor. Não sentimental sobre sinistros — foca em análise justa e precisa. Precisa de uma fonte única e confiável de informações.</p>
         <span class="profile-tag">Previsul</span>
       </div>
       <div class="profile-card highlight">
-        <div class="profile-icon">💼</div>
-        <div class="profile-company">Previsul · Management</div>
-        <div class="profile-name">GESIN Manager</div>
-        <p class="profile-desc">Needs visibility over the full claim pipeline. Requires management features — overview dashboards, team performance, escalation controls. Strategic, not operational.</p>
+        <div class="profile-icon">&#128188;</div>
+        <div class="profile-company"><span class="en-inline">Previsul &middot; Management</span><span class="pt-inline">Previsul &middot; Gestão</span></div>
+        <div class="profile-name"><span class="en-inline">GESIN Manager</span><span class="pt-inline">Gerente GESIN</span></div>
+        <p class="profile-desc en">Needs visibility over the full claim pipeline. Requires management features — overview dashboards, team performance, escalation controls. Strategic, not operational.</p>
+        <p class="profile-desc pt">Precisa de visibilidade sobre todo o pipeline de sinistros. Requer funcionalidades de gestão — dashboards de visão geral, performance da equipe, controles de escalação. Estratégico, não operacional.</p>
         <span class="profile-tag">Previsul</span>
       </div>
       <div class="profile-card">
-        <div class="profile-icon">🤝</div>
-        <div class="profile-company">External · Broker</div>
-        <div class="profile-name">Insurance Broker</div>
-        <p class="profile-desc">Flexible, helpful, adaptable to any channel — WhatsApp, email, phone, in-person. Experienced with bureaucracy, tries to shield clients from it. Ready to use any tool that speeds up the process.</p>
-        <span class="profile-tag">External</span>
+        <div class="profile-icon">&#129309;</div>
+        <div class="profile-company"><span class="en-inline">External &middot; Broker</span><span class="pt-inline">Externo &middot; Corretor</span></div>
+        <div class="profile-name"><span class="en-inline">Insurance Broker</span><span class="pt-inline">Corretor de Seguros</span></div>
+        <p class="profile-desc en">Flexible, helpful, adaptable to any channel — WhatsApp, email, phone, in-person. Experienced with bureaucracy, tries to shield clients from it. Ready to use any tool that speeds up the process.</p>
+        <p class="profile-desc pt">Flexível, prestativo, adaptável a qualquer canal — WhatsApp, e-mail, telefone, presencial. Experiente com burocracia, tenta proteger os clientes dela. Pronto para usar qualquer ferramenta que agilize o processo.</p>
+        <span class="profile-tag"><span class="en-inline">External</span><span class="pt-inline">Externo</span></span>
       </div>
     </div>
   </section>
 
   <!-- 06 DIAGNÓSTICO -->
   <section class="case-section reveal">
-    <div class="cs-label">06 — Diagnosis</div>
-    <h2 class="cs-title">Service Blueprints —<br><em>making the invisible visible.</em></h2>
-    <p class="cs-body-text">Only after analyzing the current service experience could we build a map to guide the next stages. The Service Blueprint was used to document the journeys of all audiences involved — pointing out contact points, channels, feelings, pain points, and opportunities.</p>
+    <div class="cs-label"><span class="en-inline">06 — Diagnosis</span><span class="pt-inline">06 — Diagnóstico</span></div>
+    <h2 class="cs-title">
+      <span class="en">Service Blueprints —<br><em>making the invisible visible.</em></span>
+      <span class="pt">Service Blueprints —<br><em>tornando o invisível visível.</em></span>
+    </h2>
+    <p class="cs-body-text en">Only after analyzing the current service experience could we build a map to guide the next stages. The Service Blueprint was used to document the journeys of all audiences involved — pointing out contact points, channels, feelings, pain points, and opportunities.</p>
+    <p class="cs-body-text pt">Somente após analisar a experiência atual do serviço pudemos construir um mapa para guiar as próximas etapas. O Service Blueprint foi usado para documentar as jornadas de todos os públicos envolvidos — apontando pontos de contato, canais, sentimentos, dores e oportunidades.</p>
 
     <div class="blueprint-cards">
       <div class="blueprint-card">
         <img class="blueprint-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/y1KOi683iKdZEIEi.png" alt="Service Blueprint TMA Journey" loading="lazy">
         <div class="blueprint-body">
           <div class="blueprint-label">Blueprint 01</div>
-          <div class="blueprint-title">TMA Journey — Third Party Operations</div>
-          <ul class="blueprint-results">
+          <div class="blueprint-title"><span class="en-inline">TMA Journey — Third Party Operations</span><span class="pt-inline">Jornada TMA — Operações Terceirizadas</span></div>
+          <ul class="blueprint-results en">
             <li>Mapping of daily routines across 3 roles</li>
             <li>Client contact points identified</li>
             <li>Internal profile documentation</li>
             <li>Pain points and key insights</li>
+          </ul>
+          <ul class="blueprint-results pt">
+            <li>Mapeamento de rotinas diárias em 3 funções</li>
+            <li>Pontos de contato com o cliente identificados</li>
+            <li>Documentação de perfis internos</li>
+            <li>Pontos de dor e insights-chave</li>
           </ul>
         </div>
       </div>
@@ -857,12 +889,18 @@
         <img class="blueprint-img" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/tYLlWV12LblRQTyf.png" alt="Service Blueprint Internal Journey" loading="lazy">
         <div class="blueprint-body">
           <div class="blueprint-label">Blueprint 02</div>
-          <div class="blueprint-title">Internal Journey — Previsul Analysts</div>
-          <ul class="blueprint-results">
+          <div class="blueprint-title"><span class="en-inline">Internal Journey — Previsul Analysts</span><span class="pt-inline">Jornada Interna — Analistas Previsul</span></div>
+          <ul class="blueprint-results en">
             <li>Full analysis and payment workflow mapped</li>
             <li>Contact points with clients and partners</li>
             <li>Analyst and broker profiles documented</li>
             <li>Critical pain points and opportunities</li>
+          </ul>
+          <ul class="blueprint-results pt">
+            <li>Fluxo completo de análise e pagamento mapeado</li>
+            <li>Pontos de contato com clientes e parceiros</li>
+            <li>Perfis de analistas e corretores documentados</li>
+            <li>Pontos de dor críticos e oportunidades</li>
           </ul>
         </div>
       </div>
@@ -871,16 +909,23 @@
 
   <!-- 07 IDEAÇÃO -->
   <section class="case-section reveal" style="background: var(--warm-stone);">
-    <div class="cs-label">07 — Ideation</div>
-    <h2 class="cs-title">Workshop, storyboards,<br><em>and task flows.</em></h2>
+    <div class="cs-label"><span class="en-inline">07 — Ideation</span><span class="pt-inline">07 — Ideação</span></div>
+    <h2 class="cs-title">
+      <span class="en">Workshop, storyboards,<br><em>and task flows.</em></span>
+      <span class="pt">Workshop, storyboards,<br><em>e fluxos de tarefas.</em></span>
+    </h2>
     <div class="cs-2col">
       <div>
-        <p class="cs-body-text">After understanding all the processes, it was time to show the stakeholders the pain points found — and raise the flag on the most critical ones. A co-creation workshop brought together people from all areas of the claims department, plus special participants from Previsul.</p>
-        <p class="cs-body-text">Together, we discussed the pains and defined the actions needed to solve them. The workshop delivered prioritized pain points, storyboards, and task flows — the foundation for everything that followed.</p>
+        <p class="cs-body-text en">After understanding all the processes, it was time to show the stakeholders the pain points found — and raise the flag on the most critical ones. A co-creation workshop brought together people from all areas of the claims department, plus special participants from Previsul.</p>
+        <p class="cs-body-text pt">Após entender todos os processos, era hora de mostrar aos stakeholders os pontos de dor encontrados — e levantar a bandeira dos mais críticos. Um workshop de cocriação reuniu pessoas de todas as áreas do departamento de sinistros, além de participantes especiais da Previsul.</p>
+        <p class="cs-body-text en">Together, we discussed the pains and defined the actions needed to solve them. The workshop delivered prioritized pain points, storyboards, and task flows — the foundation for everything that followed.</p>
+        <p class="cs-body-text pt">Juntos, discutimos as dores e definimos as ações necessárias para resolvê-las. O workshop entregou pontos de dor priorizados, storyboards e fluxos de tarefas — a base para tudo que veio depois.</p>
       </div>
       <div>
-        <p class="cs-body-text">After the workshop, we created task flows for all planned products. This was the map that initiated the wireframe phase — ensuring every screen had a clear purpose and a documented user need behind it.</p>
-        <p class="cs-body-text"><strong>Before any pixel was moved to development,</strong> we ran usability tests with actual users in early prototypes — catching issues early, minimizing rework, and validating the direction before the real cost of development began.</p>
+        <p class="cs-body-text en">After the workshop, we created task flows for all planned products. This was the map that initiated the wireframe phase — ensuring every screen had a clear purpose and a documented user need behind it.</p>
+        <p class="cs-body-text pt">Após o workshop, criamos fluxos de tarefas para todos os produtos planejados. Este foi o mapa que iniciou a fase de wireframes — garantindo que cada tela tivesse um propósito claro e uma necessidade documentada do usuário por trás.</p>
+        <p class="cs-body-text en"><strong>Before any pixel was moved to development,</strong> we ran usability tests with actual users in early prototypes — catching issues early, minimizing rework, and validating the direction before the real cost of development began.</p>
+        <p class="cs-body-text pt"><strong>Antes de qualquer pixel ir para desenvolvimento,</strong> realizamos testes de usabilidade com usuários reais em protótipos iniciais — identificando problemas cedo, minimizando retrabalho e validando a direção antes que o custo real do desenvolvimento começasse.</p>
       </div>
     </div>
 
@@ -888,33 +933,44 @@
     <div class="img-gallery two-col" style="margin-top: 48px;">
       <div class="gallery-item">
         <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/6D0G91BbCYWDOBTx.png" alt="Ideation workshop" loading="lazy">
-        <div class="gallery-caption">Co-creation workshop — pain prioritization and storyboards</div>
+        <div class="gallery-caption"><span class="en-inline">Co-creation workshop — pain prioritization and storyboards</span><span class="pt-inline">Workshop de cocriação — priorização de dores e storyboards</span></div>
       </div>
       <div class="gallery-item">
         <img src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/HvXsQc5p2ywCvPta.png" alt="Task flows" loading="lazy">
-        <div class="gallery-caption">Task flows for all planned products — the map before the wireframes</div>
+        <div class="gallery-caption"><span class="en-inline">Task flows for all planned products — the map before the wireframes</span><span class="pt-inline">Fluxos de tarefas para todos os produtos planejados — o mapa antes dos wireframes</span></div>
       </div>
     </div>
   </section>
 
   <!-- 08 OS PRODUTOS -->
   <section class="case-section reveal">
-    <div class="cs-label">08 — Design & Delivery</div>
-    <h2 class="cs-title">Two connected products.<br><em>One redesigned journey.</em></h2>
-    <p class="cs-body-text">The design phase produced two distinct but deeply connected products — one facing outward toward claimants and brokers, the other facing inward toward analysts and managers. Together, they replaced what was previously handled entirely through the 0800 phone line.</p>
+    <div class="cs-label"><span class="en-inline">08 — Design & Delivery</span><span class="pt-inline">08 — Design & Entrega</span></div>
+    <h2 class="cs-title">
+      <span class="en">Two connected products.<br><em>One redesigned journey.</em></span>
+      <span class="pt">Dois produtos conectados.<br><em>Uma jornada redesenhada.</em></span>
+    </h2>
+    <p class="cs-body-text en">The design phase produced two distinct but deeply connected products — one facing outward toward claimants and brokers, the other facing inward toward analysts and managers. Together, they replaced what was previously handled entirely through the 0800 phone line.</p>
+    <p class="cs-body-text pt">A fase de design produziu dois produtos distintos mas profundamente conectados — um voltado para fora, para segurados e corretores, o outro voltado para dentro, para analistas e gestores. Juntos, substituíram o que antes era tratado inteiramente pela linha telefônica 0800.</p>
 
     <div class="products-grid">
       <div class="product-card">
         <img class="product-mockup" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/Hfo8eQ6up7Bw4rjK.png" alt="Claims Notice Web Portal mockup" loading="lazy" style="object-fit: cover;">
         <div class="product-body">
           <div class="product-num">01</div>
-          <div class="product-name">Claims Notice Web Portal</div>
-          <p class="product-desc">A web channel for clients and brokers to file and track insurance claims online — replacing the 0800-only process. Simple, visual, and designed for the most stressful moments.</p>
-          <div class="product-users">
+          <div class="product-name"><span class="en-inline">Claims Notice Web Portal</span><span class="pt-inline">Portal Web de Aviso de Sinistros</span></div>
+          <p class="product-desc en">A web channel for clients and brokers to file and track insurance claims online — replacing the 0800-only process. Simple, visual, and designed for the most stressful moments.</p>
+          <p class="product-desc pt">Um canal web para clientes e corretores registrarem e acompanharem sinistros online — substituindo o processo exclusivo pelo 0800. Simples, visual e desenhado para os momentos mais estressantes.</p>
+          <div class="product-users en">
             <span class="product-user-tag">Insured</span>
             <span class="product-user-tag">Beneficiaries</span>
             <span class="product-user-tag">Brokers</span>
             <span class="product-user-tag">HR Companies</span>
+          </div>
+          <div class="product-users pt">
+            <span class="product-user-tag">Segurados</span>
+            <span class="product-user-tag">Beneficiários</span>
+            <span class="product-user-tag">Corretores</span>
+            <span class="product-user-tag">Empresas RH</span>
           </div>
         </div>
       </div>
@@ -922,14 +978,22 @@
         <img class="product-mockup" src="https://uxfolio-prod.s3.us-east-1.amazonaws.com/5c742ce10ed14e0004f21ba9/5c742d3a0ed14e0004f21baa/350Wi68cCcxqCjHs.png" alt="Claims Management Tool mockup" loading="lazy" style="object-fit: cover;">
         <div class="product-body">
           <div class="product-num">02</div>
-          <div class="product-name">Claims Management Tool</div>
-          <p class="product-desc">A full regulation platform for analysts, managers, and partners — with differentiated access per profile and integration with legacy systems (SNGS and I4PRO). The single source of truth for the entire operation.</p>
-          <div class="product-users">
+          <div class="product-name"><span class="en-inline">Claims Management Tool</span><span class="pt-inline">Ferramenta de Gestão de Sinistros</span></div>
+          <p class="product-desc en">A full regulation platform for analysts, managers, and partners — with differentiated access per profile and integration with legacy systems (SNGS and I4PRO). The single source of truth for the entire operation.</p>
+          <p class="product-desc pt">Uma plataforma completa de regulação para analistas, gestores e parceiros — com acesso diferenciado por perfil e integração com sistemas legados (SNGS e I4PRO). A fonte única de verdade para toda a operação.</p>
+          <div class="product-users en">
             <span class="product-user-tag">Technical Analysts</span>
             <span class="product-user-tag">GESIN Managers</span>
             <span class="product-user-tag">Medical Providers</span>
             <span class="product-user-tag">Call Center</span>
             <span class="product-user-tag">Legal</span>
+          </div>
+          <div class="product-users pt">
+            <span class="product-user-tag">Analistas Técnicos</span>
+            <span class="product-user-tag">Gerentes GESIN</span>
+            <span class="product-user-tag">Prestadores Médicos</span>
+            <span class="product-user-tag">Call Center</span>
+            <span class="product-user-tag">Jurídico</span>
           </div>
         </div>
       </div>
@@ -951,46 +1015,54 @@
 
   <!-- 09 RESULTADOS -->
   <section class="case-section section-dark reveal">
-    <div class="cs-label">09 — Result</div>
-    <h2 class="cs-title">From invisible<br><em>to accountable.</em></h2>
+    <div class="cs-label"><span class="en-inline">09 — Result</span><span class="pt-inline">09 — Resultado</span></div>
+    <h2 class="cs-title">
+      <span class="en">From invisible<br><em>to accountable.</em></span>
+      <span class="pt">De invisível<br><em>a rastreável.</em></span>
+    </h2>
     <div class="cs-2col">
       <div>
-        <p class="cs-body-text">The outcome was the creation of two connected products that brought visibility to the entire claim process — for clients, brokers, analysts, and managers alike.</p>
-        <p class="cs-body-text">Visibility for clients and brokers. Reduced rework across internal teams. A <strong>single source of truth</strong> for the whole operation — replacing a fragmented, phone-dependent process that left everyone operating blind.</p>
+        <p class="cs-body-text en">The outcome was the creation of two connected products that brought visibility to the entire claim process — for clients, brokers, analysts, and managers alike.</p>
+        <p class="cs-body-text pt">O resultado foi a criação de dois produtos conectados que trouxeram visibilidade a todo o processo de sinistros — para clientes, corretores, analistas e gestores igualmente.</p>
+        <p class="cs-body-text en">Visibility for clients and brokers. Reduced rework across internal teams. A <strong>single source of truth</strong> for the whole operation — replacing a fragmented, phone-dependent process that left everyone operating blind.</p>
+        <p class="cs-body-text pt">Visibilidade para clientes e corretores. Redução de retrabalho nas equipes internas. Uma <strong>fonte única de verdade</strong> para toda a operação — substituindo um processo fragmentado e dependente de telefone que deixava todos operando no escuro.</p>
       </div>
       <div>
-        <p class="cs-body-text">The prototype delivered to Previsul became the direct basis for the final product development — according to the team that worked with it.</p>
-        <p class="cs-body-text">In total: <strong>151 high-fidelity screens</strong>, <strong>40+ pain points addressed</strong>, and <strong>22 stakeholders and users</strong> engaged across the process.</p>
+        <p class="cs-body-text en">The prototype delivered to Previsul became the direct basis for the final product development — according to the team that worked with it.</p>
+        <p class="cs-body-text pt">O protótipo entregue à Previsul se tornou a base direta para o desenvolvimento do produto final — segundo a equipe que trabalhou com ele.</p>
+        <p class="cs-body-text en">In total: <strong>151 high-fidelity screens</strong>, <strong>40+ pain points addressed</strong>, and <strong>22 stakeholders and users</strong> engaged across the process.</p>
+        <p class="cs-body-text pt">No total: <strong>151 telas de alta fidelidade</strong>, <strong>40+ pontos de dor endereçados</strong>, e <strong>22 stakeholders e usuários</strong> engajados ao longo do processo.</p>
       </div>
     </div>
 
     <div class="metrics-row" style="margin-top: 56px;">
       <div class="metric-box">
         <div class="metric-num" style="color: var(--blue-deep);">6<sup>mo</sup></div>
-        <div class="metric-label">duration of the<br>UX phase</div>
+        <div class="metric-label"><span class="en-inline">duration of the<br>UX phase</span><span class="pt-inline">duração da<br>fase de UX</span></div>
       </div>
       <div class="metric-box">
         <div class="metric-num" style="color: var(--blue-deep);">22</div>
-        <div class="metric-label">interviews &<br>tests conducted</div>
+        <div class="metric-label"><span class="en-inline">interviews &<br>tests conducted</span><span class="pt-inline">entrevistas e<br>testes realizados</span></div>
       </div>
       <div class="metric-box">
         <div class="metric-num" style="color: var(--blue-deep);">40<sup>+</sup></div>
-        <div class="metric-label">pain points<br>mapped & addressed</div>
+        <div class="metric-label"><span class="en-inline">pain points<br>mapped & addressed</span><span class="pt-inline">pontos de dor<br>mapeados e endereçados</span></div>
       </div>
       <div class="metric-box">
         <div class="metric-num" style="color: var(--blue-deep);">151</div>
-        <div class="metric-label">high-fidelity<br>screens designed</div>
+        <div class="metric-label"><span class="en-inline">high-fidelity<br>screens designed</span><span class="pt-inline">telas de alta fidelidade<br>desenhadas</span></div>
       </div>
     </div>
 
     <!-- Testimonial -->
     <div class="testimonial-block" style="margin-top: 64px;">
-      <p class="testimonial-text">Na Previsul Seguradora, tive a oportunidade de trabalhar em conjunto com essa profissional fantástica, que nos entregou um projeto fantástico na leitura da Jornada do Cliente para Sinistros, resultando em um protótipo que, no final, foi usado para o desenvolvimento do produto final. Super recomendo.</p>
+      <p class="testimonial-text pt">Na Previsul Seguradora, tive a oportunidade de trabalhar em conjunto com essa profissional fantástica, que nos entregou um projeto fantástico na leitura da Jornada do Cliente para Sinistros, resultando em um protótipo que, no final, foi usado para o desenvolvimento do produto final. Super recomendo.</p>
+      <p class="testimonial-text en">At Previsul Seguradora, I had the opportunity to work alongside this fantastic professional, who delivered a fantastic project mapping the Customer Journey for Claims, resulting in a prototype that, in the end, was used for the final product development. Highly recommended.</p>
       <div class="testimonial-author">
         <div class="testimonial-dot">D</div>
         <div>
           <div class="testimonial-name">Denny Garbujo</div>
-          <div class="testimonial-role">Insurance Claims Coordinator · Previsul</div>
+          <div class="testimonial-role"><span class="en-inline">Insurance Claims Coordinator &middot; Previsul</span><span class="pt-inline">Coordenador de Sinistros &middot; Previsul</span></div>
         </div>
       </div>
     </div>
@@ -998,9 +1070,13 @@
 
   <!-- 10 SCREENS GALLERY -->
   <section class="case-section reveal">
-    <div class="cs-label">10 — Selected Screens</div>
-    <h2 class="cs-title">151 screens.<br><em>Every one with a reason.</em></h2>
-    <p class="cs-body-text">Both products were designed at high fidelity, with prototype-level quality that was directly handed off for development. A selection of screens from both the Portal and the Management Tool:</p>
+    <div class="cs-label"><span class="en-inline">10 — Selected Screens</span><span class="pt-inline">10 — Telas Selecionadas</span></div>
+    <h2 class="cs-title">
+      <span class="en">151 screens.<br><em>Every one with a reason.</em></span>
+      <span class="pt">151 telas.<br><em>Cada uma com um motivo.</em></span>
+    </h2>
+    <p class="cs-body-text en">Both products were designed at high fidelity, with prototype-level quality that was directly handed off for development. A selection of screens from both the Portal and the Management Tool:</p>
+    <p class="cs-body-text pt">Ambos os produtos foram desenhados em alta fidelidade, com qualidade de protótipo que foi entregue diretamente para desenvolvimento. Uma seleção de telas do Portal e da Ferramenta de Gestão:</p>
 
     <div class="img-gallery" style="margin-top: 48px;">
       <div class="gallery-item">
@@ -1026,24 +1102,97 @@
 
 </div><!-- /case-body -->
 
+<!-- ROLE -->
+<section class="role-section">
+  <div class="role-content">
+    <div class="role-eyebrow reveal">
+      <span class="en-inline">Giuliana's role in this project</span>
+      <span class="pt-inline">O papel da Giuliana neste projeto</span>
+    </div>
+    <blockquote class="role-quote reveal">
+      <span class="en">"Mapping 40 pain points, interviewing 22 stakeholders, redesigning the entire claims journey — from the 0800 call to the payment — and delivering two connected products in high fidelity. That was the work."</span>
+      <span class="pt">"Mapear 40 pontos de dor, entrevistar 22 stakeholders, redesenhar a jornada inteira de sinistros — do 0800 ao pagamento — e entregar dois produtos conectados em alta fidelidade. Esse foi o trabalho."</span>
+    </blockquote>
+    <div class="role-attribution reveal">
+      <span class="en-inline">UX & Service Lead &middot; Service Design &middot; UX Research &middot; Journey Mapping &middot; Prototyping &middot; Stakeholder Interviews</span>
+      <span class="pt-inline">Líder UX & Serviço &middot; Design de Serviço &middot; Pesquisa UX &middot; Mapeamento de Jornada &middot; Prototipação &middot; Entrevistas com Stakeholders</span>
+    </div>
+    <div class="role-stats reveal">
+      <div style="text-align:center; padding: 24px; background: rgba(58,90,138,0.3); border-radius: 12px; border: 1px solid rgba(200,216,240,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">22</div>
+        <div style="font-size:12px; color:rgba(200,216,240,0.6); line-height:1.5;"><span class="en-inline">Stakeholder interviews conducted</span><span class="pt-inline">Entrevistas com stakeholders realizadas</span></div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(58,90,138,0.3); border-radius: 12px; border: 1px solid rgba(200,216,240,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">40+</div>
+        <div style="font-size:12px; color:rgba(200,216,240,0.6); line-height:1.5;"><span class="en-inline">Pain points mapped across the journey</span><span class="pt-inline">Pontos de dor mapeados ao longo da jornada</span></div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(58,90,138,0.3); border-radius: 12px; border: 1px solid rgba(200,216,240,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">151</div>
+        <div style="font-size:12px; color:rgba(200,216,240,0.6); line-height:1.5;"><span class="en-inline">High-fidelity screens designed</span><span class="pt-inline">Telas de alta fidelidade desenhadas</span></div>
+      </div>
+      <div style="text-align:center; padding: 24px; background: rgba(58,90,138,0.3); border-radius: 12px; border: 1px solid rgba(200,216,240,0.1);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">2</div>
+        <div style="font-size:12px; color:rgba(200,216,240,0.6); line-height:1.5;"><span class="en-inline">Connected products delivered</span><span class="pt-inline">Produtos conectados entregues</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <div class="case-cta">
   <div class="case-cta-text">
-    <div class="case-cta-label">More work</div>
-    <div class="case-cta-title">See the next case<br>or get in touch.</div>
+    <div class="case-cta-label">
+      <span class="en-inline">Let's work together</span>
+      <span class="pt-inline">Vamos trabalhar juntos</span>
+    </div>
+    <div class="case-cta-title">
+      <span class="en">Interested in how I think<br>through complex products?</span>
+      <span class="pt">Interessado em como eu penso<br>produtos complexos?</span>
+    </div>
   </div>
   <div class="case-cta-links">
-    <a href="neuroot-case.html" class="cta-btn white">Neuroot Case →</a>
-    <a href="index.html#contact" class="cta-btn outline">Get in touch</a>
+    <a href="mailto:giulopesg@gmail.com" class="cta-btn white">
+      <span class="en-inline">&#9993; Get in touch</span>
+      <span class="pt-inline">&#9993; Entrar em contato</span>
+    </a>
+    <a href="index.html" class="cta-btn outline">
+      <span class="en-inline">&larr; Back to portfolio</span>
+      <span class="pt-inline">&larr; Voltar ao portfólio</span>
+    </a>
   </div>
 </div>
 
+<!-- FOOTER NAV -->
+<div class="case-footer-nav">
+  <a href="petrobras-case.html" class="footer-nav-link">
+    <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
+    <span class="fnl-title">Petrobras</span>
+  </a>
+  <a href="cpfl-case.html" class="footer-nav-link" style="text-align:right;">
+    <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Próximo</span> &rarr;</span>
+    <span class="fnl-title">CPFL Soluções</span>
+  </a>
+</div>
+
 <footer>
-  <p>Giuliana Lopes Galvão · UX Designer · São Paulo</p>
-  <p><a href="index.html">← Back to portfolio</a></p>
+  <p>&copy; 2026 Giuliana Lopes Galvão</p>
 </footer>
 
 <script>
+// Lang switching
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.body.classList.toggle('lang-pt', lang === 'pt');
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+  localStorage.setItem('lang', lang);
+}
+const savedLang = localStorage.getItem('lang');
+if (savedLang) setLang(savedLang);
+
+// Scroll reveal
 const observer = new IntersectionObserver(
   entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
   { threshold: 0.08 }

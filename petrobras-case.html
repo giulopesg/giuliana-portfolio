@@ -10,15 +10,11 @@
 <style>
   :root {
     --plum: #6B4FA0;
-    --plum-light: #8B6FC0;
-    --plum-pale: #D4C8EF;
-    --plum-ghost: #F2EEF9;
     --warm-cream: #FAF7F2;
     --warm-stone: #EDE8E0;
     --ink: #1C1917;
     --ink-soft: #4A4542;
     --ink-muted: #8A8480;
-    /* Petrobras accent palette — deep teal + petrol */
     --petro-deep: #0A2A3A;
     --petro-mid: #0E4B6B;
     --petro-bright: #0D7EA6;
@@ -31,6 +27,16 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; font-size: 16px; }
   body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--ink); overflow-x: hidden; }
+
+  /* ── LANG SWITCHING ── */
+  .en { display: block; }
+  .pt { display: none; }
+  .lang-pt .en { display: none; }
+  .lang-pt .pt { display: block; }
+  .en-inline { display: inline; }
+  .pt-inline { display: none; }
+  .lang-pt .en-inline { display: none; }
+  .lang-pt .pt-inline { display: inline; }
 
   /* ── NAV ── */
   nav {
@@ -50,597 +56,294 @@
   .nav-divider { width: 1px; height: 16px; background: var(--warm-stone); }
   .nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: var(--ink); }
 
+  .lang-toggle { display: flex; gap: 2px; border-radius: 20px; padding: 4px; margin-left: auto; }
+  .lang-btn {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+    padding: 6px 14px; border-radius: 16px; border: none;
+    background: transparent; color: var(--ink-muted); cursor: pointer; transition: all 0.2s;
+  }
+  .lang-btn.active { background: var(--petro-deep); color: var(--white); }
+
   /* ── HERO ── */
   .case-hero {
-    min-height: 100vh;
-    background: var(--petro-deep);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    overflow: hidden;
-    position: relative;
+    min-height: 100vh; background: var(--petro-deep);
+    display: grid; grid-template-columns: 1fr 1fr;
+    overflow: hidden; position: relative;
   }
   .case-hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 70% 90% at 85% 50%, rgba(13,126,166,0.3) 0%, transparent 65%),
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 90% at 85% 50%, rgba(13,126,166,0.3) 0%, transparent 65%),
       radial-gradient(ellipse 40% 50% at 10% 90%, rgba(232,160,32,0.07) 0%, transparent 55%);
     pointer-events: none;
   }
   .case-hero::after {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
     opacity: 0.025; pointer-events: none; z-index: 1;
   }
-
   .case-hero-left {
     display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 140px 64px 80px 80px;
-    position: relative; z-index: 2;
+    padding: 140px 64px 80px 80px; position: relative; z-index: 2;
   }
   .case-hero-right {
     display: flex; align-items: center; justify-content: center;
-    padding: 140px 80px 80px 40px;
-    position: relative; z-index: 2;
+    padding: 140px 80px 80px 40px; position: relative; z-index: 2;
   }
-
   .case-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
   .ctag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
     padding: 5px 12px; border-radius: 12px;
-    border: 1px solid rgba(168,216,234,0.3);
-    color: var(--petro-pale);
-    background: rgba(14,75,107,0.35);
+    border: 1px solid rgba(168,216,234,0.3); color: var(--petro-pale); background: rgba(14,75,107,0.35);
   }
-  .ctag-amber {
-    border-color: rgba(232,160,32,0.4);
-    color: var(--amber);
-    background: rgba(232,160,32,0.1);
-  }
-
+  .ctag-amber { border-color: rgba(232,160,32,0.4); color: var(--amber); background: rgba(232,160,32,0.1); }
   .case-hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--petro-pale); margin-bottom: 20px;
     display: flex; align-items: center; gap: 12px;
   }
   .case-hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--petro-pale); }
-
   .case-hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(48px, 6vw, 82px);
-    font-weight: 300; line-height: 1.02;
-    color: var(--white);
-    margin-bottom: 32px;
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 6vw, 82px);
+    font-weight: 300; line-height: 1.02; color: var(--white); margin-bottom: 32px;
   }
   .case-hero-title em { font-style: italic; color: var(--petro-pale); }
-
   .case-hero-lead {
     font-size: 17px; font-weight: 300; line-height: 1.65;
-    color: rgba(168,216,234,0.7);
-    max-width: 480px; margin-bottom: 56px;
+    color: rgba(168,216,234,0.7); max-width: 480px; margin-bottom: 56px;
   }
-
   .hero-meta-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
-    padding-top: 40px;
-    border-top: 1px solid rgba(168,216,234,0.15);
+    padding-top: 40px; border-top: 1px solid rgba(168,216,234,0.15);
   }
-  .hero-meta-item {}
   .hero-meta-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
     color: rgba(168,216,234,0.45); margin-bottom: 8px;
   }
-  .hero-meta-value {
-    font-size: 14px; font-weight: 400;
-    color: var(--white); line-height: 1.4;
-  }
+  .hero-meta-value { font-size: 14px; font-weight: 400; color: var(--white); line-height: 1.4; }
 
-  /* Hero right — SUS visual */
-  .sus-visual {
-    width: 100%; max-width: 400px;
-    display: flex; flex-direction: column; gap: 24px;
-  }
+  /* Hero SUS visual */
+  .sus-visual { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 24px; }
   .sus-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
     color: rgba(168,216,234,0.45); margin-bottom: 4px;
   }
   .sus-score-big {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 120px; font-weight: 300; line-height: 1;
-    color: var(--white);
+    font-family: 'Cormorant Garamond', serif; font-size: 120px; font-weight: 300; line-height: 1; color: var(--white);
   }
   .sus-score-big span { color: var(--amber); }
-  .sus-scale {
-    display: flex; flex-direction: column; gap: 6px;
-  }
+  .sus-scale { display: flex; flex-direction: column; gap: 6px; }
   .sus-scale-row {
     display: flex; align-items: center; gap: 12px;
-    font-size: 12px; color: rgba(168,216,234,0.5);
-    font-family: 'DM Mono', monospace;
+    font-size: 12px; color: rgba(168,216,234,0.5); font-family: 'DM Mono', monospace;
   }
-  .sus-scale-bar {
-    height: 3px; border-radius: 2px; background: rgba(168,216,234,0.12);
-    flex: 1;
-  }
-  .sus-scale-row.active .sus-scale-bar {
-    background: var(--amber);
-  }
-  .sus-scale-row.active {
-    color: var(--amber);
-    font-weight: 500;
-  }
-  .sus-benchmark {
-    font-size: 13px; color: rgba(168,216,234,0.55);
-    padding-top: 16px;
-    border-top: 1px solid rgba(168,216,234,0.1);
-  }
+  .sus-scale-bar { height: 3px; border-radius: 2px; background: rgba(168,216,234,0.12); flex: 1; }
+  .sus-scale-row.active .sus-scale-bar { background: var(--amber); }
+  .sus-scale-row.active { color: var(--amber); font-weight: 500; }
+  .sus-benchmark { font-size: 13px; color: rgba(168,216,234,0.55); padding-top: 16px; border-top: 1px solid rgba(168,216,234,0.1); }
   .sus-benchmark strong { color: var(--petro-pale); }
 
-  /* ── SECTION SYSTEM ── */
-  .section {
-    padding: 120px 80px;
-    position: relative;
-  }
-  .section-light { background: var(--warm-cream); }
-  .section-stone { background: var(--warm-stone); }
-  .section-petro { background: var(--petro-deep); }
-  .section-white { background: var(--white); }
+  /* ── CONTENT ── */
+  .case-body { max-width: 1200px; margin: 0 auto; }
+  .case-section { padding: 96px 80px; border-bottom: 1px solid var(--warm-stone); position: relative; }
+  .case-section:last-child { border-bottom: none; }
 
-  .section-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  .section-white { background: var(--white); }
+  .section-stone { background: var(--warm-stone); }
+  .section-dark { background: var(--petro-deep); }
+
+  .cs-label {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--petro-bright); margin-bottom: 16px;
     display: flex; align-items: center; gap: 12px;
   }
-  .section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--petro-bright); }
-  .section-eyebrow-light { color: var(--petro-pale); }
-  .section-eyebrow-light::before { background: var(--petro-pale); }
+  .cs-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--petro-bright); }
+  .section-dark .cs-label { color: var(--petro-pale); }
+  .section-dark .cs-label::before { background: var(--petro-pale); }
 
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(34px, 4vw, 52px);
-    font-weight: 300; line-height: 1.12;
-    color: var(--ink); margin-bottom: 24px;
+  .cs-title {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 52px);
+    font-weight: 300; line-height: 1.12; color: var(--ink); margin-bottom: 24px;
   }
-  .section-title-light { color: var(--white); }
+  .section-dark .cs-title { color: var(--white); }
 
-  .section-lead {
-    font-size: 17px; font-weight: 300; line-height: 1.7;
-    color: var(--ink-soft); max-width: 640px;
-  }
-  .section-lead-light { color: rgba(168,216,234,0.7); }
+  .cs-body-text { font-size: 17px; font-weight: 300; line-height: 1.8; color: var(--ink-soft); max-width: 680px; margin-bottom: 28px; }
+  .cs-body-text strong { color: var(--ink); font-weight: 500; }
+  .section-dark .cs-body-text { color: rgba(168,216,234,0.7); }
+  .section-dark .cs-body-text strong { color: var(--petro-pale); }
 
-  /* ── TWO COL ── */
-  .two-col {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-    align-items: start;
-  }
-  .three-col {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
-  }
-  .four-col {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
-  }
+  .cs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .four-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
 
-  /* ── OVERVIEW SECTION ── */
-  .overview-grid {
-    display: grid; grid-template-columns: 2fr 1fr; gap: 80px;
-    align-items: start;
-  }
-  .overview-body {
-    font-size: 18px; font-weight: 300; line-height: 1.8;
-    color: var(--ink-soft);
-  }
+  /* ── OVERVIEW ── */
+  .overview-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 80px; align-items: start; }
+  .overview-body { font-size: 18px; font-weight: 300; line-height: 1.8; color: var(--ink-soft); }
   .overview-body p + p { margin-top: 20px; }
-
-  .overview-stats {
-    display: flex; flex-direction: column; gap: 0;
-    border: 1px solid var(--warm-stone);
-    border-radius: 16px; overflow: hidden;
-  }
-  .stat-item {
-    padding: 24px 28px;
-    border-bottom: 1px solid var(--warm-stone);
-  }
+  .overview-stats { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--warm-stone); border-radius: 16px; overflow: hidden; }
+  .stat-item { padding: 24px 28px; border-bottom: 1px solid var(--warm-stone); }
   .stat-item:last-child { border-bottom: none; }
-  .stat-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px; font-weight: 300; line-height: 1;
-    color: var(--petro-mid); margin-bottom: 4px;
-  }
-  .stat-label {
-    font-size: 13px; color: var(--ink-muted); font-weight: 300;
-  }
+  .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; line-height: 1; color: var(--petro-mid); margin-bottom: 4px; }
+  .stat-label { font-size: 13px; color: var(--ink-muted); font-weight: 300; }
 
   /* ── METHODOLOGY ── */
-  .method-card {
-    background: var(--petro-ghost);
-    border: 1px solid rgba(13,126,166,0.15);
-    border-radius: 16px;
-    padding: 32px;
-  }
-  .method-card-icon {
-    width: 40px; height: 40px;
-    background: var(--petro-mid);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px;
-    font-size: 18px;
-  }
-  .method-card-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 400;
-    color: var(--petro-deep); margin-bottom: 12px;
-  }
-  .method-card-body {
-    font-size: 14px; line-height: 1.65;
-    color: var(--ink-soft);
-  }
+  .method-card { background: var(--petro-ghost); border: 1px solid rgba(13,126,166,0.15); border-radius: 16px; padding: 32px; }
+  .method-card-icon { width: 40px; height: 40px; background: var(--petro-mid); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 18px; }
+  .method-card-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--petro-deep); margin-bottom: 12px; }
+  .method-card-body { font-size: 14px; line-height: 1.65; color: var(--ink-soft); }
 
   /* ── PARTICIPANTS ── */
-  .participant-section {
-    background: var(--petro-deep);
-    padding: 120px 80px;
-  }
-
-  .disability-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    margin-top: 64px;
-    border-radius: 20px;
-    overflow: hidden;
-  }
-  .disability-card {
-    background: rgba(14,75,107,0.6);
-    padding: 36px 28px;
-    border: 1px solid rgba(168,216,234,0.08);
-    transition: background 0.3s;
-  }
+  /* participant-section specific children styles below */
+  .disability-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 64px; border-radius: 20px; overflow: hidden; }
+  .disability-card { background: rgba(14,75,107,0.6); padding: 36px 28px; border: 1px solid rgba(168,216,234,0.08); transition: background 0.3s; }
   .disability-card:hover { background: rgba(14,75,107,0.9); }
-  .disability-card-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 56px; font-weight: 300; line-height: 1;
-    color: var(--petro-bright); margin-bottom: 16px;
-  }
-  .disability-card-type {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--petro-pale); margin-bottom: 8px;
-  }
-  .disability-card-desc {
-    font-size: 13px; line-height: 1.6;
-    color: rgba(168,216,234,0.55);
-  }
-
-  .participants-visual {
-    margin-top: 64px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
-  }
-  .group-card {
-    background: rgba(14,75,107,0.3);
-    border: 1px solid rgba(168,216,234,0.1);
-    border-radius: 16px; padding: 32px;
-  }
-  .group-card-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--petro-bright); margin-bottom: 16px;
-  }
-  .group-card-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px; font-weight: 300;
-    color: var(--white); margin-bottom: 20px;
-  }
+  .disability-card-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; line-height: 1; color: var(--petro-bright); margin-bottom: 16px; }
+  .disability-card-type { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--petro-pale); margin-bottom: 8px; }
+  .disability-card-desc { font-size: 13px; line-height: 1.6; color: rgba(168,216,234,0.55); }
+  .participants-visual { margin-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .group-card { background: rgba(14,75,107,0.3); border: 1px solid rgba(168,216,234,0.1); border-radius: 16px; padding: 32px; }
+  .group-card-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--petro-bright); margin-bottom: 16px; }
+  .group-card-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--white); margin-bottom: 20px; }
   .group-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .group-list li {
-    display: flex; align-items: baseline; gap: 10px;
-    font-size: 14px; color: rgba(168,216,234,0.7);
-  }
-  .group-list li::before {
-    content: ''; display: block;
-    width: 4px; height: 4px; border-radius: 50%;
-    background: var(--petro-bright);
-    flex-shrink: 0; margin-top: 6px;
-  }
+  .group-list li { display: flex; align-items: baseline; gap: 10px; font-size: 14px; color: rgba(168,216,234,0.7); }
+  .group-list li::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--petro-bright); flex-shrink: 0; margin-top: 6px; }
 
   /* ── TASKS ── */
-  .tasks-section { background: var(--white); padding: 120px 80px; }
-  .task-row {
-    display: grid; grid-template-columns: 80px 1fr 1fr;
-    gap: 0;
-    border-bottom: 1px solid var(--warm-stone);
-    padding: 32px 0;
-    align-items: start;
-  }
+  /* task styles */
+  .task-row { display: grid; grid-template-columns: 80px 1fr 1fr; gap: 0; border-bottom: 1px solid var(--warm-stone); padding: 32px 0; align-items: start; }
   .task-row:first-child { border-top: 1px solid var(--warm-stone); }
-  .task-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px; font-weight: 300;
-    color: var(--petro-bright);
-    line-height: 1;
-    padding-top: 4px;
-  }
-  .task-name {
-    font-size: 16px; font-weight: 500;
-    color: var(--ink); margin-bottom: 6px;
-  }
-  .task-desc {
-    font-size: 14px; font-weight: 300;
-    color: var(--ink-muted); line-height: 1.6;
-  }
-  .task-focus {
-    font-size: 13px; color: var(--petro-mid);
-    line-height: 1.6; padding-left: 20px;
-  }
+  .task-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--petro-bright); line-height: 1; padding-top: 4px; }
+  .task-name { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+  .task-desc { font-size: 14px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; }
+  .task-focus { font-size: 13px; color: var(--petro-mid); line-height: 1.6; padding-left: 20px; }
 
   /* ── INSIGHTS ── */
-  .insights-section { background: var(--warm-cream); padding: 120px 80px; }
-
-  .insight-block {
-    padding: 48px 0;
-    border-bottom: 1px solid var(--warm-stone);
-  }
+  /* insight styles */
+  .insight-block { padding: 48px 0; border-bottom: 1px solid var(--warm-stone); }
   .insight-block:last-child { border-bottom: none; }
-  .insight-header {
-    display: flex; align-items: center; gap: 20px;
-    margin-bottom: 28px;
-  }
-  .insight-icon {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-  }
+  .insight-header { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
+  .insight-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
   .insight-icon-teal { background: var(--petro-ghost); }
   .insight-icon-amber { background: var(--amber-pale); }
-  .insight-type {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--ink-muted); margin-bottom: 4px;
-  }
-  .insight-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px; font-weight: 400; color: var(--ink);
-  }
-  .insight-findings {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-  }
-  .finding-pill {
-    background: var(--white);
-    border: 1px solid var(--warm-stone);
-    border-left: 3px solid var(--petro-bright);
-    border-radius: 8px; padding: 16px 20px;
-    font-size: 14px; line-height: 1.6; color: var(--ink-soft);
-  }
+  .insight-type { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 4px; }
+  .insight-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--ink); }
+  .insight-findings { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .finding-pill { background: var(--white); border: 1px solid var(--warm-stone); border-left: 3px solid var(--petro-bright); border-radius: 8px; padding: 16px 20px; font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
   .finding-pill.amber-accent { border-left-color: var(--amber); }
 
   /* ── SUS SECTION ── */
-  .sus-section { background: var(--petro-deep); padding: 120px 80px; }
-  .sus-viz-row {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-    align-items: center; margin-top: 64px;
-  }
-  .sus-big-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 160px; font-weight: 300; line-height: 1;
-    color: var(--white);
-  }
+  /* SUS detail styles */
+  .sus-viz-row { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 64px; }
+  .sus-big-num { font-family: 'Cormorant Garamond', serif; font-size: 160px; font-weight: 300; line-height: 1; color: var(--white); }
   .sus-big-num em { font-style: normal; color: var(--amber); }
-  .sus-context {
-    font-size: 17px; font-weight: 300;
-    color: rgba(168,216,234,0.65);
-    line-height: 1.7;
-  }
-  .sus-scale-full {
-    display: flex; flex-direction: column; gap: 12px;
-    margin-top: 32px;
-  }
-  .sus-scale-row-full {
-    display: flex; align-items: center; gap: 16px;
-  }
-  .sus-range {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px; color: rgba(168,216,234,0.4);
-    width: 80px; flex-shrink: 0;
-  }
+  .sus-context { font-size: 17px; font-weight: 300; color: rgba(168,216,234,0.65); line-height: 1.7; }
+  .sus-scale-full { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+  .sus-scale-row-full { display: flex; align-items: center; gap: 16px; }
+  .sus-range { font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(168,216,234,0.4); width: 80px; flex-shrink: 0; }
   .sus-bar-wrap { flex: 1; height: 6px; background: rgba(168,216,234,0.08); border-radius: 3px; overflow: hidden; }
   .sus-bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
-  .sus-rating {
-    font-size: 12px; color: rgba(168,216,234,0.4);
-    width: 100px; text-align: right;
-    font-family: 'DM Mono', monospace;
-  }
-  .sus-scale-row-full.highlighted .sus-range,
-  .sus-scale-row-full.highlighted .sus-rating { color: var(--amber); }
+  .sus-rating { font-size: 12px; color: rgba(168,216,234,0.4); width: 100px; text-align: right; font-family: 'DM Mono', monospace; }
+  .sus-scale-row-full.highlighted .sus-range, .sus-scale-row-full.highlighted .sus-rating { color: var(--amber); }
   .sus-scale-row-full.highlighted .sus-bar-fill { background: var(--amber); }
-
-  .sus-participants {
-    margin-top: 48px;
-    padding: 28px 32px;
-    background: rgba(14,75,107,0.3);
-    border: 1px solid rgba(168,216,234,0.1);
-    border-radius: 16px;
-  }
-  .sus-participants p {
-    font-size: 15px; color: rgba(168,216,234,0.6);
-    line-height: 1.7;
-  }
+  .sus-participants { margin-top: 48px; padding: 28px 32px; background: rgba(14,75,107,0.3); border: 1px solid rgba(168,216,234,0.1); border-radius: 16px; }
+  .sus-participants p { font-size: 15px; color: rgba(168,216,234,0.6); line-height: 1.7; }
   .sus-participants strong { color: var(--petro-pale); }
 
   /* ── BACKLOG ── */
-  .backlog-section { background: var(--warm-stone); padding: 120px 80px; }
-  .backlog-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
-    margin-top: 64px;
-  }
-  .backlog-col {}
-  .backlog-col-header {
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 28px;
-  }
-  .backlog-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
-    padding: 4px 12px; border-radius: 12px;
-  }
-  .badge-quick {
-    background: var(--petro-ghost);
-    color: var(--petro-mid);
-    border: 1px solid rgba(13,126,166,0.25);
-  }
-  .badge-project {
-    background: var(--amber-pale);
-    color: #8B5500;
-    border: 1px solid rgba(232,160,32,0.3);
-  }
-  .backlog-col-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 300; color: var(--ink);
-  }
-  .backlog-item {
-    display: flex; gap: 16px;
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(28,25,23,0.08);
-  }
+  /* backlog styles */
+  .backlog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 64px; }
+  .backlog-col-header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .backlog-badge { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 12px; border-radius: 12px; }
+  .badge-quick { background: var(--petro-ghost); color: var(--petro-mid); border: 1px solid rgba(13,126,166,0.25); }
+  .badge-project { background: var(--amber-pale); color: #8B5500; border: 1px solid rgba(232,160,32,0.3); }
+  .backlog-col-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--ink); }
+  .backlog-item { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid rgba(28,25,23,0.08); }
   .backlog-item:last-child { border-bottom: none; }
-  .backlog-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px; color: var(--ink-muted);
-    padding-top: 2px; flex-shrink: 0;
-  }
-  .backlog-item-text {
-    font-size: 14px; line-height: 1.65; color: var(--ink-soft);
-  }
+  .backlog-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink-muted); padding-top: 2px; flex-shrink: 0; }
+  .backlog-item-text { font-size: 14px; line-height: 1.65; color: var(--ink-soft); }
   .backlog-item-text strong { color: var(--ink); font-weight: 500; }
 
   /* ── PARTICIPANT HIGHLIGHT ── */
-  .highlight-section { background: var(--white); padding: 120px 80px; }
-  .participant-card {
-    background: var(--warm-cream);
-    border: 1px solid var(--warm-stone);
-    border-radius: 20px; padding: 40px;
-    display: grid; grid-template-columns: auto 1fr; gap: 32px;
-    align-items: start;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .participant-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(10,42,58,0.08);
-  }
-  .participant-avatar {
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    background: var(--petro-ghost);
-    border: 3px solid var(--petro-pale);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; color: var(--petro-mid);
-    flex-shrink: 0;
-    overflow: hidden;
-  }
-  .participant-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-  .participant-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 400; color: var(--ink);
-    margin-bottom: 4px;
-  }
-  .participant-meta {
-    font-size: 13px; color: var(--petro-mid);
-    font-weight: 500; margin-bottom: 12px;
-  }
-  .participant-detail {
-    font-size: 13px; color: var(--ink-muted);
-    margin-bottom: 4px;
-  }
-  .participant-insight {
-    margin-top: 16px; padding: 14px 18px;
-    background: var(--white);
-    border-left: 3px solid var(--petro-bright);
-    border-radius: 0 8px 8px 0;
-    font-size: 14px; line-height: 1.65; color: var(--ink-soft);
-    font-style: italic;
-  }
-
-  .participants-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-    margin-top: 64px;
-  }
+  /* highlight/participant card styles */
+  .participant-card { background: var(--warm-cream); border: 1px solid var(--warm-stone); border-radius: 20px; padding: 40px; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start; transition: transform 0.2s, box-shadow 0.2s; }
+  .participant-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(10,42,58,0.08); }
+  .participant-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--petro-ghost); border: 3px solid var(--petro-pale); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--petro-mid); flex-shrink: 0; }
+  .participant-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 4px; }
+  .participant-meta { font-size: 13px; color: var(--petro-mid); font-weight: 500; margin-bottom: 12px; }
+  .participant-detail { font-size: 13px; color: var(--ink-muted); margin-bottom: 4px; }
+  .participant-insight { margin-top: 16px; padding: 14px 18px; background: var(--white); border-left: 3px solid var(--petro-bright); border-radius: 0 8px 8px 0; font-size: 14px; line-height: 1.65; color: var(--ink-soft); font-style: italic; }
+  .participants-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 64px; }
 
   /* ── ROLE ── */
   .role-section { background: var(--petro-deep); padding: 100px 80px; }
-  .role-content {
-    max-width: 800px; margin: 0 auto; text-align: center;
+  .role-section .cs-label { color: var(--petro-pale); }
+  .role-section .cs-label::before { background: var(--petro-pale); }
+  .role-content { max-width: 800px; margin: 0 auto; text-align: center; }
+  .role-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3.5vw, 46px); font-weight: 300; font-style: italic; line-height: 1.3; color: var(--white); margin-bottom: 32px; }
+  .role-attribution { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--petro-pale); }
+
+  /* ── CTA ── */
+  .case-cta {
+    max-width: 1200px; margin: 0 auto; padding: 80px;
+    display: flex; align-items: center; justify-content: space-between; gap: 48px;
+    border-bottom: 1px solid var(--warm-stone);
   }
-  .role-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 3.5vw, 46px);
-    font-weight: 300; font-style: italic;
-    line-height: 1.3; color: var(--white);
-    margin-bottom: 32px;
+  .case-cta-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--petro-bright); margin-bottom: 12px; }
+  .case-cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 3vw, 36px); font-weight: 300; line-height: 1.3; color: var(--ink); }
+  .case-cta-links { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
+    text-decoration: none; padding: 14px 28px; border-radius: 32px;
+    transition: all 0.25s; text-transform: uppercase; white-space: nowrap;
   }
-  .role-attribution {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--petro-pale);
-  }
+  .cta-btn.teal { background: var(--petro-deep); color: var(--white); }
+  .cta-btn.teal:hover { background: var(--petro-mid); }
+  .cta-btn.outline { border: 1px solid var(--warm-stone); color: var(--ink-soft); background: transparent; }
+  .cta-btn.outline:hover { border-color: var(--petro-bright); color: var(--petro-bright); }
 
   /* ── FOOTER NAV ── */
   .case-footer-nav {
-    background: var(--warm-cream);
-    padding: 64px 80px;
+    max-width: 1200px; margin: 0 auto; padding: 64px 80px;
     display: flex; justify-content: space-between; align-items: center;
     border-top: 1px solid var(--warm-stone);
   }
-  .footer-nav-link {
-    text-decoration: none; display: flex; flex-direction: column; gap: 6px;
-  }
-  .footer-nav-dir {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--ink-muted);
-  }
-  .footer-nav-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 300; color: var(--ink);
-    transition: color 0.2s;
-  }
-  .footer-nav-link:hover .footer-nav-name { color: var(--petro-bright); }
+  .footer-nav-link { text-decoration: none; display: flex; flex-direction: column; gap: 8px; }
+  .fnl-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--ink-muted); text-transform: uppercase; }
+  .fnl-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--ink); transition: color 0.2s; }
+  .footer-nav-link:hover .fnl-title { color: var(--petro-bright); }
 
-  /* ── REVEAL ANIMATIONS ── */
+  footer { text-align: center; padding: 32px 24px; color: var(--ink-muted); font-size: 13px; border-top: 1px solid var(--warm-stone); }
+
+  /* ── REVEAL ── */
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: none; }
-
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes rise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
   .hero-rise { animation: rise 1s ease forwards; }
   .hero-rise-2 { animation: rise 1s 0.15s ease forwards; opacity: 0; }
   .hero-rise-3 { animation: rise 1s 0.3s ease forwards; opacity: 0; }
   .hero-rise-4 { animation: rise 1s 0.45s ease forwards; opacity: 0; }
   .hero-rise-r { animation: rise 1s 0.6s ease forwards; opacity: 0; }
 
-  @media (max-width: 1024px) {
-    nav { padding: 20px 32px; }
-    .section { padding: 80px 40px; }
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
     .case-hero { grid-template-columns: 1fr; }
     .case-hero-right { display: none; }
-    .case-hero-left { padding: 140px 40px 80px; }
-    .two-col, .overview-grid { grid-template-columns: 1fr; gap: 40px; }
+    .case-hero-left { padding: 120px 24px 60px; }
+    .case-section { padding: 64px 24px; }
+    .cs-2col, .overview-grid { grid-template-columns: 1fr; gap: 40px; }
     .disability-grid { grid-template-columns: 1fr 1fr; }
     .four-col { grid-template-columns: 1fr 1fr; }
     .backlog-grid { grid-template-columns: 1fr; }
     .task-row { grid-template-columns: 60px 1fr; }
     .task-focus { display: none; }
     .participants-grid { grid-template-columns: 1fr; }
-    .case-footer-nav { padding: 48px 40px; }
-    .sus-section, .participant-section, .tasks-section, .insights-section, .backlog-section, .highlight-section, .role-section { padding: 80px 40px; }
+    .case-cta { padding: 48px 24px; flex-direction: column; text-align: center; }
+    .case-cta-links { align-items: center; }
+    .case-footer-nav { padding: 40px 24px; flex-direction: column; gap: 32px; }
+    .role-section { padding: 80px 24px; }
+    .sus-viz-row { grid-template-columns: 1fr; gap: 40px; }
+    .insight-findings { grid-template-columns: 1fr; }
+    .participants-visual { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -649,11 +352,17 @@
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-back">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Todos os cases
+    &larr; <span class="en-inline">Back to work</span><span class="pt-inline">Todos os cases</span>
   </a>
   <div class="nav-divider"></div>
-  <span class="nav-title">Petrobras — Usabilidade PCD</span>
+  <span class="nav-title">
+    <span class="en-inline">Petrobras — PCD Usability Testing</span>
+    <span class="pt-inline">Petrobras — Usabilidade PCD</span>
+  </span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -661,602 +370,412 @@
   <div class="case-hero-left">
     <div class="case-tag-row hero-rise">
       <span class="ctag">UX Research</span>
-      <span class="ctag">Testes de Usabilidade</span>
-      <span class="ctag ctag-amber">Acessibilidade</span>
-      <span class="ctag">PCDs</span>
+      <span class="ctag"><span class="en-inline">Usability Testing</span><span class="pt-inline">Testes de Usabilidade</span></span>
+      <span class="ctag ctag-amber"><span class="en-inline">Accessibility</span><span class="pt-inline">Acessibilidade</span></span>
+      <span class="ctag"><span class="en-inline">PWDs</span><span class="pt-inline">PCDs</span></span>
     </div>
-    <div class="case-hero-eyebrow hero-rise-2">Petrobras · Brivia / The Creative Smartech</div>
+    <div class="case-hero-eyebrow hero-rise-2">Petrobras &middot; Brivia / The Creative Smartech</div>
     <h1 class="case-hero-title hero-rise-3">
-      Acessibilidade<br>
-      <em>como pauta,</em><br>
-      não como adorno
+      <span class="en">Accessibility<br><em>as agenda,</em><br>not ornament</span>
+      <span class="pt">Acessibilidade<br><em>como pauta,</em><br>não como adorno</span>
     </h1>
     <p class="case-hero-lead hero-rise-4">
-      28 pessoas com deficiência. 28 sessões remotas. Um diagnóstico honesto de como o site institucional da Petrobras falha — e como pode ser melhorado para incluir de verdade.
+      <span class="en">28 people with disabilities. 28 remote sessions. An honest diagnosis of how Petrobras' institutional website fails — and how it can be improved to truly include.</span>
+      <span class="pt">28 pessoas com deficiência. 28 sessões remotas. Um diagnóstico honesto de como o site institucional da Petrobras falha — e como pode ser melhorado para incluir de verdade.</span>
     </p>
     <div class="hero-meta-grid hero-rise-4">
-      <div class="hero-meta-item">
-        <div class="hero-meta-label">Cliente</div>
+      <div>
+        <div class="hero-meta-label"><span class="en-inline">Client</span><span class="pt-inline">Cliente</span></div>
         <div class="hero-meta-value">Petrobras</div>
       </div>
-      <div class="hero-meta-item">
-        <div class="hero-meta-label">Agência</div>
+      <div>
+        <div class="hero-meta-label"><span class="en-inline">Agency</span><span class="pt-inline">Agência</span></div>
         <div class="hero-meta-value">Brivia / The Creative Smartech</div>
       </div>
-      <div class="hero-meta-item">
-        <div class="hero-meta-label">Período</div>
-        <div class="hero-meta-value">Ago–Dez 2025</div>
+      <div>
+        <div class="hero-meta-label"><span class="en-inline">Period</span><span class="pt-inline">Período</span></div>
+        <div class="hero-meta-value"><span class="en-inline">Aug–Dec 2025</span><span class="pt-inline">Ago–Dez 2025</span></div>
       </div>
-      <div class="hero-meta-item">
-        <div class="hero-meta-label">Método</div>
-        <div class="hero-meta-value">Testes Remotos Moderados</div>
+      <div>
+        <div class="hero-meta-label"><span class="en-inline">Method</span><span class="pt-inline">Método</span></div>
+        <div class="hero-meta-value"><span class="en-inline">Moderated Remote Tests</span><span class="pt-inline">Testes Remotos Moderados</span></div>
       </div>
-      <div class="hero-meta-item">
-        <div class="hero-meta-label">Papel</div>
+      <div>
+        <div class="hero-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Papel</span></div>
         <div class="hero-meta-value">UX Researcher</div>
       </div>
-      <div class="hero-meta-item">
-        <div class="hero-meta-label">Participantes</div>
-        <div class="hero-meta-value">28 PCDs · 3 grupos</div>
+      <div>
+        <div class="hero-meta-label"><span class="en-inline">Participants</span><span class="pt-inline">Participantes</span></div>
+        <div class="hero-meta-value"><span class="en-inline">28 PWDs &middot; 3 groups</span><span class="pt-inline">28 PCDs &middot; 3 grupos</span></div>
       </div>
     </div>
   </div>
   <div class="case-hero-right">
     <div class="sus-visual hero-rise-r">
-      <div class="sus-label">Resultado SUS Geral</div>
+      <div class="sus-label"><span class="en-inline">Overall SUS Result</span><span class="pt-inline">Resultado SUS Geral</span></div>
       <div class="sus-score-big">41<span>.02</span></div>
       <div class="sus-scale">
-        <div class="sus-scale-row">
-          <div class="sus-scale-bar" style="width:39%"></div>
-          <span>Inaceitável · 0–39</span>
-        </div>
-        <div class="sus-scale-row active">
-          <div class="sus-scale-bar"></div>
-          <span>Ruim · 40–52 ← aqui</span>
-        </div>
-        <div class="sus-scale-row">
-          <div class="sus-scale-bar" style="width:60%"></div>
-          <span>Aceitável · 53–73</span>
-        </div>
-        <div class="sus-scale-row">
-          <div class="sus-scale-bar" style="width:75%"></div>
-          <span>Boa · 74–85</span>
-        </div>
-        <div class="sus-scale-row">
-          <div class="sus-scale-bar" style="width:90%"></div>
-          <span>Excelente · 86–100</span>
-        </div>
+        <div class="sus-scale-row"><div class="sus-scale-bar" style="width:39%"></div><span><span class="en-inline">Unacceptable &middot; 0–39</span><span class="pt-inline">Inaceitável &middot; 0–39</span></span></div>
+        <div class="sus-scale-row active"><div class="sus-scale-bar"></div><span><span class="en-inline">Poor &middot; 40–52 &larr; here</span><span class="pt-inline">Ruim &middot; 40–52 &larr; aqui</span></span></div>
+        <div class="sus-scale-row"><div class="sus-scale-bar" style="width:60%"></div><span><span class="en-inline">Acceptable &middot; 53–73</span><span class="pt-inline">Aceitável &middot; 53–73</span></span></div>
+        <div class="sus-scale-row"><div class="sus-scale-bar" style="width:75%"></div><span><span class="en-inline">Good &middot; 74–85</span><span class="pt-inline">Boa &middot; 74–85</span></span></div>
+        <div class="sus-scale-row"><div class="sus-scale-bar" style="width:90%"></div><span><span class="en-inline">Excellent &middot; 86–100</span><span class="pt-inline">Excelente &middot; 86–100</span></span></div>
       </div>
-      <div class="sus-benchmark">
-        Benchmark do setor: <strong>68</strong> · Distância: <strong style="color:var(--amber)">-27 pontos</strong>
-      </div>
+      <div class="sus-benchmark"><span class="en-inline">Industry benchmark: <strong>68</strong> &middot; Gap: <strong style="color:var(--amber)">-27 points</strong></span><span class="pt-inline">Benchmark do setor: <strong>68</strong> &middot; Distância: <strong style="color:var(--amber)">-27 pontos</strong></span></div>
     </div>
   </div>
 </section>
 
-<!-- VISÃO GERAL -->
-<section class="section section-light">
+<div class="case-body">
+
+<!-- 01 VISÃO GERAL -->
+<section class="case-section">
   <div class="overview-grid">
     <div>
-      <div class="section-eyebrow reveal">01 — O Projeto</div>
-      <h2 class="section-title reveal">O que foi investigado<br>e por quê</h2>
+      <div class="cs-label reveal"><span class="en-inline">01 — The Project</span><span class="pt-inline">01 — O Projeto</span></div>
+      <h2 class="cs-title reveal"><span class="en">What was investigated<br>and why</span><span class="pt">O que foi investigado<br>e por quê</span></h2>
       <div class="overview-body reveal">
-        <p>A Petrobras, como uma das maiores empresas do Brasil, possui um compromisso declarado com diversidade e inclusão. Mas o site institucional — vitrine desse compromisso — estava sendo acessado por pessoas com deficiência sem qualquer teste sistematizado de acessibilidade real.</p>
-        <p>O objetivo deste projeto foi simples e profundo: entender como PCDs navegam, compreendem e percebem o site da Petrobras, nas páginas mais críticas para oportunidades de trabalho e informação institucional. E transformar esse entendimento em recomendações concretas.</p>
-        <p>Foram 28 sessões remotas moderadas, com participantes recrutados entre surdos, cegos, surdocegos, pessoas com TEA, com deficiência física e deficiência visual — diversidade real, não cota de pesquisa.</p>
+        <p class="en">Petrobras, as one of Brazil's largest companies, has a stated commitment to diversity and inclusion. But the institutional website — the showcase for that commitment — was being accessed by people with disabilities without any systematic real accessibility testing.</p>
+        <p class="pt">A Petrobras, como uma das maiores empresas do Brasil, possui um compromisso declarado com diversidade e inclusão. Mas o site institucional — vitrine desse compromisso — estava sendo acessado por pessoas com deficiência sem qualquer teste sistematizado de acessibilidade real.</p>
+        <p class="en">The goal of this project was simple and profound: understand how PWDs navigate, comprehend, and perceive Petrobras' website, on the most critical pages for job opportunities and institutional information. And turn that understanding into concrete recommendations.</p>
+        <p class="pt">O objetivo deste projeto foi simples e profundo: entender como PCDs navegam, compreendem e percebem o site da Petrobras, nas páginas mais críticas para oportunidades de trabalho e informação institucional. E transformar esse entendimento em recomendações concretas.</p>
+        <p class="en">There were 28 moderated remote sessions, with participants recruited among deaf, blind, deafblind, people with ASD, physical disabilities, and visual impairments — real diversity, not a research quota.</p>
+        <p class="pt">Foram 28 sessões remotas moderadas, com participantes recrutados entre surdos, cegos, surdocegos, pessoas com TEA, com deficiência física e deficiência visual — diversidade real, não cota de pesquisa.</p>
       </div>
     </div>
     <div class="reveal">
       <div class="overview-stats">
-        <div class="stat-item">
-          <div class="stat-number">28</div>
-          <div class="stat-label">Participantes com deficiência</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">3</div>
-          <div class="stat-label">Grupos de teste · nov–dez 2025</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">6</div>
-          <div class="stat-label">Tarefas por sessão</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">41<small style="font-size:22px">.02</small></div>
-          <div class="stat-label">Score SUS médio — Usabilidade Ruim</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">13</div>
-          <div class="stat-label">Recomendações no backlog</div>
-        </div>
+        <div class="stat-item"><div class="stat-number">28</div><div class="stat-label"><span class="en-inline">Participants with disabilities</span><span class="pt-inline">Participantes com deficiência</span></div></div>
+        <div class="stat-item"><div class="stat-number">3</div><div class="stat-label"><span class="en-inline">Test groups &middot; Nov–Dec 2025</span><span class="pt-inline">Grupos de teste &middot; nov–dez 2025</span></div></div>
+        <div class="stat-item"><div class="stat-number">6</div><div class="stat-label"><span class="en-inline">Tasks per session</span><span class="pt-inline">Tarefas por sessão</span></div></div>
+        <div class="stat-item"><div class="stat-number">41<small style="font-size:22px">.02</small></div><div class="stat-label"><span class="en-inline">Average SUS Score — Poor Usability</span><span class="pt-inline">Score SUS médio — Usabilidade Ruim</span></div></div>
+        <div class="stat-item"><div class="stat-number">13</div><div class="stat-label"><span class="en-inline">Recommendations in backlog</span><span class="pt-inline">Recomendações no backlog</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- METODOLOGIA -->
-<section class="section section-white">
-  <div class="section-eyebrow reveal">02 — Metodologia</div>
-  <h2 class="section-title reveal">Como os testes<br>foram conduzidos</h2>
-  <p class="section-lead reveal" style="margin-bottom: 64px;">Testes remotos moderados síncronos, com cada sessão estruturada em três partes: introdução e coleta de perfil, execução de tarefas com observação em tempo real, e questionário SUS adaptado para PCDs.</p>
-
+<!-- 02 METODOLOGIA -->
+<section class="case-section section-white">
+  <div class="cs-label reveal"><span class="en-inline">02 — Methodology</span><span class="pt-inline">02 — Metodologia</span></div>
+  <h2 class="cs-title reveal"><span class="en">How the tests<br>were conducted</span><span class="pt">Como os testes<br>foram conduzidos</span></h2>
+  <p class="cs-body-text reveal en" style="margin-bottom: 64px;">Synchronous moderated remote tests, with each session structured in three parts: introduction and profile collection, task execution with real-time observation, and SUS questionnaire adapted for PWDs.</p>
+  <p class="cs-body-text reveal pt" style="margin-bottom: 64px;">Testes remotos moderados síncronos, com cada sessão estruturada em três partes: introdução e coleta de perfil, execução de tarefas com observação em tempo real, e questionário SUS adaptado para PCDs.</p>
   <div class="three-col">
     <div class="method-card reveal">
-      <div class="method-card-icon">📡</div>
-      <div class="method-card-title">Remoto e Moderado</div>
-      <div class="method-card-body">Formato remoto recomendado para garantir o ambiente real dos participantes, com sua própria tecnologia assistiva, e escalabilidade geográfica — participantes de todo o Brasil.</div>
+      <div class="method-card-icon">&#128225;</div>
+      <div class="method-card-title"><span class="en-inline">Remote and Moderated</span><span class="pt-inline">Remoto e Moderado</span></div>
+      <div class="method-card-body en">Remote format recommended to ensure participants' real environment, with their own assistive technology, and geographic scalability — participants from all over Brazil.</div>
+      <div class="method-card-body pt">Formato remoto recomendado para garantir o ambiente real dos participantes, com sua própria tecnologia assistiva, e escalabilidade geográfica — participantes de todo o Brasil.</div>
     </div>
     <div class="method-card reveal">
-      <div class="method-card-icon">🔍</div>
-      <div class="method-card-title">Ferramentas de Análise</div>
-      <div class="method-card-body">Lookback ou UserTesting.com para gravação. Lighthouse, Axe e WAVE para auditoria de acessibilidade. Otter.ai, Read.ai ou Gemini para transcrição qualitativa das sessões.</div>
+      <div class="method-card-icon">&#128269;</div>
+      <div class="method-card-title"><span class="en-inline">Analysis Tools</span><span class="pt-inline">Ferramentas de Análise</span></div>
+      <div class="method-card-body en">Lookback or UserTesting.com for recording. Lighthouse, Axe, and WAVE for accessibility audit. Otter.ai, Read.ai, or Gemini for qualitative session transcription.</div>
+      <div class="method-card-body pt">Lookback ou UserTesting.com para gravação. Lighthouse, Axe e WAVE para auditoria de acessibilidade. Otter.ai, Read.ai ou Gemini para transcrição qualitativa das sessões.</div>
     </div>
     <div class="method-card reveal">
-      <div class="method-card-icon">📊</div>
-      <div class="method-card-title">SUS Adaptado para PCDs</div>
-      <div class="method-card-body">Escala SUS com 10 perguntas adaptadas ao contexto de acessibilidade, com escala Likert 1–5 (adaptável para 1–3 em perfis cognitivos). Foco em experiência com a própria deficiência como variável.</div>
+      <div class="method-card-icon">&#128202;</div>
+      <div class="method-card-title"><span class="en-inline">SUS Adapted for PWDs</span><span class="pt-inline">SUS Adaptado para PCDs</span></div>
+      <div class="method-card-body en">SUS scale with 10 questions adapted to the accessibility context, with Likert scale 1–5 (adaptable to 1–3 for cognitive profiles). Focus on experience with one's own disability as a variable.</div>
+      <div class="method-card-body pt">Escala SUS com 10 perguntas adaptadas ao contexto de acessibilidade, com escala Likert 1–5 (adaptável para 1–3 em perfis cognitivos). Foco em experiência com a própria deficiência como variável.</div>
     </div>
   </div>
 </section>
 
-<!-- PARTICIPANTES -->
-<section class="participant-section">
-  <div class="section-eyebrow section-eyebrow-light reveal">03 — Participantes</div>
-  <h2 class="section-title section-title-light reveal">28 pessoas.<br><em style="font-style:italic; color:var(--petro-pale)">Deficiências reais, contextos reais.</em></h2>
-  <p class="section-lead section-lead-light reveal">Distribuição equilibrada entre tipos de deficiência, refletindo a prevalência real na população brasileira. Sessões entre 05/11/2025 e 02/12/2025.</p>
+<!-- 03 PARTICIPANTES -->
+<section class="case-section section-dark">
+  <div class="cs-label reveal"><span class="en-inline">03 — Participants</span><span class="pt-inline">03 — Participantes</span></div>
+  <h2 class="cs-title reveal"><span class="en">28 people.<br><em style="font-style:italic; color:var(--petro-pale)">Real disabilities, real contexts.</em></span><span class="pt">28 pessoas.<br><em style="font-style:italic; color:var(--petro-pale)">Deficiências reais, contextos reais.</em></span></h2>
+  <p class="cs-body-text reveal en">Balanced distribution across disability types, reflecting actual prevalence in the Brazilian population. Sessions between 11/05/2025 and 12/02/2025.</p>
+  <p class="cs-body-text reveal pt">Distribuição equilibrada entre tipos de deficiência, refletindo a prevalência real na população brasileira. Sessões entre 05/11/2025 e 02/12/2025.</p>
 
   <div class="disability-grid reveal">
     <div class="disability-card">
       <div class="disability-card-num">7</div>
-      <div class="disability-card-type">Deficiência Auditiva / Surdez</div>
-      <div class="disability-card-desc">Incluindo Pessoas Surdas, usuários de Libras, comunicação por escrita e legendas. Avaliam Libras, WhatsApp, menus visuais.</div>
+      <div class="disability-card-type"><span class="en-inline">Hearing Impairment / Deafness</span><span class="pt-inline">Deficiência Auditiva / Surdez</span></div>
+      <div class="disability-card-desc en">Including Deaf people, sign language users, written communication and captions. Evaluate sign language, WhatsApp, visual menus.</div>
+      <div class="disability-card-desc pt">Incluindo Pessoas Surdas, usuários de Libras, comunicação por escrita e legendas. Avaliam Libras, WhatsApp, menus visuais.</div>
     </div>
     <div class="disability-card">
       <div class="disability-card-num">6</div>
-      <div class="disability-card-type">Deficiência Visual / Cegueira</div>
-      <div class="disability-card-desc">Cegueira total (leitores de tela NVDA/JAWS) e baixa visão (zoom, alto contraste, modo escuro). 1 participante surdocega.</div>
+      <div class="disability-card-type"><span class="en-inline">Visual Impairment / Blindness</span><span class="pt-inline">Deficiência Visual / Cegueira</span></div>
+      <div class="disability-card-desc en">Total blindness (NVDA/JAWS screen readers) and low vision (zoom, high contrast, dark mode). 1 deafblind participant.</div>
+      <div class="disability-card-desc pt">Cegueira total (leitores de tela NVDA/JAWS) e baixa visão (zoom, alto contraste, modo escuro). 1 participante surdocega.</div>
     </div>
     <div class="disability-card">
       <div class="disability-card-num">9</div>
-      <div class="disability-card-type">TEA / Cognitiva / TDAH</div>
-      <div class="disability-card-desc">TEA 1, TEA+TDAH, deficiências cognitivas e intelectuais. Avaliam linguagem, movimento, hierarquia visual e carga cognitiva.</div>
+      <div class="disability-card-type"><span class="en-inline">ASD / Cognitive / ADHD</span><span class="pt-inline">TEA / Cognitiva / TDAH</span></div>
+      <div class="disability-card-desc en">ASD level 1, ASD+ADHD, cognitive and intellectual disabilities. Evaluate language, motion, visual hierarchy, and cognitive load.</div>
+      <div class="disability-card-desc pt">TEA 1, TEA+TDAH, deficiências cognitivas e intelectuais. Avaliam linguagem, movimento, hierarquia visual e carga cognitiva.</div>
     </div>
     <div class="disability-card">
       <div class="disability-card-num">5</div>
-      <div class="disability-card-type">Deficiência Física</div>
-      <div class="disability-card-desc">Navegação por teclado, ponteiro de cabeça, controle de voz. Avaliam tamanho de botões, formulários e Tab navigation.</div>
+      <div class="disability-card-type"><span class="en-inline">Physical Disability</span><span class="pt-inline">Deficiência Física</span></div>
+      <div class="disability-card-desc en">Keyboard navigation, head pointer, voice control. Evaluate button sizes, forms, and Tab navigation.</div>
+      <div class="disability-card-desc pt">Navegação por teclado, ponteiro de cabeça, controle de voz. Avaliam tamanho de botões, formulários e Tab navigation.</div>
     </div>
   </div>
 
   <div class="participants-visual reveal">
     <div class="group-card">
-      <div class="group-card-label">Grupo 1 · Testes 1–8</div>
-      <div class="group-card-title">Novembro/2025</div>
-      <ul class="group-list">
-        <li>Andrey F. · Pessoa Surda</li>
-        <li>Stefany B. · Surdocega ⭐</li>
-        <li>Erica M. · Deficiência Visual</li>
-        <li>Marcel L. · TEA 1</li>
-        <li>Otto U. · TEA 1 ⭐</li>
-        <li>Michelle S. · Pessoa Surda</li>
-        <li>Alinne R. · Pessoa Cega ⭐</li>
-        <li>André F. · Deficiência Física</li>
+      <div class="group-card-label"><span class="en-inline">Group 1 &middot; Tests 1–8</span><span class="pt-inline">Grupo 1 &middot; Testes 1–8</span></div>
+      <div class="group-card-title"><span class="en-inline">November/2025</span><span class="pt-inline">Novembro/2025</span></div>
+      <ul class="group-list en">
+        <li>Andrey F. &middot; Deaf person</li>
+        <li>Stefany B. &middot; Deafblind &#11088;</li>
+        <li>Erica M. &middot; Visual impairment</li>
+        <li>Marcel L. &middot; ASD level 1</li>
+        <li>Otto U. &middot; ASD level 1 &#11088;</li>
+        <li>Michelle S. &middot; Deaf person</li>
+        <li>Alinne R. &middot; Blind person &#11088;</li>
+        <li>André F. &middot; Physical disability</li>
+      </ul>
+      <ul class="group-list pt">
+        <li>Andrey F. &middot; Pessoa Surda</li>
+        <li>Stefany B. &middot; Surdocega &#11088;</li>
+        <li>Erica M. &middot; Deficiência Visual</li>
+        <li>Marcel L. &middot; TEA 1</li>
+        <li>Otto U. &middot; TEA 1 &#11088;</li>
+        <li>Michelle S. &middot; Pessoa Surda</li>
+        <li>Alinne R. &middot; Pessoa Cega &#11088;</li>
+        <li>André F. &middot; Deficiência Física</li>
       </ul>
     </div>
     <div class="group-card">
-      <div class="group-card-label">Grupos 2 e 3 · Testes 9–28</div>
-      <div class="group-card-title">Novembro–Dezembro/2025</div>
-      <ul class="group-list">
+      <div class="group-card-label"><span class="en-inline">Groups 2 and 3 &middot; Tests 9–28</span><span class="pt-inline">Grupos 2 e 3 &middot; Testes 9–28</span></div>
+      <div class="group-card-title"><span class="en-inline">November–December/2025</span><span class="pt-inline">Novembro–Dezembro/2025</span></div>
+      <ul class="group-list en">
+        <li>9 participants with hearing impairment</li>
+        <li>3 blind participants</li>
+        <li>3 participants with physical disability</li>
+        <li>2 participants with visual impairment</li>
+        <li>ASD level 1+ADHD &middot; ASD+ADHD (multiple)</li>
+        <li>Participants from across Brazil</li>
+        <li>Age: 18–60 years</li>
+        <li>Internet &ge;3x per week</li>
+      </ul>
+      <ul class="group-list pt">
         <li>9 participantes com Deficiência Auditiva</li>
         <li>3 participantes Pessoas Cegas</li>
         <li>3 participantes com Deficiência Física</li>
         <li>2 participantes com Deficiência Visual</li>
-        <li>TEA 1+TDAH · TEA+TDAH (múltiplos)</li>
+        <li>TEA 1+TDAH &middot; TEA+TDAH (múltiplos)</li>
         <li>Participantes do Brasil inteiro</li>
         <li>Idade: 18–60 anos</li>
-        <li>Internet ≥3x por semana</li>
+        <li>Internet &ge;3x por semana</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- TAREFAS -->
-<section class="tasks-section">
-  <div class="section-eyebrow reveal">04 — Roteiro de Tarefas</div>
-  <h2 class="section-title reveal">6 tarefas,<br>páginas críticas</h2>
-  <p class="section-lead reveal" style="margin-bottom: 56px;">Cada sessão seguiu o mesmo roteiro de 6 tarefas, cobrindo as principais jornadas de usuários PCDs interessados em oportunidades e informações da Petrobras.</p>
-
+<!-- 04 TAREFAS -->
+<section class="case-section section-white">
+  <div class="cs-label reveal"><span class="en-inline">04 — Task Script</span><span class="pt-inline">04 — Roteiro de Tarefas</span></div>
+  <h2 class="cs-title reveal"><span class="en">6 tasks,<br>critical pages</span><span class="pt">6 tarefas,<br>páginas críticas</span></h2>
+  <p class="cs-body-text reveal en" style="margin-bottom: 56px;">Each session followed the same 6-task script, covering the main journeys of PWD users interested in opportunities and information from Petrobras.</p>
+  <p class="cs-body-text reveal pt" style="margin-bottom: 56px;">Cada sessão seguiu o mesmo roteiro de 6 tarefas, cobrindo as principais jornadas de usuários PCDs interessados em oportunidades e informações da Petrobras.</p>
   <div class="reveal">
-    <div class="task-row">
-      <div class="task-num">T1</div>
-      <div>
-        <div class="task-name">Navegação básica — Jovem Aprendiz</div>
-        <div class="task-desc">Localizar a página de Jovem Aprendiz a partir da homepage, testando a capacidade de descoberta do menu.</div>
-      </div>
-      <div class="task-focus">Foco: descoberta de menu, hierarquia de navegação, visibilidade de seções</div>
-    </div>
-    <div class="task-row">
-      <div class="task-num">T2</div>
-      <div>
-        <div class="task-name">Carreiras — Processo Seletivo</div>
-        <div class="task-desc">Encontrar um processo seletivo aberto na página de Carreiras.</div>
-      </div>
-      <div class="task-focus">Foco: clareza de informação, carga de texto, vagas vs concursos</div>
-    </div>
-    <div class="task-row">
-      <div class="task-num">T3</div>
-      <div>
-        <div class="task-name">Estágio — Informações</div>
-        <div class="task-desc">Localizar informações sobre vagas de estágio no site.</div>
-      </div>
-      <div class="task-focus">Foco: posicionamento de conteúdo na página, rolagem, ancoragem</div>
-    </div>
-    <div class="task-row">
-      <div class="task-num">T4</div>
-      <div>
-        <div class="task-name">Transição Energética Justa (TEJ)</div>
-        <div class="task-desc">Descobrir o que é a Transição Energética Justa através do site.</div>
-      </div>
-      <div class="task-focus">Foco: linguagem técnica, elementos interativos, legibilidade</div>
-    </div>
-    <div class="task-row">
-      <div class="task-num">T5</div>
-      <div>
-        <div class="task-name">Busca — Benefícios</div>
-        <div class="task-desc">Usar a ferramenta de busca para encontrar "benefícios para empregados".</div>
-      </div>
-      <div class="task-focus">Foco: busca com erros de digitação, resultados, sugestões</div>
-    </div>
-    <div class="task-row">
-      <div class="task-num">T6</div>
-      <div>
-        <div class="task-name">Canal de Contato — Fale Conosco</div>
-        <div class="task-desc">Encontrar como entrar em contato com a Petrobras.</div>
-      </div>
-      <div class="task-focus">Foco: nomenclatura intuitiva, visibilidade de canais, preferências por deficiência</div>
-    </div>
+    <div class="task-row"><div class="task-num">T1</div><div><div class="task-name"><span class="en-inline">Basic Navigation — Young Apprentice</span><span class="pt-inline">Navegação básica — Jovem Aprendiz</span></div><div class="task-desc en">Locate the Young Apprentice page from the homepage, testing menu discoverability.</div><div class="task-desc pt">Localizar a página de Jovem Aprendiz a partir da homepage, testando a capacidade de descoberta do menu.</div></div><div class="task-focus"><span class="en-inline">Focus: menu discovery, navigation hierarchy, section visibility</span><span class="pt-inline">Foco: descoberta de menu, hierarquia de navegação, visibilidade de seções</span></div></div>
+    <div class="task-row"><div class="task-num">T2</div><div><div class="task-name"><span class="en-inline">Careers — Selection Process</span><span class="pt-inline">Carreiras — Processo Seletivo</span></div><div class="task-desc en">Find an open selection process on the Careers page.</div><div class="task-desc pt">Encontrar um processo seletivo aberto na página de Carreiras.</div></div><div class="task-focus"><span class="en-inline">Focus: information clarity, text load, jobs vs competitions</span><span class="pt-inline">Foco: clareza de informação, carga de texto, vagas vs concursos</span></div></div>
+    <div class="task-row"><div class="task-num">T3</div><div><div class="task-name"><span class="en-inline">Internship — Information</span><span class="pt-inline">Estágio — Informações</span></div><div class="task-desc en">Locate information about internship openings on the website.</div><div class="task-desc pt">Localizar informações sobre vagas de estágio no site.</div></div><div class="task-focus"><span class="en-inline">Focus: content positioning, scrolling, anchoring</span><span class="pt-inline">Foco: posicionamento de conteúdo na página, rolagem, ancoragem</span></div></div>
+    <div class="task-row"><div class="task-num">T4</div><div><div class="task-name"><span class="en-inline">Just Energy Transition (JET)</span><span class="pt-inline">Transição Energética Justa (TEJ)</span></div><div class="task-desc en">Discover what the Just Energy Transition is through the website.</div><div class="task-desc pt">Descobrir o que é a Transição Energética Justa através do site.</div></div><div class="task-focus"><span class="en-inline">Focus: technical language, interactive elements, readability</span><span class="pt-inline">Foco: linguagem técnica, elementos interativos, legibilidade</span></div></div>
+    <div class="task-row"><div class="task-num">T5</div><div><div class="task-name"><span class="en-inline">Search — Benefits</span><span class="pt-inline">Busca — Benefícios</span></div><div class="task-desc en">Use the search tool to find "employee benefits."</div><div class="task-desc pt">Usar a ferramenta de busca para encontrar "benefícios para empregados".</div></div><div class="task-focus"><span class="en-inline">Focus: search with typos, results, suggestions</span><span class="pt-inline">Foco: busca com erros de digitação, resultados, sugestões</span></div></div>
+    <div class="task-row"><div class="task-num">T6</div><div><div class="task-name"><span class="en-inline">Contact Channel — Contact Us</span><span class="pt-inline">Canal de Contato — Fale Conosco</span></div><div class="task-desc en">Find how to contact Petrobras.</div><div class="task-desc pt">Encontrar como entrar em contato com a Petrobras.</div></div><div class="task-focus"><span class="en-inline">Focus: intuitive naming, channel visibility, disability preferences</span><span class="pt-inline">Foco: nomenclatura intuitiva, visibilidade de canais, preferências por deficiência</span></div></div>
   </div>
 </section>
 
-<!-- PARTICIPANTES DESTAQUE -->
-<section class="highlight-section">
-  <div class="section-eyebrow reveal">05 — Vozes do Teste</div>
-  <h2 class="section-title reveal">Quem navegou.<br>O que viveu.</h2>
-  <p class="section-lead reveal" style="margin-bottom: 16px;">Cada participante trouxe uma perspectiva única — e insubstituível. Nenhum dado quantitativo substitui ouvir Stefany B. apontando "texto branco sobre fundo branco" ou Andrey F. explicando que o avatar do V-Libras não tem expressão facial.</p>
+<!-- 05 VOZES DO TESTE -->
+<section class="case-section section-white">
+  <div class="cs-label reveal"><span class="en-inline">05 — Voices from Testing</span><span class="pt-inline">05 — Vozes do Teste</span></div>
+  <h2 class="cs-title reveal"><span class="en">Who navigated.<br>What they experienced.</span><span class="pt">Quem navegou.<br>O que viveu.</span></h2>
+  <p class="cs-body-text reveal en" style="margin-bottom: 16px;">Each participant brought a unique — and irreplaceable — perspective. No quantitative data replaces hearing Stefany B. pointing out "white text on white background" or Andrey F. explaining that the V-Libras avatar has no facial expression.</p>
+  <p class="cs-body-text reveal pt" style="margin-bottom: 16px;">Cada participante trouxe uma perspectiva única — e insubstituível. Nenhum dado quantitativo substitui ouvir Stefany B. apontando "texto branco sobre fundo branco" ou Andrey F. explicando que o avatar do V-Libras não tem expressão facial.</p>
 
   <div class="participants-grid">
-    <div class="participant-card reveal">
-      <div class="participant-avatar">AF</div>
-      <div>
-        <div class="participant-name">Andrey F.</div>
-        <div class="participant-meta">Pessoa Surda · 33 anos · Porto Velho/RO · Teste 1/28</div>
-        <div class="participant-detail">Gestão Hospitalar · Celular + Notebook · Comunica via Libras, WhatsApp, e-mail</div>
-        <div class="participant-insight">
-          O avatar do V-Libras não transmite expressões faciais — elemento essencial para a língua de sinais. Sites como Energisa e UFSC usam intérpretes humanos em vídeo. Por que a Petrobras não pode?
-        </div>
-      </div>
-    </div>
+    <div class="participant-card reveal"><div class="participant-avatar">AF</div><div><div class="participant-name">Andrey F.</div><div class="participant-meta"><span class="en-inline">Deaf person &middot; 33 &middot; Porto Velho/RO &middot; Test 1/28</span><span class="pt-inline">Pessoa Surda &middot; 33 anos &middot; Porto Velho/RO &middot; Teste 1/28</span></div><div class="participant-detail"><span class="en-inline">Hospital Management &middot; Phone + Laptop &middot; Communicates via sign language, WhatsApp, email</span><span class="pt-inline">Gestão Hospitalar &middot; Celular + Notebook &middot; Comunica via Libras, WhatsApp, e-mail</span></div><div class="participant-insight en">The V-Libras avatar doesn't convey facial expressions — an essential linguistic element in sign language that differentiates meanings and emotions. Sites like Energisa and UFSC use human video interpreters. Why can't Petrobras?</div><div class="participant-insight pt">O avatar do V-Libras não transmite expressões faciais — elemento essencial para a língua de sinais. Sites como Energisa e UFSC usam intérpretes humanos em vídeo. Por que a Petrobras não pode?</div></div></div>
 
-    <div class="participant-card reveal">
-      <div class="participant-avatar">SB</div>
-      <div>
-        <div class="participant-name">Stefany B.</div>
-        <div class="participant-meta">Surdocega (ictiose) · 24 anos · São Paulo/SP · Teste 2/28</div>
-        <div class="participant-detail">Administração · Fundo preto + letras amarelas + modo P&B · Comunicação por escrita e legendas</div>
-        <div class="participant-insight">
-          Ao acessar o site, ativou imediatamente modo preto e branco e aumentou a fonte. Mesmo assim: texto branco sobre fundo branco em várias áreas. A busca não sugeriu correção ao digitar errado.
-        </div>
-      </div>
-    </div>
+    <div class="participant-card reveal"><div class="participant-avatar">SB</div><div><div class="participant-name">Stefany B.</div><div class="participant-meta"><span class="en-inline">Deafblind (ichthyosis) &middot; 24 &middot; São Paulo/SP &middot; Test 2/28</span><span class="pt-inline">Surdocega (ictiose) &middot; 24 anos &middot; São Paulo/SP &middot; Teste 2/28</span></div><div class="participant-detail"><span class="en-inline">Business Administration &middot; Black background + yellow text + B&W mode &middot; Written communication and captions</span><span class="pt-inline">Administração &middot; Fundo preto + letras amarelas + modo P&B &middot; Comunicação por escrita e legendas</span></div><div class="participant-insight en">Upon accessing the site, immediately activated black and white mode and increased font size. Even so: white text on white background in several areas. Search didn't suggest corrections when typing errors.</div><div class="participant-insight pt">Ao acessar o site, ativou imediatamente modo preto e branco e aumentou a fonte. Mesmo assim: texto branco sobre fundo branco em várias áreas. A busca não sugeriu correção ao digitar errado.</div></div></div>
 
-    <div class="participant-card reveal">
-      <div class="participant-avatar">EM</div>
-      <div>
-        <div class="participant-name">Erica M.</div>
-        <div class="participant-meta">Deficiência Visual · Teste 3/28 · 06/11/2025</div>
-        <div class="participant-detail">Uso de leitor de tela e recursos de magnificação</div>
-        <div class="participant-insight">
-          Menus e itens expansíveis não eram lidos corretamente pelo leitor de tela. Janela de cookies não identificada pelo NVDA. A navegação por leitura linear não seguia uma hierarquia compreensível.
-        </div>
-      </div>
-    </div>
+    <div class="participant-card reveal"><div class="participant-avatar">EM</div><div><div class="participant-name">Erica M.</div><div class="participant-meta"><span class="en-inline">Visual Impairment &middot; Test 3/28 &middot; 11/06/2025</span><span class="pt-inline">Deficiência Visual &middot; Teste 3/28 &middot; 06/11/2025</span></div><div class="participant-detail"><span class="en-inline">Screen reader and magnification tools user</span><span class="pt-inline">Uso de leitor de tela e recursos de magnificação</span></div><div class="participant-insight en">Menus and expandable items were not read correctly by the screen reader. Cookies window not identified by NVDA. Linear reading navigation didn't follow a comprehensible hierarchy.</div><div class="participant-insight pt">Menus e itens expansíveis não eram lidos corretamente pelo leitor de tela. Janela de cookies não identificada pelo NVDA. A navegação por leitura linear não seguia uma hierarquia compreensível.</div></div></div>
 
-    <div class="participant-card reveal">
-      <div class="participant-avatar">AR</div>
-      <div>
-        <div class="participant-name">Alinne R.</div>
-        <div class="participant-meta">Pessoa Cega · Teste 7/28 · 11/11/2025</div>
-        <div class="participant-detail">Leitor de tela (JAWS/NVDA) · Navegação totalmente por teclado e áudio</div>
-        <div class="participant-insight">
-          Falta de ARIA labels e descrições semânticas tornava impossível compreender a estrutura das páginas. Links sem descrição contextual e imagens sem alt text criavam lacunas críticas na experiência.
-        </div>
-      </div>
-    </div>
+    <div class="participant-card reveal"><div class="participant-avatar">AR</div><div><div class="participant-name">Alinne R.</div><div class="participant-meta"><span class="en-inline">Blind person &middot; Test 7/28 &middot; 11/11/2025</span><span class="pt-inline">Pessoa Cega &middot; Teste 7/28 &middot; 11/11/2025</span></div><div class="participant-detail"><span class="en-inline">Screen reader (JAWS/NVDA) &middot; Full keyboard and audio navigation</span><span class="pt-inline">Leitor de tela (JAWS/NVDA) &middot; Navegação totalmente por teclado e áudio</span></div><div class="participant-insight en">Lack of ARIA labels and semantic descriptions made it impossible to understand page structure. Links without contextual descriptions and images without alt text created critical gaps in the experience.</div><div class="participant-insight pt">Falta de ARIA labels e descrições semânticas tornava impossível compreender a estrutura das páginas. Links sem descrição contextual e imagens sem alt text criavam lacunas críticas na experiência.</div></div></div>
 
-    <div class="participant-card reveal">
-      <div class="participant-avatar">ML</div>
-      <div>
-        <div class="participant-name">Marcel L.</div>
-        <div class="participant-meta">TEA 1 · Teste 4/28 · 10/11/2025</div>
-        <div class="participant-detail">Sensibilidade a movimento e sobrecarga visual</div>
-        <div class="participant-insight">
-          Carrosséis e vídeos de fundo na homepage causaram distração severa antes mesmo de começar as tarefas. A linguagem técnica da página TEJ, sem glossário, gerou confusão e abandono da leitura.
-        </div>
-      </div>
-    </div>
+    <div class="participant-card reveal"><div class="participant-avatar">ML</div><div><div class="participant-name">Marcel L.</div><div class="participant-meta"><span class="en-inline">ASD level 1 &middot; Test 4/28 &middot; 11/10/2025</span><span class="pt-inline">TEA 1 &middot; Teste 4/28 &middot; 10/11/2025</span></div><div class="participant-detail"><span class="en-inline">Sensitivity to motion and visual overload</span><span class="pt-inline">Sensibilidade a movimento e sobrecarga visual</span></div><div class="participant-insight en">Homepage carousels and background videos caused severe distraction before tasks even began. Technical language on the JET page, without a glossary, caused confusion and reading abandonment.</div><div class="participant-insight pt">Carrosséis e vídeos de fundo na homepage causaram distração severa antes mesmo de começar as tarefas. A linguagem técnica da página TEJ, sem glossário, gerou confusão e abandono da leitura.</div></div></div>
 
-    <div class="participant-card reveal">
-      <div class="participant-avatar">AF</div>
-      <div>
-        <div class="participant-name">André F.</div>
-        <div class="participant-meta">Deficiência Física · Teste 8/28 · 12/11/2025</div>
-        <div class="participant-detail">Navegação por teclado · Headset · Sem uso de mouse</div>
-        <div class="participant-insight">
-          Navegação por Tab completamente comprometida em vários pontos. O link "Situação" levava ao topo da página em vez do conteúdo esperado — dead link crítico para quem depende de ancoragem exata.
-        </div>
-      </div>
-    </div>
+    <div class="participant-card reveal"><div class="participant-avatar">AF</div><div><div class="participant-name">André F.</div><div class="participant-meta"><span class="en-inline">Physical Disability &middot; Test 8/28 &middot; 11/12/2025</span><span class="pt-inline">Deficiência Física &middot; Teste 8/28 &middot; 12/11/2025</span></div><div class="participant-detail"><span class="en-inline">Keyboard navigation &middot; Headset &middot; No mouse use</span><span class="pt-inline">Navegação por teclado &middot; Headset &middot; Sem uso de mouse</span></div><div class="participant-insight en">Tab navigation completely compromised at several points. The "Status" link went to the top of the page instead of expected content — a critical dead link for those who depend on exact anchoring.</div><div class="participant-insight pt">Navegação por Tab completamente comprometida em vários pontos. O link "Situação" levava ao topo da página em vez do conteúdo esperado — dead link crítico para quem depende de ancoragem exata.</div></div></div>
   </div>
 </section>
 
-<!-- INSIGHTS -->
-<section class="insights-section">
-  <div class="section-eyebrow reveal">06 — Principais Insights</div>
-  <h2 class="section-title reveal">O que os testes<br>revelaram</h2>
-  <p class="section-lead reveal" style="margin-bottom: 64px;">Cinco eixos de problemas identificados sistematicamente nos 28 testes, com recorrência em múltiplos perfis de deficiência.</p>
-
+<!-- 06 INSIGHTS -->
+<section class="case-section">
+  <div class="cs-label reveal"><span class="en-inline">06 — Key Insights</span><span class="pt-inline">06 — Principais Insights</span></div>
+  <h2 class="cs-title reveal"><span class="en">What the tests<br>revealed</span><span class="pt">O que os testes<br>revelaram</span></h2>
+  <p class="cs-body-text reveal en" style="margin-bottom: 64px;">Five axes of problems systematically identified across 28 tests, with recurrence across multiple disability profiles.</p>
+  <p class="cs-body-text reveal pt" style="margin-bottom: 64px;">Cinco eixos de problemas identificados sistematicamente nos 28 testes, com recorrência em múltiplos perfis de deficiência.</p>
   <div class="reveal">
-    <div class="insight-block">
-      <div class="insight-header">
-        <div class="insight-icon insight-icon-teal">🤟</div>
-        <div>
-          <div class="insight-type">Deficiência Auditiva · Surdos</div>
-          <div class="insight-title">V-Libras falha onde importa — nas expressões</div>
-        </div>
-      </div>
-      <div class="insight-findings">
-        <div class="finding-pill">O avatar do V-Libras não transmite expressões faciais — elemento linguístico essencial em Libras que diferencia significados e emoções.</div>
-        <div class="finding-pill">Ícone de Libras difícil de localizar na interface. Canal preferido pelos surdos — WhatsApp — não estava destacado no site.</div>
-        <div class="finding-pill">O termo "Fale Conosco" não foi intuitivo para surdos, que preferem "Ouvidoria" ou "Dúvidas" — termos mais concretos e diretos.</div>
-        <div class="finding-pill amber-accent">Recomendação prioritária: substituir V-Libras por intérprete humano em vídeo, como já fazem Energisa e UFSC.</div>
-      </div>
-    </div>
+    <div class="insight-block"><div class="insight-header"><div class="insight-icon insight-icon-teal">&#129311;</div><div><div class="insight-type"><span class="en-inline">Hearing Impairment &middot; Deaf</span><span class="pt-inline">Deficiência Auditiva &middot; Surdos</span></div><div class="insight-title"><span class="en-inline">V-Libras fails where it matters — in expressions</span><span class="pt-inline">V-Libras falha onde importa — nas expressões</span></div></div></div><div class="insight-findings"><div class="finding-pill en">The V-Libras avatar doesn't convey facial expressions — an essential linguistic element in sign language that differentiates meanings and emotions.</div><div class="finding-pill pt">O avatar do V-Libras não transmite expressões faciais — elemento linguístico essencial em Libras que diferencia significados e emoções.</div><div class="finding-pill en">Sign language icon hard to locate in the interface. Preferred channel for deaf users — WhatsApp — was not highlighted on the site.</div><div class="finding-pill pt">Ícone de Libras difícil de localizar na interface. Canal preferido pelos surdos — WhatsApp — não estava destacado no site.</div><div class="finding-pill en">The term "Contact Us" was not intuitive for deaf users, who prefer "Ombudsman" or "Questions" — more concrete and direct terms.</div><div class="finding-pill pt">O termo "Fale Conosco" não foi intuitivo para surdos, que preferem "Ouvidoria" ou "Dúvidas" — termos mais concretos e diretos.</div><div class="finding-pill amber-accent en">Priority recommendation: replace V-Libras with a human video interpreter, as Energisa and UFSC already do.</div><div class="finding-pill amber-accent pt">Recomendação prioritária: substituir V-Libras por intérprete humano em vídeo, como já fazem Energisa e UFSC.</div></div></div>
 
-    <div class="insight-block">
-      <div class="insight-header">
-        <div class="insight-icon insight-icon-teal">👁️</div>
-        <div>
-          <div class="insight-type">Surdocegueira · Baixa Visão</div>
-          <div class="insight-title">Contraste quebrado em múltiplos pontos</div>
-        </div>
-      </div>
-      <div class="insight-findings">
-        <div class="finding-pill">Texto branco sobre fundo branco em várias áreas — falha crítica de contraste que torna conteúdo completamente invisível.</div>
-        <div class="finding-pill">Busca sem sugestão de correção para erros de digitação, criando dead-ends para usuários que dependem de escrita adaptada.</div>
-        <div class="finding-pill amber-accent">Fontes pequenas e cores claras persistiam mesmo após zoom máximo ativado. A interface não foi construída para acomodar adaptações visuais.</div>
-        <div class="finding-pill">Necessidade de fundo escuro com letras amarelas em negrito — padrão de alta acessibilidade já existente mas não suportado pelo site.</div>
-      </div>
-    </div>
+    <div class="insight-block"><div class="insight-header"><div class="insight-icon insight-icon-teal">&#128065;&#65039;</div><div><div class="insight-type"><span class="en-inline">Deafblindness &middot; Low Vision</span><span class="pt-inline">Surdocegueira &middot; Baixa Visão</span></div><div class="insight-title"><span class="en-inline">Broken contrast at multiple points</span><span class="pt-inline">Contraste quebrado em múltiplos pontos</span></div></div></div><div class="insight-findings"><div class="finding-pill en">White text on white background in several areas — a critical contrast failure that makes content completely invisible.</div><div class="finding-pill pt">Texto branco sobre fundo branco em várias áreas — falha crítica de contraste que torna conteúdo completamente invisível.</div><div class="finding-pill en">Search without correction suggestions for typos, creating dead-ends for users who depend on adapted writing.</div><div class="finding-pill pt">Busca sem sugestão de correção para erros de digitação, criando dead-ends para usuários que dependem de escrita adaptada.</div><div class="finding-pill amber-accent en">Small fonts and light colors persisted even after maximum zoom activated. The interface was not built to accommodate visual adaptations.</div><div class="finding-pill amber-accent pt">Fontes pequenas e cores claras persistiam mesmo após zoom máximo ativado. A interface não foi construída para acomodar adaptações visuais.</div><div class="finding-pill en">Need for dark background with bold yellow text — a high-accessibility standard that already exists but is not supported by the site.</div><div class="finding-pill pt">Necessidade de fundo escuro com letras amarelas em negrito — padrão de alta acessibilidade já existente mas não suportado pelo site.</div></div></div>
 
-    <div class="insight-block">
-      <div class="insight-header">
-        <div class="insight-icon insight-icon-teal">🦯</div>
-        <div>
-          <div class="insight-type">Deficiência Visual · Cegueira</div>
-          <div class="insight-title">Leitores de tela navegando às cegas</div>
-        </div>
-      </div>
-      <div class="insight-findings">
-        <div class="finding-pill">NVDA e JAWS não liam corretamente menus expansíveis, itens de accordion e links clicáveis — estruturas essenciais das páginas principais.</div>
-        <div class="finding-pill">Janela de cookies não identificada pelo leitor de tela — impede consentimento informado e trava a sessão inicial.</div>
-        <div class="finding-pill amber-accent">Ausência de ARIA labels e descrições semânticas em todo o site. Links sem descrição contextual — apenas "clique aqui" ou sem texto.</div>
-        <div class="finding-pill">Imagens sem alt text e elementos decorativos sem atributo role="presentation" polui a experiência de leitura linear.</div>
-      </div>
-    </div>
+    <div class="insight-block"><div class="insight-header"><div class="insight-icon insight-icon-teal">&#129455;</div><div><div class="insight-type"><span class="en-inline">Visual Impairment &middot; Blindness</span><span class="pt-inline">Deficiência Visual &middot; Cegueira</span></div><div class="insight-title"><span class="en-inline">Screen readers navigating blind</span><span class="pt-inline">Leitores de tela navegando às cegas</span></div></div></div><div class="insight-findings"><div class="finding-pill en">NVDA and JAWS could not correctly read expandable menus, accordion items, and clickable links — essential structures of main pages.</div><div class="finding-pill pt">NVDA e JAWS não liam corretamente menus expansíveis, itens de accordion e links clicáveis — estruturas essenciais das páginas principais.</div><div class="finding-pill en">Cookies window not identified by the screen reader — prevents informed consent and blocks the initial session.</div><div class="finding-pill pt">Janela de cookies não identificada pelo leitor de tela — impede consentimento informado e trava a sessão inicial.</div><div class="finding-pill amber-accent en">Missing ARIA labels and semantic descriptions across the entire site. Links without contextual description — just "click here" or no text.</div><div class="finding-pill amber-accent pt">Ausência de ARIA labels e descrições semânticas em todo o site. Links sem descrição contextual — apenas "clique aqui" ou sem texto.</div><div class="finding-pill en">Images without alt text and decorative elements without role="presentation" pollute the linear reading experience.</div><div class="finding-pill pt">Imagens sem alt text e elementos decorativos sem atributo role="presentation" polui a experiência de leitura linear.</div></div></div>
 
-    <div class="insight-block">
-      <div class="insight-header">
-        <div class="insight-icon insight-icon-amber">🧩</div>
-        <div>
-          <div class="insight-type">TEA · Deficiência Cognitiva</div>
-          <div class="insight-title">Movimento e complexidade como barreiras</div>
-        </div>
-      </div>
-      <div class="insight-findings">
-        <div class="finding-pill amber-accent">Carrosséis e vídeos de fundo causam distração severa antes mesmo das tarefas começarem. O movimento involuntário interrompe o foco cognitivo.</div>
-        <div class="finding-pill">Linguagem técnica da página TEJ sem glossário ou explicação contextual — especialmente termos como "GEE", "pré-sal", "matriz energética".</div>
-        <div class="finding-pill">Excesso de texto sem hierarquia visual clara em Carreiras e Concursos dificultava identificar o que era mais importante.</div>
-        <div class="finding-pill">Ausência de blocos visuais, ícones e resumos expandíveis que facilitariam a navegação para perfis cognitivos variados.</div>
-      </div>
-    </div>
+    <div class="insight-block"><div class="insight-header"><div class="insight-icon insight-icon-amber">&#129513;</div><div><div class="insight-type"><span class="en-inline">ASD &middot; Cognitive Disability</span><span class="pt-inline">TEA &middot; Deficiência Cognitiva</span></div><div class="insight-title"><span class="en-inline">Motion and complexity as barriers</span><span class="pt-inline">Movimento e complexidade como barreiras</span></div></div></div><div class="insight-findings"><div class="finding-pill amber-accent en">Carousels and background videos cause severe distraction before tasks even begin. Involuntary motion interrupts cognitive focus.</div><div class="finding-pill amber-accent pt">Carrosséis e vídeos de fundo causam distração severa antes mesmo das tarefas começarem. O movimento involuntário interrompe o foco cognitivo.</div><div class="finding-pill en">Technical language on the JET page without glossary or contextual explanation — especially terms like "GHG," "pre-salt," "energy matrix."</div><div class="finding-pill pt">Linguagem técnica da página TEJ sem glossário ou explicação contextual — especialmente termos como "GEE", "pré-sal", "matriz energética".</div><div class="finding-pill en">Excess text without clear visual hierarchy in Careers and Competitions made it hard to identify what was most important.</div><div class="finding-pill pt">Excesso de texto sem hierarquia visual clara em Carreiras e Concursos dificultava identificar o que era mais importante.</div><div class="finding-pill en">Lack of visual blocks, icons, and expandable summaries that would facilitate navigation for varied cognitive profiles.</div><div class="finding-pill pt">Ausência de blocos visuais, ícones e resumos expandíveis que facilitariam a navegação para perfis cognitivos variados.</div></div></div>
 
-    <div class="insight-block">
-      <div class="insight-header">
-        <div class="insight-icon insight-icon-teal">⌨️</div>
-        <div>
-          <div class="insight-type">Deficiência Física</div>
-          <div class="insight-title">Teclado como único caminho — e ele não funcionava</div>
-        </div>
-      </div>
-      <div class="insight-findings">
-        <div class="finding-pill">Navegação por Tab completamente comprometida em múltiplos pontos — foco visual não aparecia ou saltava de forma imprevisível.</div>
-        <div class="finding-pill">Link "Situação" levava ao topo da página em vez do conteúdo correto — dead link crítico para usuários que não usam mouse.</div>
-        <div class="finding-pill amber-accent">Botões pequenos e formulários sem labels adequadas criavam barreiras para quem usa teclado, ponteiro de cabeça ou controle de voz.</div>
-        <div class="finding-pill">Ausência de "skip to main content" forçava navegação completa do cabeçalho em cada página.</div>
-      </div>
-    </div>
+    <div class="insight-block"><div class="insight-header"><div class="insight-icon insight-icon-teal">&#9000;&#65039;</div><div><div class="insight-type"><span class="en-inline">Physical Disability</span><span class="pt-inline">Deficiência Física</span></div><div class="insight-title"><span class="en-inline">Keyboard as the only path — and it didn't work</span><span class="pt-inline">Teclado como único caminho — e ele não funcionava</span></div></div></div><div class="insight-findings"><div class="finding-pill en">Tab navigation completely compromised at multiple points — visual focus didn't appear or jumped unpredictably.</div><div class="finding-pill pt">Navegação por Tab completamente comprometida em múltiplos pontos — foco visual não aparecia ou saltava de forma imprevisível.</div><div class="finding-pill en">"Status" link went to the top of the page instead of correct content — a critical dead link for users who don't use a mouse.</div><div class="finding-pill pt">Link "Situação" levava ao topo da página em vez do conteúdo correto — dead link crítico para usuários que não usam mouse.</div><div class="finding-pill amber-accent en">Small buttons and forms without proper labels created barriers for those using keyboard, head pointer, or voice control.</div><div class="finding-pill amber-accent pt">Botões pequenos e formulários sem labels adequadas criavam barreiras para quem usa teclado, ponteiro de cabeça ou controle de voz.</div><div class="finding-pill en">No "skip to main content" forced complete header navigation on every page.</div><div class="finding-pill pt">Ausência de "skip to main content" forçava navegação completa do cabeçalho em cada página.</div></div></div>
   </div>
 </section>
 
-<!-- SUS -->
-<section class="sus-section">
-  <div class="section-eyebrow section-eyebrow-light reveal">07 — Score SUS</div>
-  <h2 class="section-title section-title-light reveal">O número que<br>sintetiza o diagnóstico</h2>
-
+<!-- 07 SUS -->
+<section class="case-section section-dark">
+  <div class="cs-label reveal"><span class="en-inline">07 — SUS Score</span><span class="pt-inline">07 — Score SUS</span></div>
+  <h2 class="cs-title reveal"><span class="en">The number that<br>summarizes the diagnosis</span><span class="pt">O número que<br>sintetiza o diagnóstico</span></h2>
   <div class="sus-viz-row reveal">
     <div>
       <div class="sus-big-num">41<em>.02</em></div>
-      <p class="sus-context" style="margin-top: 24px;">A média SUS de <strong style="color:var(--white)">41.02</strong> coloca o site da Petrobras na faixa "Ruim" da escala de usabilidade — 27 pontos abaixo do benchmark de mercado de 68. 78% dos participantes completaram o questionário pós-teste.</p>
-      <p class="sus-context" style="margin-top: 16px;">A ausência de mensurabilidade por tarefa reflete a realidade dos testes com PCDs: cada participante exigia uma abordagem adaptada, tornando comparações por sucesso/fracasso inadequadas. O valor qualitativo está nos padrões — e eles foram claros.</p>
+      <p class="sus-context en" style="margin-top: 24px;">The average SUS of <strong style="color:var(--white)">41.02</strong> places the Petrobras website in the "Poor" range of the usability scale — 27 points below the industry benchmark of 68. 78% of participants completed the post-test questionnaire.</p>
+      <p class="sus-context pt" style="margin-top: 24px;">A média SUS de <strong style="color:var(--white)">41.02</strong> coloca o site da Petrobras na faixa "Ruim" da escala de usabilidade — 27 pontos abaixo do benchmark de mercado de 68. 78% dos participantes completaram o questionário pós-teste.</p>
+      <p class="sus-context en" style="margin-top: 16px;">The absence of per-task measurability reflects the reality of testing with PWDs: each participant required an adapted approach, making success/failure comparisons inadequate. The qualitative value lies in the patterns — and they were clear.</p>
+      <p class="sus-context pt" style="margin-top: 16px;">A ausência de mensurabilidade por tarefa reflete a realidade dos testes com PCDs: cada participante exigia uma abordagem adaptada, tornando comparações por sucesso/fracasso inadequadas. O valor qualitativo está nos padrões — e eles foram claros.</p>
     </div>
     <div>
       <div class="sus-scale-full">
-        <div class="sus-scale-row-full">
-          <div class="sus-range">0–39</div>
-          <div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:39%; background:rgba(168,216,234,0.2)"></div></div>
-          <div class="sus-rating">Inaceitável</div>
-        </div>
-        <div class="sus-scale-row-full highlighted">
-          <div class="sus-range">40–52 ←</div>
-          <div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:42%"></div></div>
-          <div class="sus-rating">Ruim</div>
-        </div>
-        <div class="sus-scale-row-full">
-          <div class="sus-range">53–73</div>
-          <div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:65%; background:rgba(168,216,234,0.2)"></div></div>
-          <div class="sus-rating">Aceitável</div>
-        </div>
-        <div class="sus-scale-row-full">
-          <div class="sus-range">74–85</div>
-          <div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:80%; background:rgba(168,216,234,0.2)"></div></div>
-          <div class="sus-rating">Boa</div>
-        </div>
-        <div class="sus-scale-row-full">
-          <div class="sus-range">86–100</div>
-          <div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:95%; background:rgba(168,216,234,0.2)"></div></div>
-          <div class="sus-rating">Excelente</div>
-        </div>
+        <div class="sus-scale-row-full"><div class="sus-range">0–39</div><div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:39%; background:rgba(168,216,234,0.2)"></div></div><div class="sus-rating"><span class="en-inline">Unacceptable</span><span class="pt-inline">Inaceitável</span></div></div>
+        <div class="sus-scale-row-full highlighted"><div class="sus-range">40–52 &larr;</div><div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:42%"></div></div><div class="sus-rating"><span class="en-inline">Poor</span><span class="pt-inline">Ruim</span></div></div>
+        <div class="sus-scale-row-full"><div class="sus-range">53–73</div><div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:65%; background:rgba(168,216,234,0.2)"></div></div><div class="sus-rating"><span class="en-inline">Acceptable</span><span class="pt-inline">Aceitável</span></div></div>
+        <div class="sus-scale-row-full"><div class="sus-range">74–85</div><div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:80%; background:rgba(168,216,234,0.2)"></div></div><div class="sus-rating"><span class="en-inline">Good</span><span class="pt-inline">Boa</span></div></div>
+        <div class="sus-scale-row-full"><div class="sus-range">86–100</div><div class="sus-bar-wrap"><div class="sus-bar-fill" style="width:95%; background:rgba(168,216,234,0.2)"></div></div><div class="sus-rating"><span class="en-inline">Excellent</span><span class="pt-inline">Excelente</span></div></div>
       </div>
-
       <div class="sus-participants" style="margin-top: 32px;">
-        <p>78% dos participantes responderam o questionário. A escala SUS foi adaptada ao contexto de acessibilidade — perguntas consideravam a deficiência do participante como variável central. Benchmark do setor: <strong>68</strong>. Distância atual: <strong style="color:var(--amber)">-27 pontos</strong>.</p>
+        <p class="en">78% of participants answered the questionnaire. The SUS scale was adapted to the accessibility context — questions considered the participant's disability as a central variable. Industry benchmark: <strong>68</strong>. Current gap: <strong style="color:var(--amber)">-27 points</strong>.</p>
+        <p class="pt">78% dos participantes responderam o questionário. A escala SUS foi adaptada ao contexto de acessibilidade — perguntas consideravam a deficiência do participante como variável central. Benchmark do setor: <strong>68</strong>. Distância atual: <strong style="color:var(--amber)">-27 pontos</strong>.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BACKLOG -->
-<section class="backlog-section">
-  <div class="section-eyebrow reveal">08 — Backlog de Recomendações</div>
-  <h2 class="section-title reveal">Do diagnóstico<br>à ação</h2>
-  <p class="section-lead reveal" style="margin-bottom: 16px;">13 recomendações priorizadas entre quick wins (impacto imediato) e projetos estruturais (médio e longo prazo).</p>
-
+<!-- 08 BACKLOG -->
+<section class="case-section section-stone">
+  <div class="cs-label reveal"><span class="en-inline">08 — Recommendations Backlog</span><span class="pt-inline">08 — Backlog de Recomendações</span></div>
+  <h2 class="cs-title reveal"><span class="en">From diagnosis<br>to action</span><span class="pt">Do diagnóstico<br>à ação</span></h2>
+  <p class="cs-body-text reveal en" style="margin-bottom: 16px;">13 prioritized recommendations between quick wins (immediate impact) and structural projects (medium and long term).</p>
+  <p class="cs-body-text reveal pt" style="margin-bottom: 16px;">13 recomendações priorizadas entre quick wins (impacto imediato) e projetos estruturais (médio e longo prazo).</p>
   <div class="backlog-grid reveal">
     <div class="backlog-col">
-      <div class="backlog-col-header">
-        <div class="backlog-badge badge-quick">Quick Wins</div>
-        <div class="backlog-col-title">Curto prazo</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">01</div>
-        <div class="backlog-item-text">Melhorar visibilidade de <strong>Carreiras e Concursos</strong> no menu de navegação principal</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">02</div>
-        <div class="backlog-item-text">Ajustar <strong>contraste e fontes</strong> nas páginas principais — eliminar texto branco sobre fundo branco</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">03</div>
-        <div class="backlog-item-text">Corrigir bugs críticos: <strong>link "Situação"</strong> + janela de cookies não lida pelo NVDA</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">04</div>
-        <div class="backlog-item-text">Melhorar ferramenta de <strong>busca com sugestões de correção</strong> para erros de digitação</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">05</div>
-        <div class="backlog-item-text"><strong>Barra de acessibilidade fixa</strong> (fonte/contraste) + ícone de Libras maior e mais visível</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">06</div>
-        <div class="backlog-item-text">Substituir V-Libras por ferramenta com <strong>avatar humano realista ou intérprete em vídeo</strong></div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">07</div>
-        <div class="backlog-item-text">Revisar ou remover <strong>vídeos e imagens em movimento</strong> que distraem do conteúdo principal</div>
-      </div>
+      <div class="backlog-col-header"><div class="backlog-badge badge-quick">Quick Wins</div><div class="backlog-col-title"><span class="en-inline">Short term</span><span class="pt-inline">Curto prazo</span></div></div>
+      <div class="backlog-item"><div class="backlog-num">01</div><div class="backlog-item-text en">Improve visibility of <strong>Careers and Competitions</strong> in the main navigation menu</div><div class="backlog-item-text pt">Melhorar visibilidade de <strong>Carreiras e Concursos</strong> no menu de navegação principal</div></div>
+      <div class="backlog-item"><div class="backlog-num">02</div><div class="backlog-item-text en">Fix <strong>contrast and fonts</strong> on main pages — eliminate white text on white background</div><div class="backlog-item-text pt">Ajustar <strong>contraste e fontes</strong> nas páginas principais — eliminar texto branco sobre fundo branco</div></div>
+      <div class="backlog-item"><div class="backlog-num">03</div><div class="backlog-item-text en">Fix critical bugs: <strong>"Status" link</strong> + cookies window not read by NVDA</div><div class="backlog-item-text pt">Corrigir bugs críticos: <strong>link "Situação"</strong> + janela de cookies não lida pelo NVDA</div></div>
+      <div class="backlog-item"><div class="backlog-num">04</div><div class="backlog-item-text en">Improve <strong>search tool with correction suggestions</strong> for typos</div><div class="backlog-item-text pt">Melhorar ferramenta de <strong>busca com sugestões de correção</strong> para erros de digitação</div></div>
+      <div class="backlog-item"><div class="backlog-num">05</div><div class="backlog-item-text en"><strong>Fixed accessibility bar</strong> (font/contrast) + larger and more visible sign language icon</div><div class="backlog-item-text pt"><strong>Barra de acessibilidade fixa</strong> (fonte/contraste) + ícone de Libras maior e mais visível</div></div>
+      <div class="backlog-item"><div class="backlog-num">06</div><div class="backlog-item-text en">Replace V-Libras with a tool featuring <strong>realistic human avatar or video interpreter</strong></div><div class="backlog-item-text pt">Substituir V-Libras por ferramenta com <strong>avatar humano realista ou intérprete em vídeo</strong></div></div>
+      <div class="backlog-item"><div class="backlog-num">07</div><div class="backlog-item-text en">Review or remove <strong>videos and moving images</strong> that distract from main content</div><div class="backlog-item-text pt">Revisar ou remover <strong>vídeos e imagens em movimento</strong> que distraem do conteúdo principal</div></div>
     </div>
-
     <div class="backlog-col">
-      <div class="backlog-col-header">
-        <div class="backlog-badge badge-project">Projetos</div>
-        <div class="backlog-col-title">Médio e longo prazo</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">08</div>
-        <div class="backlog-item-text">Reestruturar <strong>Carreiras e Concursos</strong> — descrições claras com escolaridade e requisitos por deficiência</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">09</div>
-        <div class="backlog-item-text"><strong>Ferramenta de pesquisa avançada + IA</strong> com filtros por deficiência, localização e escolaridade</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">10</div>
-        <div class="backlog-item-text">Revisar imagens dinâmicas — substituir por estáticas ou <strong>permitir desativar movimento</strong> (crítico para TEA)</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">11</div>
-        <div class="backlog-item-text"><strong>Glossário de termos técnicos</strong> — tooltips ou seção interativa, especialmente na página TEJ</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">12</div>
-        <div class="backlog-item-text"><strong>Design System inclusivo</strong> — voz, teclado, áudio, daltonismo, surdocegueira, Libras, alt text, diretrizes cognitivas</div>
-      </div>
-      <div class="backlog-item">
-        <div class="backlog-num">13</div>
-        <div class="backlog-item-text"><strong>Revisão semântica e ARIA completa</strong> — todos os elementos com labels, descrições e hierarquia acessível em todo o site</div>
-      </div>
+      <div class="backlog-col-header"><div class="backlog-badge badge-project"><span class="en-inline">Projects</span><span class="pt-inline">Projetos</span></div><div class="backlog-col-title"><span class="en-inline">Medium and long term</span><span class="pt-inline">Médio e longo prazo</span></div></div>
+      <div class="backlog-item"><div class="backlog-num">08</div><div class="backlog-item-text en">Restructure <strong>Careers and Competitions</strong> — clear descriptions with education and requirements per disability</div><div class="backlog-item-text pt">Reestruturar <strong>Carreiras e Concursos</strong> — descrições claras com escolaridade e requisitos por deficiência</div></div>
+      <div class="backlog-item"><div class="backlog-num">09</div><div class="backlog-item-text en"><strong>Advanced search tool + AI</strong> with filters by disability, location, and education</div><div class="backlog-item-text pt"><strong>Ferramenta de pesquisa avançada + IA</strong> com filtros por deficiência, localização e escolaridade</div></div>
+      <div class="backlog-item"><div class="backlog-num">10</div><div class="backlog-item-text en">Review dynamic images — replace with static or <strong>allow disabling motion</strong> (critical for ASD)</div><div class="backlog-item-text pt">Revisar imagens dinâmicas — substituir por estáticas ou <strong>permitir desativar movimento</strong> (crítico para TEA)</div></div>
+      <div class="backlog-item"><div class="backlog-num">11</div><div class="backlog-item-text en"><strong>Technical terms glossary</strong> — tooltips or interactive section, especially on the JET page</div><div class="backlog-item-text pt"><strong>Glossário de termos técnicos</strong> — tooltips ou seção interativa, especialmente na página TEJ</div></div>
+      <div class="backlog-item"><div class="backlog-num">12</div><div class="backlog-item-text en"><strong>Inclusive Design System</strong> — voice, keyboard, audio, color blindness, deafblindness, sign language, alt text, cognitive guidelines</div><div class="backlog-item-text pt"><strong>Design System inclusivo</strong> — voz, teclado, áudio, daltonismo, surdocegueira, Libras, alt text, diretrizes cognitivas</div></div>
+      <div class="backlog-item"><div class="backlog-num">13</div><div class="backlog-item-text en"><strong>Complete semantic and ARIA review</strong> — all elements with labels, descriptions, and accessible hierarchy across the entire site</div><div class="backlog-item-text pt"><strong>Revisão semântica e ARIA completa</strong> — todos os elementos com labels, descrições e hierarquia acessível em todo o site</div></div>
     </div>
   </div>
 </section>
+
+</div><!-- /.case-body -->
 
 <!-- ROLE -->
 <section class="role-section">
   <div class="role-content">
-    <div class="section-eyebrow section-eyebrow-light reveal" style="justify-content: center; margin-bottom: 40px;">Papel da Giuliana no projeto</div>
+    <div class="cs-label reveal" style="justify-content: center; margin-bottom: 40px; color: var(--petro-pale);">
+      <span class="en-inline">Giuliana's role in this project</span>
+      <span class="pt-inline">Papel da Giuliana no projeto</span>
+    </div>
     <blockquote class="role-quote reveal">
-      "Planejar o método, moderar as sessões, analisar o qualitativo e transformar 28 histórias em um diagnóstico que a Petrobras pudesse usar — esse foi o trabalho."
+      <span class="en">"Planning the method, moderating the sessions, analyzing the qualitative data, and turning 28 stories into a diagnosis Petrobras could act on — that was the work."</span>
+      <span class="pt">"Planejar o método, moderar as sessões, analisar o qualitativo e transformar 28 histórias em um diagnóstico que a Petrobras pudesse usar — esse foi o trabalho."</span>
     </blockquote>
     <div class="role-attribution reveal">
-      UX Researcher · Planejamento · Moderação · Análise Qualitativa · Diagnóstico e Backlog
+      <span class="en-inline">UX Researcher &middot; Planning &middot; Moderation &middot; Qualitative Analysis &middot; Diagnosis and Backlog</span>
+      <span class="pt-inline">UX Researcher &middot; Planejamento &middot; Moderação &middot; Análise Qualitativa &middot; Diagnóstico e Backlog</span>
     </div>
     <div class="four-col reveal" style="margin-top: 64px; gap: 24px;">
       <div style="text-align:center; padding: 24px; background: rgba(14,75,107,0.3); border-radius: 12px; border: 1px solid rgba(168,216,234,0.1);">
         <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">01</div>
-        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;">Planejamento do roteiro e seleção de participantes</div>
+        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;"><span class="en-inline">Script planning and participant selection</span><span class="pt-inline">Planejamento do roteiro e seleção de participantes</span></div>
       </div>
       <div style="text-align:center; padding: 24px; background: rgba(14,75,107,0.3); border-radius: 12px; border: 1px solid rgba(168,216,234,0.1);">
         <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">28</div>
-        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;">Sessões moderadas diretamente</div>
+        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;"><span class="en-inline">Sessions directly moderated</span><span class="pt-inline">Sessões moderadas diretamente</span></div>
       </div>
       <div style="text-align:center; padding: 24px; background: rgba(14,75,107,0.3); border-radius: 12px; border: 1px solid rgba(168,216,234,0.1);">
         <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">5</div>
-        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;">Eixos de análise qualitativa</div>
+        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;"><span class="en-inline">Qualitative analysis axes</span><span class="pt-inline">Eixos de análise qualitativa</span></div>
       </div>
       <div style="text-align:center; padding: 24px; background: rgba(14,75,107,0.3); border-radius: 12px; border: 1px solid rgba(168,216,234,0.1);">
         <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">13</div>
-        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;">Recomendações priorizadas no backlog</div>
+        <div style="font-size:12px; color:rgba(168,216,234,0.6); line-height:1.5;"><span class="en-inline">Prioritized backlog recommendations</span><span class="pt-inline">Recomendações priorizadas no backlog</span></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- CTA -->
+<div class="case-cta">
+  <div class="case-cta-text">
+    <div class="case-cta-label">
+      <span class="en-inline">Let's work together</span>
+      <span class="pt-inline">Vamos trabalhar juntos</span>
+    </div>
+    <div class="case-cta-title">
+      <span class="en">Interested in how I think through complex products?</span>
+      <span class="pt">Interessado em como eu penso produtos complexos?</span>
+    </div>
+  </div>
+  <div class="case-cta-links">
+    <a href="mailto:giulopesg@gmail.com" class="cta-btn teal">
+      <span class="en-inline">&#9993; Get in touch</span>
+      <span class="pt-inline">&#9993; Entrar em contato</span>
+    </a>
+    <a href="index.html" class="cta-btn outline">
+      <span class="en-inline">&larr; Back to portfolio</span>
+      <span class="pt-inline">&larr; Voltar ao portfólio</span>
+    </a>
+  </div>
+</div>
+
 <!-- FOOTER NAV -->
 <div class="case-footer-nav">
   <a href="techback-case.html" class="footer-nav-link">
-    <div class="footer-nav-dir">← anterior</div>
-    <div class="footer-nav-name">TechBack BB</div>
+    <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
+    <span class="fnl-title">TechBack BB</span>
   </a>
-  <a href="index.html" class="footer-nav-link" style="text-align: center;">
-    <div class="footer-nav-dir">todos os cases</div>
-    <div class="footer-nav-name">Portfolio</div>
-  </a>
-  <a href="previsul-case.html" class="footer-nav-link" style="text-align: right;">
-    <div class="footer-nav-dir">próximo →</div>
-    <div class="footer-nav-name">Previsul</div>
+  <a href="previsul-case.html" class="footer-nav-link" style="text-align:right;">
+    <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Próximo</span> &rarr;</span>
+    <span class="fnl-title">Previsul</span>
   </a>
 </div>
 
+<footer>
+  <p>&copy; 2026 Giuliana Lopes Galvão</p>
+</footer>
+
 <script>
+  // Lang switching
+  let currentLang = 'en';
+  function setLang(lang) {
+    currentLang = lang;
+    document.body.classList.toggle('lang-pt', lang === 'pt');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+    localStorage.setItem('lang', lang);
+  }
+  const savedLang = localStorage.getItem('lang');
+  if (savedLang) setLang(savedLang);
+
+  // Scroll reveal
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
