@@ -223,13 +223,32 @@
   /* screen cards */
   .screen-card {
     background: var(--white);
-    padding: 40px 36px;
+    padding: 0;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
   .screen-card:first-child { border-radius: 24px 4px 4px 4px; }
   .screen-card:nth-child(2) { border-radius: 4px 24px 4px 4px; }
   .screen-card:last-child { border-radius: 4px 4px 24px 4px; }
+  .screen-img {
+    width: 100%;
+    aspect-ratio: 9/16;
+    overflow: hidden;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .screen-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .screen-card-body {
+    padding: 32px 28px;
+  }
 
   .screen-num {
     font-family: 'Cormorant Garamond', serif;
@@ -251,6 +270,25 @@
     color: var(--plum); background: var(--plum-ghost);
     padding: 12px 16px; border-radius: 8px;
     border-left: 2px solid var(--plum-pale);
+  }
+
+  /* app video */
+  .app-video-wrap {
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+  }
+  .app-video-frame {
+    width: 280px;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+    border: 1px solid var(--warm-stone);
+    background: var(--ink);
+  }
+  .app-video-frame video {
+    width: 100%;
+    display: block;
   }
 
   /* callout block */
@@ -358,6 +396,117 @@
   .ns-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--plum); margin-top: 6px; flex-shrink: 0; }
   .ns-text { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-soft); }
 
+  /* metrics plan */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .metric-card {
+    background: var(--white);
+    padding: 36px 32px;
+    position: relative;
+  }
+  .metric-card:first-child { border-radius: 16px 4px 4px 4px; }
+  .metric-card:nth-child(2) { border-radius: 4px 16px 4px 4px; }
+  .metric-card:nth-last-child(2) { border-radius: 4px 4px 4px 16px; }
+  .metric-card:last-child { border-radius: 4px 4px 16px 4px; }
+  .metric-icon {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .metric-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .metric-rationale {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .metric-kpi {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--plum);
+    background: var(--plum-ghost);
+    padding: 8px 14px;
+    border-radius: 8px;
+    border-left: 2px solid var(--plum-pale);
+    line-height: 1.5;
+  }
+
+  .tools-stack {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .tool-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 32px 28px;
+  }
+  .tool-card:first-child { border-radius: 16px 4px 4px 16px; }
+  .tool-card:last-child { border-radius: 4px 16px 16px 4px; }
+  .tool-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .tool-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--plum-pale);
+    margin-bottom: 14px;
+  }
+  .tool-desc {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .privacy-bar {
+    margin-top: 48px;
+    display: flex;
+    gap: 2px;
+  }
+  .privacy-item {
+    flex: 1;
+    background: rgba(107,79,160,0.15);
+    border: 1px solid rgba(107,79,160,0.2);
+    padding: 20px 24px;
+    text-align: center;
+  }
+  .privacy-item:first-child { border-radius: 12px 4px 4px 12px; }
+  .privacy-item:last-child { border-radius: 4px 12px 12px 4px; }
+  .privacy-icon { font-size: 20px; margin-bottom: 8px; }
+  .privacy-text {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .metrics-grid { grid-template-columns: 1fr; }
+    .tools-stack { grid-template-columns: 1fr; }
+    .privacy-bar { flex-direction: column; }
+    .tool-card:first-child, .tool-card:last-child { border-radius: 4px; }
+    .privacy-item:first-child, .privacy-item:last-child { border-radius: 4px; }
+  }
+
   /* CTA section */
   .case-cta {
     background: var(--plum);
@@ -451,6 +600,7 @@
     .case-hero-right { display: none; }
     .case-section { padding: 64px 24px; }
     .cs-2col, .cs-3col, .next-steps-grid { grid-template-columns: 1fr; }
+    .app-video-frame { width: 220px; }
     .case-cta { padding: 48px 24px; }
     .case-footer-nav { padding: 40px 24px; flex-direction: column; gap: 32px; }
     footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
@@ -527,14 +677,10 @@
         <path d="M300 700 C298 630 295 560 300 480 C304 430 312 400 300 350" fill="none" stroke="#6B4FA0" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
         <path d="M300 700 C268 718 220 740 175 750 C145 758 115 748 90 735" fill="none" stroke="#6B4FA0" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
         <path d="M300 700 C332 718 380 742 425 750 C455 757 485 748 510 733" fill="none" stroke="#6B4FA0" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
-        <path d="M292 670 C262 682 225 688 190 678" fill="none" stroke="#8B6FC0" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
-        <path d="M308 670 C338 683 375 688 408 677" fill="none" stroke="#8B6FC0" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
         <path d="M300 400 C272 372 230 348 188 335 C158 325 130 332 110 322" fill="none" stroke="#6B4FA0" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/>
         <path d="M302 425 C330 395 368 372 408 360 C438 351 465 358 485 348" fill="none" stroke="#6B4FA0" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/>
         <path d="M298 375 C272 348 248 322 222 300 C206 284 188 276 172 268" fill="none" stroke="#8B6FC0" stroke-width="1.4" stroke-linecap="round" opacity="0.3"/>
         <path d="M305 388 C332 358 358 332 388 312 C406 299 428 292 445 283" fill="none" stroke="#8B6FC0" stroke-width="1.4" stroke-linecap="round" opacity="0.3"/>
-        <path d="M222 298 C204 280 194 266 180 252 C172 242 166 234 158 226" fill="none" stroke="#8B6FC0" stroke-width="0.8" opacity="0.22"/>
-        <path d="M388 310 C406 290 418 274 432 260 C440 250 446 240 454 232" fill="none" stroke="#8B6FC0" stroke-width="0.8" opacity="0.22"/>
         <circle cx="108" cy="320" r="4.5" fill="#6B4FA0" opacity="0.35"/><circle cx="92" cy="308" r="3" fill="#8B6FC0" opacity="0.28"/><circle cx="122" cy="304" r="3.5" fill="#6B4FA0" opacity="0.25"/>
         <circle cx="486" cy="346" r="4.5" fill="#6B4FA0" opacity="0.35"/><circle cx="500" cy="334" r="3" fill="#8B6FC0" opacity="0.28"/><circle cx="472" cy="330" r="3.5" fill="#6B4FA0" opacity="0.25"/>
         <circle cx="170" cy="266" r="4" fill="#6B4FA0" opacity="0.28"/><circle cx="155" cy="254" r="2.5" fill="#8B6FC0" opacity="0.22"/>
@@ -775,77 +921,117 @@
       <span class="pt">Microcopy é estratégia de produto aqui. A linguagem é a terapia.</span>
     </p>
 
-    <div class="cs-3col" style="margin-top: 48px;">
+    <!-- App walkthrough video -->
+    <div class="app-video-wrap reveal" style="margin-top: 48px; margin-bottom: 64px;">
+      <div class="app-video-frame">
+        <video autoplay loop muted playsinline>
+          <source src="cases/neuroot/neurootapp.mov" type="video/quicktime">
+          <source src="cases/neuroot/neurootapp.mov" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <div class="cs-3col" style="margin-top: 0;">
       <div class="screen-card">
-        <div class="screen-num">01</div>
-        <div class="screen-name">Home — Empty State</div>
-        <p class="screen-desc">
-          <span class="en">"There's no practice defined for today." — Not "You haven't done anything yet." The language removes debt. One CTA: "Choose today's practice" — an invitation, never a task.</span>
-          <span class="pt">"Não tem prática definida para hoje." — Não "Você ainda não fez nada." A linguagem remove a dívida. Um CTA: "Escolher a prática de hoje" — um convite, nunca uma tarefa.</span>
-        </p>
-        <div class="screen-decision">
-          <span class="en-inline">Copy decision: the app cannot know you were absent. It only knows you came back.</span>
-          <span class="pt-inline">Decisão de copy: o app não pode saber que você esteve ausente. Ele só sabe que você voltou.</span>
+        <div class="screen-img">
+          <img src="cases/neuroot/home.png" alt="Neuroot Home screen" loading="lazy">
+        </div>
+        <div class="screen-card-body">
+          <div class="screen-num">01</div>
+          <div class="screen-name">Home — Empty State</div>
+          <p class="screen-desc">
+            <span class="en">"There's no practice defined for today." — Not "You haven't done anything yet." The language removes debt. One CTA: "Choose today's practice" — an invitation, never a task.</span>
+            <span class="pt">"Não tem prática definida para hoje." — Não "Você ainda não fez nada." A linguagem remove a dívida. Um CTA: "Escolher a prática de hoje" — um convite, nunca uma tarefa.</span>
+          </p>
+          <div class="screen-decision">
+            <span class="en-inline">Copy decision: the app cannot know you were absent. It only knows you came back.</span>
+            <span class="pt-inline">Decisão de copy: o app não pode saber que você esteve ausente. Ele só sabe que você voltou.</span>
+          </div>
         </div>
       </div>
       <div class="screen-card">
-        <div class="screen-num">02</div>
-        <div class="screen-name"><span class="en-inline">Execution — Timer</span><span class="pt-inline">Execução — Timer</span></div>
-        <p class="screen-desc">
-          <span class="en">Full-screen timer. Limit visible. At the bottom: "Stop when the time ends — even if you haven't finished. Stopping before exhaustion is part of the method."</span>
-          <span class="pt">Timer em tela cheia. Limite visível. Na parte de baixo: "Pare quando o tempo acabar — mesmo que não tenha terminado. Parar antes da exaustão faz parte do método."</span>
-        </p>
-        <div class="screen-decision">
-          <span class="en-inline">Button label: "End at the right point." — Not "Done." This is the method in a button label.</span>
-          <span class="pt-inline">Label do botão: "Encerrar no ponto certo." — Não "Feito." Isso é o método em um label de botão.</span>
+        <div class="screen-img">
+          <img src="cases/neuroot/timer.png" alt="Neuroot Timer screen" loading="lazy">
+        </div>
+        <div class="screen-card-body">
+          <div class="screen-num">02</div>
+          <div class="screen-name"><span class="en-inline">Execution — Timer</span><span class="pt-inline">Execução — Timer</span></div>
+          <p class="screen-desc">
+            <span class="en">Full-screen timer. Limit visible. At the bottom: "Stop when the time ends — even if you haven't finished. Stopping before exhaustion is part of the method."</span>
+            <span class="pt">Timer em tela cheia. Limite visível. Na parte de baixo: "Pare quando o tempo acabar — mesmo que não tenha terminado. Parar antes da exaustão faz parte do método."</span>
+          </p>
+          <div class="screen-decision">
+            <span class="en-inline">Button label: "End at the right point." — Not "Done." This is the method in a button label.</span>
+            <span class="pt-inline">Label do botão: "Encerrar no ponto certo." — Não "Feito." Isso é o método em um label de botão.</span>
+          </div>
         </div>
       </div>
       <div class="screen-card">
-        <div class="screen-num">03</div>
-        <div class="screen-name"><span class="en-inline">Post-Practice Registration</span><span class="pt-inline">Registro Pós-Prática</span></div>
-        <p class="screen-desc">
-          <span class="en">Three axes: Body (Light / Neutral / Heavy), Mind (Clear / Neutral / Tired), Resistance (Less / Same / More). No scores. No percentages. Just observation.</span>
-          <span class="pt">Três eixos: Corpo (Leve / Neutro / Pesado), Mente (Clara / Neutra / Cansada), Resistência (Menor / Igual / Maior). Sem notas. Sem porcentagens. Apenas observação.</span>
-        </p>
-        <div class="screen-decision">
-          <span class="en-inline">Design decision: data tracks nervous system recalibration over time without turning it into performance metrics.</span>
-          <span class="pt-inline">Decisão de design: dados acompanham a recalibração do sistema nervoso ao longo do tempo sem transformá-los em métricas de performance.</span>
+        <div class="screen-img">
+          <img src="cases/neuroot/praticaconcluida.png" alt="Neuroot Post-Practice Registration" loading="lazy">
+        </div>
+        <div class="screen-card-body">
+          <div class="screen-num">03</div>
+          <div class="screen-name"><span class="en-inline">Post-Practice Registration</span><span class="pt-inline">Registro Pós-Prática</span></div>
+          <p class="screen-desc">
+            <span class="en">Three axes: Body (Light / Neutral / Heavy), Mind (Clear / Neutral / Tired), Resistance (Less / Same / More). No scores. No percentages. Just observation.</span>
+            <span class="pt">Três eixos: Corpo (Leve / Neutro / Pesado), Mente (Clara / Neutra / Cansada), Resistência (Menor / Igual / Maior). Sem notas. Sem porcentagens. Apenas observação.</span>
+          </p>
+          <div class="screen-decision">
+            <span class="en-inline">Design decision: data tracks nervous system recalibration over time without turning it into performance metrics.</span>
+            <span class="pt-inline">Decisão de design: dados acompanham a recalibração do sistema nervoso ao longo do tempo sem transformá-los em métricas de performance.</span>
+          </div>
         </div>
       </div>
       <div class="screen-card">
-        <div class="screen-num">04</div>
-        <div class="screen-name"><span class="en-inline">Practice Completed</span><span class="pt-inline">Prática Concluída</span></div>
-        <p class="screen-desc">
-          <span class="en">"Você fez sua prática hoje." Then: "Executing beyond the plan doesn't accelerate — it only teaches the body that limits don't exist."</span>
-          <span class="pt">"Você fez sua prática hoje." Depois: "Executar além do plano não acelera — apenas ensina o corpo que limites não existem."</span>
-        </p>
-        <div class="screen-decision">
-          <span class="en-inline">The screen actively discourages doing more. That's the product. No buttons. Just presence.</span>
-          <span class="pt-inline">A tela ativamente desencoraja fazer mais. Esse é o produto. Sem botões. Apenas presença.</span>
+        <div class="screen-img">
+          <img src="cases/neuroot/homepraticaconcluida.png" alt="Neuroot Practice Completed" loading="lazy">
+        </div>
+        <div class="screen-card-body">
+          <div class="screen-num">04</div>
+          <div class="screen-name"><span class="en-inline">Practice Completed</span><span class="pt-inline">Prática Concluída</span></div>
+          <p class="screen-desc">
+            <span class="en">"Você fez sua prática hoje." Then: "Executing beyond the plan doesn't accelerate — it only teaches the body that limits don't exist."</span>
+            <span class="pt">"Você fez sua prática hoje." Depois: "Executar além do plano não acelera — apenas ensina o corpo que limites não existem."</span>
+          </p>
+          <div class="screen-decision">
+            <span class="en-inline">The screen actively discourages doing more. That's the product. No buttons. Just presence.</span>
+            <span class="pt-inline">A tela ativamente desencoraja fazer mais. Esse é o produto. Sem botões. Apenas presença.</span>
+          </div>
         </div>
       </div>
       <div class="screen-card">
-        <div class="screen-num">05</div>
-        <div class="screen-name"><span class="en-inline">Week View</span><span class="pt-inline">Visão Semanal</span></div>
-        <p class="screen-desc">
-          <span class="en">Shows what happened, never what should have happened. The single weekly question: "Did your body feel less resistant to effort this week?"</span>
-          <span class="pt">Mostra o que aconteceu, nunca o que deveria ter acontecido. A única pergunta semanal: "Seu corpo sentiu menos resistência ao esforço esta semana?"</span>
-        </p>
-        <div class="screen-decision">
-          <span class="en-inline">Design decision: that's the only metric that matters. Nervous system recalibration, not streak count.</span>
-          <span class="pt-inline">Decisão de design: essa é a única métrica que importa. Recalibração do sistema nervoso, não contagem de sequências.</span>
+        <div class="screen-img">
+          <img src="cases/neuroot/sobreoapp.png" alt="Neuroot Week View" loading="lazy">
+        </div>
+        <div class="screen-card-body">
+          <div class="screen-num">05</div>
+          <div class="screen-name"><span class="en-inline">About the App</span><span class="pt-inline">Sobre o App</span></div>
+          <p class="screen-desc">
+            <span class="en">Explains what burnout does to the brain, how the behavioral activation method works, and the phases of recovery. Transparency about the science builds trust before any practice begins.</span>
+            <span class="pt">Explica o que o burnout faz no cérebro, como o método de ativação comportamental funciona e as fases da recuperação. Transparência sobre a ciência constrói confiança antes de qualquer prática começar.</span>
+          </p>
+          <div class="screen-decision">
+            <span class="en-inline">Design decision: the user understands the "why" before the "how." Education is part of the therapy.</span>
+            <span class="pt-inline">Decisão de design: o usuário entende o "por quê" antes do "como." Educação é parte da terapia.</span>
+          </div>
         </div>
       </div>
       <div class="screen-card">
-        <div class="screen-num">06</div>
-        <div class="screen-name">AI Onboarding</div>
-        <p class="screen-desc">
-          <span class="en">No forms. No signup before understanding what the product does. The AI asks one question at a time, responds with brief empathetic context, and generates 3 personalized practices.</span>
-          <span class="pt">Sem formulários. Sem cadastro antes de entender o que o produto faz. A IA faz uma pergunta de cada vez, responde com breve contexto empático e gera 3 práticas personalizadas.</span>
-        </p>
-        <div class="screen-decision">
-          <span class="en-inline">The user sees their practices before they ever see the home screen.</span>
-          <span class="pt-inline">O usuário vê suas práticas antes de ver a tela inicial.</span>
+        <div class="screen-img">
+          <img src="cases/neuroot/aionboarding.png" alt="Neuroot AI Onboarding" loading="lazy">
+        </div>
+        <div class="screen-card-body">
+          <div class="screen-num">06</div>
+          <div class="screen-name">AI Onboarding</div>
+          <p class="screen-desc">
+            <span class="en">No forms. No signup before understanding what the product does. The AI asks one question at a time, responds with brief empathetic context, and generates 3 personalized practices.</span>
+            <span class="pt">Sem formulários. Sem cadastro antes de entender o que o produto faz. A IA faz uma pergunta de cada vez, responde com breve contexto empático e gera 3 práticas personalizadas.</span>
+          </p>
+          <div class="screen-decision">
+            <span class="en-inline">The user sees their practices before they ever see the home screen.</span>
+            <span class="pt-inline">O usuário vê suas práticas antes de ver a tela inicial.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -906,9 +1092,197 @@
     </div>
   </section>
 
-  <!-- 08 NEXT STEPS -->
+  <!-- 08 METRICS & MEASUREMENT PLAN -->
+  <section class="case-section reveal" style="background: var(--plum-ghost);">
+    <div class="cs-label"><span class="en-inline">08 — Metrics & Measurement Plan</span><span class="pt-inline">08 — Plano de Métricas e Mensuração</span></div>
+    <h2 class="cs-title">
+      <span class="en">Measuring recovery,<br><em>not performance.</em></span>
+      <span class="pt">Medindo recuperação,<br><em>não performance.</em></span>
+    </h2>
+    <div class="cs-2col">
+      <div>
+        <p class="cs-body-text en">Traditional product metrics would destroy this product. DAU penalizes absence. Session length rewards overuse. Retention curves treat a 3-day gap as churn. But in Neuroot, a user who pauses for 3 days and returns safely is <strong>exactly</strong> the behavior we want to see.</p>
+        <p class="cs-body-text pt">Métricas tradicionais de produto destruiriam este produto. DAU penaliza ausência. Tempo de sessão recompensa uso excessivo. Curvas de retenção tratam uma pausa de 3 dias como churn. Mas no Neuroot, um usuário que pausa por 3 dias e retorna com segurança é <strong>exatamente</strong> o comportamento que queremos ver.</p>
+        <p class="cs-body-text en">Every metric here was designed from the methodology outward — not from a dashboard template inward. If a metric contradicts the therapeutic logic, it doesn't belong in the product.</p>
+        <p class="cs-body-text pt">Cada métrica aqui foi desenhada a partir da metodologia — não a partir de um template de dashboard. Se uma métrica contradiz a lógica terapêutica, ela não pertence ao produto.</p>
+      </div>
+      <div>
+        <div class="callout" style="margin: 0;">
+          <p>
+            <span class="en">"The question isn't <em>'are users coming back every day?'</em> — it's <em>'when they come back, are they safer than before?'</em>"</span>
+            <span class="pt">"A pergunta não é <em>'os usuários estão voltando todo dia?'</em> — é <em>'quando voltam, estão mais seguros do que antes?'</em>"</span>
+          </p>
+          <div class="callout-source">
+            <span class="en-inline">The measurement philosophy behind Neuroot</span>
+            <span class="pt-inline">A filosofia de mensuração por trás do Neuroot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADAPTED HEART FRAMEWORK -->
+    <div style="margin-top: 64px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--plum); margin-bottom:12px;">
+        <span class="en-inline">Adapted HEART Framework</span>
+        <span class="pt-inline">Framework HEART Adaptado</span>
+      </div>
+      <p class="cs-body-text" style="margin-bottom: 32px;">
+        <span class="en">Google's HEART framework — rewritten for a product where success means the user eventually doesn't need you anymore.</span>
+        <span class="pt">O framework HEART do Google — reescrito para um produto onde sucesso significa que o usuário eventualmente não precisa mais de você.</span>
+      </p>
+    </div>
+
+    <div class="metrics-grid">
+      <!-- 1. Safe Return Rate -->
+      <div class="metric-card">
+        <div class="metric-icon">🛡</div>
+        <div class="metric-name"><span class="en-inline">Safe Return Rate</span><span class="pt-inline">Taxa de Retorno Seguro</span></div>
+        <p class="metric-rationale">
+          <span class="en">% of users who return after 2+ day gaps. In traditional products, this would be "reactivation." Here, it's the primary success signal — the user paused, listened to their body, and came back without guilt.</span>
+          <span class="pt">% de usuários que retornam após pausas de 2+ dias. Em produtos tradicionais, seria "reativação." Aqui, é o principal sinal de sucesso — o usuário pausou, ouviu o corpo e voltou sem culpa.</span>
+        </p>
+        <div class="metric-kpi">
+          <span class="en-inline">HEART: Happiness · Signal: voluntary return after absence</span>
+          <span class="pt-inline">HEART: Happiness · Sinal: retorno voluntário após ausência</span>
+        </div>
+      </div>
+
+      <!-- 2. Nervous System Trend -->
+      <div class="metric-card">
+        <div class="metric-icon">📊</div>
+        <div class="metric-name"><span class="en-inline">Self-Assessment Trend</span><span class="pt-inline">Tendência de Auto-Avaliação</span></div>
+        <p class="metric-rationale">
+          <span class="en">Are the 3 axes (Body, Mind, Resistance) trending toward lighter / clearer / less resistance over weeks? This is the direct signal that the nervous system is recalibrating — the core product promise.</span>
+          <span class="pt">Os 3 eixos (Corpo, Mente, Resistência) estão tendendo para mais leve / mais claro / menos resistência ao longo das semanas? É o sinal direto de que o sistema nervoso está se recalibrando — a promessa central do produto.</span>
+        </p>
+        <div class="metric-kpi">
+          <span class="en-inline">HEART: Happiness · Signal: weekly average shift in body/mind/resistance</span>
+          <span class="pt-inline">HEART: Happiness · Sinal: variação semanal média em corpo/mente/resistência</span>
+        </div>
+      </div>
+
+      <!-- 3. Onboarding Conversion -->
+      <div class="metric-card">
+        <div class="metric-icon">💬</div>
+        <div class="metric-name"><span class="en-inline">Onboarding Completion</span><span class="pt-inline">Conversão do Onboarding</span></div>
+        <p class="metric-rationale">
+          <span class="en">% of users who complete the AI conversation and generate their first practices. A drop here means the conversational UX isn't building enough trust, or the questions feel too invasive for a vulnerable user.</span>
+          <span class="pt">% de usuários que completam a conversa com IA e geram suas primeiras práticas. Queda aqui significa que a UX conversacional não está construindo confiança suficiente, ou as perguntas parecem invasivas demais para um usuário vulnerável.</span>
+        </p>
+        <div class="metric-kpi">
+          <span class="en-inline">HEART: Adoption · Signal: conversation started → practices generated</span>
+          <span class="pt-inline">HEART: Adoption · Sinal: conversa iniciada → práticas geradas</span>
+        </div>
+      </div>
+
+      <!-- 4. Practice Completion -->
+      <div class="metric-card">
+        <div class="metric-icon">⏱</div>
+        <div class="metric-name"><span class="en-inline">Practice Completion Rate</span><span class="pt-inline">Taxa de Conclusão de Práticas</span></div>
+        <p class="metric-rationale">
+          <span class="en">% who complete the timer vs. early exit. But here, both outcomes are valid — stopping early might be the right decision. The real signal is: did the user feel safe enough to start at all?</span>
+          <span class="pt">% que completam o timer vs. saída antecipada. Mas aqui, ambos os resultados são válidos — parar antes pode ser a decisão certa. O sinal real é: o usuário se sentiu seguro o suficiente para começar?</span>
+        </p>
+        <div class="metric-kpi">
+          <span class="en-inline">HEART: Task success · Signal: timer initiated (not just completed)</span>
+          <span class="pt-inline">HEART: Task success · Sinal: timer iniciado (não apenas completado)</span>
+        </div>
+      </div>
+
+      <!-- 5. Voluntary Cadence -->
+      <div class="metric-card">
+        <div class="metric-icon">🌊</div>
+        <div class="metric-name"><span class="en-inline">Voluntary Cadence</span><span class="pt-inline">Cadência Voluntária</span></div>
+        <p class="metric-rationale">
+          <span class="en">The natural rhythm each user develops — not forced daily. Some users will practice 5x/week, others 2x. The metric tracks whether their personal rhythm is stabilizing, not whether it matches a target we set.</span>
+          <span class="pt">O ritmo natural que cada usuário desenvolve — não forçado diariamente. Alguns vão praticar 5x/semana, outros 2x. A métrica acompanha se o ritmo pessoal está estabilizando, não se corresponde a uma meta que nós definimos.</span>
+        </p>
+        <div class="metric-kpi">
+          <span class="en-inline">HEART: Engagement · Signal: personal rhythm stability over 4 weeks</span>
+          <span class="pt-inline">HEART: Engagement · Sinal: estabilidade do ritmo pessoal em 4 semanas</span>
+        </div>
+      </div>
+
+      <!-- 6. Graduation Signal -->
+      <div class="metric-card">
+        <div class="metric-icon">🌳</div>
+        <div class="metric-name"><span class="en-inline">Graduation Signal</span><span class="pt-inline">Sinal de Graduação</span></div>
+        <p class="metric-rationale">
+          <span class="en">Users who naturally progress from Day view → 3-day → Week view, and eventually stop needing the app. In most products, this is churn. In Neuroot, this is the ultimate success metric — the user is recovered.</span>
+          <span class="pt">Usuários que progridem naturalmente da visão Dia → 3 dias → Semana, e eventualmente param de precisar do app. Na maioria dos produtos, isso é churn. No Neuroot, é a métrica definitiva de sucesso — o usuário se recuperou.</span>
+        </p>
+        <div class="metric-kpi">
+          <span class="en-inline">HEART: Retention (inverted) · Signal: healthy departure after phase completion</span>
+          <span class="pt-inline">HEART: Retention (invertido) · Sinal: saída saudável após conclusão de fases</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08b ANALYTICS TOOLS — dark section -->
+  <section class="case-section reveal" style="background: var(--ink);">
+    <div class="cs-label" style="color: var(--plum-pale);">
+      <span style="display:block;width:24px;height:1px;background:var(--plum-pale);flex-shrink:0"></span>
+      <span class="en-inline">08b — Analytics Stack</span><span class="pt-inline">08b — Stack de Analytics</span>
+    </div>
+    <h2 class="cs-title" style="color: var(--white);">
+      <span class="en">Tools chosen for<br><em style="color:var(--plum-pale)">what they don't collect.</em></span>
+      <span class="pt">Ferramentas escolhidas pelo<br><em style="color:var(--plum-pale)">que elas não coletam.</em></span>
+    </h2>
+    <p class="cs-body-text en" style="color: rgba(255,255,255,0.7);">The analytics stack was selected with one constraint above all: this is mental health data. Every tool must be privacy-first, LGPD-compliant, and respectful of the user's vulnerability. No third-party data sharing. No behavioral profiling. No retargeting.</p>
+    <p class="cs-body-text pt" style="color: rgba(255,255,255,0.7);">A stack de analytics foi selecionada com uma restrição acima de todas: estes são dados de saúde mental. Toda ferramenta precisa ser privacy-first, aderente à LGPD e respeitosa com a vulnerabilidade do usuário. Sem compartilhamento com terceiros. Sem profiling comportamental. Sem retargeting.</p>
+
+    <div class="tools-stack">
+      <div class="tool-card">
+        <div class="tool-name">PostHog</div>
+        <div class="tool-type"><span class="en-inline">Quantitative Analytics</span><span class="pt-inline">Analytics Quantitativo</span></div>
+        <p class="tool-desc">
+          <span class="en">Open-source, self-hostable product analytics. Event tracking for all 6 core metrics. Funnels for onboarding flow. Cohort analysis by user profile type. No data leaves the infrastructure.</span>
+          <span class="pt">Analytics de produto open-source e auto-hospedável. Rastreamento de eventos para as 6 métricas centrais. Funis para fluxo de onboarding. Análise de coorte por perfil de usuário. Nenhum dado sai da infraestrutura.</span>
+        </p>
+      </div>
+      <div class="tool-card" style="border-radius: 4px;">
+        <div class="tool-name">Hotjar</div>
+        <div class="tool-type"><span class="en-inline">Qualitative Insights</span><span class="pt-inline">Insights Qualitativos</span></div>
+        <p class="tool-desc">
+          <span class="en">Session recordings and heatmaps to understand where users hesitate, abandon, or get confused — especially in the AI onboarding conversation. Sensitive screens excluded from recording.</span>
+          <span class="pt">Gravações de sessão e heatmaps para entender onde os usuários hesitam, abandonam ou se confundem — especialmente na conversa de onboarding com IA. Telas sensíveis excluídas da gravação.</span>
+        </p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Supabase Events</div>
+        <div class="tool-type"><span class="en-inline">Custom Telemetry</span><span class="pt-inline">Telemetria Customizada</span></div>
+        <p class="tool-desc">
+          <span class="en">Lightweight custom events logged directly to Supabase — already in the stack. Tracks self-assessment submissions, timer starts/completions, practice selections, and return-after-gap events. Feeds into a private Metabase dashboard.</span>
+          <span class="pt">Eventos customizados leves logados diretamente no Supabase — já na stack. Rastreia submissões de auto-avaliação, inícios/conclusões do timer, seleções de prática e eventos de retorno-após-pausa. Alimenta um dashboard privado no Metabase.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Privacy -->
+    <div class="privacy-bar">
+      <div class="privacy-item">
+        <div class="privacy-icon">🔒</div>
+        <div class="privacy-text"><span class="en-inline">LGPD-compliant data handling</span><span class="pt-inline">Tratamento de dados conforme LGPD</span></div>
+      </div>
+      <div class="privacy-item">
+        <div class="privacy-icon">🚫</div>
+        <div class="privacy-text"><span class="en-inline">No third-party data sharing</span><span class="pt-inline">Sem compartilhamento com terceiros</span></div>
+      </div>
+      <div class="privacy-item">
+        <div class="privacy-icon">👤</div>
+        <div class="privacy-text"><span class="en-inline">Anonymized behavioral data</span><span class="pt-inline">Dados comportamentais anonimizados</span></div>
+      </div>
+      <div class="privacy-item">
+        <div class="privacy-icon">🗑</div>
+        <div class="privacy-text"><span class="en-inline">Full data deletion on request</span><span class="pt-inline">Exclusão total de dados sob solicitação</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 NEXT STEPS -->
   <section class="case-section reveal">
-    <div class="cs-label"><span class="en-inline">08 — Next Steps</span><span class="pt-inline">08 — Próximos Passos</span></div>
+    <div class="cs-label"><span class="en-inline">09 — Next Steps</span><span class="pt-inline">09 — Próximos Passos</span></div>
     <h2 class="cs-title">
       <span class="en">What comes<br><em>next.</em></span>
       <span class="pt">O que vem<br><em>a seguir.</em></span>
@@ -970,7 +1344,7 @@
     </div>
   </div>
   <div class="case-cta-links">
-    <a href="/cdn-cgi/l/email-protection#412628342d2e3124322601262c20282d6f222e2c" class="cta-btn white">✉ <span class="en-inline">Get in touch</span><span class="pt-inline">Entrar em contato</span></a>
+    <a href="mailto:giulopesg@gmail.com" class="cta-btn white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg><span class="en-inline">Get in touch</span><span class="pt-inline">Entrar em contato</span></a>
     <a href="index.html" class="cta-btn outline">← <span class="en-inline">Back to portfolio</span><span class="pt-inline">Voltar ao portfólio</span></a>
   </div>
 </div>

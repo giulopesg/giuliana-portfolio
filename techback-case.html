@@ -343,6 +343,24 @@
   }
   .screenshot-frame:hover { transform: scale(1.02); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
   .screenshot-frame img { width: 100%; display: block; }
+
+  /* Protected screenshots — no zoom */
+  .screenshot-frame.protected {
+    cursor: default;
+    pointer-events: none;
+  }
+  .screenshot-frame.protected:hover { transform: none; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+
+  /* Blurred screenshots — roadmap protection */
+  .screenshot-frame.blurred {
+    cursor: default;
+    pointer-events: none;
+  }
+  .screenshot-frame.blurred img {
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+  }
+  .screenshot-frame.blurred:hover { transform: none; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
   .screenshot-label {
     font-family: 'DM Mono', monospace;
     font-size: 10px; letter-spacing: 0.1em;
@@ -612,24 +630,24 @@
           <span class="pt">Reinventando como o Brasil lida com <em>resíduos eletrônicos</em></span>
         </h2>
         <p class="cs-body-text en">
-          TechBack set out to transform something deeply physical — collection kiosks placed in cities — into a <strong>connected digital ecosystem</strong> that rewards people for doing the right thing with their electronic waste. But to build something that actually works, you have to understand the full chain: citizens, waste-pickers, cooperatives, operators.
+          TechBack set out to transform something deeply physical, collection kiosks placed in cities, into a <strong>connected digital ecosystem</strong> that rewards people for doing the right thing with their electronic waste. But to build something that actually works, you have to understand the full chain: citizens, waste-pickers, cooperatives, operators.
         </p>
         <p class="cs-body-text pt">
-          O TechBack se propôs a transformar algo profundamente físico — quiosques de coleta instalados em cidades — em um <strong>ecossistema digital conectado</strong> que recompensa as pessoas por darem o destino correto aos seus resíduos eletrônicos. Mas para construir algo que realmente funcione, é preciso entender toda a cadeia: cidadãos, catadores, cooperativas, operadores.
+          O TechBack se propôs a transformar algo profundamente físico, quiosques de coleta instalados em cidades, em um <strong>ecossistema digital conectado</strong> que recompensa as pessoas por darem o destino correto aos seus resíduos eletrônicos. Mas para construir algo que realmente funcione, é preciso entender toda a cadeia: cidadãos, catadores, cooperativas, operadores.
         </p>
         <p class="cs-body-text en">
-          Banco do Brasil brought the ambition and the infrastructure. I was brought in as <strong>UX Researcher and Strategist</strong> to make sure the solution would be grounded in real human behavior — not assumptions.
+          Banco do Brasil brought the ambition and the infrastructure. I was brought in as <strong>UX Researcher and Strategist</strong> to make sure the solution would be grounded in real human behavior, not assumptions.
         </p>
         <p class="cs-body-text pt">
-          O Banco do Brasil trouxe a ambição e a infraestrutura. Fui convidada como <strong>Pesquisadora UX e Estrategista</strong> para garantir que a solução estivesse fundamentada em comportamento humano real — não em suposições.
+          O Banco do Brasil trouxe a ambição e a infraestrutura. Fui convidada como <strong>Pesquisadora UX e Estrategista</strong> para garantir que a solução estivesse fundamentada em comportamento humano real, não em suposições.
         </p>
       </div>
       <div>
         <p class="cs-body-text en">
-          The research happened inside <strong>Expocatadores 2024</strong> — the largest circular economy event in Latin America, held in São Paulo in December 2024. TechBack had a physical interactive stand inside the FBB pavilion, which gave us direct access to the people who matter most.
+          The research happened inside <strong>Expocatadores 2024</strong>, the largest circular economy event in Latin America, held in São Paulo in December 2024. TechBack had a physical interactive stand inside the FBB pavilion, which gave us direct access to the people who matter most.
         </p>
         <p class="cs-body-text pt">
-          A pesquisa aconteceu dentro da <strong>Expocatadores 2024</strong> — o maior evento de economia circular da América Latina, realizado em São Paulo em dezembro de 2024. O TechBack tinha um estande físico interativo dentro do pavilhão da FBB, o que nos deu acesso direto às pessoas que mais importam.
+          A pesquisa aconteceu dentro da <strong>Expocatadores 2024</strong>, o maior evento de economia circular da América Latina, realizado em São Paulo em dezembro de 2024. O TechBack tinha um estande físico interativo dentro do pavilhão da FBB, o que nos deu acesso direto às pessoas que mais importam.
         </p>
         <p class="cs-body-text en">
           Three days. Three audiences. One mission: <strong>understand the ecosystem well enough to design something that doesn't exclude the people it claims to serve.</strong>
@@ -645,8 +663,8 @@
   <section class="case-section reveal">
     <div class="cs-label"><span class="en-inline">02 — The Challenge</span><span class="pt-inline">02 — O Desafio</span></div>
     <div class="challenge-callout">
-      <p class="en">Without listening to waste-pickers, TechBack Digital risks becoming a solution <strong>disconnected from reality.</strong> Technology built on assumptions — not on lived experience — excludes the very people who make the circular economy run.</p>
-      <p class="pt">Sem ouvir os catadores, o TechBack Digital corre o risco de se tornar uma solução <strong>desconectada da realidade.</strong> Tecnologia construída sobre suposições — não sobre experiências vividas — exclui justamente as pessoas que fazem a economia circular funcionar.</p>
+      <p class="en">Without listening to waste-pickers, TechBack Digital risks becoming a solution <strong>disconnected from reality.</strong> Technology built on assumptions, not on lived experience, excludes the very people who make the circular economy run.</p>
+      <p class="pt">Sem ouvir os catadores, o TechBack Digital corre o risco de se tornar uma solução <strong>desconectada da realidade.</strong> Tecnologia construída sobre suposições, não sobre experiências vividas, exclui justamente as pessoas que fazem a economia circular funcionar.</p>
     </div>
     <div class="cs-2col">
       <div>
@@ -659,10 +677,10 @@
       </div>
       <div>
         <p class="cs-body-text en">
-          At the same time, we needed to understand citizen behavior — why they discard incorrectly, what would motivate them to change, and how a reward system could genuinely move behavior rather than just feel good on paper. Two very different problems, one research sprint.
+          At the same time, we needed to understand citizen behavior: why they discard incorrectly, what would motivate them to change, and how a reward system could genuinely move behavior rather than just feel good on paper. Two very different problems, one research sprint.
         </p>
         <p class="cs-body-text pt">
-          Ao mesmo tempo, precisávamos entender o comportamento dos cidadãos — por que descartam incorretamente, o que os motivaria a mudar, e como um sistema de recompensas poderia realmente mudar comportamentos em vez de apenas parecer bom no papel. Dois problemas muito diferentes, um sprint de pesquisa.
+          Ao mesmo tempo, precisávamos entender o comportamento dos cidadãos: por que descartam incorretamente, o que os motivaria a mudar, e como um sistema de recompensas poderia realmente mudar comportamentos em vez de apenas parecer bom no papel. Dois problemas muito diferentes, um sprint de pesquisa.
         </p>
       </div>
     </div>
@@ -680,8 +698,8 @@
         <div class="phase-num">01</div>
         <div class="phase-name"><span class="en-inline">Planning</span><span class="pt-inline">Planejamento</span></div>
         <div class="phase-title"><span class="en-inline">Interview Design for Expocatadores</span><span class="pt-inline">Design de Entrevistas para a Expocatadores</span></div>
-        <p class="phase-desc en">Tailored scripts for each audience segment — visitors, waste-pickers, and kiosk operators — with different angles for each profile. Objectives focused on validating TechBack's roadmap and understanding real pain points.</p>
-        <p class="phase-desc pt">Roteiros personalizados para cada segmento de público — visitantes, catadores e operadores de quiosques — com diferentes ângulos para cada perfil. Objetivos focados em validar o roadmap do TechBack e entender as dores reais.</p>
+        <p class="phase-desc en">Tailored scripts for each audience segment (visitors, waste-pickers, and kiosk operators) with different angles for each profile. Objectives focused on validating TechBack's roadmap and understanding real pain points.</p>
+        <p class="phase-desc pt">Roteiros personalizados para cada segmento de público (visitantes, catadores e operadores de quiosques) com diferentes ângulos para cada perfil. Objetivos focados em validar o roadmap do TechBack e entender as dores reais.</p>
       </div>
       <div class="phase-card">
         <div class="phase-num">02</div>
@@ -694,8 +712,8 @@
         <div class="phase-num">03</div>
         <div class="phase-name"><span class="en-inline">Synthesis</span><span class="pt-inline">Síntese</span></div>
         <div class="phase-title"><span class="en-inline">Strategic Report + Digital Journey</span><span class="pt-inline">Relatório Estratégico + Jornada Digital</span></div>
-        <p class="phase-desc en">Consolidated all insights into a structured report mapping pains, motivations, and opportunities. Designed a proposed digital journey covering access, engagement, and reward flows — plus strategic product recommendations.</p>
-        <p class="phase-desc pt">Consolidação de todos os insights em um relatório estruturado mapeando dores, motivações e oportunidades. Desenho de uma jornada digital proposta cobrindo fluxos de acesso, engajamento e recompensas — além de recomendações estratégicas de produto.</p>
+        <p class="phase-desc en">Consolidated all insights into a structured report mapping pains, motivations, and opportunities. Designed a proposed digital journey covering access, engagement, and reward flows, plus strategic product recommendations.</p>
+        <p class="phase-desc pt">Consolidação de todos os insights em um relatório estruturado mapeando dores, motivações e oportunidades. Desenho de uma jornada digital proposta cobrindo fluxos de acesso, engajamento e recompensas, além de recomendações estratégicas de produto.</p>
       </div>
     </div>
   </section>
@@ -707,42 +725,42 @@
       <span class="en">The report that <em>came from the field</em></span>
       <span class="pt">O relatório que <em>veio do campo</em></span>
     </h2>
-    <p class="cs-body-text en">These are screens from the actual research report delivered to Banco do Brasil — compiled from real interviews conducted at Expocatadores 2024 in São Paulo.</p>
-    <p class="cs-body-text pt">Estas são telas do relatório de pesquisa real entregue ao Banco do Brasil — compiladas a partir de entrevistas reais realizadas na Expocatadores 2024 em São Paulo.</p>
+    <p class="cs-body-text en">These are screens from the actual research report delivered to Banco do Brasil, compiled from real interviews conducted at Expocatadores 2024 in São Paulo.</p>
+    <p class="cs-body-text pt">Estas são telas do relatório de pesquisa real entregue ao Banco do Brasil, compiladas a partir de entrevistas reais realizadas na Expocatadores 2024 em São Paulo.</p>
     <div class="screenshots-scroll">
       <div>
-        <div class="screenshot-frame" onclick="openLightbox(this)">
-          <img src="images/techback/field-01.png" alt="Report cover — Insights: Expocatadores 2024" loading="lazy">
+        <div class="screenshot-frame protected">
+          <img src="images/techback/field-01.png" alt="Report cover" loading="lazy">
         </div>
         <div class="screenshot-label"><span class="en-inline">Report Cover</span><span class="pt-inline">Capa do Relatório</span></div>
       </div>
       <div>
-        <div class="screenshot-frame" onclick="openLightbox(this)">
-          <img src="images/techback/field-02.png" alt="Interview plan — Expocatadores" loading="lazy">
+        <div class="screenshot-frame protected">
+          <img src="images/techback/field-02.png" alt="Interview planning" loading="lazy">
         </div>
         <div class="screenshot-label"><span class="en-inline">Interview Planning</span><span class="pt-inline">Planejamento de Entrevistas</span></div>
       </div>
       <div>
-        <div class="screenshot-frame" onclick="openLightbox(this)">
+        <div class="screenshot-frame protected">
           <img src="images/techback/field-03.png" alt="Visitor insights summary" loading="lazy">
         </div>
         <div class="screenshot-label"><span class="en-inline">Visitor Insights</span><span class="pt-inline">Insights dos Visitantes</span></div>
       </div>
       <div>
-        <div class="screenshot-frame" onclick="openLightbox(this)">
-          <img src="images/techback/field-04.png" alt="Catador profile — Dilvana" loading="lazy">
+        <div class="screenshot-frame protected">
+          <img src="images/techback/field-04.png" alt="Waste-picker profile" loading="lazy">
         </div>
         <div class="screenshot-label"><span class="en-inline">Waste-picker Profile</span><span class="pt-inline">Perfil do Catador</span></div>
       </div>
       <div>
-        <div class="screenshot-frame" onclick="openLightbox(this)">
-          <img src="images/techback/field-05.png" alt="Main pains — catadores" loading="lazy">
+        <div class="screenshot-frame protected">
+          <img src="images/techback/field-05.png" alt="Main pain points" loading="lazy">
         </div>
         <div class="screenshot-label"><span class="en-inline">Main Pain Points</span><span class="pt-inline">Principais Dores</span></div>
       </div>
       <div>
-        <div class="screenshot-frame" onclick="openLightbox(this)">
-          <img src="images/techback/field-06.png" alt="Key insights — catadores" loading="lazy">
+        <div class="screenshot-frame protected">
+          <img src="images/techback/field-06.png" alt="Key insights" loading="lazy">
         </div>
         <div class="screenshot-label"><span class="en-inline">Key Insights</span><span class="pt-inline">Insights Principais</span></div>
       </div>
@@ -756,109 +774,109 @@
       <span class="en">The people behind the <em>waste chain</em></span>
       <span class="pt">As pessoas por trás da <em>cadeia de resíduos</em></span>
     </h2>
-    <p class="cs-body-text en">Each interview surfaced a distinct reality. These aren't personas built from demographics — they're real people, with real names, interviewed at the event.</p>
-    <p class="cs-body-text pt">Cada entrevista revelou uma realidade distinta. Não são personas construídas a partir de dados demográficos — são pessoas reais, com nomes reais, entrevistadas no evento.</p>
+    <p class="cs-body-text en">Each interview surfaced a distinct reality. These aren't personas built from demographics. They're real people interviewed at the event.</p>
+    <p class="cs-body-text pt">Cada entrevista revelou uma realidade distinta. Não são personas construídas a partir de dados demográficos. São pessoas reais, entrevistadas no evento.</p>
 
     <div class="profiles-grid">
-      <!-- Laura Santos -->
+      <!-- Visitor 1 -->
       <div class="profile-card">
         <div class="profile-img-wrap">
-          <img src="images/techback/field-07.png" alt="Laura Santos — visitor interview" loading="lazy">
+          <img src="cases/techback/laura santos.jpeg" alt="Visitor 1 interview" loading="lazy">
           <span class="profile-type-badge"><span class="en-inline">Visitor</span><span class="pt-inline">Visitante</span></span>
         </div>
         <div class="profile-body">
-          <div class="profile-name">Laura Santos</div>
+          <div class="profile-name"><span class="en-inline">Visitor 1</span><span class="pt-inline">Visitante 1</span></div>
           <div class="profile-role">
-            <span class="en-inline">Real estate broker, 55 — São Paulo</span>
-            <span class="pt-inline">Corretora de imóveis, 55 — São Paulo</span>
+            <span class="en-inline">São Paulo, SP</span>
+            <span class="pt-inline">São Paulo, SP</span>
           </div>
-          <p class="profile-insight en">Has discarded e-waste before, motivated by environmental awareness — not financial incentives. Wants <strong>scheduling, real-time kiosk availability, and cashback directly to her BB app wallet.</strong></p>
-          <p class="profile-insight pt">Já descartou lixo eletrônico antes, motivada pela consciência ambiental — não por incentivos financeiros. Quer <strong>agendamento, disponibilidade do quiosque em tempo real e cashback direto na carteira do app BB.</strong></p>
+          <p class="profile-insight en">Has discarded e-waste before, motivated by environmental awareness, not financial incentives. Wants <strong>scheduling, real-time kiosk availability, and cashback directly to her BB app wallet.</strong></p>
+          <p class="profile-insight pt">Já descartou lixo eletrônico antes, motivada pela consciência ambiental, não por incentivos financeiros. Quer <strong>agendamento, disponibilidade do quiosque em tempo real e cashback direto na carteira do app BB.</strong></p>
         </div>
       </div>
 
-      <!-- Audrin -->
+      <!-- Visitor 2 -->
       <div class="profile-card">
         <div class="profile-img-wrap">
-          <img src="images/techback/field-08.png" alt="Audrin — visitor interview" loading="lazy">
+          <img src="cases/techback/audrin.jpeg" alt="Visitor 2 interview" loading="lazy">
           <span class="profile-type-badge"><span class="en-inline">Visitor</span><span class="pt-inline">Visitante</span></span>
         </div>
         <div class="profile-body">
-          <div class="profile-name">Audrin</div>
+          <div class="profile-name"><span class="en-inline">Visitor 2</span><span class="pt-inline">Visitante 2</span></div>
           <div class="profile-role">
-            <span class="en-inline">Developer & designer, 54 — brought a discarded laptop to the event</span>
-            <span class="pt-inline">Desenvolvedor & designer, 54 — trouxe um laptop descartado ao evento</span>
+            <span class="en-inline">Brought a discarded laptop to the event</span>
+            <span class="pt-inline">Trouxe um laptop descartado ao evento</span>
           </div>
           <p class="profile-insight en">Described the scanning experience as a <strong>key differentiator</strong>. Wants AI photo recognition of items, real-time kiosk status, and an environmental impact dashboard. Believes financial rewards drive initial engagement but environmental awareness sustains it.</p>
           <p class="profile-insight pt">Descreveu a experiência de escaneamento como um <strong>diferencial-chave</strong>. Quer reconhecimento fotográfico por IA dos itens, status do quiosque em tempo real e um dashboard de impacto ambiental. Acredita que recompensas financeiras impulsionam o engajamento inicial, mas a consciência ambiental o sustenta.</p>
         </div>
       </div>
 
-      <!-- Maria Girlene -->
+      <!-- Waste-picker 1 -->
       <div class="profile-card">
         <div class="profile-img-wrap">
-          <img src="images/techback/field-09.png" alt="Maria Girlene — catadora" loading="lazy">
+          <img src="cases/techback/maria girlene.jpeg" alt="Waste-picker 1 interview" loading="lazy">
           <span class="profile-type-badge"><span class="en-inline">Waste-picker</span><span class="pt-inline">Catadora</span></span>
         </div>
         <div class="profile-body">
-          <div class="profile-name">Maria Girlene</div>
+          <div class="profile-name"><span class="en-inline">Waste-picker 1</span><span class="pt-inline">Catadora 1</span></div>
           <div class="profile-role">
-            <span class="en-inline">Pedras de Fogo, PB — collecting since childhood</span>
-            <span class="pt-inline">Pedras de Fogo, PB — catadora desde a infância</span>
+            <span class="en-inline">Paraíba, collecting since childhood</span>
+            <span class="pt-inline">Paraíba, catadora desde a infância</span>
           </div>
           <p class="profile-insight en">Operates without formal headquarters, storing materials on her own property. E-waste ends up as common trash <strong>because no local market exists</strong> to buy it. Faces social discrimination. Needs government support and market creation.</p>
           <p class="profile-insight pt">Opera sem sede formal, armazenando materiais em sua própria propriedade. O lixo eletrônico acaba como lixo comum <strong>porque não existe mercado local</strong> para comprá-lo. Enfrenta discriminação social. Precisa de apoio governamental e criação de mercado.</p>
         </div>
       </div>
 
-      <!-- Mateus Alves -->
+      <!-- Waste-picker 2 -->
       <div class="profile-card">
         <div class="profile-img-wrap">
-          <img src="images/techback/field-10.png" alt="Mateus Alves — catador cooperativa" loading="lazy">
+          <img src="cases/techback/mateus alves.jpeg" alt="Waste-picker 2 interview" loading="lazy">
           <span class="profile-type-badge"><span class="en-inline">Waste-picker</span><span class="pt-inline">Catador</span></span>
         </div>
         <div class="profile-body">
-          <div class="profile-name">Mateus Alves</div>
+          <div class="profile-name"><span class="en-inline">Waste-picker 2</span><span class="pt-inline">Catador 2</span></div>
           <div class="profile-role">
-            <span class="en-inline">Londrina, PR — 15 years, Cooper Região cooperative</span>
-            <span class="pt-inline">Londrina, PR — 15 anos, cooperativa Cooper Região</span>
+            <span class="en-inline">Paraná, 15 years in a cooperative</span>
+            <span class="pt-inline">Paraná, 15 anos em cooperativa</span>
           </div>
-          <p class="profile-insight en">Serves ~208,000 households. Electronic waste has very low market value — described as <strong>"cheap as popcorn."</strong> No reverse logistics infrastructure. People prefer to leave materials at their door rather than bring them to proper points.</p>
-          <p class="profile-insight pt">Atende ~208.000 domicílios. O lixo eletrônico tem valor de mercado muito baixo — descrito como <strong>"barato que nem pipoca."</strong> Sem infraestrutura de logística reversa. As pessoas preferem deixar materiais na porta de casa em vez de levá-los a pontos adequados.</p>
+          <p class="profile-insight en">Serves ~208,000 households. Electronic waste has very low market value, described as <strong>"cheap as popcorn."</strong> No reverse logistics infrastructure. People prefer to leave materials at their door rather than bring them to proper points.</p>
+          <p class="profile-insight pt">Atende ~208.000 domicílios. O lixo eletrônico tem valor de mercado muito baixo, descrito como <strong>"barato que nem pipoca."</strong> Sem infraestrutura de logística reversa. As pessoas preferem deixar materiais na porta de casa em vez de levá-los a pontos adequados.</p>
         </div>
       </div>
 
-      <!-- Dilvana Santos -->
+      <!-- Waste-picker 3 -->
       <div class="profile-card">
         <div class="profile-img-wrap">
-          <img src="images/techback/field-11.png" alt="Dilvana Santos — ASCOR" loading="lazy">
+          <img src="cases/techback/dilvana.jpeg" alt="Waste-picker 3 interview" loading="lazy">
           <span class="profile-type-badge"><span class="en-inline">Waste-picker</span><span class="pt-inline">Catadora</span></span>
         </div>
         <div class="profile-body">
-          <div class="profile-name">Dilvana Santos</div>
+          <div class="profile-name"><span class="en-inline">Waste-picker 3</span><span class="pt-inline">Catadora 3</span></div>
           <div class="profile-role">
-            <span class="en-inline">Colatina, ES — President, ASCOR (38 members)</span>
-            <span class="pt-inline">Colatina, ES — Presidente, ASCOR (38 membros)</span>
+            <span class="en-inline">Espírito Santo, cooperative president (38 members)</span>
+            <span class="pt-inline">Espírito Santo, presidente de cooperativa (38 membros)</span>
           </div>
           <p class="profile-insight en">Sources from hospitals, companies, and the public. Faces difficulty finding <strong>reliable buyers</strong> for specific materials (circuit boards, plastics). Does community awareness rounds in neighborhoods to drive correct separation.</p>
           <p class="profile-insight pt">Recebe materiais de hospitais, empresas e da população. Enfrenta dificuldade em encontrar <strong>compradores confiáveis</strong> para materiais específicos (placas de circuito, plásticos). Faz rondas de conscientização em bairros para promover a separação correta.</p>
         </div>
       </div>
 
-      <!-- Leonardo César -->
+      <!-- Operator 1 -->
       <div class="profile-card">
         <div class="profile-img-wrap">
-          <img src="images/techback/field-12.png" alt="Leonardo César — Reeecicle operator" loading="lazy">
+          <img src="cases/techback/leonardo cesar.jpeg" alt="Operator 1 interview" loading="lazy">
           <span class="profile-type-badge"><span class="en-inline">Operator</span><span class="pt-inline">Operador</span></span>
         </div>
         <div class="profile-body">
-          <div class="profile-name">Leonardo César</div>
+          <div class="profile-name"><span class="en-inline">Operator 1</span><span class="pt-inline">Operador 1</span></div>
           <div class="profile-role">
-            <span class="en-inline">Environmental engineer — Reeecicle, Recife + João Pessoa</span>
-            <span class="pt-inline">Engenheiro ambiental — Reeecicle, Recife + João Pessoa</span>
+            <span class="en-inline">Environmental engineer, kiosk operator in the Northeast</span>
+            <span class="pt-inline">Engenheiro ambiental, operador de quiosque no Nordeste</span>
           </div>
-          <p class="profile-insight en">Homologated by Green Electron. Uses logistics software for optimized routes. Batteries travel to Minas Gerais for specialized processing. Recommends <strong>automatic PEV notifications, cooperative training, and remote monitoring</strong> for the TechBack platform.</p>
-          <p class="profile-insight pt">Homologado pela Green Electron. Usa software de logística para rotas otimizadas. Baterias viajam para Minas Gerais para processamento especializado. Recomenda <strong>notificações automáticas de PEV, treinamento de cooperativas e monitoramento remoto</strong> para a plataforma TechBack.</p>
+          <p class="profile-insight en">Uses logistics software for optimized routes. Batteries travel to other states for specialized processing. Recommends <strong>automatic PEV notifications, cooperative training, and remote monitoring</strong> for the TechBack platform.</p>
+          <p class="profile-insight pt">Usa software de logística para rotas otimizadas. Baterias viajam para outros estados para processamento especializado. Recomenda <strong>notificações automáticas de PEV, treinamento de cooperativas e monitoramento remoto</strong> para a plataforma TechBack.</p>
         </div>
       </div>
     </div>
@@ -887,8 +905,8 @@
       <div class="insight-block dark">
         <div class="insight-num">03</div>
         <div class="insight-title"><span class="en-inline">Without catadores, TechBack fails</span><span class="pt-inline">Sem catadores, o TechBack fracassa</span></div>
-        <p class="insight-desc en">The full chain depends on waste-pickers and cooperatives. A digital solution that ignores their operational reality — no infrastructure, no formal market, social barriers — is a solution that serves only part of the ecosystem.</p>
-        <p class="insight-desc pt">Toda a cadeia depende dos catadores e cooperativas. Uma solução digital que ignora sua realidade operacional — sem infraestrutura, sem mercado formal, barreiras sociais — é uma solução que serve apenas parte do ecossistema.</p>
+        <p class="insight-desc en">The full chain depends on waste-pickers and cooperatives. A digital solution that ignores their operational reality (no infrastructure, no formal market, social barriers) serves only part of the ecosystem.</p>
+        <p class="insight-desc pt">Toda a cadeia depende dos catadores e cooperativas. Uma solução digital que ignora sua realidade operacional (sem infraestrutura, sem mercado formal, barreiras sociais) serve apenas parte do ecossistema.</p>
       </div>
       <div class="insight-block">
         <div class="insight-num">04</div>
@@ -911,8 +929,8 @@
         <div class="d-num">01</div>
         <div class="d-content">
           <div class="d-title"><span class="en-inline">Research Plan & Interview Protocols</span><span class="pt-inline">Plano de Pesquisa & Protocolos de Entrevista</span></div>
-          <p class="d-desc en">Tailored scripts for three distinct audiences at Expocatadores 2024 — visitors, waste-pickers, and kiosk operators — each with specific objectives aligned to TechBack's product roadmap.</p>
-          <p class="d-desc pt">Roteiros personalizados para três públicos distintos na Expocatadores 2024 — visitantes, catadores e operadores de quiosques — cada um com objetivos específicos alinhados ao roadmap do produto TechBack.</p>
+          <p class="d-desc en">Tailored scripts for three distinct audiences at Expocatadores 2024 (visitors, waste-pickers, and kiosk operators), each with specific objectives aligned to TechBack's product roadmap.</p>
+          <p class="d-desc pt">Roteiros personalizados para três públicos distintos na Expocatadores 2024 (visitantes, catadores e operadores de quiosques), cada um com objetivos específicos alinhados ao roadmap do produto TechBack.</p>
         </div>
       </div>
       <div class="deliverable-item">
@@ -927,16 +945,16 @@
         <div class="d-num">03</div>
         <div class="d-content">
           <div class="d-title"><span class="en-inline">Consolidated Research Report</span><span class="pt-inline">Relatório de Pesquisa Consolidado</span></div>
-          <p class="d-desc en">Structured report with user profiles, main pain points, motivations, and strategic opportunities — delivered to BB with clear synthesis and actionable insights per audience segment.</p>
-          <p class="d-desc pt">Relatório estruturado com perfis de usuários, principais dores, motivações e oportunidades estratégicas — entregue ao BB com síntese clara e insights acionáveis por segmento de público.</p>
+          <p class="d-desc en">Structured report with user profiles, main pain points, motivations, and strategic opportunities. Delivered to BB with clear synthesis and actionable insights per audience segment.</p>
+          <p class="d-desc pt">Relatório estruturado com perfis de usuários, principais dores, motivações e oportunidades estratégicas. Entregue ao BB com síntese clara e insights acionáveis por segmento de público.</p>
         </div>
       </div>
       <div class="deliverable-item">
         <div class="d-num">04</div>
         <div class="d-content">
           <div class="d-title"><span class="en-inline">Proposed Digital User Journey</span><span class="pt-inline">Jornada Digital do Usuário Proposta</span></div>
-          <p class="d-desc en">Designed three core flows — access, engagement, and rewards — grounded in research findings and validated against the different user profiles encountered at Expocatadores.</p>
-          <p class="d-desc pt">Projetei três fluxos principais — acesso, engajamento e recompensas — fundamentados nas descobertas de pesquisa e validados contra os diferentes perfis de usuários encontrados na Expocatadores.</p>
+          <p class="d-desc en">Designed three core flows (access, engagement, and rewards) grounded in research findings and validated against the different user profiles encountered at Expocatadores.</p>
+          <p class="d-desc pt">Projetei três fluxos principais (acesso, engajamento e recompensas) fundamentados nas descobertas de pesquisa e validados contra os diferentes perfis de usuários encontrados na Expocatadores.</p>
         </div>
       </div>
       <div class="deliverable-item">
@@ -957,100 +975,28 @@
       <span class="en">The <em>2025 Roadmap</em> built from field research</span>
       <span class="pt">O <em>Roadmap 2025</em> construído a partir da pesquisa de campo</span>
     </h2>
-    <p class="cs-body-text en">Every recommendation in the roadmap traces back to something a real person said or showed us at Expocatadores. Research doesn't end at insights — it ends when it shapes what gets built.</p>
-    <p class="cs-body-text pt">Cada recomendação no roadmap remonta a algo que uma pessoa real disse ou nos mostrou na Expocatadores. Pesquisa não termina nos insights — termina quando molda o que é construído.</p>
+    <p class="cs-body-text en">Every recommendation in the roadmap traces back to something a real person said or showed us at Expocatadores. Research doesn't end at insights. It ends when it shapes what gets built.</p>
+    <p class="cs-body-text pt">Cada recomendação no roadmap remonta a algo que uma pessoa real disse ou nos mostrou na Expocatadores. Pesquisa não termina nos insights. Termina quando molda o que é construído.</p>
     <div class="screenshots-scroll">
       <div>
-        <div class="screenshot-frame" onclick="openLightbox(this)">
-          <img src="images/techback/field-13.png" alt="Quick Wins — from learning to action" loading="lazy">
+        <div class="screenshot-frame blurred">
+          <img src="images/techback/field-13.png" alt="Quick Wins overview" loading="lazy">
         </div>
         <div class="screenshot-label"><span class="en-inline">Quick Wins (1–3 months)</span><span class="pt-inline">Ações Rápidas (1–3 meses)</span></div>
       </div>
       <div>
-        <div class="screenshot-frame" onclick="openLightbox(this)">
-          <img src="images/techback/field-14.png" alt="Long Actions — TechBack future" loading="lazy">
+        <div class="screenshot-frame blurred">
+          <img src="images/techback/field-14.png" alt="Long Actions overview" loading="lazy">
         </div>
         <div class="screenshot-label"><span class="en-inline">Long Actions (3–12 months)</span><span class="pt-inline">Ações de Longo Prazo (3–12 meses)</span></div>
       </div>
       <div>
-        <div class="screenshot-frame" onclick="openLightbox(this)">
-          <img src="images/techback/field-15.png" alt="Roadmap 2025 — TechBack BB" loading="lazy">
+        <div class="screenshot-frame blurred">
+          <img src="images/techback/field-15.png" alt="Roadmap 2025 overview" loading="lazy">
         </div>
         <div class="screenshot-label">Roadmap 2025</div>
       </div>
     </div>
-
-    <!-- EN table -->
-    <table class="roadmap-table en" style="margin-top:48px;">
-      <thead>
-        <tr>
-          <th>Quarter</th>
-          <th>Blueprint & Discovery</th>
-          <th>Digital Development</th>
-          <th>Testing & Validation</th>
-          <th>Partnerships</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="q-label">Q1</td>
-          <td><span class="tag-green">Priority</span><br>TechBack Digital blueprint. Waste-picker blueprint review. Deep discovery (parallel).</td>
-          <td>MVP Digital development starts.</td>
-          <td>—</td>
-          <td>Initial cooperative workshops.</td>
-        </tr>
-        <tr>
-          <td class="q-label">Q2</td>
-          <td>—</td>
-          <td>Launch functional MVP. Feature prototyping.</td>
-          <td>Initial testing with cooperatives. Feedback loops.</td>
-          <td>Basic cooperative training.</td>
-        </tr>
-        <tr>
-          <td class="q-label">Q3</td>
-          <td>—</td>
-          <td>MVP iteration with improvements.</td>
-          <td>Controlled expansion. Testing in new areas.</td>
-          <td>Formalize regional partnerships.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- PT table -->
-    <table class="roadmap-table pt" style="margin-top:48px;">
-      <thead>
-        <tr>
-          <th>Trimestre</th>
-          <th>Blueprint & Discovery</th>
-          <th>Desenvolvimento Digital</th>
-          <th>Testes & Validação</th>
-          <th>Parcerias</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="q-label">Q1</td>
-          <td><span class="tag-green">Prioridade</span><br>Blueprint digital do TechBack. Revisão do blueprint dos catadores. Discovery aprofundado (paralelo).</td>
-          <td>Início do desenvolvimento do MVP Digital.</td>
-          <td>—</td>
-          <td>Workshops iniciais com cooperativas.</td>
-        </tr>
-        <tr>
-          <td class="q-label">Q2</td>
-          <td>—</td>
-          <td>Lançamento do MVP funcional. Prototipação de funcionalidades.</td>
-          <td>Testes iniciais com cooperativas. Loops de feedback.</td>
-          <td>Treinamento básico de cooperativas.</td>
-        </tr>
-        <tr>
-          <td class="q-label">Q3</td>
-          <td>—</td>
-          <td>Iteração do MVP com melhorias.</td>
-          <td>Expansão controlada. Testes em novas áreas.</td>
-          <td>Formalizar parcerias regionais.</td>
-        </tr>
-      </tbody>
-    </table>
   </section>
 
   <!-- 09 IMPACT CALLOUT -->
@@ -1058,10 +1004,10 @@
     <div class="impact-banner">
       <div class="impact-banner-label"><span class="en-inline">Why this matters</span><span class="pt-inline">Por que isso importa</span></div>
       <p class="impact-banner-text en">
-        This research connected innovation with social impact — laying the groundwork for a solution that works for <strong>citizens, waste-pickers, cooperatives, and operators</strong> alike. Not just for the technology that sits on top.
+        This research connected innovation with social impact, laying the groundwork for a solution that works for <strong>citizens, waste-pickers, cooperatives, and operators</strong> alike. Not just for the technology that sits on top.
       </p>
       <p class="impact-banner-text pt">
-        Esta pesquisa conectou inovação com impacto social — estabelecendo as bases para uma solução que funciona para <strong>cidadãos, catadores, cooperativas e operadores</strong> igualmente. Não apenas para a tecnologia que fica por cima.
+        Esta pesquisa conectou inovação com impacto social, estabelecendo as bases para uma solução que funciona para <strong>cidadãos, catadores, cooperativas e operadores</strong> igualmente. Não apenas para a tecnologia que fica por cima.
       </p>
     </div>
   </section>
@@ -1076,8 +1022,8 @@
       <span class="pt-inline">O papel da Giuliana neste projeto</span>
     </div>
     <blockquote class="role-quote reveal">
-      <span class="en">"Going to the field, listening to waste-pickers and operators, synthesizing 11 interviews into a service strategy that connects social impact with innovation — that was the work."</span>
-      <span class="pt">"Ir a campo, ouvir catadores e operadores, sintetizar 11 entrevistas em uma estratégia de serviço que conecta impacto social com inovação — esse foi o trabalho."</span>
+      <span class="en">"Going to the field, listening to waste-pickers and operators, synthesizing 11 interviews into a service strategy that connects social impact with innovation. That was the work."</span>
+      <span class="pt">"Ir a campo, ouvir catadores e operadores, sintetizar 11 entrevistas em uma estratégia de serviço que conecta impacto social com inovação. Esse foi o trabalho."</span>
     </blockquote>
     <div class="role-attribution reveal">
       <span class="en-inline">UX Researcher & Strategist · Field Research · User Interviews · Service Blueprint · Stakeholder Mapping · Strategic Roadmap</span>
@@ -1118,8 +1064,9 @@
   </div>
   <div class="case-cta-links">
     <a href="mailto:giulopesg@gmail.com" class="cta-btn green">
-      <span class="en-inline">&#9993; Get in touch</span>
-      <span class="pt-inline">&#9993; Entrar em contato</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+      <span class="en-inline">Get in touch</span>
+      <span class="pt-inline">Entrar em contato</span>
     </a>
     <a href="index.html" class="cta-btn outline">
       <span class="en-inline">&larr; Back to portfolio</span>

@@ -304,16 +304,16 @@
     object-position: center 15%;
     display: block;
   }
-  /* Blend photo edges — top very subtle */
+  /* Blend photo edges — soft feather, preserving image clarity */
   .hero-photo::after {
     content: '';
     position: absolute;
     inset: -2px;
     background:
-      linear-gradient(to left, transparent 55%, var(--warm-cream) 100%),
-      linear-gradient(to bottom, transparent 45%, var(--warm-cream) 100%),
-      linear-gradient(to top, transparent 92%, var(--warm-cream) 100%),
-      linear-gradient(to right, transparent 80%, var(--warm-cream) 100%);
+      linear-gradient(to left, transparent 75%, var(--warm-cream) 100%),
+      linear-gradient(to bottom, transparent 70%, var(--warm-cream) 100%),
+      linear-gradient(to top, transparent 95%, var(--warm-cream) 100%),
+      linear-gradient(to right, transparent 92%, var(--warm-cream) 100%);
     pointer-events: none;
     z-index: 1;
   }
@@ -395,8 +395,8 @@
 
   .about-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 80px;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
     align-items: start;
   }
 
@@ -432,7 +432,7 @@
   .about-aside {
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 28px;
   }
 
   .aside-block-title {
@@ -468,6 +468,45 @@
     border-color: rgba(107,79,160,0.5);
     background: rgba(107,79,160,0.15);
     color: var(--plum-pale);
+  }
+
+  .about-cat-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--plum-pale);
+    margin-bottom: 14px;
+  }
+
+  .about-statement {
+    font-size: 13px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .about-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--plum-pale);
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid rgba(212,200,239,0.25);
+    border-radius: 40px;
+    transition: all 0.25s;
+  }
+  .about-cta:hover {
+    background: rgba(107,79,160,0.15);
+    border-color: var(--plum-pale);
+    color: var(--white);
   }
 
   .personal-tags {
@@ -537,7 +576,7 @@
   .case-bg-4 { background: linear-gradient(135deg, #3A5A4A 0%, #4A7A5A 100%); }
   .case-bg-5 { background: linear-gradient(135deg, #5A3A6A 0%, #7A4A8A 100%); }
   .case-bg-6 { background: linear-gradient(135deg, #2A3A5A 0%, #3A4A6A 100%); }
-  .case-bg-7 { background: linear-gradient(135deg, #6A3A3A 0%, #8A4A4A 100%); }
+  .case-bg-7 { background: linear-gradient(135deg, #3A1800 0%, #B07800 100%); }
 
   .case-top {
     display: flex;
@@ -1014,8 +1053,8 @@
     </h1>
 
     <p class="hero-sub reveal reveal-delay-2">
-      <span class="en">Senior UX Designer with 8 years of experience. Curious by nature, adaptive by choice — I use research, methodology, and AI as a utility belt, not a script.</span>
-      <span class="pt">UX Designer Sênior com 8 anos de experiência. Curiosa por natureza, adaptável por escolha — uso pesquisa, metodologia e IA como cinto de utilidades, não como roteiro.</span>
+      <span class="en">Senior UX Designer with 8 years of experience. Curious by nature, adaptive by choice. I use research, methodology, and AI as a utility belt, not a script.</span>
+      <span class="pt">UX Designer Sênior com 8 anos de experiência. Curiosa por natureza, adaptável por escolha. Uso pesquisa, metodologia e IA como cinto de utilidades, não como roteiro.</span>
     </p>
 
     <div class="hero-stats reveal reveal-delay-2">
@@ -1089,11 +1128,10 @@
           <div class="case-arrow">↗</div>
         </div>
         <div class="case-bottom">
-          <div class="case-featured en">Personal project — app in development</div>
-          <div class="case-featured pt">Projeto pessoal — app em desenvolvimento</div>
+          <div class="case-featured"><span class="en-inline">Personal project · app in development</span><span class="pt-inline">Projeto pessoal · app em desenvolvimento</span></div>
           <h3 class="case-title">Neuroot</h3>
-          <p class="case-desc en">A post-burnout recovery app designed from personal experience. No user research — just lived truth, Behavioral Activation methodology, and neuroplasticity as a foundation. One practice a day. A defined end. Built with Figma Make, Claude Code, and Claude API. The name grew from roots → neurons → a new beginning.</p>
-          <p class="case-desc pt">App de recuperação pós-burnout criado a partir da própria experiência. Sem pesquisa com usuários — só verdade vivida, Ativação Comportamental e neuroplasticidade como base. Uma prática por dia. Um fim definido. Construído com Figma Make, Claude Code e Claude API. O nome nasceu de raízes → neurônios → um recomeço.</p>
+          <p class="case-desc en">A post-burnout recovery app designed from personal experience. No user research, just lived truth, Behavioral Activation methodology, and neuroplasticity as a foundation. One practice a day. A defined end. Built with Figma Make, Claude Code, and Claude API. The name grew from roots → neurons → a new beginning.</p>
+          <p class="case-desc pt">App de recuperação pós-burnout criado a partir da própria experiência. Sem pesquisa com usuários, só verdade vivida, Ativação Comportamental e neuroplasticidade como base. Uma prática por dia. Um fim definido. Construído com Figma Make, Claude Code e Claude API. O nome nasceu de raízes → neurônios → um recomeço.</p>
         </div>
       </div>
     </a>
@@ -1115,8 +1153,8 @@
           <div class="case-eyebrow en">Oil & Gas · Petrobras</div>
           <div class="case-eyebrow pt">Energia · Petrobras</div>
           <h3 class="case-title">Petrobras —<br><em>PCD Usability Testing</em></h3>
-          <p class="case-desc en">28 remote sessions with people with disabilities. An honest diagnosis of how Petrobras' institutional website fails — and how it can truly include.</p>
-          <p class="case-desc pt">28 sessões remotas com pessoas com deficiência. Um diagnóstico honesto de como o site institucional da Petrobras falha — e como pode incluir de verdade.</p>
+          <p class="case-desc en">28 remote sessions with people with disabilities. An honest diagnosis of how Petrobras' institutional website fails, and how it can truly include.</p>
+          <p class="case-desc pt">28 sessões remotas com pessoas com deficiência. Um diagnóstico honesto de como o site institucional da Petrobras falha e como pode incluir de verdade.</p>
         </div>
       </div>
     </a>
@@ -1169,7 +1207,6 @@
       <div class="case-inner">
         <div class="case-top">
           <div class="case-tags">
-            <span class="case-tag new">New</span>
             <span class="case-tag">UX Research</span>
             <span class="case-tag">Stakeholder Interviews</span>
             <span class="case-tag">Strategy</span>
@@ -1177,8 +1214,8 @@
           <div class="case-arrow">↗</div>
         </div>
         <div class="case-bottom">
-          <div class="case-eyebrow en">Energy Sector · Brivia</div>
-          <div class="case-eyebrow pt">Setor de Energia · Brivia</div>
+          <div class="case-eyebrow en">Energy Sector · CPFL Soluções</div>
+          <div class="case-eyebrow pt">Setor de Energia · CPFL Soluções</div>
           <h3 class="case-title">CPFL Soluções —<br><em>Stakeholder Research</em></h3>
           <p class="case-desc en">14 strategic leaders interviewed across 8 departments. Stakeholder research, competitive analysis, and strategic proposals for a website redesign in the energy sector.</p>
           <p class="case-desc pt">14 líderes estratégicos entrevistados em 8 departamentos. Pesquisa com stakeholders, análise competitiva e propostas estratégicas para o redesign do site no setor de energia.</p>
@@ -1208,15 +1245,15 @@
       </div>
     </a>
 
-    <!-- BB INFLUENCER GAMIFICATION (hidden — no case page yet) -->
-    <a href="#" class="case-card reveal" style="display:none;">
+    <!-- BB INFLUENCER GAMIFICATION -->
+    <a href="bb-influencer-case.html" class="case-card reveal">
       <div class="case-bg case-bg-7"></div>
       <div class="case-inner">
         <div class="case-top">
           <div class="case-tags">
             <span class="case-tag">Gamification</span>
-            <span class="case-tag">UX Design</span>
-            <span class="case-tag">Social Media</span>
+            <span class="case-tag">UX/UI Design</span>
+            <span class="case-tag">Prototyping</span>
           </div>
           <div class="case-arrow">↗</div>
         </div>
@@ -1224,8 +1261,8 @@
           <div class="case-eyebrow en">Banking · Banco do Brasil</div>
           <div class="case-eyebrow pt">Bancário · Banco do Brasil</div>
           <h3 class="case-title">Banco do Brasil —<br><em>Influencer School Gamification</em></h3>
-          <p class="case-desc en">Gamified learning experience design for BB's influencer school program, combining engagement mechanics with brand education.</p>
-          <p class="case-desc pt">Design de experiência de aprendizado gamificado para o programa de escola de influenciadores do BB, combinando mecânicas de engajamento com educação de marca.</p>
+          <p class="case-desc en">The gamification layer behind BB's existing course platform. 8+ admin modules, 4 gamification mechanics, evidence tracking, and ranking calibration — replacing manual spreadsheet operations. Validated with stakeholders.</p>
+          <p class="case-desc pt">A camada de gamificação por trás da plataforma de cursos existente do BB. 8+ módulos administrativos, 4 mecânicas de gamificação, rastreamento de evidências e calibragem de ranking — substituindo operações manuais em planilhas. Validado com stakeholders.</p>
         </div>
       </div>
     </a>
@@ -1246,8 +1283,8 @@
           <div class="case-eyebrow en">Insurance · Previsul</div>
           <div class="case-eyebrow pt">Seguros · Previsul</div>
           <h3 class="case-title">Previsul —<br><em>End-to-End Service Design</em></h3>
-          <p class="case-desc en">Full redesign of the insurance claims journey — from the 0800 call to final payment. 150+ screens, 40+ pain points, 22 stakeholders. Two connected products delivered.</p>
-          <p class="case-desc pt">Redesign completo da jornada de sinistros — do atendimento 0800 ao pagamento final. 150+ telas, 40+ pontos de dor, 22 stakeholders. Dois produtos conectados entregues.</p>
+          <p class="case-desc en">Full redesign of the insurance claims journey, from the 0800 call to final payment. 150+ screens, 40+ pain points, 22 stakeholders. Two connected products delivered.</p>
+          <p class="case-desc pt">Redesign completo da jornada de sinistros, do atendimento 0800 ao pagamento final. 150+ telas, 40+ pontos de dor, 22 stakeholders. Dois produtos conectados entregues.</p>
         </div>
       </div>
     </a>
@@ -1269,24 +1306,24 @@
   <div class="about-grid">
     <div class="about-text reveal">
       <p class="en">
-        I'm a <strong>Senior UX Designer with 8 years of experience</strong>, with a background in graphic design. I'm deeply curious, and I move with the world — not against it. My focus is always on the human problem first. The method comes after. I don't limit myself to a single framework because every problem deserves its own approach.
+        I'm a <strong>Senior UX Designer with 8 years of experience</strong>, with a background in graphic design. I'm deeply curious, and I move with the world, not against it. My focus is always on the human problem first. The method comes after. I don't limit myself to a single framework because every problem deserves its own approach.
       </p>
       <p class="pt">
-        Sou <strong>UX Designer Sênior com 8 anos de experiência</strong>, com origem no design gráfico. Sou muito curiosa e me adapto rapidamente às mudanças do mundo. Meu foco é sempre o problema humano primeiro — o método vem depois. Não me limito a uma única abordagem porque cada problema merece a sua.
+        Sou <strong>UX Designer Sênior com 8 anos de experiência</strong>, com origem no design gráfico. Sou muito curiosa e me movo com o mundo, não contra ele. Meu foco é sempre o problema humano primeiro. O método vem depois. Não me limito a uma única abordagem porque cada problema merece a sua.
       </p>
 
       <p class="en">
-        What people call <strong>"owner mindset"</strong> is how I naturally work. I've led strategic projects for enterprise clients like <strong>Banco do Brasil, Petrobras, CPFL, Vivo, GPA, and Carrefour</strong>. Research, methodology, and tooling are always at my side, not as a cage, but as a <em>utility belt.</em>
+        What people call <strong>"owner mindset"</strong> is how I naturally work. I've led strategic projects for enterprise clients like <strong>Banco do Brasil, Petrobras, CPFL, Vivo, GPA, and Carrefour</strong>. Research, methodology, and tooling are always at my side. Not as a cage, but as a <em>utility belt.</em>
       </p>
       <p class="pt">
-        O que as pessoas chamam de <strong>"pensamento de dono"</strong> é como eu trabalho naturalmente. Liderei projetos estratégicos para grandes empresas como <strong>Banco do Brasil, Petrobras, CPFL, Vivo, GPA e Carrefour</strong>. Pesquisa, metodologia e ferramentas estão sempre do meu lado, não como uma prisão, mas como um <em>cinto de utilidades.</em>
+        O que as pessoas chamam de <strong>"pensamento de dono"</strong> é como eu trabalho naturalmente. Liderei projetos estratégicos para grandes empresas como <strong>Banco do Brasil, Petrobras, CPFL, Vivo, GPA e Carrefour</strong>. Pesquisa, metodologia e ferramentas estão sempre do meu lado. Não como uma prisão, mas como um <em>cinto de utilidades.</em>
       </p>
 
       <p class="en">
-        I never stop. I finished my postgraduate studies, started an IBM AI course, and I'm now walking the path of <strong>design engineering</strong> — because AI arrived and changed everything. Those who embrace it have a superpower. I'm one of them.
+        I never stop. I finished my postgraduate studies, started an IBM AI course, and I'm now walking the path of <strong>design engineering</strong> because AI arrived and changed everything. Those who embrace it have a superpower. I'm one of them.
       </p>
       <p class="pt">
-        Nunca paro. Terminei a pós, comecei um curso de IA pela IBM, e agora estou trilhando o caminho de <strong>design engineering</strong> — porque a IA chegou e mudou tudo. Quem abraçar isso tem um superpoder. Eu sou uma dessas pessoas.
+        Nunca paro. Terminei a pós, comecei um curso de IA pela IBM, e agora estou trilhando o caminho de <strong>design engineering</strong> porque a IA chegou e mudou tudo. Quem abraçar isso tem um superpoder. Eu sou uma dessas pessoas.
       </p>
       <a href="about.html" class="about-more reveal">
         <span class="en-inline">More about me</span>
@@ -1297,60 +1334,57 @@
 
     <div class="about-aside reveal reveal-delay-1">
       <div>
-        <div class="aside-block-title en">Expertise</div>
-        <div class="aside-block-title pt">Especialidades</div>
+        <div class="about-cat-title en">Core Expertise</div>
+        <div class="about-cat-title pt">Expertise Principal</div>
         <div class="skills-list">
-          <span class="skill-chip">UX Research</span>
-          <span class="skill-chip">Product Discovery</span>
-          <span class="skill-chip">Service Design</span>
-          <span class="skill-chip">Information Architecture</span>
-          <span class="skill-chip">Usability Testing</span>
-          <span class="skill-chip">Design Sprints</span>
-          <span class="skill-chip">Lean Inception</span>
           <span class="skill-chip">UX Strategy</span>
-          <span class="skill-chip">Workshop Facilitation</span>
+          <span class="skill-chip">Product Discovery</span>
+          <span class="skill-chip">UX Research</span>
+          <span class="skill-chip">Service Design</span>
+          <span class="skill-chip">AI-Native Product Design</span>
           <span class="skill-chip">Design Engineering</span>
         </div>
       </div>
 
       <div>
-        <div class="aside-block-title en">Tools</div>
-        <div class="aside-block-title pt">Ferramentas</div>
+        <div class="about-cat-title en">Technical Capabilities</div>
+        <div class="about-cat-title pt">Capacidades Técnicas</div>
+        <div class="skills-list">
+          <span class="skill-chip">Workshops & Design Sprints</span>
+          <span class="skill-chip">Lean Inception</span>
+          <span class="skill-chip">Usability Testing</span>
+          <span class="skill-chip">Information Architecture</span>
+          <span class="skill-chip">Interaction Design</span>
+          <span class="skill-chip">Product Prototyping</span>
+        </div>
+      </div>
 
-        <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;font-family:'DM Mono',monospace;">
-          <span class="en-inline">Design & Engineering</span>
-          <span class="pt-inline">Design & Engenharia</span>
-        </p>
-        <div class="skills-list" style="margin-bottom:20px;">
+      <div>
+        <div class="about-cat-title en">Tools</div>
+        <div class="about-cat-title pt">Ferramentas</div>
+        <div class="skills-list">
           <span class="skill-chip">Figma</span>
-          <span class="skill-chip">Framer</span>
           <span class="skill-chip">Miro</span>
+          <span class="skill-chip">Notion</span>
           <span class="skill-chip">Maze</span>
           <span class="skill-chip">Hotjar</span>
           <span class="skill-chip">Clarity</span>
-          <span class="skill-chip">Notion</span>
           <span class="skill-chip">GitHub</span>
+          <span class="skill-chip">Supabase</span>
           <span class="skill-chip">Vercel</span>
-        </div>
-
-        <p style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;font-family:'DM Mono',monospace;">AI</p>
-        <div class="skills-list">
           <span class="skill-chip ai">Claude Code</span>
-          <span class="skill-chip ai">Claude API</span>
-          <span class="skill-chip ai">ChatGPT</span>
-          <span class="skill-chip ai">Gemini</span>
-          <span class="skill-chip ai">Figma Make</span>
-          <span class="skill-chip ai">Cursor</span>
+          <span class="skill-chip ai">AntiGravity</span>
           <span class="skill-chip ai">Lovable</span>
-          <span class="skill-chip ai">Kling AI</span>
-          <span class="skill-chip ai">Miro AI</span>
-          <span class="skill-chip ai">Framer AI</span>
+          <span class="skill-chip ai">Framer</span>
+          <span class="skill-chip ai">Gemini</span>
+          <span class="skill-chip ai">ChatGPT</span>
         </div>
-        <p style="font-size:12px;color:var(--ink-muted);margin-top:12px;line-height:1.6;">
-          <span class="en-inline">IBM AI for Designers — in progress</span>
-          <span class="pt-inline">IBM IA para Designers — em curso</span>
-        </p>
       </div>
+
+      <p class="about-statement">
+        <span class="en-inline">"Tools change quickly. The ability to understand problems and design the right solutions remains."</span>
+        <span class="pt-inline">"Ferramentas mudam rápido. A capacidade de entender problemas e projetar as soluções certas permanece."</span>
+      </p>
 
       <div>
         <div class="aside-block-title en">Beyond design</div>
@@ -1360,9 +1394,10 @@
           <span class="personal-tag"><span>🥋</span> <span class="en-inline">Martial arts</span><span class="pt-inline">Artes marciais</span></span>
           <span class="personal-tag"><span>✈️</span> <span class="en-inline">Traveler</span><span class="pt-inline">Viajante</span></span>
           <span class="personal-tag"><span>🐱</span> <span class="en-inline">Cat mom</span><span class="pt-inline">Mãe de gato</span></span>
-          <span class="personal-tag"><span>🔮</span> <span class="en-inline">Future curious</span><span class="pt-inline">Curiosa sobre o futuro</span></span>
+          <span class="personal-tag"><span>🔮</span> <span class="en-inline">Future Thinker</span><span class="pt-inline">Future Thinker</span></span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1379,8 +1414,8 @@
   </h2>
 
   <p class="reveal" style="font-size:17px;font-weight:300;line-height:1.75;color:var(--ink-soft);max-width:600px;margin-bottom:64px;">
-    <span class="en">My process starts with human exploration — and only moves to execution when the problem is sharp enough for AI to help. Design Thinking defines the field. Shape Up defines the game. AI plays fast.</span>
-    <span class="pt">Meu processo começa com exploração humana — e só avança para execução quando o problema está nítido o suficiente para a IA ajudar. O Design Thinking define o campo. O Shape Up define o jogo. A IA joga rápido.</span>
+    <span class="en">My process starts with human exploration, and only moves to execution when the problem is sharp enough for AI to help. Design Thinking defines the field. Shape Up defines the game. AI plays fast.</span>
+    <span class="pt">Meu processo começa com exploração humana e só avança para execução quando o problema está nítido o suficiente para a IA ajudar. O Design Thinking define o campo. O Shape Up define o jogo. A IA joga rápido.</span>
   </p>
 
   <!-- TAB BUTTONS -->
@@ -1420,8 +1455,8 @@
         <div class="meth-panel-tag pt">Exploração humana primeiro</div>
         <h3 class="meth-panel-title en">Understanding<br>the <em>right</em> problem.</h3>
         <h3 class="meth-panel-title pt">Entendendo<br>o problema <em>certo.</em></h3>
-        <p class="meth-panel-desc en">Before any shaping or building, I use Design Thinking to make sure we're solving the right problem — not just the visible one. This phase lives in empathy, context, and systemic understanding.</p>
-        <p class="meth-panel-desc pt">Antes de qualquer moldagem ou construção, uso o Design Thinking para garantir que estamos resolvendo o problema certo. Essa fase vive na empatia, no contexto e na compreensão sistêmica.</p>
+        <p class="meth-panel-desc en">Before any shaping or building, I use Design Thinking to make sure we're solving the right problem, not just the visible one. This phase lives in empathy, context, and systemic understanding.</p>
+        <p class="meth-panel-desc pt">Antes de qualquer moldagem ou construção, uso o Design Thinking para garantir que estamos resolvendo o problema certo, não apenas o visível. Essa fase vive na empatia, no contexto e na compreensão sistêmica.</p>
         <div class="meth-tools">
           <span class="meth-tool">User Interviews</span><span class="meth-tool">Desk Research</span><span class="meth-tool">Personas</span><span class="meth-tool">Journey Maps</span><span class="meth-tool">Double Diamond</span>
         </div>
@@ -1452,8 +1487,8 @@
         <div class="meth-panel-tag pt">Decisão antes da execução</div>
         <h3 class="meth-panel-title en">Shaping the work<br>before <em>building it.</em></h3>
         <h3 class="meth-panel-title pt">Moldando o trabalho<br>antes de <em>construir.</em></h3>
-        <p class="meth-panel-desc en">Shape Up replaces infinite backlogs with intentional bets. I use it to define appetite (how much time is worth investing), identify rabbit holes, and set explicit no-gos — before a single line of code.</p>
-        <p class="meth-panel-desc pt">O Shape Up substitui backlogs infinitos por apostas intencionais. Uso para definir apetite, identificar rabbit holes e estabelecer no-gos explícitos — antes de uma linha de código.</p>
+        <p class="meth-panel-desc en">Shape Up replaces infinite backlogs with intentional bets. I use it to define appetite (how much time is worth investing), identify rabbit holes, and set explicit no-gos. All before a single line of code.</p>
+        <p class="meth-panel-desc pt">O Shape Up substitui backlogs infinitos por apostas intencionais. Uso para definir apetite, identificar rabbit holes e estabelecer no-gos explícitos. Tudo antes de uma linha de código.</p>
         <div class="meth-tools">
           <span class="meth-tool">Appetite</span><span class="meth-tool">Betting Table</span><span class="meth-tool">Rabbit Holes</span><span class="meth-tool">No-gos</span><span class="meth-tool">Scoping</span>
         </div>
@@ -1462,10 +1497,10 @@
         <div class="meth-outputs-label en">Outputs</div>
         <div class="meth-outputs-label pt">Outputs</div>
         <ul class="meth-output-list">
-          <li class="en">Defined appetite — the time we're willing to invest</li>
-          <li class="pt">Apetite definido — o tempo que estamos dispostos a investir</li>
-          <li class="en">Explicit no-gos — what won't be built, no discussion needed</li>
-          <li class="pt">No-gos explícitos — o que não será construído, sem discussão</li>
+          <li class="en">Defined appetite: the time we're willing to invest</li>
+          <li class="pt">Apetite definido: o tempo que estamos dispostos a investir</li>
+          <li class="en">Explicit no-gos: what won't be built, no discussion needed</li>
+          <li class="pt">No-gos explícitos: o que não será construído, sem discussão</li>
           <li class="en">Known risks surfaced before building begins</li>
           <li class="pt">Riscos mapeados antes de começar a construir</li>
         </ul>
@@ -1484,8 +1519,8 @@
         <div class="meth-panel-tag pt">Engenharia de decisão, não spec de tela</div>
         <h3 class="meth-panel-title en">The PRD as a<br><em>decision artifact.</em></h3>
         <h3 class="meth-panel-title pt">O PRD como<br><em>artefato de decisão.</em></h3>
-        <p class="meth-panel-desc en">The PRD I write isn't a spec document — it's a decision artifact. It describes logic, intent, and limits. Five blocks: problem, appetite, solution direction, rabbit holes, no-gos. AI fails when logic is missing, not when UI is missing.</p>
-        <p class="meth-panel-desc pt">O PRD que escrevo não é um documento de especificação — é um artefato de decisão. Descreve lógica, intenção e limites. Cinco blocos: problema, apetite, direção da solução, rabbit holes, no-gos.</p>
+        <p class="meth-panel-desc en">The PRD I write isn't a spec document. It's a decision artifact. It describes logic, intent, and limits. Five blocks: problem, appetite, solution direction, rabbit holes, no-gos. AI fails when logic is missing, not when UI is missing.</p>
+        <p class="meth-panel-desc pt">O PRD que escrevo não é um documento de especificação. É um artefato de decisão. Descreve lógica, intenção e limites. Cinco blocos: problema, apetite, direção da solução, rabbit holes, no-gos.</p>
         <div class="meth-tools">
           <span class="meth-tool">Problem Framing</span><span class="meth-tool">Appetite Block</span><span class="meth-tool">Solution Direction</span><span class="meth-tool">No-gos</span>
         </div>
@@ -1494,20 +1529,20 @@
         <div class="meth-outputs-label en">The 5 PRD blocks</div>
         <div class="meth-outputs-label pt">Os 5 blocos do PRD</div>
         <ul class="meth-output-list">
-          <li class="en"><strong>Block 1</strong> — What is the problem?</li>
-          <li class="pt"><strong>Bloco 1</strong> — Qual é o problema?</li>
-          <li class="en"><strong>Block 2</strong> — What's the appetite?</li>
-          <li class="pt"><strong>Bloco 2</strong> — Qual é o apetite?</li>
-          <li class="en"><strong>Block 3</strong> — Solution direction (logic, not UI)</li>
-          <li class="pt"><strong>Bloco 3</strong> — Direção da solução (lógica, não UI)</li>
-          <li class="en"><strong>Block 4</strong> — Rabbit holes</li>
-          <li class="pt"><strong>Bloco 4</strong> — Rabbit holes</li>
-          <li class="en"><strong>Block 5</strong> — No-gos</li>
-          <li class="pt"><strong>Bloco 5</strong> — No-gos</li>
+          <li class="en"><strong>Block 1</strong> · What is the problem?</li>
+          <li class="pt"><strong>Bloco 1</strong> · Qual é o problema?</li>
+          <li class="en"><strong>Block 2</strong> · What's the appetite?</li>
+          <li class="pt"><strong>Bloco 2</strong> · Qual é o apetite?</li>
+          <li class="en"><strong>Block 3</strong> · Solution direction (logic, not UI)</li>
+          <li class="pt"><strong>Bloco 3</strong> · Direção da solução (lógica, não UI)</li>
+          <li class="en"><strong>Block 4</strong> · Rabbit holes</li>
+          <li class="pt"><strong>Bloco 4</strong> · Rabbit holes</li>
+          <li class="en"><strong>Block 5</strong> · No-gos</li>
+          <li class="pt"><strong>Bloco 5</strong> · No-gos</li>
         </ul>
         <div class="meth-quote">
-          <p class="en">"If the PRD is weak, everything breaks — including the AI."</p>
-          <p class="pt">"Se o PRD está fraco, tudo quebra — incluindo a IA."</p>
+          <p class="en">"If the PRD is weak, everything breaks. Including the AI."</p>
+          <p class="pt">"Se o PRD está fraco, tudo quebra. Incluindo a IA."</p>
         </div>
       </div>
     </div>
@@ -1520,8 +1555,8 @@
         <div class="meth-panel-tag pt">Traduzindo decisões em instruções para IA</div>
         <h3 class="meth-panel-title en">Context +<br><em>limits + criteria.</em></h3>
         <h3 class="meth-panel-title pt">Contexto +<br><em>limites + critério.</em></h3>
-        <p class="meth-panel-desc en">A prompt frame isn't a loose request — it's a reusable instruction structure built on PRD decisions. It gives the AI a clear problem, explicit boundaries, and a success criterion.</p>
-        <p class="meth-panel-desc pt">Um prompt frame não é um pedido solto — é uma estrutura de instrução reutilizável construída sobre as decisões do PRD. Dá à IA um problema claro, limites explícitos e um critério de sucesso.</p>
+        <p class="meth-panel-desc en">A prompt frame isn't a loose request. It's a reusable instruction structure built on PRD decisions. It gives the AI a clear problem, explicit boundaries, and a success criterion.</p>
+        <p class="meth-panel-desc pt">Um prompt frame não é um pedido solto. É uma estrutura de instrução reutilizável construída sobre as decisões do PRD. Dá à IA um problema claro, limites explícitos e um critério de sucesso.</p>
         <div class="meth-tools">
           <span class="meth-tool">Context Layer</span><span class="meth-tool">Constraints</span><span class="meth-tool">Success Criteria</span><span class="meth-tool">Role Definition</span>
         </div>
@@ -1530,14 +1565,14 @@
         <div class="meth-outputs-label en">Anatomy of a prompt frame</div>
         <div class="meth-outputs-label pt">Anatomia de um prompt frame</div>
         <ul class="meth-output-list">
-          <li class="en"><strong>Context</strong> — What the AI needs to know to reason correctly</li>
-          <li class="pt"><strong>Contexto</strong> — O que a IA precisa saber para raciocinar</li>
-          <li class="en"><strong>Problem</strong> — The specific task drawn from the PRD</li>
-          <li class="pt"><strong>Problema</strong> — A tarefa específica extraída do PRD</li>
-          <li class="en"><strong>Limits</strong> — What the AI cannot do, invent, or assume</li>
-          <li class="pt"><strong>Limites</strong> — O que a IA não pode fazer ou assumir</li>
-          <li class="en"><strong>Criteria</strong> — How we know the output is good enough</li>
-          <li class="pt"><strong>Critério</strong> — Como sabemos que o output é bom</li>
+          <li class="en"><strong>Context</strong> · What the AI needs to know to reason correctly</li>
+          <li class="pt"><strong>Contexto</strong> · O que a IA precisa saber para raciocinar</li>
+          <li class="en"><strong>Problem</strong> · The specific task drawn from the PRD</li>
+          <li class="pt"><strong>Problema</strong> · A tarefa específica extraída do PRD</li>
+          <li class="en"><strong>Limits</strong> · What the AI cannot do, invent, or assume</li>
+          <li class="pt"><strong>Limites</strong> · O que a IA não pode fazer ou assumir</li>
+          <li class="en"><strong>Criteria</strong> · How we know the output is good enough</li>
+          <li class="pt"><strong>Critério</strong> · Como sabemos que o output é bom</li>
         </ul>
         <div class="meth-quote">
           <p class="en">"AI performs well when the problem is clear and limits are explicit. That comes from the PRD."</p>
@@ -1557,7 +1592,7 @@
         <p class="meth-panel-desc en">With a shaped problem, a clear PRD, and precise prompt frames, AI becomes a focused executor. I write the prompts, review the output, direct iterations, catch errors. Building alone with AI is a new design skill.</p>
         <p class="meth-panel-desc pt">Com um problema moldado, PRD claro e prompt frames precisos, a IA se torna uma executora focada. Escrevo os prompts, reviso o output, dirijo as iterações. Construir sozinha com IA é uma nova habilidade de design.</p>
         <div class="meth-tools">
-          <span class="meth-tool">Claude Code</span><span class="meth-tool">Claude API</span><span class="meth-tool">Figma Make</span><span class="meth-tool">Cursor</span><span class="meth-tool">Vercel</span>
+          <span class="meth-tool">Claude Code</span><span class="meth-tool">Claude API</span><span class="meth-tool">Figma + Make</span><span class="meth-tool">AntiGravity</span><span class="meth-tool">Lovable</span>
         </div>
       </div>
       <div class="meth-panel-right">
@@ -1574,8 +1609,8 @@
           <li class="pt">Ciclos de iteração que comprimem semanas em dias</li>
         </ul>
         <div class="meth-quote">
-          <p class="en">"AI plays fast — but only what's already been well decided."</p>
-          <p class="pt">"A IA joga rápido — mas só o que já foi bem decidido."</p>
+          <p class="en">"AI plays fast. But only what's already been well decided."</p>
+          <p class="pt">"A IA joga rápido. Mas só o que já foi bem decidido."</p>
         </div>
       </div>
     </div>
@@ -1594,15 +1629,17 @@
     <span class="pt">Vamos construir algo<br><em>que valha a pena usar.</em></span>
   </h2>
   <div class="contact-links reveal reveal-delay-1">
-    <a href="/cdn-cgi/l/email-protection#1a7d736f76756a7f697d5a7d777b737634797577" class="contact-link primary">
-      ✉ <span class="__cf_email__" data-cfemail="1a7d736f76756a7f697d5a7d777b737634797577">[email&#160;protected]</span>
+    <a href="mailto:giulopesg@gmail.com" class="contact-link primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+      giulopesg@gmail.com
+    </a>
+    <a href="https://wa.me/5511993862967" target="_blank" class="contact-link primary" style="background:var(--plum-light);">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
     </a>
     <a href="https://linkedin.com/in/giulianalg" target="_blank" class="contact-link outline">
-      LinkedIn ↗
-    </a>
-    <a href="https://giusportfolio.framer.website" target="_blank" class="contact-link outline">
-      <span class="en-inline">Current portfolio ↗</span>
-      <span class="pt-inline">Portfólio atual ↗</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
     </a>
   </div>
 </section>
@@ -1614,7 +1651,7 @@
   <p class="pt">Disponível para início imediato · Inglês C1 · Pronta para trabalho remoto</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ─── LANG TOGGLE ───
 let currentLang = 'en';
 function setLang(lang) {

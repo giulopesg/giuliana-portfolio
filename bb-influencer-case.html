@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banco do Brasil — Influencer School Gamification · Giuliana Lopes Galvão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #6B4FA0;
+    --plum-light: #8B6FC0;
+    --plum-pale: #D4C8EF;
+    --plum-ghost: #F2EEF9;
+    --warm-cream: #FAF7F2;
+    --warm-stone: #EDE8E0;
+    --ink: #1C1917;
+    --ink-soft: #4A4542;
+    --ink-muted: #8A8480;
+    --amber-deep: #3A1800;
+    --amber-mid: #B07800;
+    --amber-accent: #D4960A;
+    --amber-pale: #F5D48A;
+    --amber-ghost: #FDF6E3;
+    --amber-gold: #F5C842;
+    --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--ink); overflow-x: hidden; }
+
+  /* ── LANG SWITCHING ── */
+  .en { display: block; }
+  .pt { display: none; }
+  .lang-pt .en { display: none; }
+  .lang-pt .pt { display: block; }
+  .en-inline { display: inline; }
+  .pt-inline { display: none; }
+  .lang-pt .en-inline { display: none; }
+  .lang-pt .pt-inline { display: inline; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+    padding: 24px 64px;
+    display: flex; align-items: center; gap: 24px;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .nav-back {
+    font-size: 13px; color: var(--ink-muted); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--amber-deep); }
+  .nav-divider { width: 1px; height: 16px; background: var(--warm-stone); }
+  .nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: var(--ink); }
+
+  .lang-toggle { display: flex; gap: 2px; border-radius: 20px; padding: 4px; margin-left: auto; }
+  .lang-btn {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+    padding: 6px 14px; border-radius: 16px; border: none;
+    background: transparent; color: var(--ink-muted); cursor: pointer; transition: all 0.2s;
+  }
+  .lang-btn.active { background: var(--amber-deep); color: var(--white); }
+
+  /* ── HERO ── */
+  .case-hero {
+    min-height: 100vh;
+    background: var(--amber-deep);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+  }
+  .case-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(176,120,0,0.4) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(245,200,66,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .case-hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03; pointer-events: none; z-index: 1;
+  }
+
+  .case-hero-left {
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 140px 64px 80px 80px;
+    position: relative; z-index: 2;
+  }
+
+  .case-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+  .ctag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 12px;
+    border: 1px solid rgba(245,212,138,0.3);
+    color: var(--amber-pale);
+    background: rgba(176,120,0,0.25);
+  }
+
+  .case-hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--amber-pale); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .case-hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--amber-pale); }
+
+  .case-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 300; line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .case-hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 300; font-style: italic;
+    color: var(--amber-pale); margin-bottom: 48px; line-height: 1.4;
+  }
+
+  .case-meta-row { display: flex; gap: 48px; flex-wrap: wrap; }
+  .case-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 6px;
+  }
+  .case-meta-value { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.8); }
+
+  .case-hero-right {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 64px 80px 40px;
+    z-index: 2;
+  }
+  .hero-stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; width: 100%; max-width: 380px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 32px 28px;
+  }
+  .hero-stat:nth-child(1) { border-radius: 24px 4px 4px 4px; }
+  .hero-stat:nth-child(2) { border-radius: 4px 24px 4px 4px; }
+  .hero-stat:nth-child(3) { border-radius: 4px 4px 4px 24px; }
+  .hero-stat:nth-child(4) { border-radius: 4px 4px 24px 4px; }
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 300; line-height: 1;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .hero-stat-num span { font-size: 28px; color: var(--amber-pale); }
+  .hero-stat-label { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+  /* ── BODY ── */
+  .case-body { max-width: 1200px; margin: 0 auto; }
+  .case-section {
+    padding: 96px 80px;
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .case-section:last-child { border-bottom: none; }
+
+  .cs-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--amber-mid); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cs-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--amber-mid); }
+
+  .cs-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300; line-height: 1.1; letter-spacing: -0.01em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .cs-title em { font-style: italic; color: var(--amber-mid); }
+
+  .cs-body-text {
+    font-size: 17px; font-weight: 300; line-height: 1.8;
+    color: var(--ink-soft); max-width: 680px; margin-bottom: 28px;
+  }
+  .cs-body-text strong { color: var(--ink); font-weight: 500; }
+
+  .cs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+
+  /* ── CHALLENGE CALLOUT ── */
+  .challenge-callout {
+    background: var(--amber-deep);
+    border-radius: 4px 32px 4px 32px;
+    padding: 64px 72px;
+    position: relative; overflow: hidden;
+    margin-bottom: 64px;
+  }
+  .challenge-callout::before {
+    content: '\201C';
+    position: absolute; top: -20px; left: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px; font-weight: 300; line-height: 1;
+    color: rgba(245,200,66,0.08);
+    pointer-events: none;
+  }
+  .challenge-callout p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 300; font-style: italic; line-height: 1.4;
+    color: var(--white); position: relative; z-index: 1;
+  }
+  .challenge-callout p strong {
+    color: var(--amber-gold); font-style: normal; font-weight: 400;
+  }
+
+  /* ── METHODOLOGY PHASES ── */
+  .phase-flow { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 48px; }
+  .phase-card {
+    padding: 40px 28px; position: relative;
+    background: var(--amber-ghost);
+    border: 1px solid var(--amber-pale);
+  }
+  .phase-card:first-child { border-radius: 24px 4px 4px 4px; }
+  .phase-card:last-child { border-radius: 4px 4px 24px 4px; }
+  .phase-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 300; line-height: 1;
+    color: var(--amber-pale); margin-bottom: 16px;
+  }
+  .phase-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--amber-mid); margin-bottom: 12px;
+  }
+  .phase-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400; line-height: 1.3;
+    color: var(--ink); margin-bottom: 12px;
+  }
+  .phase-desc { font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── PLATFORM CARDS ── */
+  .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
+  .platform-card {
+    padding: 48px 40px;
+    background: var(--white);
+    border: 1px solid var(--warm-stone);
+  }
+  .platform-card:first-child { border-radius: 24px 4px 4px 24px; }
+  .platform-card:last-child { border-radius: 4px 24px 24px 4px; }
+  .platform-card.dark {
+    background: var(--amber-deep);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .platform-icon {
+    font-size: 32px; margin-bottom: 20px;
+    width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 16px;
+    background: var(--amber-ghost);
+    color: var(--amber-mid);
+  }
+  .platform-card.dark .platform-icon {
+    background: rgba(245,200,66,0.12);
+    color: var(--amber-gold);
+  }
+  .platform-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--amber-mid); margin-bottom: 12px;
+  }
+  .platform-card.dark .platform-name { color: var(--amber-pale); }
+  .platform-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 400; line-height: 1.2;
+    color: var(--ink); margin-bottom: 16px;
+  }
+  .platform-card.dark .platform-title { color: var(--white); }
+  .platform-desc {
+    font-size: 14px; font-weight: 300; color: var(--ink-soft); line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .platform-card.dark .platform-desc { color: rgba(255,255,255,0.6); }
+  .platform-features {
+    list-style: none; display: flex; flex-direction: column; gap: 8px;
+  }
+  .platform-features li {
+    font-size: 13px; font-weight: 300; color: var(--ink-muted);
+    display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+  }
+  .platform-features li::before {
+    content: '\2192'; color: var(--amber-mid); flex-shrink: 0; margin-top: 1px;
+  }
+  .platform-card.dark .platform-features li { color: rgba(255,255,255,0.5); }
+  .platform-card.dark .platform-features li::before { color: var(--amber-gold); }
+
+  /* ── GAMIFICATION MECHANICS ── */
+  .mechanics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 48px; }
+  .mechanic-card {
+    padding: 44px 36px;
+    background: var(--white);
+    border: 1px solid var(--warm-stone);
+  }
+  .mechanic-card:nth-child(1) { border-radius: 24px 4px 4px 4px; }
+  .mechanic-card:nth-child(2) { border-radius: 4px 24px 4px 4px; }
+  .mechanic-card:nth-child(3) { border-radius: 4px 4px 4px 24px; }
+  .mechanic-card:nth-child(4) { border-radius: 4px 4px 24px 4px; }
+  .mechanic-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300; line-height: 1;
+    color: var(--amber-pale); margin-bottom: 16px;
+  }
+  .mechanic-title {
+    font-size: 16px; font-weight: 500; color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .mechanic-desc {
+    font-size: 14px; font-weight: 300; color: var(--ink-muted); line-height: 1.7;
+  }
+
+  /* ── DELIVERABLES ── */
+  .deliverables-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px;
+  }
+  .deliverable-card {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--warm-stone);
+    background: var(--white);
+  }
+  .deliverable-card.full-width { grid-column: 1 / -1; }
+  .deliverable-media {
+    width: 100%; display: block;
+    background: var(--warm-stone);
+  }
+  .deliverable-media img {
+    width: 100%; height: auto; display: block;
+  }
+  .deliverable-media video {
+    width: 100%; height: auto; display: block;
+  }
+  .deliverable-info { padding: 24px 28px; }
+  .deliverable-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--amber-mid); margin-bottom: 8px;
+  }
+  .deliverable-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400; line-height: 1.3;
+    color: var(--ink); margin-bottom: 8px;
+  }
+  .deliverable-desc {
+    font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.6;
+  }
+
+  /* ── RESULTS METRICS ── */
+  .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+  .result-card {
+    padding: 48px 36px; text-align: center;
+    background: var(--amber-deep);
+    border: 1px solid rgba(245,200,66,0.1);
+  }
+  .result-card:first-child { border-radius: 24px 4px 4px 24px; }
+  .result-card:last-child { border-radius: 4px 24px 24px 4px; }
+  .result-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 300; line-height: 1;
+    color: var(--amber-gold); margin-bottom: 12px;
+  }
+  .result-num span { font-size: 32px; color: var(--amber-pale); }
+  .result-label {
+    font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.55); line-height: 1.5;
+  }
+
+  /* ── IMPACT CALLOUT ── */
+  .impact-banner {
+    background: var(--amber-gold);
+    padding: 64px 80px;
+    position: relative; overflow: hidden;
+    margin: 0 -80px;
+  }
+  .impact-banner::before {
+    content: '\2192';
+    position: absolute; right: 60px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 120px; color: rgba(0,0,0,0.06);
+    font-family: sans-serif;
+  }
+  .impact-banner-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--amber-deep); margin-bottom: 16px; opacity: 0.6;
+  }
+  .impact-banner-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 400; line-height: 1.3;
+    color: var(--amber-deep);
+  }
+  .impact-banner-text strong { font-style: italic; font-weight: 300; }
+
+  /* ── VALIDATION STEPS ── */
+  .validation-list { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; }
+  .validation-item {
+    display: grid; grid-template-columns: 56px 1fr;
+    gap: 24px; align-items: start;
+    padding: 32px;
+    border: 1px solid var(--warm-stone);
+    transition: background 0.2s;
+  }
+  .validation-item:hover { background: var(--amber-ghost); }
+  .validation-item:first-child { border-radius: 24px 4px 4px 4px; }
+  .validation-item:last-child { border-radius: 4px 4px 24px 4px; }
+  .v-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 300;
+    color: var(--amber-pale); line-height: 1;
+  }
+  .v-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+  .v-desc { font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── CTA ── */
+  .case-cta {
+    max-width: 1200px; margin: 0 auto;
+    padding: 80px;
+    display: flex; align-items: center; justify-content: space-between; gap: 48px;
+    border-bottom: 1px solid var(--warm-stone);
+  }
+  .case-cta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--amber-mid); margin-bottom: 12px;
+  }
+  .case-cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 300; line-height: 1.3; color: var(--ink);
+  }
+  .case-cta-links { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
+    text-decoration: none; padding: 14px 28px; border-radius: 32px;
+    transition: all 0.25s; text-transform: uppercase; white-space: nowrap;
+  }
+  .cta-btn.amber { background: var(--amber-deep); color: var(--white); }
+  .cta-btn.amber:hover { background: var(--amber-mid); }
+  .cta-btn.outline { border: 1px solid var(--warm-stone); color: var(--ink-soft); background: transparent; }
+  .cta-btn.outline:hover { border-color: var(--amber-mid); color: var(--amber-mid); }
+
+  /* ── FOOTER NAV ── */
+  .case-footer-nav {
+    max-width: 1200px; margin: 0 auto;
+    padding: 64px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--warm-stone);
+  }
+  .footer-nav-link {
+    text-decoration: none; display: flex; flex-direction: column; gap: 8px;
+  }
+  .fnl-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--ink-muted); text-transform: uppercase; }
+  .fnl-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--ink); transition: color 0.2s; }
+  .footer-nav-link:hover .fnl-title { color: var(--amber-mid); }
+
+  /* ── ROLE ── */
+  .role-section { background: var(--amber-deep); padding: 100px 80px; }
+  .role-content { max-width: 800px; margin: 0 auto; text-align: center; }
+  .role-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--amber-pale); margin-bottom: 40px;
+    display: flex; align-items: center; gap: 12px; justify-content: center;
+  }
+  .role-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--amber-pale); }
+  .role-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 300; font-style: italic;
+    line-height: 1.3; color: var(--white);
+    margin-bottom: 32px;
+  }
+  .role-attribution {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--amber-pale);
+  }
+  .role-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    margin-top: 64px;
+  }
+  .role-stat-card {
+    text-align: center; padding: 24px;
+    background: rgba(176,120,0,0.2);
+    border-radius: 12px;
+    border: 1px solid rgba(245,212,138,0.1);
+  }
+  .role-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; color: var(--white); margin-bottom: 8px;
+  }
+  .role-stat-label {
+    font-size: 12px; color: rgba(245,212,138,0.6); line-height: 1.5;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  footer { text-align: center; padding: 32px 24px; color: var(--ink-muted); font-size: 13px; border-top: 1px solid var(--warm-stone); }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .case-hero { grid-template-columns: 1fr; }
+    .case-hero-right { display: none; }
+    .case-hero-left { padding: 120px 24px 60px; }
+    .case-section { padding: 64px 24px; }
+    .cs-2col, .platform-grid, .mechanics-grid, .results-grid, .phase-flow, .deliverables-grid { grid-template-columns: 1fr; }
+    .impact-banner { margin: 0; padding: 48px 24px; }
+    .case-footer-nav { padding: 40px 24px; flex-direction: column; gap: 32px; }
+    .role-section { padding: 80px 24px; }
+    .role-stats { grid-template-columns: 1fr 1fr; }
+    .case-cta { padding: 48px 24px; flex-direction: column; text-align: center; }
+    .case-cta-links { align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span class="en-inline">Back to work</span><span class="pt-inline">Voltar ao trabalho</span>
+  </a>
+  <div class="nav-divider"></div>
+  <span class="nav-title">
+    <span class="en-inline">Banco do Brasil — Influencer School</span>
+    <span class="pt-inline">Banco do Brasil — Escola de Influenciadores</span>
+  </span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="case-hero">
+  <div class="case-hero-left">
+    <div class="case-tag-row">
+      <span class="ctag"><span class="en-inline">Gamification</span><span class="pt-inline">Gamificação</span></span>
+      <span class="ctag"><span class="en-inline">UX/UI Design</span><span class="pt-inline">Design UX/UI</span></span>
+      <span class="ctag"><span class="en-inline">Prototyping</span><span class="pt-inline">Prototipação</span></span>
+      <span class="ctag"><span class="en-inline">Stakeholder Validation</span><span class="pt-inline">Validação com Stakeholders</span></span>
+    </div>
+    <div class="case-hero-eyebrow">
+      <span class="en-inline">Banco do Brasil — Escola de Influenciadores</span>
+      <span class="pt-inline">Banco do Brasil — Escola de Influenciadores</span>
+    </div>
+    <h1 class="case-hero-title">Influencer<br>School.</h1>
+    <p class="case-hero-subtitle">
+      <span class="en-inline">Gamification Platform</span>
+      <span class="pt-inline">Plataforma de Gamificação</span>
+    </p>
+    <div class="case-meta-row">
+      <div>
+        <div class="case-meta-label"><span class="en-inline">Client</span><span class="pt-inline">Cliente</span></div>
+        <div class="case-meta-value">Banco do Brasil</div>
+      </div>
+      <div>
+        <div class="case-meta-label"><span class="en-inline">Year</span><span class="pt-inline">Ano</span></div>
+        <div class="case-meta-value">2025</div>
+      </div>
+      <div>
+        <div class="case-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Função</span></div>
+        <div class="case-meta-value"><span class="en-inline">UX/UI Designer</span><span class="pt-inline">Designer UX/UI</span></div>
+      </div>
+      <div>
+        <div class="case-meta-label"><span class="en-inline">HQ</span><span class="pt-inline">Sede</span></div>
+        <div class="case-meta-value">São Paulo, BR</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-hero-right">
+    <div class="hero-stats-grid">
+      <div class="hero-stat">
+        <div class="hero-stat-num">8<span>+</span></div>
+        <div class="hero-stat-label"><span class="en-inline">admin modules designed end-to-end</span><span class="pt-inline">módulos administrativos desenhados ponta a ponta</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4<span></span></div>
+        <div class="hero-stat-label"><span class="en-inline">gamification mechanics engineered</span><span class="pt-inline">mecânicas de gamificação projetadas</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1<span></span></div>
+        <div class="hero-stat-label"><span class="en-inline">validated high-fidelity prototype</span><span class="pt-inline">protótipo de alta fidelidade validado</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100<span>%</span></div>
+        <div class="hero-stat-label"><span class="en-inline">stakeholder validation sign-off</span><span class="pt-inline">aprovação na validação com stakeholders</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="case-body">
+
+  <!-- 01 THE PROJECT -->
+  <section class="case-section reveal">
+    <div class="cs-label"><span class="en-inline">01 — The Project</span><span class="pt-inline">01 — O Projeto</span></div>
+    <div class="cs-2col">
+      <div>
+        <h2 class="cs-title">
+          <span class="en">Turning a manual program into a <em>gamified experience</em></span>
+          <span class="pt">Transformando um programa manual em uma <em>experiência gamificada</em></span>
+        </h2>
+        <p class="cs-body-text en">
+          Banco do Brasil's <strong>Influencer School</strong> already existed as a course platform designed to train employees into brand ambassadors on social media. The program had strategic value and a growing community — but behind the scenes, <strong>managers were running everything manually</strong> through spreadsheets, emails, and disconnected tools.
+        </p>
+        <p class="cs-body-text pt">
+          A <strong>Escola de Influenciadores</strong> do Banco do Brasil já existia como uma plataforma de cursos para treinar funcionários como embaixadores da marca nas redes sociais. O programa tinha valor estratégico e uma comunidade crescente — mas nos bastidores, <strong>os gestores faziam tudo manualmente</strong> através de planilhas, e-mails e ferramentas desconectadas.
+        </p>
+      </div>
+      <div>
+        <p class="cs-body-text en">
+          There was no gamification layer, no structured way to track participation, and no visibility into what was actually driving engagement. The <strong>administrative burden was unsustainable</strong> — managers spent more time operating the program than improving it.
+        </p>
+        <p class="cs-body-text pt">
+          Não havia camada de gamificação, nenhuma forma estruturada de rastrear participação, e nenhuma visibilidade sobre o que realmente impulsionava o engajamento. A <strong>carga administrativa era insustentável</strong> — os gestores gastavam mais tempo operando o programa do que melhorando-o.
+        </p>
+        <p class="cs-body-text en">
+          This project is <strong>the platform behind the course platform</strong> — a gamification and administration layer that gives managers structured tools to run the program at scale, while making the learning experience more engaging for participants.
+        </p>
+        <p class="cs-body-text pt">
+          Este projeto é <strong>a plataforma por trás da plataforma de cursos</strong> — uma camada de gamificação e administração que dá aos gestores ferramentas estruturadas para operar o programa em escala, enquanto torna a experiência de aprendizado mais envolvente para os participantes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 THE CHALLENGE -->
+  <section class="case-section reveal">
+    <div class="cs-label"><span class="en-inline">02 — The Challenge</span><span class="pt-inline">02 — O Desafio</span></div>
+    <div class="challenge-callout">
+      <p class="en">Design the <strong>gamification platform behind the existing course platform</strong> — replacing spreadsheet-driven management with a structured ecosystem of missions, rankings, evidence tracking, and rewards that managers could operate at scale.</p>
+      <p class="pt">Projetar a <strong>plataforma de gamificação por trás da plataforma de cursos existente</strong> — substituindo a gestão por planilhas por um ecossistema estruturado de missões, rankings, rastreamento de evidências e recompensas que os gestores pudessem operar em escala.</p>
+    </div>
+    <div class="cs-2col">
+      <div>
+        <p class="cs-body-text en">
+          The challenge went far beyond interface design. I needed to understand the <strong>full ecosystem:</strong> how students interacted with missions, how managers tracked progress, how evidence was submitted and validated, and how rankings could be fair across different student profiles.
+        </p>
+        <p class="cs-body-text pt">
+          O desafio ia muito além do design de interface. Eu precisava entender o <strong>ecossistema completo:</strong> como os alunos interagiam com as missões, como os gestores acompanhavam o progresso, como as evidências eram submetidas e validadas, e como os rankings poderiam ser justos entre diferentes perfis de alunos.
+        </p>
+      </div>
+      <div>
+        <p class="cs-body-text en">
+          Two interconnected platforms needed to be designed: a <strong>student-facing gamification experience</strong> that drives engagement, and an <strong>admin panel</strong> that gives managers full control without the spreadsheet chaos. Both had to work together seamlessly.
+        </p>
+        <p class="cs-body-text pt">
+          Duas plataformas interconectadas precisavam ser desenhadas: uma <strong>experiência gamificada para os alunos</strong> que impulsionasse o engajamento, e um <strong>painel administrativo</strong> que desse aos gestores controle total sem o caos das planilhas. Ambas precisavam funcionar juntas de forma integrada.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 HOW I WORKED -->
+  <section class="case-section reveal">
+    <div class="cs-label"><span class="en-inline">03 — How I Worked</span><span class="pt-inline">03 — Como Trabalhei</span></div>
+    <h2 class="cs-title">
+      <span class="en">Agile methodology, <em>deep thinking</em></span>
+      <span class="pt">Metodologia ágil, <em>pensamento profundo</em></span>
+    </h2>
+    <p class="cs-body-text en">I worked with an agile methodology, but every sprint was grounded in deep understanding — not assumptions. Research on gamification models and AI tools guided each design decision.</p>
+    <p class="cs-body-text pt">Trabalhei com metodologia ágil, mas cada sprint era fundamentado em entendimento profundo — não em suposições. Pesquisa sobre modelos de gamificação e ferramentas de IA guiou cada decisão de design.</p>
+    <div class="phase-flow">
+      <div class="phase-card">
+        <div class="phase-num">01</div>
+        <div class="phase-name"><span class="en-inline">Alignment</span><span class="pt-inline">Alinhamento</span></div>
+        <div class="phase-title"><span class="en-inline">Deep sessions with BB managers</span><span class="pt-inline">Sessões profundas com gestores do BB</span></div>
+        <p class="phase-desc en">Started by understanding how the program actually worked in practice. Mapped the full operational flow, identified bottlenecks, and aligned on what success looked like for both students and managers.</p>
+        <p class="phase-desc pt">Comecei entendendo como o programa realmente funcionava na prática. Mapeei o fluxo operacional completo, identifiquei gargalos e alinhei o que sucesso significava tanto para alunos quanto para gestores.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">02</div>
+        <div class="phase-name"><span class="en-inline">Research</span><span class="pt-inline">Pesquisa</span></div>
+        <div class="phase-title"><span class="en-inline">Gamification models & AI tools</span><span class="pt-inline">Modelos de gamificação & ferramentas de IA</span></div>
+        <p class="phase-desc en">Researched gamification frameworks, benchmark analysis of similar programs, and explored how AI tools could help guide mechanics for personalized missions and ranking systems.</p>
+        <p class="phase-desc pt">Pesquisei frameworks de gamificação, análise de benchmark de programas similares, e explorei como ferramentas de IA poderiam ajudar a guiar mecânicas para missões personalizadas e sistemas de ranking.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">03</div>
+        <div class="phase-name"><span class="en-inline">Prototyping</span><span class="pt-inline">Prototipação</span></div>
+        <div class="phase-title"><span class="en-inline">High-fidelity prototypes</span><span class="pt-inline">Protótipos de alta fidelidade</span></div>
+        <p class="phase-desc en">Built prototypes that simulated the complete student journey — from registration to evidence upload and real-time rankings — plus the full admin panel with user, student, cycle, and interaction management.</p>
+        <p class="phase-desc pt">Construí protótipos que simulavam toda a jornada do aluno — do cadastro ao upload de evidências e rankings em tempo real — além do painel administrativo completo com gestão de usuários, alunos, ciclos e interações.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">04</div>
+        <div class="phase-name"><span class="en-inline">Validation</span><span class="pt-inline">Validação</span></div>
+        <div class="phase-title"><span class="en-inline">Stakeholder validation</span><span class="pt-inline">Validação com stakeholders</span></div>
+        <p class="phase-desc en">Validated the design with the stakeholders who administered the Influencer School — people in direct contact with end users. Their operational knowledge shaped the final flows and information architecture.</p>
+        <p class="phase-desc pt">Validei o design com os stakeholders que administravam a Escola de Influenciadores — pessoas em contato direto com os usuários finais. O conhecimento operacional deles moldou os fluxos finais e a arquitetura de informação.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 PLATFORM DESIGN -->
+  <section class="case-section reveal">
+    <div class="cs-label"><span class="en-inline">04 — Platform Design</span><span class="pt-inline">04 — Design da Plataforma</span></div>
+    <h2 class="cs-title">
+      <span class="en">Two platforms, <em>one ecosystem</em></span>
+      <span class="pt">Duas plataformas, <em>um ecossistema</em></span>
+    </h2>
+    <p class="cs-body-text en">The solution required designing two interconnected platforms that serve different users but share the same data, the same logic, and the same goal: making the Influencer School work at scale.</p>
+    <p class="cs-body-text pt">A solução exigiu o design de duas plataformas interconectadas que servem usuários diferentes, mas compartilham os mesmos dados, a mesma lógica e o mesmo objetivo: fazer a Escola de Influenciadores funcionar em escala.</p>
+
+    <div class="platform-grid">
+      <div class="platform-card">
+        <div class="platform-icon">&#9733;</div>
+        <div class="platform-name"><span class="en-inline">Student Platform</span><span class="pt-inline">Plataforma do Aluno</span></div>
+        <div class="platform-title">
+          <span class="en">The gamified experience</span>
+          <span class="pt">A experiência gamificada</span>
+        </div>
+        <p class="platform-desc en">A mobile-first platform where students discover missions, submit evidence, track their progress, and compete in real-time rankings.</p>
+        <p class="platform-desc pt">Uma plataforma mobile-first onde os alunos descobrem missões, submetem evidências, acompanham seu progresso e competem em rankings em tempo real.</p>
+        <ul class="platform-features">
+          <li class="en">Home dashboard with progress and active missions</li>
+          <li class="pt">Dashboard com progresso e missões ativas</li>
+          <li class="en">Personalized mission feed based on student profile</li>
+          <li class="pt">Feed de missões personalizadas por perfil do aluno</li>
+          <li class="en">Evidence submission with photo/video upload</li>
+          <li class="pt">Submissão de evidências com upload de foto/vídeo</li>
+          <li class="en">Real-time rankings and leaderboards</li>
+          <li class="pt">Rankings e leaderboards em tempo real</li>
+          <li class="en">Achievement system and rewards</li>
+          <li class="pt">Sistema de conquistas e recompensas</li>
+        </ul>
+      </div>
+
+      <div class="platform-card dark">
+        <div class="platform-icon">&#9881;</div>
+        <div class="platform-name"><span class="en-inline">Admin Panel</span><span class="pt-inline">Painel Administrativo</span></div>
+        <div class="platform-title">
+          <span class="en">Full operational control</span>
+          <span class="pt">Controle operacional completo</span>
+        </div>
+        <p class="platform-desc en">A comprehensive management dashboard that replaces spreadsheets with structured tools for every aspect of the program.</p>
+        <p class="platform-desc pt">Um dashboard de gestão abrangente que substitui planilhas por ferramentas estruturadas para cada aspecto do programa.</p>
+        <ul class="platform-features">
+          <li class="en">User management with roles and permissions</li>
+          <li class="pt">Gestão de usuários com papéis e permissões</li>
+          <li class="en">Student management and profile tracking</li>
+          <li class="pt">Gestão de alunos e acompanhamento de perfis</li>
+          <li class="en">Cycle management for program periods</li>
+          <li class="pt">Gestão de ciclos para períodos do programa</li>
+          <li class="en">Interaction types and scoring configuration</li>
+          <li class="pt">Tipos de interação e configuração de pontuação</li>
+          <li class="en">Ranking calibration and evidence review</li>
+          <li class="pt">Calibragem de ranking e revisão de evidências</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 GAMIFICATION ENGINE -->
+  <section class="case-section reveal">
+    <div class="cs-label"><span class="en-inline">05 — Gamification Engine</span><span class="pt-inline">05 — Motor de Gamificação</span></div>
+    <h2 class="cs-title">
+      <span class="en">The mechanics that <em>drive engagement</em></span>
+      <span class="pt">As mecânicas que <em>impulsionam o engajamento</em></span>
+    </h2>
+    <p class="cs-body-text en">Every gamification mechanic was designed with purpose — not just to make the platform feel like a game, but to create real behavioral change in how students approach learning and content creation.</p>
+    <p class="cs-body-text pt">Cada mecânica de gamificação foi projetada com propósito — não apenas para fazer a plataforma parecer um jogo, mas para criar mudança comportamental real em como os alunos abordam aprendizado e criação de conteúdo.</p>
+
+    <div class="mechanics-grid">
+      <div class="mechanic-card">
+        <div class="mechanic-num">01</div>
+        <div class="mechanic-title">
+          <span class="en">Personalized Missions</span>
+          <span class="pt">Missões Personalizadas</span>
+        </div>
+        <p class="mechanic-desc en">210+ missions designed and tailored per student profile, tied to real-world influencer activities. Each mission has clear objectives, deadlines, and point values that reflect effort and impact.</p>
+        <p class="mechanic-desc pt">210+ missões desenhadas e personalizadas por perfil de aluno, ligadas a atividades reais de influenciadores. Cada missão tem objetivos claros, prazos e valores de pontos que refletem esforço e impacto.</p>
+      </div>
+      <div class="mechanic-card">
+        <div class="mechanic-num">02</div>
+        <div class="mechanic-title">
+          <span class="en">Evidence Submission</span>
+          <span class="pt">Submissão de Evidências</span>
+        </div>
+        <p class="mechanic-desc en">A verification system where students upload photo or video proof of completed activities. Evidence is reviewed and validated, turning real actions into verifiable progress — not just self-reported checkboxes.</p>
+        <p class="mechanic-desc pt">Um sistema de verificação onde os alunos fazem upload de fotos ou vídeos como prova das atividades concluídas. As evidências são revisadas e validadas, transformando ações reais em progresso verificável — não apenas checkboxes de autopreenchimento.</p>
+      </div>
+      <div class="mechanic-card">
+        <div class="mechanic-num">03</div>
+        <div class="mechanic-title">
+          <span class="en">Real-Time Rankings</span>
+          <span class="pt">Rankings em Tempo Real</span>
+        </div>
+        <p class="mechanic-desc en">Dynamic leaderboards with calibration tools to ensure fairness across different student profiles and experience levels. Rankings update in real time, creating healthy competition and visibility into performance.</p>
+        <p class="mechanic-desc pt">Leaderboards dinâmicos com ferramentas de calibragem para garantir justiça entre diferentes perfis de alunos e níveis de experiência. Rankings atualizam em tempo real, criando competição saudável e visibilidade de desempenho.</p>
+      </div>
+      <div class="mechanic-card">
+        <div class="mechanic-num">04</div>
+        <div class="mechanic-title">
+          <span class="en">Reward Mechanics</span>
+          <span class="pt">Mecânicas de Recompensa</span>
+        </div>
+        <p class="mechanic-desc en">An achievement system that balances competition with learning. Rewards are earned through consistent participation, quality of evidence, and mission completion — not just speed or volume.</p>
+        <p class="mechanic-desc pt">Um sistema de conquistas que equilibra competição com aprendizado. Recompensas são ganhas através de participação consistente, qualidade das evidências e conclusão de missões — não apenas velocidade ou volume.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 VALIDATION -->
+  <section class="case-section reveal">
+    <div class="cs-label"><span class="en-inline">06 — Validation</span><span class="pt-inline">06 — Validação</span></div>
+    <h2 class="cs-title">
+      <span class="en">Validated with <em>stakeholders</em>, refined with operational insight</span>
+      <span class="pt">Validado com <em>stakeholders</em>, refinado com visão operacional</span>
+    </h2>
+    <p class="cs-body-text en">The prototypes were validated with the <strong>stakeholders who administered the Influencer School</strong> — people in direct contact with end users daily. Their deep operational knowledge of the program's pain points and user behaviors made them the ideal validators for the gamification platform.</p>
+    <p class="cs-body-text pt">Os protótipos foram validados com os <strong>stakeholders que administravam a Escola de Influenciadores</strong> — pessoas em contato direto com os usuários finais diariamente. O conhecimento operacional profundo deles sobre as dores do programa e comportamentos dos usuários os tornou os validadores ideais para a plataforma de gamificação.</p>
+
+    <div class="validation-list">
+      <div class="validation-item">
+        <div class="v-num">01</div>
+        <div>
+          <div class="v-title"><span class="en-inline">Admin Flow Validation</span><span class="pt-inline">Validação do Fluxo Administrativo</span></div>
+          <p class="v-desc en">Stakeholders walked through the full admin panel — user management, student management, cycle configuration, interaction types, and ranking calibration — validating that the platform replaced their manual spreadsheet processes effectively.</p>
+          <p class="v-desc pt">Os stakeholders percorreram todo o painel administrativo — gestão de usuários, gestão de alunos, configuração de ciclos, tipos de interação e calibragem de rankings — validando que a plataforma substituía efetivamente seus processos manuais em planilhas.</p>
+        </div>
+      </div>
+      <div class="validation-item">
+        <div class="v-num">02</div>
+        <div>
+          <div class="v-title"><span class="en-inline">Evidence Submission Flow</span><span class="pt-inline">Fluxo de Submissão de Evidências</span></div>
+          <p class="v-desc en">The core interaction — registering and validating evidence — was the most complex flow. Stakeholders validated the process from the manager's perspective, ensuring it was faster and more reliable than the manual approach they used before.</p>
+          <p class="v-desc pt">A interação principal — registrar e validar evidências — era o fluxo mais complexo. Os stakeholders validaram o processo pela perspectiva do gestor, garantindo que fosse mais rápido e confiável que a abordagem manual que usavam antes.</p>
+        </div>
+      </div>
+      <div class="validation-item">
+        <div class="v-num">03</div>
+        <div>
+          <div class="v-title"><span class="en-inline">Gamification Mechanics Review</span><span class="pt-inline">Revisão das Mecânicas de Gamificação</span></div>
+          <p class="v-desc en">Ranking logic, scoring rules, and reward mechanics were reviewed with stakeholders who understood student behavior firsthand. Their feedback ensured the gamification model aligned with real program dynamics, not theoretical assumptions.</p>
+          <p class="v-desc pt">Lógica de ranking, regras de pontuação e mecânicas de recompensa foram revisadas com stakeholders que conheciam o comportamento dos alunos em primeira mão. O feedback deles garantiu que o modelo de gamificação se alinhasse com a dinâmica real do programa, não com suposições teóricas.</p>
+        </div>
+      </div>
+      <div class="validation-item">
+        <div class="v-num">04</div>
+        <div>
+          <div class="v-title"><span class="en-inline">Information Architecture Sign-off</span><span class="pt-inline">Aprovação da Arquitetura de Informação</span></div>
+          <p class="v-desc en">The overall navigation, hierarchy, and data organization were validated with stakeholders who would use the platform daily. This shaped the final sidebar structure, dashboard priorities, and the relationship between admin modules.</p>
+          <p class="v-desc pt">A navegação geral, hierarquia e organização de dados foram validadas com stakeholders que usariam a plataforma diariamente. Isso moldou a estrutura final da sidebar, prioridades do dashboard e a relação entre os módulos administrativos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 DELIVERABLES -->
+  <section class="case-section reveal">
+    <div class="cs-label"><span class="en-inline">07 — Deliverables</span><span class="pt-inline">07 — Entregáveis</span></div>
+    <h2 class="cs-title">
+      <span class="en">From research to <em>validated artifacts</em></span>
+      <span class="pt">Da pesquisa aos <em>artefatos validados</em></span>
+    </h2>
+    <p class="cs-body-text en">Every deliverable was built with purpose — mapping the full operational flow, prototyping at low and high fidelity, and validating with stakeholders before moving forward. These are the core artifacts that shaped the final product.</p>
+    <p class="cs-body-text pt">Cada entregável foi construído com propósito — mapeando o fluxo operacional completo, prototipando em baixa e alta fidelidade, e validando com stakeholders antes de avançar. Estes são os artefatos centrais que moldaram o produto final.</p>
+
+    <div class="deliverables-grid">
+      <div class="deliverable-card full-width">
+        <div class="deliverable-media">
+          <img src="cases/bancodobrasil-escoladeinfluenciadores/fluxodetarefasdousuario.jpg" alt="User task flow diagram">
+        </div>
+        <div class="deliverable-info">
+          <div class="deliverable-tag"><span class="en-inline">Information Architecture</span><span class="pt-inline">Arquitetura de Informação</span></div>
+          <div class="deliverable-name"><span class="en-inline">User Task Flow</span><span class="pt-inline">Fluxo de Tarefas do Usuário</span></div>
+          <p class="deliverable-desc en">Complete mapping of all admin platform flows — Home, Evidence Registration, User Management, Student Management, Cycle Management, Interaction Management, Ranking, and Scoring. Each module mapped with its full task hierarchy.</p>
+          <p class="deliverable-desc pt">Mapeamento completo de todos os fluxos da plataforma administrativa — Página Inicial, Registro de Evidências, Gestão de Usuários, Gestão de Alunos, Gestão de Ciclos, Gestão de Interações, Ranking e Pontuação. Cada módulo mapeado com sua hierarquia completa de tarefas.</p>
+        </div>
+      </div>
+
+      <div class="deliverable-card full-width">
+        <div class="deliverable-media">
+          <img src="cases/bancodobrasil-escoladeinfluenciadores/wireframesbaixa.jpg" alt="Low-fidelity wireframes">
+        </div>
+        <div class="deliverable-info">
+          <div class="deliverable-tag"><span class="en-inline">Wireframing</span><span class="pt-inline">Wireframing</span></div>
+          <div class="deliverable-name"><span class="en-inline">Low-Fidelity Wireframes — Validated</span><span class="pt-inline">Wireframes de Baixa Fidelidade — Validados</span></div>
+          <p class="deliverable-desc en">All admin screens wireframed with flow connections and annotations — Login, Dashboard, Evidence Registration, Ranking Calibration, Student Search, Student Profile, User Registration, User Profile, Student Management, Interaction Management, and Cycle Management. Validated and signed off by stakeholders.</p>
+          <p class="deliverable-desc pt">Todas as telas administrativas wireframadas com conexões de fluxo e anotações — Login, Dashboard, Registro de Evidência, Calibragem de Ranking, Busca de Aluno, Perfil de Aluno, Cadastro de Usuário, Perfil de Usuário, Gestão de Alunos, Gestão de Interação e Gestão de Ciclos. Validados e aprovados pelos stakeholders.</p>
+        </div>
+      </div>
+
+      <div class="deliverable-card full-width">
+        <div class="deliverable-media">
+          <video controls playsinline preload="metadata" poster="cases/bancodobrasil-escoladeinfluenciadores/mockupprodutofinal.png">
+            <source src="cases/bancodobrasil-escoladeinfluenciadores/navegacaoprototipo.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="deliverable-info">
+          <div class="deliverable-tag"><span class="en-inline">Prototype</span><span class="pt-inline">Protótipo</span></div>
+          <div class="deliverable-name"><span class="en-inline">Prototype Navigation</span><span class="pt-inline">Navegação do Protótipo</span></div>
+          <p class="deliverable-desc en">High-fidelity interactive prototype walkthrough showing the complete admin platform navigation — the GAMIFY BB dashboard with all modules functioning as an integrated ecosystem.</p>
+          <p class="deliverable-desc pt">Walkthrough do protótipo interativo de alta fidelidade mostrando a navegação completa da plataforma administrativa — o dashboard GAMIFY BB com todos os módulos funcionando como um ecossistema integrado.</p>
+        </div>
+      </div>
+
+      <div class="deliverable-card full-width">
+        <div class="deliverable-media">
+          <img src="cases/bancodobrasil-escoladeinfluenciadores/mockupprodutofinal.png" alt="Final product mockup">
+        </div>
+        <div class="deliverable-info">
+          <div class="deliverable-tag"><span class="en-inline">Final Product</span><span class="pt-inline">Produto Final</span></div>
+          <div class="deliverable-name"><span class="en-inline">GAMIFY BB — Product Mockup</span><span class="pt-inline">GAMIFY BB — Mockup do Produto</span></div>
+          <p class="deliverable-desc en">Final high-fidelity product mockup showing the GAMIFY BB admin dashboard on desktop with sidebar navigation (Dashboard, Evidence Registration, Ranking, Students, User Management), plus mobile login and ranking screens.</p>
+          <p class="deliverable-desc pt">Mockup final de alta fidelidade do produto mostrando o dashboard administrativo GAMIFY BB no desktop com navegação lateral (Dashboard, Registro de Evidência, Ranking, Alunos, Gestão de Usuários), mais telas mobile de login e ranking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 RESULTS -->
+  <section class="case-section reveal">
+    <div class="cs-label"><span class="en-inline">08 — Results</span><span class="pt-inline">08 — Resultados</span></div>
+    <h2 class="cs-title">
+      <span class="en">From spreadsheets to a <em>scalable platform</em></span>
+      <span class="pt">De planilhas para uma <em>plataforma escalável</em></span>
+    </h2>
+    <p class="cs-body-text en">The result was a complete gamification strategy and stakeholder-validated prototypes for a platform that structures evidence submission, implements gamification mechanics for different student profiles, and provides administrative dashboards that replace manual spreadsheet operations.</p>
+    <p class="cs-body-text pt">O resultado foi uma estratégia de gamificação completa e protótipos validados com stakeholders para uma plataforma que estrutura a submissão de evidências, implementa mecânicas de gamificação para diferentes perfis de alunos e fornece dashboards administrativos que substituem operações manuais em planilhas.</p>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-num">8<span>+</span></div>
+        <div class="result-label"><span class="en-inline">Admin modules designed</span><span class="pt-inline">Módulos administrativos desenhados</span></div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">4<span></span></div>
+        <div class="result-label"><span class="en-inline">Gamification mechanics</span><span class="pt-inline">Mecânicas de gamificação</span></div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">100<span>%</span></div>
+        <div class="result-label"><span class="en-inline">Stakeholder sign-off</span><span class="pt-inline">Aprovação dos stakeholders</span></div>
+      </div>
+    </div>
+
+    <div class="impact-banner" style="margin-top:64px;">
+      <div class="impact-banner-label"><span class="en-inline">Why this matters</span><span class="pt-inline">Por que isso importa</span></div>
+      <p class="impact-banner-text en">
+        The program gained a <strong>structured digital foundation for scaling</strong> — turning what was a spreadsheet-driven manual operation into a validated gamification platform ready for development, with full stakeholder buy-in.
+      </p>
+      <p class="impact-banner-text pt">
+        O programa ganhou uma <strong>base digital estruturada para escalar</strong> — transformando o que era uma operação manual gerida por planilhas em uma plataforma de gamificação validada e pronta para desenvolvimento, com total adesão dos stakeholders.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ROLE -->
+<section class="role-section">
+  <div class="role-content">
+    <div class="role-eyebrow reveal">
+      <span class="en-inline">Giuliana's role in this project</span>
+      <span class="pt-inline">O papel da Giuliana neste projeto</span>
+    </div>
+    <blockquote class="role-quote reveal">
+      <span class="en">"Designing the gamification layer behind an existing course platform — from deep alignment with BB managers, through gamification model research, to high-fidelity prototypes validated with the stakeholders who ran the program daily."</span>
+      <span class="pt">"Desenhando a camada de gamificação por trás de uma plataforma de cursos existente — do alinhamento profundo com gestores do BB, passando pela pesquisa de modelos de gamificação, até protótipos de alta fidelidade validados com os stakeholders que operavam o programa diariamente."</span>
+    </blockquote>
+    <div class="role-attribution reveal">
+      <span class="en-inline">UX/UI Designer · Gamification Strategy · Prototyping · Stakeholder Validation · Information Architecture · Agile Methodology</span>
+      <span class="pt-inline">Designer UX/UI · Estratégia de Gamificação · Prototipação · Validação com Stakeholders · Arquitetura de Informação · Metodologia Ágil</span>
+    </div>
+    <div class="role-stats reveal">
+      <div class="role-stat-card">
+        <div class="role-stat-num">8+</div>
+        <div class="role-stat-label"><span class="en-inline">Admin modules designed</span><span class="pt-inline">Módulos administrativos desenhados</span></div>
+      </div>
+      <div class="role-stat-card">
+        <div class="role-stat-num">4</div>
+        <div class="role-stat-label"><span class="en-inline">Gamification mechanics</span><span class="pt-inline">Mecânicas de gamificação</span></div>
+      </div>
+      <div class="role-stat-card">
+        <div class="role-stat-num">100%</div>
+        <div class="role-stat-label"><span class="en-inline">Stakeholder sign-off</span><span class="pt-inline">Aprovação dos stakeholders</span></div>
+      </div>
+      <div class="role-stat-card">
+        <div class="role-stat-num">1</div>
+        <div class="role-stat-label"><span class="en-inline">Validated prototype delivered</span><span class="pt-inline">Protótipo validado entregue</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="case-cta">
+  <div class="case-cta-text">
+    <div class="case-cta-label">
+      <span class="en-inline">Let's work together</span>
+      <span class="pt-inline">Vamos trabalhar juntos</span>
+    </div>
+    <div class="case-cta-title">
+      <span class="en">Interested in how I design gamified experiences?</span>
+      <span class="pt">Interessado em como eu desenho experiências gamificadas?</span>
+    </div>
+  </div>
+  <div class="case-cta-links">
+    <a href="mailto:giulopesg@gmail.com" class="cta-btn amber">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+      <span class="en-inline">Get in touch</span>
+      <span class="pt-inline">Entrar em contato</span>
+    </a>
+    <a href="index.html" class="cta-btn outline">
+      <span class="en-inline">&larr; Back to portfolio</span>
+      <span class="pt-inline">&larr; Voltar ao portfólio</span>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER NAV -->
+<div class="case-footer-nav">
+  <a href="cpfl-case.html" class="footer-nav-link">
+    <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
+    <span class="fnl-title">CPFL Soluções</span>
+  </a>
+  <a href="previsul-case.html" class="footer-nav-link" style="text-align:right;">
+    <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Próximo</span> &rarr;</span>
+    <span class="fnl-title">Previsul</span>
+  </a>
+</div>
+
+<footer>
+  <p>&copy; 2026 Giuliana Lopes Galvão</p>
+</footer>
+
+<script>
+  // Lang switching
+  let currentLang = 'en';
+  function setLang(lang) {
+    currentLang = lang;
+    document.body.classList.toggle('lang-pt', lang === 'pt');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+    localStorage.setItem('lang', lang);
+  }
+  const savedLang = localStorage.getItem('lang');
+  if (savedLang) setLang(savedLang);
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
