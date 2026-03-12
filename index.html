@@ -181,7 +181,7 @@
     font-family: 'DM Sans', sans-serif;
     background: var(--warm-cream);
     color: var(--ink);
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   /* ─── LANG TOGGLE ─── */
@@ -254,7 +254,8 @@
   #hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 140vh;
+    grid-template-rows: 1fr;
+    height: 140vh;
     position: relative;
     overflow: visible;
     background: var(--warm-cream);
@@ -911,7 +912,7 @@
     nav { padding: 20px 24px; }
     .nav-links { display: none; }
     section { padding: 80px 24px; }
-    #hero { grid-template-columns: 1fr; min-height: auto; }
+    #hero { grid-template-columns: 1fr; grid-template-rows: auto auto; height: auto; }
     .hero-left { padding: 100px 24px 40px; position: relative; height: auto; }
     .hero-right { min-height: 60vh; }
     .about-grid { grid-template-columns: 1fr; gap: 48px; }
