@@ -235,6 +235,24 @@
     color: var(--plum-pale); font-style: normal;
   }
 
+  /* try app bar */
+  .try-app-bar {
+    background: var(--ink);
+    padding: 16px 80px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.5;
+  }
+  .try-app-bar strong { color: rgba(255,255,255,0.75); font-weight: 400; }
+  .try-app-bar p { margin: 0; }
+  .try-app-bar a {
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em;
+    color: var(--plum-pale); text-decoration: none;
+    padding: 8px 20px; border: 1px solid var(--plum-pale); border-radius: 40px;
+    transition: all 0.25s;
+  }
+  .try-app-bar a:hover { background: var(--plum); color: var(--white); border-color: var(--plum); }
+
   /* ── CONTENT ── */
   .case-body { max-width: 1200px; margin: 0 auto; }
 
@@ -674,6 +692,7 @@
     .case-hero-left { padding: 120px 24px 60px; }
     .case-hero-right { display: none; }
     .case-meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
+    .try-app-bar { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
     .case-section { padding: 64px 24px; }
     .cs-2col, .cs-3col, .next-steps-grid { grid-template-columns: 1fr; }
     .app-video-frame { width: 220px; }
@@ -789,6 +808,15 @@
     </div>
   </div>
 </header>
+
+<!-- TRY THE APP -->
+<div class="try-app-bar">
+  <p>
+    <span class="en">Neuroot is a PWA — open on your phone and tap <strong>Share → Add to Home Screen</strong> (iOS) or <strong>Install app</strong> (Android).</span>
+    <span class="pt">Neuroot é uma PWA — abra no celular e toque em <strong>Compartilhar → Tela Inicial</strong> (iOS) ou <strong>Instalar app</strong> (Android).</span>
+  </p>
+  <a href="https://neuroot.vercel.app/" target="_blank" rel="noopener"><span class="en-inline">Open Neuroot</span><span class="pt-inline">Abrir Neuroot</span> →</a>
+</div>
 
 <!-- ── BODY ── -->
 <div class="case-body">
@@ -1422,24 +1450,6 @@
     </div>
   </div>
 </section>
-
-<!-- TRY THE APP -->
-<div class="case-cta" style="background: var(--ink);">
-  <div class="case-cta-text">
-    <div class="case-cta-label" style="color: var(--plum-pale);"><span class="en-inline">Try the MVP</span><span class="pt-inline">Teste o MVP</span></div>
-    <div class="case-cta-title">
-      <span class="en">Neuroot is live.<br>Try it on your phone.</span>
-      <span class="pt">Neuroot está no ar.<br>Teste no seu celular.</span>
-    </div>
-    <p style="font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.6); margin-top: 16px; line-height: 1.7; max-width: 480px;">
-      <span class="en">Neuroot is a PWA — it works like a native app without downloading from the App Store. Open the link on your phone, tap <strong style="color: rgba(255,255,255,0.85);">Share → Add to Home Screen</strong> (iOS) or <strong style="color: rgba(255,255,255,0.85);">Menu → Install app</strong> (Android), and it'll appear as an icon on your home screen.</span>
-      <span class="pt">Neuroot é uma PWA — funciona como um app nativo sem precisar baixar da App Store. Abra o link no celular, toque em <strong style="color: rgba(255,255,255,0.85);">Compartilhar → Adicionar à Tela Inicial</strong> (iOS) ou <strong style="color: rgba(255,255,255,0.85);">Menu → Instalar app</strong> (Android), e ele aparece como ícone na sua home.</span>
-    </p>
-  </div>
-  <div class="case-cta-links">
-    <a href="https://neuroot.vercel.app/" target="_blank" rel="noopener" class="cta-btn white" style="background: var(--plum); color: var(--white);"><span class="en-inline">Open Neuroot</span><span class="pt-inline">Abrir Neuroot</span> →</a>
-  </div>
-</div>
 
 <!-- CTA -->
 <div class="case-cta">
