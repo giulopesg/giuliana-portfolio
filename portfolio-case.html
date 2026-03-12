@@ -675,6 +675,94 @@
       color: var(--ink-soft);
     }
 
+    /* showcase images */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    .showcase-grid.three-col {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .showcase-item {
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--warm-stone);
+    }
+
+    .showcase-item:first-child { border-radius: 16px 4px 4px 16px; }
+    .showcase-item:last-child { border-radius: 4px 16px 16px 4px; }
+
+    .showcase-grid.three-col .showcase-item:first-child { border-radius: 16px 4px 4px 4px; }
+    .showcase-grid.three-col .showcase-item:nth-child(2) { border-radius: 4px; }
+    .showcase-grid.three-col .showcase-item:last-child { border-radius: 4px 16px 4px 4px; }
+
+    .showcase-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .showcase-item.mobile-frame {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: var(--ink);
+    }
+
+    .showcase-item.mobile-frame img {
+      width: auto;
+      max-width: 220px;
+      height: auto;
+      max-height: 460px;
+      border-radius: 24px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+      object-fit: contain;
+    }
+
+    .showcase-full {
+      margin-top: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--warm-stone);
+    }
+
+    .showcase-full img {
+      width: 100%;
+      display: block;
+    }
+
+    .showcase-caption {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .showcase-grid,
+      .showcase-grid.three-col {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-item:first-child,
+      .showcase-item:last-child,
+      .showcase-grid.three-col .showcase-item:first-child,
+      .showcase-grid.three-col .showcase-item:last-child {
+        border-radius: 4px;
+      }
+
+      .showcase-item.mobile-frame { padding: 32px 24px; }
+      .showcase-item.mobile-frame img { max-width: 180px; }
+    }
+
     /* CTA section */
     .case-cta {
       background: var(--plum);
@@ -1053,6 +1141,19 @@
         </div>
       </section>
 
+      <!-- SHOWCASE: Desktop + Mobile -->
+      <section class="case-section reveal" style="border-bottom:none; padding-bottom:0;">
+        <div class="showcase-grid">
+          <div class="showcase-item">
+            <img src="cases/portfolio/home-desktop.png" alt="Portfolio home page — desktop view showing hero section with photo, stats grid, and navigation" loading="lazy">
+          </div>
+          <div class="showcase-item mobile-frame">
+            <img src="cases/portfolio/home-mobile.png" alt="Portfolio home page — mobile responsive view" loading="lazy">
+          </div>
+        </div>
+        <p class="showcase-caption"><span class="en-inline">Home page — desktop &amp; mobile</span><span class="pt-inline">P&aacute;gina inicial &mdash; desktop &amp; mobile</span></p>
+      </section>
+
       <!-- 02 METHOD -->
       <section class="case-section reveal">
         <div class="cs-label"><span class="en-inline">02 &mdash; Method</span><span class="pt-inline">02 &mdash; M&eacute;todo</span></div>
@@ -1089,6 +1190,12 @@
             </p>
           </div>
         </div>
+
+        <!-- SHOWCASE: Terminal -->
+        <div class="showcase-full" style="margin-top:48px;">
+          <img src="cases/portfolio/terminal-claude-code.png" alt="Terminal showing Claude Code generating portfolio files, committing and deploying" loading="lazy">
+        </div>
+        <p class="showcase-caption"><span class="en-inline">Claude Code in action &mdash; generating, committing, deploying</span><span class="pt-inline">Claude Code em a&ccedil;&atilde;o &mdash; gerando, commitando, fazendo deploy</span></p>
       </section>
 
     </div>
@@ -1141,6 +1248,12 @@
             </div>
           </div>
         </div>
+
+        <!-- SHOWCASE: Git log -->
+        <div class="showcase-full" style="margin-top:48px; border-color:rgba(255,255,255,0.1);">
+          <img src="cases/portfolio/git-log-history.png" alt="Git log showing commit history with Claude co-authorship across all portfolio commits" loading="lazy">
+        </div>
+        <p class="showcase-caption" style="color:rgba(255,255,255,0.35);"><span class="en-inline">Git history &mdash; every commit co-authored with Claude</span><span class="pt-inline">Hist&oacute;rico Git &mdash; cada commit co-autorado com Claude</span></p>
       </div>
     </div>
 
@@ -1195,6 +1308,20 @@
             <span><span class="en-inline">60+ assets (images, videos)</span><span class="pt-inline">60+ assets (imagens, v&iacute;deos)</span></span>
           </div>
         </div>
+
+        <!-- SHOWCASE: Pages built -->
+        <div class="showcase-grid three-col" style="margin-top:48px;">
+          <div class="showcase-item">
+            <img src="cases/portfolio/about-desktop.png" alt="About page — dark mode hero with professional photo and expertise stats" loading="lazy">
+          </div>
+          <div class="showcase-item">
+            <img src="cases/portfolio/case-neuroot-desktop.png" alt="Neuroot case study page — hero section with product tags, quote card, and tree illustration" loading="lazy">
+          </div>
+          <div class="showcase-item">
+            <img src="cases/portfolio/case-techback-desktop.png" alt="TechBack BB case study page — service design hero with green accent color" loading="lazy">
+          </div>
+        </div>
+        <p class="showcase-caption"><span class="en-inline">About, Neuroot case, and TechBack BB case &mdash; each page fully custom</span><span class="pt-inline">About, case Neuroot e case TechBack BB &mdash; cada p&aacute;gina totalmente customizada</span></p>
       </section>
 
       <!-- 05 LEARNINGS -->
