@@ -17,6 +17,7 @@ export default defineConfig({
         techback:  resolve(__dirname, 'techback-case.html'),
         previsul:  resolve(__dirname, 'previsul-case.html'),
         petrobras: resolve(__dirname, 'petrobras-case.html'),
+        portfolio: resolve(__dirname, 'portfolio-case.html'),
       }
     }
   }

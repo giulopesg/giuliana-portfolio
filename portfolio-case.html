@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Portfolio — Built with AI · Giuliana Lopes Galvão | Design Engineering Case Study</title>
+  <meta name="description"
+    content="Design engineering case study: a fully responsive, bilingual portfolio built in 5 days using Claude Code as engineering partner. 8 pages, 6 case studies, zero lines written manually.">
+  <meta name="keywords"
+    content="design engineering, AI-assisted development, Claude Code, portfolio, HTML CSS, Vercel, bilingual, responsive design, UX designer, Giuliana Lopes Galvão">
+  <meta name="author" content="Giuliana Lopes Galvão">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.giulopesgalvao.com.br/portfolio-case.html">
+  <link rel="alternate" hreflang="en" href="https://www.giulopesgalvao.com.br/portfolio-case.html">
+  <link rel="alternate" hreflang="pt-BR" href="https://www.giulopesgalvao.com.br/portfolio-case.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.giulopesgalvao.com.br/portfolio-case.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="This Portfolio — Built with AI · Giuliana Lopes Galvão | Design Engineering Case Study">
+  <meta property="og:description"
+    content="A fully responsive, bilingual portfolio built in 5 days using Claude Code. 8 pages, 6 case studies, zero lines written manually.">
+  <meta property="og:image" content="https://www.giulopesgalvao.com.br/cases/portfolio/og-portfolio-case.png">
+  <meta property="og:url" content="https://www.giulopesgalvao.com.br/portfolio-case.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:site_name" content="Giuliana Lopes Galvão — UX Designer Portfolio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="This Portfolio — Built with AI · Giuliana Lopes Galvão | Design Engineering Case Study">
+  <meta name="twitter:description"
+    content="A fully responsive, bilingual portfolio built in 5 days using Claude Code. 8 pages, 6 case studies, zero lines written manually.">
+  <meta name="twitter:image" content="https://www.giulopesgalvao.com.br/cases/portfolio/og-portfolio-case.png">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "This Portfolio — Built with AI. Design Engineering with Claude Code.",
+      "name": "Portfolio — Built with AI",
+      "author": {
+        "@type": "Person",
+        "name": "Giuliana Lopes Galvão",
+        "url": "https://www.giulopesgalvao.com.br"
+      },
+      "description": "A fully responsive, bilingual portfolio built in 5 days using Claude Code as engineering partner. 8 pages, 6 case studies, zero lines written manually. Design engineering case study documenting the process of going from Figma to deploy without a developer.",
+      "datePublished": "2026-03-12",
+      "dateModified": "2026-03-12",
+      "keywords": ["design engineering", "AI-assisted development", "Claude Code", "portfolio", "HTML CSS", "Vercel", "bilingual", "responsive design"],
+      "image": "https://www.giulopesgalvao.com.br/cases/portfolio/og-portfolio-case.png",
+      "url": "https://www.giulopesgalvao.com.br/portfolio-case.html",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.giulopesgalvao.com.br/portfolio-case.html"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".case-hero-title", ".case-hero-subtitle", ".cs-title", ".cs-body-text"]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Portfolio",
+          "item": "https://www.giulopesgalvao.com.br/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "This Portfolio — Built with AI",
+          "item": "https://www.giulopesgalvao.com.br/portfolio-case.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --plum: #6B4FA0;
+      --plum-light: #8B6FC0;
+      --plum-pale: #D4C8EF;
+      --plum-ghost: #F2EEF9;
+      --warm-cream: #FAF7F2;
+      --warm-stone: #EDE8E0;
+      --ink: #1C1917;
+      --ink-soft: #4A4542;
+      --ink-muted: #8A8480;
+      --accent-gold: #C4975A;
+      --white: #FFFFFF;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      overflow-x: clip;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── LANG SWITCHING ── */
+    .en { display: block; }
+    .pt { display: none; }
+    .lang-pt .en { display: none; }
+    .lang-pt .pt { display: block; }
+    .en-inline { display: inline; }
+    .pt-inline { display: none; }
+    .lang-pt .en-inline { display: none; }
+    .lang-pt .pt-inline { display: inline; }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      display: flex;
+      gap: 2px;
+      border-radius: 20px;
+      padding: 4px;
+      margin-left: auto;
+    }
+
+    .lang-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 16px;
+      border: none;
+      background: transparent;
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--plum);
+      color: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      padding: 24px 64px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--warm-stone);
+    }
+
+    .nav-back {
+      font-size: 13px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover {
+      color: var(--plum);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--warm-stone);
+    }
+
+    .nav-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    /* ── HERO ── */
+    .case-hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .case-hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 140px 64px 80px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .case-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .ctag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(107, 79, 160, 0.5);
+      color: var(--plum-pale);
+      background: rgba(107, 79, 160, 0.12);
+    }
+
+    .case-hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--plum-pale);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .case-hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--plum-pale);
+    }
+
+    .case-hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 6vw, 96px);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .case-hero-title em {
+      font-style: italic;
+      color: var(--plum-pale);
+    }
+
+    .case-hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2vw, 26px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--plum-pale);
+      margin-bottom: 48px;
+      line-height: 1.4;
+    }
+
+    .case-meta-row {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .case-meta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 6px;
+    }
+
+    .case-meta-value {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .case-hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Hero right — stats grid */
+    .hero-stats-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      max-width: 380px;
+      width: 100%;
+      padding: 0 40px;
+    }
+
+    .hero-stat-card {
+      background: rgba(250, 247, 242, 0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 36px 28px;
+      text-align: center;
+    }
+
+    .hero-stat-card:first-child { border-radius: 24px 4px 4px 4px; }
+    .hero-stat-card:nth-child(2) { border-radius: 4px 24px 4px 4px; }
+    .hero-stat-card:nth-child(3) { border-radius: 4px 4px 4px 24px; }
+    .hero-stat-card:last-child { border-radius: 4px 4px 24px 4px; }
+
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .hero-stat-label {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(212, 200, 239, 0.6);
+      line-height: 1.4;
+    }
+
+    /* Hero background decoration */
+    .hero-code-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-code-bg svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── CONTENT ── */
+    .case-body {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .case-section {
+      padding: 96px 80px;
+      border-bottom: 1px solid var(--warm-stone);
+    }
+
+    .case-section:last-child {
+      border-bottom: none;
+    }
+
+    .cs-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--plum);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cs-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--plum);
+    }
+
+    .cs-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 48px;
+    }
+
+    .cs-title em {
+      font-style: italic;
+      color: var(--plum);
+    }
+
+    .cs-body-text {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      max-width: 680px;
+      margin-bottom: 28px;
+    }
+
+    .cs-body-text strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* 2-col layout */
+    .cs-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* callout block */
+    .callout {
+      background: var(--ink);
+      padding: 48px 52px;
+      border-radius: 4px;
+      margin: 0;
+    }
+
+    .callout p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.5vw, 30px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.5;
+      max-width: 700px;
+    }
+
+    .callout p em {
+      color: var(--plum-pale);
+      font-style: normal;
+    }
+
+    /* process cards */
+    .process-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    .process-card {
+      background: var(--white);
+      padding: 40px 32px;
+      position: relative;
+    }
+
+    .process-card:first-child { border-radius: 16px 4px 4px 16px; }
+    .process-card:last-child { border-radius: 4px 16px 16px 4px; }
+
+    .process-card::after {
+      content: '\2192';
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--plum-pale);
+      font-size: 16px;
+      z-index: 2;
+    }
+
+    .process-card:last-child::after {
+      display: none;
+    }
+
+    .process-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--plum);
+      margin-bottom: 16px;
+    }
+
+    .process-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .process-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    /* tool cards (dark bg) */
+    .stack-section {
+      background: var(--ink);
+      padding: 96px 80px;
+    }
+
+    .stack-section .cs-label {
+      color: var(--plum-pale);
+    }
+
+    .stack-section .cs-label::before {
+      background: var(--plum-pale);
+    }
+
+    .stack-section .cs-title {
+      color: var(--white);
+    }
+
+    .stack-section .cs-title em {
+      color: var(--plum-pale);
+    }
+
+    .stack-section .cs-body-text {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .stack-section .cs-body-text strong {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .tool-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 36px 32px;
+    }
+
+    .tool-card:first-child { border-radius: 16px 4px 4px 4px; }
+    .tool-card:nth-child(2) { border-radius: 4px 16px 4px 4px; }
+    .tool-card:nth-child(3) { border-radius: 4px 4px 4px 16px; }
+    .tool-card:last-child { border-radius: 4px 4px 16px 4px; }
+
+    .tool-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .tool-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--plum-pale);
+      margin-bottom: 14px;
+    }
+
+    .tool-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    /* scope list */
+    .scope-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .scope-item {
+      background: var(--white);
+      padding: 20px 28px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      border-top: 1px solid var(--warm-stone);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    .scope-item:first-child {
+      border-radius: 16px 16px 0 0;
+      border-top: none;
+    }
+
+    .scope-item:last-child {
+      border-radius: 0 0 16px 16px;
+    }
+
+    .scope-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--plum);
+      flex-shrink: 0;
+    }
+
+    /* learning pills */
+    .learning-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .learning-item {
+      background: var(--white);
+      padding: 28px 32px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      border-top: 1px solid var(--warm-stone);
+    }
+
+    .learning-item:first-child {
+      border-radius: 16px 16px 0 0;
+      border-top: none;
+    }
+
+    .learning-item:last-child {
+      border-radius: 0 0 16px 16px;
+    }
+
+    .learning-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--plum-pale);
+      flex-shrink: 0;
+      line-height: 1;
+      width: 32px;
+    }
+
+    .learning-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .learning-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    /* CTA section */
+    .case-cta {
+      background: var(--plum);
+      padding: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .case-cta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--plum-pale);
+      margin-bottom: 12px;
+    }
+
+    .case-cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.15;
+    }
+
+    .case-cta-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.25s;
+      letter-spacing: 0.04em;
+    }
+
+    .cta-btn.white {
+      background: var(--white);
+      color: var(--plum);
+    }
+
+    .cta-btn.white:hover {
+      background: var(--warm-cream);
+      transform: translateY(-1px);
+    }
+
+    .cta-btn.outline {
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .cta-btn.outline:hover {
+      border-color: var(--white);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    /* footer nav */
+    .case-footer-nav {
+      background: var(--warm-cream);
+      padding: 64px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--warm-stone);
+    }
+
+    .footer-nav-link {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fnl-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    .fnl-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--ink);
+      transition: color 0.2s;
+    }
+
+    .footer-nav-link:hover .fnl-title {
+      color: var(--plum);
+    }
+
+    /* footer */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 28px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    footer a {
+      color: rgba(255, 255, 255, 0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--plum-pale);
+    }
+
+    /* reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav {
+        padding: 18px 24px;
+      }
+
+      .case-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .case-hero-left {
+        padding: 120px 24px 60px;
+      }
+
+      .case-hero-right {
+        padding: 40px 24px 60px;
+      }
+
+      .hero-stats-grid {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .case-meta-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 32px;
+      }
+
+      .case-section {
+        padding: 64px 24px;
+      }
+
+      .cs-2col {
+        grid-template-columns: 1fr;
+      }
+
+      .process-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .process-card {
+        border-radius: 0 !important;
+      }
+
+      .process-card:first-child { border-radius: 16px 16px 0 0 !important; }
+      .process-card:last-child { border-radius: 0 0 16px 16px !important; }
+
+      .process-card::after {
+        display: none;
+      }
+
+      .stack-section {
+        padding: 64px 24px;
+      }
+
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tool-card:first-child,
+      .tool-card:nth-child(2),
+      .tool-card:nth-child(3),
+      .tool-card:last-child {
+        border-radius: 4px;
+      }
+
+      .case-cta {
+        padding: 48px 24px;
+      }
+
+      .case-footer-nav {
+        padding: 40px 24px;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-title,
+      .nav-divider {
+        display: none;
+      }
+
+      .case-meta-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">&larr; <span class="en-inline">Back to portfolio</span><span
+        class="pt-inline">Voltar ao portf&oacute;lio</span></a>
+    <div class="nav-divider"></div>
+    <span class="nav-title">Portfolio &mdash; Case Study</span>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ── HERO ── -->
+    <header class="case-hero">
+      <div class="case-hero-left">
+        <div class="case-tag-row">
+          <span class="ctag">Design Engineering</span>
+          <span class="ctag">AI-Assisted Development</span>
+        </div>
+        <div class="case-hero-eyebrow">
+          <span class="en-inline">Personal project &middot; 2026</span>
+          <span class="pt-inline">Projeto pessoal &middot; 2026</span>
+        </div>
+        <h1 class="case-hero-title">
+          <span class="en">This Portfolio &mdash;<br><em>Built with AI.</em></span>
+          <span class="pt">Este Portf&oacute;lio &mdash;<br><em>Constru&iacute;do com IA.</em></span>
+        </h1>
+        <p class="case-hero-subtitle">
+          <span class="en">8 pages, 6 case studies, fully responsive and bilingual &mdash; designed and coded in 5 days using Claude Code as my engineering partner.</span>
+          <span class="pt">8 p&aacute;ginas, 6 case studies, totalmente responsivo e bil&iacute;ngue &mdash; projetado e codificado em 5 dias usando Claude Code como parceiro de engenharia.</span>
+        </p>
+        <div class="case-meta-row">
+          <div class="case-meta-item">
+            <div class="case-meta-label"><span class="en-inline">Client</span><span class="pt-inline">Cliente</span></div>
+            <div class="case-meta-value"><span class="en-inline">Personal project</span><span class="pt-inline">Projeto pessoal</span></div>
+          </div>
+          <div class="case-meta-item">
+            <div class="case-meta-label"><span class="en-inline">Year</span><span class="pt-inline">Ano</span></div>
+            <div class="case-meta-value">2026</div>
+          </div>
+          <div class="case-meta-item">
+            <div class="case-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Fun&ccedil;&atilde;o</span></div>
+            <div class="case-meta-value">UX Designer + Design Engineer</div>
+          </div>
+          <div class="case-meta-item">
+            <div class="case-meta-label"><span class="en-inline">Location</span><span class="pt-inline">Localiza&ccedil;&atilde;o</span></div>
+            <div class="case-meta-value">Remote</div>
+          </div>
+          <div class="case-meta-item">
+            <div class="case-meta-label"><span class="en-inline">Main Tools</span><span class="pt-inline">Ferramentas</span></div>
+            <div class="case-meta-value">Claude Code, Figma, HTML/CSS/JS, Vercel</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-hero-right">
+        <div class="hero-code-bg">
+          <svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="bg2" cx="50%" cy="50%" r="70%">
+                <stop offset="0%" stop-color="#2A1F3D" />
+                <stop offset="100%" stop-color="#1C1917" />
+              </radialGradient>
+              <radialGradient id="orb3" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#6B4FA0" stop-opacity="0.4" />
+                <stop offset="100%" stop-color="#6B4FA0" stop-opacity="0" />
+              </radialGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="20" />
+              </filter>
+            </defs>
+            <rect width="600" height="800" fill="url(#bg2)" />
+            <ellipse cx="300" cy="400" rx="300" ry="300" fill="url(#orb3)" filter="url(#glow)" />
+            <!-- Terminal-like decorative lines -->
+            <g opacity="0.15" stroke="#D4C8EF" stroke-width="1" fill="none">
+              <text x="60" y="180" font-family="monospace" font-size="12" fill="#D4C8EF" opacity="0.3">&gt; claude code</text>
+              <text x="60" y="210" font-family="monospace" font-size="12" fill="#8B6FC0" opacity="0.25">  generating portfolio...</text>
+              <text x="60" y="260" font-family="monospace" font-size="12" fill="#D4C8EF" opacity="0.2">&lt;html lang="en"&gt;</text>
+              <text x="60" y="290" font-family="monospace" font-size="12" fill="#D4C8EF" opacity="0.15">  &lt;head&gt;</text>
+              <text x="60" y="320" font-family="monospace" font-size="12" fill="#8B6FC0" opacity="0.18">    &lt;title&gt;Portfolio&lt;/title&gt;</text>
+              <text x="60" y="370" font-family="monospace" font-size="12" fill="#D4C8EF" opacity="0.12">  &lt;style&gt;</text>
+              <text x="60" y="400" font-family="monospace" font-size="12" fill="#D4C8EF" opacity="0.15">    .hero { min-height: 100vh; }</text>
+              <text x="60" y="430" font-family="monospace" font-size="12" fill="#8B6FC0" opacity="0.12">    color: var(--plum);</text>
+              <text x="60" y="480" font-family="monospace" font-size="12" fill="#D4C8EF" opacity="0.18">&gt; git commit -m "deploy"</text>
+              <text x="60" y="510" font-family="monospace" font-size="12" fill="#8B6FC0" opacity="0.15">  [main abc1234] deploy</text>
+              <text x="60" y="560" font-family="monospace" font-size="12" fill="#D4C8EF" opacity="0.22">&gt; vercel --prod</text>
+              <text x="60" y="590" font-family="monospace" font-size="12" fill="#6B4FA0" opacity="0.2">  Ready! https://giulopes...</text>
+            </g>
+          </svg>
+        </div>
+        <div class="hero-stats-grid">
+          <div class="hero-stat-card">
+            <div class="hero-stat-num">8</div>
+            <div class="hero-stat-label"><span class="en-inline">Pages delivered</span><span class="pt-inline">P&aacute;ginas entregues</span></div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-num">6</div>
+            <div class="hero-stat-label"><span class="en-inline">Case studies</span><span class="pt-inline">Cases documentados</span></div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-num">5</div>
+            <div class="hero-stat-label"><span class="en-inline">Days to deploy</span><span class="pt-inline">Dias at&eacute; o deploy</span></div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-num">0</div>
+            <div class="hero-stat-label"><span class="en-inline">Lines written manually</span><span class="pt-inline">Linhas escritas manualmente</span></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── BODY ── -->
+    <div class="case-body">
+
+      <!-- 01 CONTEXT -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">01 &mdash; Context</span><span class="pt-inline">01 &mdash; Contexto</span></div>
+        <h2 class="cs-title">
+          <span class="en">From Figma to deploy &mdash;<br><em>without a developer.</em></span>
+          <span class="pt">Do Figma ao deploy &mdash;<br><em>sem desenvolvedor.</em></span>
+        </h2>
+        <div class="cs-2col">
+          <div>
+            <p class="cs-body-text en">After 8 years as a UX Designer, <strong>AI changed the equation</strong>. Claude Code made it possible to go from idea to deploy without depending on templates, CMS, or an external developer. This portfolio became the first real test of a new capability: <strong>design engineering</strong> &mdash; the ability to go from design to production using AI as a building tool.</p>
+            <p class="cs-body-text pt">Ap&oacute;s 8 anos como UX Designer, <strong>a IA mudou a equa&ccedil;&atilde;o</strong>. Claude Code tornou poss&iacute;vel ir da ideia ao deploy sem depender de templates, CMS ou dev externo. Este portf&oacute;lio se tornou o primeiro teste real de uma nova habilidade: <strong>design engineering</strong> &mdash; a capacidade de ir do design &agrave; produ&ccedil;&atilde;o usando IA como ferramenta de constru&ccedil;&atilde;o.</p>
+          </div>
+          <div class="callout">
+            <p>
+              <span class="en">&ldquo;If I can design the experience, <em>why can&rsquo;t I build it?</em>&rdquo;</span>
+              <span class="pt">&ldquo;Se eu consigo projetar a experi&ecirc;ncia, <em>por que n&atilde;o posso constru&iacute;-la?</em>&rdquo;</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 METHOD -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">02 &mdash; Method</span><span class="pt-inline">02 &mdash; M&eacute;todo</span></div>
+        <h2 class="cs-title">
+          <span class="en">Conversational<br><em>development.</em></span>
+          <span class="pt">Desenvolvimento<br><em>conversacional.</em></span>
+        </h2>
+        <p class="cs-body-text en">Not &ldquo;no-code&rdquo; or &ldquo;low-code&rdquo; &mdash; it&rsquo;s <strong>full code, with AI as the execution engine</strong>. I describe what I want, Claude Code generates it, I review in the browser, iterate with feedback, commit and deploy. The feedback loop shrunk from days to minutes.</p>
+        <p class="cs-body-text pt">N&atilde;o &eacute; &ldquo;no-code&rdquo; nem &ldquo;low-code&rdquo; &mdash; &eacute; <strong>c&oacute;digo completo, com IA como motor de execu&ccedil;&atilde;o</strong>. Descrevo o que quero, Claude Code gera, reviso no browser, itero com feedback, comito e fa&ccedil;o deploy. O ciclo de feedback encolheu de dias para minutos.</p>
+
+        <div class="process-cards">
+          <div class="process-card">
+            <div class="process-num">01</div>
+            <div class="process-name">Describe</div>
+            <p class="process-desc">
+              <span class="en-inline">Instructions in natural language, with visual references and acceptance criteria.</span>
+              <span class="pt-inline">Instru&ccedil;&otilde;es em linguagem natural, com refer&ecirc;ncias visuais e crit&eacute;rios de aceita&ccedil;&atilde;o.</span>
+            </p>
+          </div>
+          <div class="process-card">
+            <div class="process-num">02</div>
+            <div class="process-name">Generate + Review</div>
+            <p class="process-desc">
+              <span class="en-inline">Claude Code generates HTML/CSS/JS, I validate in the browser and give feedback.</span>
+              <span class="pt-inline">Claude Code gera HTML/CSS/JS, eu valido no browser e dou feedback.</span>
+            </p>
+          </div>
+          <div class="process-card">
+            <div class="process-num">03</div>
+            <div class="process-name">Iterate + Deploy</div>
+            <p class="process-desc">
+              <span class="en-inline">Adjust via conversation until correct, commit to Git, deploy on Vercel.</span>
+              <span class="pt-inline">Ajusto via conversa at&eacute; ficar correto, comito no Git e fa&ccedil;o deploy no Vercel.</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 03 STACK (dark bg — outside case-body for full width) -->
+    <div class="stack-section reveal">
+      <div style="max-width:1200px; margin:0 auto;">
+        <div class="cs-label"><span class="en-inline">03 &mdash; Stack</span><span class="pt-inline">03 &mdash; Stack T&eacute;cnico</span></div>
+        <h2 class="cs-title">
+          <span class="en">Simple<br><em>by design.</em></span>
+          <span class="pt">Simples<br><em>por design.</em></span>
+        </h2>
+        <div class="cs-2col">
+          <div>
+            <p class="cs-body-text en">Static HTML without frameworks &mdash; no React, no Next.js. <strong>Inline CSS in each page</strong>. Minimal JavaScript (lang toggle + scroll reveal). Why: <strong>maximum performance, zero dependencies, total control</strong>.</p>
+            <p class="cs-body-text pt">HTML est&aacute;tico sem frameworks &mdash; sem React, sem Next.js. <strong>CSS inline em cada p&aacute;gina</strong>. JavaScript m&iacute;nimo (lang toggle + scroll reveal). Porqu&ecirc;: <strong>performance m&aacute;xima, zero depend&ecirc;ncias, controle total</strong>.</p>
+          </div>
+          <div class="tools-grid">
+            <div class="tool-card">
+              <div class="tool-name">Claude Code</div>
+              <div class="tool-type">Development Engine</div>
+              <p class="tool-desc">
+                <span class="en-inline">Generates and edits code via conversation. The AI engineering partner.</span>
+                <span class="pt-inline">Gera e edita c&oacute;digo via conversa. O parceiro de engenharia IA.</span>
+              </p>
+            </div>
+            <div class="tool-card">
+              <div class="tool-name">GitHub</div>
+              <div class="tool-type">Version Control</div>
+              <p class="tool-desc">
+                <span class="en-inline">23+ commits with Claude co-authorship. Full project history.</span>
+                <span class="pt-inline">23+ commits com co-autoria Claude. Hist&oacute;rico completo do projeto.</span>
+              </p>
+            </div>
+            <div class="tool-card">
+              <div class="tool-name">Vercel</div>
+              <div class="tool-type">Deploy</div>
+              <p class="tool-desc">
+                <span class="en-inline">Automatic deploy on every push. Global CDN for fast delivery.</span>
+                <span class="pt-inline">Deploy autom&aacute;tico a cada push. CDN global para entrega r&aacute;pida.</span>
+              </p>
+            </div>
+            <div class="tool-card">
+              <div class="tool-name">Figma</div>
+              <div class="tool-type">Design</div>
+              <p class="tool-desc">
+                <span class="en-inline">Visual references and design tokens. The design source of truth.</span>
+                <span class="pt-inline">Refer&ecirc;ncias visuais e design tokens. A fonte de verdade do design.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- 04 SCOPE -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">04 &mdash; Scope</span><span class="pt-inline">04 &mdash; Escopo</span></div>
+        <h2 class="cs-title">
+          <span class="en">What was<br><em>built.</em></span>
+          <span class="pt">O que foi<br><em>constru&iacute;do.</em></span>
+        </h2>
+        <div class="scope-list">
+          <div class="scope-item">
+            <span class="scope-dot"></span>
+            <span><span class="en-inline">8 HTML pages (index, about, 6 case studies)</span><span class="pt-inline">8 p&aacute;ginas HTML (index, about, 6 case studies)</span></span>
+          </div>
+          <div class="scope-item">
+            <span class="scope-dot"></span>
+            <span><span class="en-inline">6 complete case studies with hero, body sections, CTA, footer nav</span><span class="pt-inline">6 case studies completos com hero, body sections, CTA, footer nav</span></span>
+          </div>
+          <div class="scope-item">
+            <span class="scope-dot"></span>
+            <span><span class="en-inline">Full bilingual support (EN/PT) with toggle and localStorage</span><span class="pt-inline">Bil&iacute;ngue completo (EN/PT) com toggle e localStorage</span></span>
+          </div>
+          <div class="scope-item">
+            <span class="scope-dot"></span>
+            <span><span class="en-inline">Complete SEO: meta tags, Open Graph, Twitter Cards, JSON-LD, sitemap.xml, robots.txt</span><span class="pt-inline">SEO completo: meta tags, Open Graph, Twitter Cards, JSON-LD, sitemap.xml, robots.txt</span></span>
+          </div>
+          <div class="scope-item">
+            <span class="scope-dot"></span>
+            <span><span class="en-inline">GEO (Generative Engine Optimization): SpeakableSpecification, Article schema, BreadcrumbList</span><span class="pt-inline">GEO (Generative Engine Optimization): SpeakableSpecification, Article schema, BreadcrumbList</span></span>
+          </div>
+          <div class="scope-item">
+            <span class="scope-dot"></span>
+            <span><span class="en-inline">Responsive design: 900px breakpoint, mobile-first</span><span class="pt-inline">Design responsivo: breakpoint 900px, mobile-first</span></span>
+          </div>
+          <div class="scope-item">
+            <span class="scope-dot"></span>
+            <span><span class="en-inline">Hero parallax with sticky positioning</span><span class="pt-inline">Hero parallax com sticky positioning</span></span>
+          </div>
+          <div class="scope-item">
+            <span class="scope-dot"></span>
+            <span><span class="en-inline">Scroll reveal animations</span><span class="pt-inline">Anima&ccedil;&otilde;es de scroll reveal</span></span>
+          </div>
+          <div class="scope-item">
+            <span class="scope-dot"></span>
+            <span><span class="en-inline">Dark mode on home page</span><span class="pt-inline">Dark mode na home</span></span>
+          </div>
+          <div class="scope-item">
+            <span class="scope-dot"></span>
+            <span><span class="en-inline">60+ assets (images, videos)</span><span class="pt-inline">60+ assets (imagens, v&iacute;deos)</span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 LEARNINGS -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">05 &mdash; Learnings</span><span class="pt-inline">05 &mdash; Aprendizados</span></div>
+        <h2 class="cs-title">
+          <span class="en">What I<br><em>learned.</em></span>
+          <span class="pt">O que<br><em>aprendi.</em></span>
+        </h2>
+        <div class="learning-list">
+          <div class="learning-item">
+            <div class="learning-num">1</div>
+            <div class="learning-content">
+              <div class="learning-title">
+                <span class="en-inline">AI doesn&rsquo;t replace design judgment</span>
+                <span class="pt-inline">IA n&atilde;o substitui crit&eacute;rio de design</span>
+              </div>
+              <p class="learning-desc">
+                <span class="en-inline">Claude Code generates code, but I decide if the result is good. Visual validation, spacing, hierarchy &mdash; all of that remains a designer skill.</span>
+                <span class="pt-inline">Claude Code gera c&oacute;digo, mas quem decide se o resultado est&aacute; bom sou eu. A valida&ccedil;&atilde;o visual, o espa&ccedil;amento, a hierarquia &mdash; tudo isso continua sendo skill de designer.</span>
+              </p>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-num">2</div>
+            <div class="learning-content">
+              <div class="learning-title">
+                <span class="en-inline">Conversation is the new prototype</span>
+                <span class="pt-inline">Conversa &eacute; o novo prot&oacute;tipo</span>
+              </div>
+              <p class="learning-desc">
+                <span class="en-inline">Instead of building screens in Figma and handing off specs, I describe what I want and iterate in real time. The feedback cycle shrunk from days to minutes.</span>
+                <span class="pt-inline">Em vez de montar tela no Figma e entregar spec, eu descrevo o que quero e itero em tempo real. O ciclo de feedback encolheu de dias para minutos.</span>
+              </p>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-num">3</div>
+            <div class="learning-content">
+              <div class="learning-title">
+                <span class="en-inline">Code is no longer a barrier</span>
+                <span class="pt-inline">C&oacute;digo deixou de ser barreira</span>
+              </div>
+              <p class="learning-desc">
+                <span class="en-inline">I don&rsquo;t need to write CSS from memory. I need to know how to read, review, and give direction. AI executes, I steer.</span>
+                <span class="pt-inline">N&atilde;o preciso saber escrever CSS de cor. Preciso saber ler, revisar e dar dire&ccedil;&atilde;o. A IA executa, eu dirijo.</span>
+              </p>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-num">4</div>
+            <div class="learning-content">
+              <div class="learning-title">
+                <span class="en-inline">Version control becomes documentation</span>
+                <span class="pt-inline">Versionamento vira documenta&ccedil;&atilde;o</span>
+              </div>
+              <p class="learning-desc">
+                <span class="en-inline">Each commit tells a piece of the project&rsquo;s story. The git log is the logbook.</span>
+                <span class="pt-inline">Cada commit conta um peda&ccedil;o da hist&oacute;ria do projeto. O git log &eacute; o di&aacute;rio de bordo.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="case-cta">
+      <div class="case-cta-text">
+        <div class="case-cta-label"><span class="en-inline">Let&rsquo;s work together</span><span class="pt-inline">Vamos trabalhar juntos</span></div>
+        <div class="case-cta-title">
+          <span class="en">Interested in how I think<br>through complex products?</span>
+          <span class="pt">Interessado em como eu penso<br>produtos complexos?</span>
+        </div>
+      </div>
+      <div class="case-cta-links">
+        <a href="mailto:giulopesg@gmail.com" class="cta-btn white"><svg width="18" height="18" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            style="vertical-align:middle;margin-right:6px">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="M22 4L12 13 2 4" />
+          </svg><span class="en-inline">Get in touch</span><span class="pt-inline">Entrar em contato</span></a>
+        <a href="index.html" class="cta-btn outline">&larr; <span class="en-inline">Back to portfolio</span><span
+            class="pt-inline">Voltar ao portf&oacute;lio</span></a>
+      </div>
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="case-footer-nav">
+      <a href="neuroot-case.html" class="footer-nav-link">
+        <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
+        <span class="fnl-title">Neuroot</span>
+      </a>
+      <a href="techback-case.html" class="footer-nav-link" style="text-align:right;">
+        <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Pr&oacute;ximo</span> &rarr;</span>
+        <span class="fnl-title">TechBack BB</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Giuliana Lopes Galv&atilde;o</p>
+  </footer>
+
+  <script>
+    // ─── LANG TOGGLE ───
+    let currentLang = 'en';
+    function setLang(lang) {
+      currentLang = lang;
+      document.body.classList.toggle('lang-pt', lang === 'pt');
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+      });
+      localStorage.setItem('lang', lang);
+    }
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang) setLang(savedLang);
+
+    // SCROLL REVEAL
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          el.classList.add('visible');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
