@@ -185,15 +185,13 @@
     font-size: 17px; font-weight: 300; line-height: 1.65;
     color: rgba(168,216,234,0.7); max-width: 480px; margin-bottom: 56px;
   }
-  .hero-meta-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
-    padding-top: 40px; border-top: 1px solid rgba(168,216,234,0.15);
-  }
-  .hero-meta-label {
+  .case-meta-row { display: flex; gap: 48px; flex-wrap: wrap; }
+  .case-meta-item {}
+  .case-meta-label {
     font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(168,216,234,0.45); margin-bottom: 8px;
+    color: rgba(168,216,234,0.45); margin-bottom: 6px;
   }
-  .hero-meta-value { font-size: 14px; font-weight: 400; color: var(--white); line-height: 1.4; }
+  .case-meta-value { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.8); }
 
   /* Hero SUS visual */
   .sus-visual { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 24px; }
@@ -403,6 +401,7 @@
     .case-hero { grid-template-columns: 1fr; }
     .case-hero-right { display: none; }
     .case-hero-left { padding: 120px 24px 60px; }
+    .case-meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
     .case-section { padding: 64px 24px; }
     .cs-2col, .overview-grid { grid-template-columns: 1fr; gap: 40px; }
     .disability-grid { grid-template-columns: 1fr 1fr; }
@@ -458,30 +457,30 @@
       <span class="en">28 people with disabilities. 28 remote sessions. An honest diagnosis of how Petrobras' institutional website fails, and how it can be improved to truly include.</span>
       <span class="pt">28 pessoas com deficiência. 28 sessões remotas. Um diagnóstico honesto de como o site institucional da Petrobras falha e como pode ser melhorado para incluir de verdade.</span>
     </p>
-    <div class="hero-meta-grid hero-rise-4">
-      <div>
-        <div class="hero-meta-label"><span class="en-inline">Client</span><span class="pt-inline">Cliente</span></div>
-        <div class="hero-meta-value">Petrobras</div>
+    <div class="case-meta-row hero-rise-4">
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Client</span><span class="pt-inline">Cliente</span></div>
+        <div class="case-meta-value">Petrobras</div>
       </div>
-      <div>
-        <div class="hero-meta-label"><span class="en-inline">Agency</span><span class="pt-inline">Agência</span></div>
-        <div class="hero-meta-value">Brivia / The Creative Smartech</div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Agency</span><span class="pt-inline">Agência</span></div>
+        <div class="case-meta-value">Brivia / The Creative Smartech</div>
       </div>
-      <div>
-        <div class="hero-meta-label"><span class="en-inline">Period</span><span class="pt-inline">Período</span></div>
-        <div class="hero-meta-value"><span class="en-inline">Aug–Dec 2025</span><span class="pt-inline">Ago–Dez 2025</span></div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Year</span><span class="pt-inline">Ano</span></div>
+        <div class="case-meta-value">2025</div>
       </div>
-      <div>
-        <div class="hero-meta-label"><span class="en-inline">Method</span><span class="pt-inline">Método</span></div>
-        <div class="hero-meta-value"><span class="en-inline">Moderated Remote Tests</span><span class="pt-inline">Testes Remotos Moderados</span></div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Função</span></div>
+        <div class="case-meta-value">UX Researcher</div>
       </div>
-      <div>
-        <div class="hero-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Papel</span></div>
-        <div class="hero-meta-value">UX Researcher</div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Location</span><span class="pt-inline">Localização</span></div>
+        <div class="case-meta-value">Remote</div>
       </div>
-      <div>
-        <div class="hero-meta-label"><span class="en-inline">Participants</span><span class="pt-inline">Participantes</span></div>
-        <div class="hero-meta-value"><span class="en-inline">28 PWDs &middot; 3 groups</span><span class="pt-inline">28 PCDs &middot; 3 grupos</span></div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Main Tools</span><span class="pt-inline">Ferramentas</span></div>
+        <div class="case-meta-value">Miro</div>
       </div>
     </div>
   </div>

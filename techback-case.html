@@ -204,6 +204,7 @@
   }
 
   .case-meta-row { display: flex; gap: 48px; flex-wrap: wrap; }
+  .case-meta-item {}
   .case-meta-label {
     font-family: 'DM Mono', monospace;
     font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -599,10 +600,11 @@
   footer { text-align: center; padding: 32px 24px; color: var(--ink-muted); font-size: 13px; border-top: 1px solid var(--warm-stone); }
 
   @media (max-width: 900px) {
-    nav { padding: 20px 24px; }
+    nav { padding: 18px 24px; }
     .case-hero { grid-template-columns: 1fr; }
     .case-hero-right { display: none; }
     .case-hero-left { padding: 120px 24px 60px; }
+    .case-meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
     .case-section { padding: 64px 24px; }
     .cs-2col, .cs-3col, .phase-flow, .profiles-grid, .insights-2col { grid-template-columns: 1fr; }
     .screenshots-scroll { grid-template-columns: 1fr 1fr; }
@@ -651,21 +653,29 @@
       <span class="pt-inline">Jornada de Resíduos Inteligentes</span>
     </p>
     <div class="case-meta-row">
-      <div>
+      <div class="case-meta-item">
         <div class="case-meta-label"><span class="en-inline">Client</span><span class="pt-inline">Cliente</span></div>
         <div class="case-meta-value">Banco do Brasil</div>
       </div>
-      <div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Agency</span><span class="pt-inline">Agência</span></div>
+        <div class="case-meta-value">Brivia</div>
+      </div>
+      <div class="case-meta-item">
         <div class="case-meta-label"><span class="en-inline">Year</span><span class="pt-inline">Ano</span></div>
         <div class="case-meta-value">2025</div>
       </div>
-      <div>
+      <div class="case-meta-item">
         <div class="case-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Função</span></div>
-        <div class="case-meta-value"><span class="en-inline">UX Researcher & Strategist</span><span class="pt-inline">Pesquisadora UX & Estrategista</span></div>
+        <div class="case-meta-value"><span class="en-inline">UX Researcher &amp; Strategist</span><span class="pt-inline">Pesquisadora UX &amp; Estrategista</span></div>
       </div>
-      <div>
-        <div class="case-meta-label"><span class="en-inline">HQ</span><span class="pt-inline">Sede</span></div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Location</span><span class="pt-inline">Localização</span></div>
         <div class="case-meta-value">Brasília, BR</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Main Tools</span><span class="pt-inline">Ferramentas</span></div>
+        <div class="case-meta-value">Miro</div>
       </div>
     </div>
   </div>

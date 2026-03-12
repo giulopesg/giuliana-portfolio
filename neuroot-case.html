@@ -44,7 +44,7 @@
         "url": "https://www.giulopesgalvao.com.br"
       },
       "description": "AI-native post-burnout recovery app designed from personal experience. Built with Figma Make, Claude Code, and Claude API. Uses Behavioral Activation methodology and neuroplasticity as foundation. One practice a day with a defined end.",
-      "datePublished": "2025-01-01",
+      "datePublished": "2026-01-01",
       "dateModified": "2026-03-11",
       "keywords": ["AI-native product", "burnout recovery", "mobile PWA", "Claude Code", "Figma Make", "behavioral activation", "neuroplasticity", "product design"],
       "image": "https://www.giulopesgalvao.com.br/cases/neuroot/mockup-neuroot.png",
@@ -388,14 +388,15 @@
 
   /* learning pills */
   .learning-list {
-    display: flex; flex-direction: column; gap: 2px;
+    display: flex; flex-direction: column; gap: 0;
   }
   .learning-item {
     background: var(--white);
     padding: 28px 32px;
     display: flex; gap: 24px; align-items: flex-start;
+    border-top: 1px solid var(--warm-stone);
   }
-  .learning-item:first-child { border-radius: 16px 16px 0 0; }
+  .learning-item:first-child { border-radius: 16px 16px 0 0; border-top: none; }
   .learning-item:last-child { border-radius: 0 0 16px 16px; }
   .learning-num {
     font-family: 'Cormorant Garamond', serif;
@@ -672,6 +673,7 @@
     .case-hero { grid-template-columns: 1fr; }
     .case-hero-left { padding: 120px 24px 60px; }
     .case-hero-right { display: none; }
+    .case-meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
     .case-section { padding: 64px 24px; }
     .cs-2col, .cs-3col, .next-steps-grid { grid-template-columns: 1fr; }
     .app-video-frame { width: 220px; }
@@ -712,8 +714,8 @@
       <span class="ctag">Claude API</span>
     </div>
     <div class="case-hero-eyebrow">
-      <span class="en-inline">Personal project · 2025 – present</span>
-      <span class="pt-inline">Projeto pessoal · 2025 – presente</span>
+      <span class="en-inline">Personal project · 2026</span>
+      <span class="pt-inline">Projeto pessoal · 2026</span>
     </div>
     <h1 class="case-hero-title">Neuroot</h1>
     <p class="case-hero-subtitle">
@@ -722,16 +724,28 @@
     </p>
     <div class="case-meta-row">
       <div class="case-meta-item">
-        <div class="case-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Papel</span></div>
+        <div class="case-meta-label"><span class="en-inline">Client</span><span class="pt-inline">Cliente</span></div>
+        <div class="case-meta-value"><span class="en-inline">Personal project</span><span class="pt-inline">Projeto pessoal</span></div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Year</span><span class="pt-inline">Ano</span></div>
+        <div class="case-meta-value">2026</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Função</span></div>
         <div class="case-meta-value">UX Designer + Builder</div>
       </div>
       <div class="case-meta-item">
-        <div class="case-meta-label">Timeline</div>
-        <div class="case-meta-value"><span class="en-inline">2025 – present</span><span class="pt-inline">2025 – presente</span></div>
+        <div class="case-meta-label"><span class="en-inline">Location</span><span class="pt-inline">Localização</span></div>
+        <div class="case-meta-value">Remote</div>
       </div>
       <div class="case-meta-item">
         <div class="case-meta-label"><span class="en-inline">Platform</span><span class="pt-inline">Plataforma</span></div>
-        <div class="case-meta-value">Mobile PWA (React + Supabase)</div>
+        <div class="case-meta-value">Mobile PWA</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label"><span class="en-inline">Main Tools</span><span class="pt-inline">Ferramentas</span></div>
+        <div class="case-meta-value">Figma Make, Claude Code, Claude API</div>
       </div>
       <div class="case-meta-item">
         <div class="case-meta-label">Status</div>
@@ -1000,8 +1014,8 @@
     <div class="app-video-wrap reveal" style="margin-top: 48px; margin-bottom: 64px;">
       <div class="app-video-frame">
         <video autoplay loop muted playsinline aria-label="Neuroot app prototype demonstration — AI-native post-burnout recovery experience">
+          <source src="cases/neuroot/neurootapp.mp4" type="video/mp4">
           <source src="cases/neuroot/neurootapp.mov" type="video/quicktime">
-          <source src="cases/neuroot/neurootapp.mov" type="video/mp4">
         </video>
       </div>
     </div>
@@ -1009,10 +1023,27 @@
     <div class="cs-3col" style="margin-top: 0;">
       <div class="screen-card">
         <div class="screen-img">
-          <img src="cases/neuroot/home.png" alt="Neuroot app screen — AI-native burnout recovery experience with daily practice interface" loading="lazy">
+          <img src="cases/neuroot/aionboarding.png" alt="Neuroot app — AI-powered onboarding screen personalizing the burnout recovery journey" loading="lazy">
         </div>
         <div class="screen-card-body">
           <div class="screen-num">01</div>
+          <div class="screen-name">AI Onboarding</div>
+          <p class="screen-desc">
+            <span class="en">No forms. No signup before understanding what the product does. The AI asks one question at a time, responds with brief empathetic context, and generates 3 personalized practices.</span>
+            <span class="pt">Sem formulários. Sem cadastro antes de entender o que o produto faz. A IA faz uma pergunta de cada vez, responde com breve contexto empático e gera 3 práticas personalizadas.</span>
+          </p>
+          <div class="screen-decision">
+            <span class="en-inline">The user sees their practices before they ever see the home screen.</span>
+            <span class="pt-inline">O usuário vê suas práticas antes de ver a tela inicial.</span>
+          </div>
+        </div>
+      </div>
+      <div class="screen-card">
+        <div class="screen-img">
+          <img src="cases/neuroot/home.png" alt="Neuroot app screen — AI-native burnout recovery experience with daily practice interface" loading="lazy">
+        </div>
+        <div class="screen-card-body">
+          <div class="screen-num">02</div>
           <div class="screen-name">Home — Empty State</div>
           <p class="screen-desc">
             <span class="en">"There's no practice defined for today." — Not "You haven't done anything yet." The language removes debt. One CTA: "Choose today's practice" — an invitation, never a task.</span>
@@ -1029,7 +1060,7 @@
           <img src="cases/neuroot/timer.png" alt="Neuroot app screen — AI-native burnout recovery experience with daily practice interface" loading="lazy">
         </div>
         <div class="screen-card-body">
-          <div class="screen-num">02</div>
+          <div class="screen-num">03</div>
           <div class="screen-name"><span class="en-inline">Execution — Timer</span><span class="pt-inline">Execução — Timer</span></div>
           <p class="screen-desc">
             <span class="en">Full-screen timer. Limit visible. At the bottom: "Stop when the time ends — even if you haven't finished. Stopping before exhaustion is part of the method."</span>
@@ -1046,7 +1077,7 @@
           <img src="cases/neuroot/praticaconcluida.png" alt="Neuroot app — post-practice registration interface for tracking burnout recovery progress" loading="lazy">
         </div>
         <div class="screen-card-body">
-          <div class="screen-num">03</div>
+          <div class="screen-num">04</div>
           <div class="screen-name"><span class="en-inline">Post-Practice Registration</span><span class="pt-inline">Registro Pós-Prática</span></div>
           <p class="screen-desc">
             <span class="en">Three axes: Body (Light / Neutral / Heavy), Mind (Clear / Neutral / Tired), Resistance (Less / Same / More). No scores. No percentages. Just observation.</span>
@@ -1063,7 +1094,7 @@
           <img src="cases/neuroot/homepraticaconcluida.png" alt="Neuroot app — practice completed confirmation in the post-burnout recovery flow" loading="lazy">
         </div>
         <div class="screen-card-body">
-          <div class="screen-num">04</div>
+          <div class="screen-num">05</div>
           <div class="screen-name"><span class="en-inline">Practice Completed</span><span class="pt-inline">Prática Concluída</span></div>
           <p class="screen-desc">
             <span class="en">"Você fez sua prática hoje." Then: "Executing beyond the plan doesn't accelerate — it only teaches the body that limits don't exist."</span>
@@ -1080,7 +1111,7 @@
           <img src="cases/neuroot/sobreoapp.png" alt="Neuroot app — about the app section explaining the neuroplasticity-based recovery methodology" loading="lazy">
         </div>
         <div class="screen-card-body">
-          <div class="screen-num">05</div>
+          <div class="screen-num">06</div>
           <div class="screen-name"><span class="en-inline">About the App</span><span class="pt-inline">Sobre o App</span></div>
           <p class="screen-desc">
             <span class="en">Explains what burnout does to the brain, how the behavioral activation method works, and the phases of recovery. Transparency about the science builds trust before any practice begins.</span>
@@ -1089,23 +1120,6 @@
           <div class="screen-decision">
             <span class="en-inline">Design decision: the user understands the "why" before the "how." Education is part of the therapy.</span>
             <span class="pt-inline">Decisão de design: o usuário entende o "por quê" antes do "como." Educação é parte da terapia.</span>
-          </div>
-        </div>
-      </div>
-      <div class="screen-card">
-        <div class="screen-img">
-          <img src="cases/neuroot/aionboarding.png" alt="Neuroot app — AI-powered onboarding screen personalizing the burnout recovery journey" loading="lazy">
-        </div>
-        <div class="screen-card-body">
-          <div class="screen-num">06</div>
-          <div class="screen-name">AI Onboarding</div>
-          <p class="screen-desc">
-            <span class="en">No forms. No signup before understanding what the product does. The AI asks one question at a time, responds with brief empathetic context, and generates 3 personalized practices.</span>
-            <span class="pt">Sem formulários. Sem cadastro antes de entender o que o produto faz. A IA faz uma pergunta de cada vez, responde com breve contexto empático e gera 3 práticas personalizadas.</span>
-          </p>
-          <div class="screen-decision">
-            <span class="en-inline">The user sees their practices before they ever see the home screen.</span>
-            <span class="pt-inline">O usuário vê suas práticas antes de ver a tela inicial.</span>
           </div>
         </div>
       </div>
@@ -1123,7 +1137,7 @@
       <span class="pt">O que construir isso<br><em style="color:var(--plum-pale)">me ensinou.</em></span>
     </h2>
 
-    <div class="learning-list" style="max-width: 800px;">
+    <div class="learning-list">
       <div class="learning-item">
         <div class="learning-num">1</div>
         <div class="learning-content">
