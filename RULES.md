@@ -1,6 +1,6 @@
 # 🤖 Regras de Desenvolvimento AI — Giuliana Galvão Portfolio
 *Versão:* 1.0.0
-*Adaptado para: Portfolio estático — HTML + Vite + deploy via FTP*
+*Adaptado para: Portfolio estatico — HTML + Vite + deploy via Vercel*
 
 ---
 
@@ -10,8 +10,8 @@ Este é um **portfolio estático** de UX Design. Stack:
 - HTML5 + CSS3 + Vanilla JS (sem framework)
 - Vite (build tool — gera `dist/` para upload via FTP)
 - Google Fonts: Cormorant Garamond, DM Sans, DM Mono
-- Deploy: hospedagem compartilhada (FTP/cPanel) com domínio via Cloudflare DNS
-- Sem backend. Sem banco de dados. Sem `.env`. Sem autenticação.
+- Deploy: Vercel (static hosting) — dominio giulopesgalvao.com.br
+- Sem backend. Sem banco de dados. Sem `.env`. Sem autenticacao.
 
 ---
 
@@ -107,16 +107,20 @@ Crie uma tag Git sempre que fizer upload para produção:
 Cada página é um HTML independente. Não há componentes compartilhados em runtime — o CSS variables system garante a consistência visual.
 
 ```
-index.html              ← Home
-about.html              ← Sobre
-neuroot-case.html       ← Case: Neuroot
-techback-case.html      ← Case: TechBack BB
-previsul-case.html      ← Case: Previsul
-petrobras-case.html     ← Case: Petrobras PCD
-public/images/
-  techback/             ← field-01.png … field-15.png
-  previsul/             ← (reservado)
-  about/                ← giuliana.jpg (pendente)
+index.html                ← Home
+about.html                ← Sobre
+neuroot-case.html         ← Case: Neuroot
+techback-case.html        ← Case: TechBack BB
+petrobras-case.html       ← Case: Petrobras PCD
+previsul-case.html        ← Case: Previsul
+cpfl-case.html            ← Case: CPFL Solucoes
+bb-influencer-case.html   ← Case: BB Influencer School
+robots.txt                ← SEO: crawl rules
+sitemap.xml               ← SEO: sitemap
+vercel.json               ← Vercel config + headers
+images/                   ← Fotos da Giuliana
+cases/                    ← Assets dos cases
+public/images/techback/   ← field-01.png … field-15.png
 ```
 
 **Regra 22 — Sistema de design via CSS variables**
@@ -135,14 +139,16 @@ As variáveis abaixo são o único "design system" do projeto. Nunca hardcode co
 **Regra 23 — Accent color por case**
 Cada case tem sua própria cor de destaque, definida como variável local no topo do `<style>`:
 - Neuroot: `--plum: #6B4FA0`
-- Previsul: `--blue-deep: #2A3F65`
 - TechBack: `--green-deep: #1A3D2B`
 - Petrobras: `--petro-deep: #0A2A3A`
+- Previsul: `--blue-deep: #2A3F65`
+- CPFL Solucoes: `--blue-deep: #2A3A5A`
+- BB Influencer: `--amber-deep: #3A1800`
 
-**Regra 24 — Navegação entre cases (footer-nav)**
-Ordem obrigatória dos cases no footer-nav:
+**Regra 24 — Navegacao entre cases (footer-nav)**
+Ordem obrigatoria dos cases no footer-nav:
 ```
-← Neuroot → TechBack → Petrobras → Previsul →
+← Neuroot → TechBack → Petrobras → Previsul → CPFL → BB Influencer →
 ```
 Ao adicionar novos cases, atualizar o footer-nav dos vizinhos.
 
@@ -183,14 +189,30 @@ Ao construir qualquer novo case, seguir este checklist:
 - [ ] Atualizar `README.md` e `CHANGELOG.md`
 
 **Cases em fila:**
-- [ ] CPFL Solutions
 - [ ] Investe Brasil
 - [ ] Banco PAN — Intranet Redesign
-- [ ] BB Influencer School Gamification
 
 ---
 
-## 🚀 FLUXO DE DEPLOY
+## SEO & GEO
+
+**Regra 30 — SEO obrigatorio em toda pagina nova**
+Toda nova pagina HTML deve incluir: title, meta description, keywords, author, robots, canonical, hreflang (en + pt-BR + x-default), Open Graph, Twitter Card, JSON-LD structured data.
+
+**Regra 31 — JSON-LD com @graph para case studies**
+Case studies usam `@graph` com Article (headline, datePublished, dateModified, mainEntityOfPage, speakable) + BreadcrumbList. A about.html usa ProfilePage.
+
+**Regra 32 — Atualizar sitemap.xml ao criar pagina**
+Adicionar a URL da nova pagina no `sitemap.xml` com a data de modificacao.
+
+**Regra 33 — Alt text descritivo**
+Toda imagem deve ter alt text que descreva o conteudo E inclua contexto do projeto/autor para SEO. Imagens below-the-fold devem ter `loading="lazy"`.
+
+---
+
+## FLUXO DE DEPLOY
+
+O deploy e automatico via Vercel. Cada push na `main` dispara um novo deploy.
 
 ```bash
 # 1. Desenvolver e testar local
@@ -198,17 +220,14 @@ npm run dev
 
 # 2. Verificar todos os links internos
 
-# 3. Gerar build
-npm run build
+# 3. Commit e push
+git add .
+git commit -m "feat: descricao"
+git push origin main
 
-# 4. Conferir pasta dist/ gerada
-# dist/ deve conter: index.html, about.html, *-case.html, images/
+# 4. Vercel faz deploy automatico
 
-# 5. Upload via FTP
-# Fazer upload de TODO o conteúdo de dist/ para a raiz do domínio
-# NUNCA fazer upload de arquivos individuais fora do build
-
-# 6. Criar tag Git
-git tag v1.x.x
-git push origin v1.x.x
+# 5. Criar tag Git ao publicar versao
+git tag v2.x.x
+git push origin v2.x.x
 ```
