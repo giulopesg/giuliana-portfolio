@@ -919,9 +919,16 @@
     nav.scrolled { padding: 14px 24px; }
     .nav-links { display: none; }
     #hero { grid-template-columns: 1fr; grid-template-rows: auto auto; padding-top: 64px; }
-    .hero-photo { min-height: 50vh; display: flex; align-items: center; justify-content: center; }
+    .hero-photo { min-height: 50vh; display: flex; align-items: center; justify-content: center; background: var(--cream); }
     .hero-photo::after { display: none; }
-    .hero-photo-img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-photo-img {
+      width: 85%;
+      height: auto;
+      max-height: 55vh;
+      object-fit: contain;
+      -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+    }
     .hero-text { padding: 40px 24px 60px; }
     .hero-photo-label { display: none; }
     .bio-inner, .edu-inner { grid-template-columns: 1fr; gap: 48px; padding: 0 24px; }
