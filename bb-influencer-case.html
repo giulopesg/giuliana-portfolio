@@ -279,6 +279,7 @@
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 40px;
+      align-items: center;
     }
 
     .ctag {
@@ -363,6 +364,17 @@
       justify-content: center;
       padding: 80px 64px 80px 40px;
       z-index: 2;
+      overflow: hidden;
+    }
+
+    .hero-deco-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-deco-bg svg {
+      width: 100%;
+      height: 100%;
     }
 
     .hero-stats-grid {
@@ -371,6 +383,8 @@
       gap: 2px;
       width: 100%;
       max-width: 380px;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-stat {
@@ -1329,6 +1343,43 @@
       </div>
 
       <div class="case-hero-right">
+        <div class="hero-deco-bg">
+          <svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="bgBb" cx="50%" cy="50%" r="70%">
+                <stop offset="0%" stop-color="#4A2800" />
+                <stop offset="100%" stop-color="#3A1800" />
+              </radialGradient>
+              <radialGradient id="orbBb" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#B07800" stop-opacity="0.3" />
+                <stop offset="100%" stop-color="#B07800" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <rect width="600" height="800" fill="url(#bgBb)" />
+            <ellipse cx="300" cy="380" rx="280" ry="280" fill="url(#orbBb)" />
+            <g opacity="0.12" fill="none" stroke="#F5D48A" stroke-width="0.6">
+              <polygon points="300,160 316,200 360,206 328,236 336,280 300,260 264,280 272,236 240,206 284,200" />
+              <polygon points="140,320 152,348 182,352 160,374 166,404 140,390 114,404 120,374 98,352 128,348" />
+              <polygon points="460,320 472,348 502,352 480,374 486,404 460,390 434,404 440,374 418,352 448,348" />
+            </g>
+            <g opacity="0.1" stroke="#F5D48A" stroke-width="0.5">
+              <rect x="160" y="480" width="280" height="10" rx="5" fill="none" />
+              <rect x="160" y="480" width="196" height="10" rx="5" fill="#F5D48A" opacity="0.15" />
+              <text x="450" y="489" font-family="monospace" font-size="9" fill="#F5D48A">70%</text>
+              <rect x="160" y="510" width="280" height="10" rx="5" fill="none" />
+              <rect x="160" y="510" width="252" height="10" rx="5" fill="#F5D48A" opacity="0.12" />
+              <text x="450" y="519" font-family="monospace" font-size="9" fill="#F5D48A">90%</text>
+              <rect x="160" y="540" width="280" height="10" rx="5" fill="none" />
+              <rect x="160" y="540" width="140" height="10" rx="5" fill="#F5D48A" opacity="0.1" />
+              <text x="450" y="549" font-family="monospace" font-size="9" fill="#F5D48A">50%</text>
+            </g>
+            <g opacity="0.06">
+              <text x="80" y="640" font-family="monospace" font-size="10" fill="#F5D48A">xp_earned: 2400</text>
+              <text x="80" y="665" font-family="monospace" font-size="10" fill="#F5D48A">badges_unlocked: 8</text>
+              <text x="80" y="690" font-family="monospace" font-size="10" fill="#F5D48A">leaderboard_rank: 1</text>
+            </g>
+          </svg>
+        </div>
         <div class="hero-stats-grid">
           <div class="hero-stat">
             <div class="hero-stat-num">8<span>+</span></div>

@@ -274,6 +274,17 @@
       padding: 140px 80px 80px 40px;
       position: relative;
       z-index: 2;
+      overflow: hidden;
+    }
+
+    .hero-deco-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-deco-bg svg {
+      width: 100%;
+      height: 100%;
     }
 
     .case-tag-row {
@@ -281,6 +292,7 @@
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 40px;
+      align-items: center;
     }
 
     .ctag {
@@ -374,6 +386,8 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
+      position: relative;
+      z-index: 2;
     }
 
     .sus-label {
@@ -1524,6 +1538,40 @@
         </div>
       </div>
       <div class="case-hero-right">
+        <div class="hero-deco-bg">
+          <svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="bgPetro" cx="50%" cy="50%" r="70%">
+                <stop offset="0%" stop-color="#0E3A4F" />
+                <stop offset="100%" stop-color="#0A2A3A" />
+              </radialGradient>
+              <radialGradient id="orbPetro" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#0E4B6B" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="#0E4B6B" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <rect width="600" height="800" fill="url(#bgPetro)" />
+            <ellipse cx="300" cy="380" rx="280" ry="280" fill="url(#orbPetro)" />
+            <g opacity="0.1" stroke="#A8D8EA" stroke-width="0.5" fill="none">
+              <circle cx="300" cy="350" r="100" />
+              <circle cx="300" cy="350" r="150" />
+              <circle cx="300" cy="350" r="200" />
+              <path d="M300,150 L300,250" />
+              <path d="M300,450 L300,550" />
+              <path d="M100,350 L200,350" />
+              <path d="M400,350 L500,350" />
+              <circle cx="300" cy="250" r="4" fill="#A8D8EA" opacity="0.3" />
+              <circle cx="400" cy="350" r="4" fill="#A8D8EA" opacity="0.3" />
+              <circle cx="300" cy="450" r="4" fill="#A8D8EA" opacity="0.3" />
+              <circle cx="200" cy="350" r="4" fill="#A8D8EA" opacity="0.3" />
+            </g>
+            <g opacity="0.06">
+              <text x="80" y="640" font-family="monospace" font-size="10" fill="#A8D8EA">accessibility_score: 41.02</text>
+              <text x="80" y="665" font-family="monospace" font-size="10" fill="#A8D8EA">sessions: 28</text>
+              <text x="80" y="690" font-family="monospace" font-size="10" fill="#A8D8EA">benchmark_gap: -27</text>
+            </g>
+          </svg>
+        </div>
         <div class="sus-visual hero-rise-r">
           <div class="sus-label"><span class="en-inline">Overall SUS Result</span><span class="pt-inline">Resultado SUS
               Geral</span></div>
