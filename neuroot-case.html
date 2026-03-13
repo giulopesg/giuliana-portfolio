@@ -251,6 +251,7 @@
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 40px;
+      align-items: center;
     }
 
     .ctag {
@@ -1146,27 +1147,11 @@
 
     /* footer */
     footer {
-      background: var(--ink);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 28px 80px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    footer p {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--ink-muted);
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.35);
-    }
-
-    footer a {
-      color: rgba(255, 255, 255, 0.35);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    footer a:hover {
-      color: var(--plum-pale);
+      border-top: 1px solid var(--warm-stone);
     }
 
     /* reveal */
@@ -1283,21 +1268,32 @@
         width: 220px;
       }
 
+      .cs-title {
+        margin-bottom: 32px;
+      }
+
+      .cs-body-text {
+        margin-bottom: 20px;
+      }
+
+      .cs-2col {
+        gap: 32px;
+      }
+
       .case-cta {
         padding: 48px 24px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .case-cta-links {
+        align-items: center;
       }
 
       .case-footer-nav {
         padding: 40px 24px;
         flex-direction: column;
         gap: 32px;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-        padding: 24px;
       }
 
       .role-section {
@@ -1585,7 +1581,8 @@
               <td
                 style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">
                 <span class="en-inline">Show backlogs of undone tasks</span><span class="pt-inline">Mostram backlogs de
-                  tarefas não feitas</span></td>
+                  tarefas não feitas</span>
+              </td>
               <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);"><span class="en-inline">One
                   small action. No debt.</span><span class="pt-inline">Uma pequena ação. Sem dívida.</span></td>
             </tr>
@@ -1593,7 +1590,8 @@
               <td
                 style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">
                 <span class="en-inline">Punish broken streaks</span><span class="pt-inline">Punem sequências
-                  quebradas</span></td>
+                  quebradas</span>
+              </td>
               <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);"><span class="en-inline">No
                   punishment for absence</span><span class="pt-inline">Sem punição por ausência</span></td>
             </tr>
@@ -1601,7 +1599,8 @@
               <td
                 style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">
                 <span class="en-inline">Measure volume, not safety</span><span class="pt-inline">Medem volume, não
-                  segurança</span></td>
+                  segurança</span>
+              </td>
               <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);"><span
                   class="en-inline">Safety of effort, not output</span><span class="pt-inline">Segurança do esforço, não
                   resultado</span></td>
@@ -1610,7 +1609,8 @@
               <td
                 style="color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); text-decoration: line-through;">
                 <span class="en-inline">Send pressure-based notifications</span><span class="pt-inline">Enviam
-                  notificações baseadas em pressão</span></td>
+                  notificações baseadas em pressão</span>
+              </td>
               <td style="color: rgba(255,255,255,0.75); background: rgba(107,79,160,0.1);"><span
                   class="en-inline">Return to effort as a choice</span><span class="pt-inline">Retorno ao esforço como
                   escolha</span></td>

@@ -356,6 +356,7 @@
       inset: 0;
       z-index: 0;
     }
+
     .hero-deco-bg svg {
       width: 100%;
       height: 100%;
@@ -909,6 +910,7 @@
       background: var(--blue-ghost);
       color: var(--blue-mid);
       border: 1px solid var(--blue-pale);
+      white-space: nowrap;
     }
 
     /* ── METRICS ROW ── */
@@ -1340,6 +1342,14 @@
         padding: 64px 24px;
       }
 
+      .cs-title {
+        margin-bottom: 32px;
+      }
+
+      .cs-body-text {
+        margin-bottom: 20px;
+      }
+
       .cs-2col,
       .diamond-flow,
       .immersion-grid,
@@ -1349,6 +1359,7 @@
       .metrics-row,
       .screens-row {
         grid-template-columns: 1fr;
+        gap: 32px;
       }
 
       .img-gallery,
@@ -2093,17 +2104,15 @@
               <p class="product-desc pt">Um canal web para clientes e corretores registrarem e acompanharem sinistros
                 online — substituindo o processo exclusivo pelo 0800. Simples, visual e desenhado para os momentos mais
                 estressantes.</p>
-              <div class="product-users en">
-                <span class="product-user-tag">Insured</span>
-                <span class="product-user-tag">Beneficiaries</span>
-                <span class="product-user-tag">Brokers</span>
-                <span class="product-user-tag">HR Companies</span>
-              </div>
-              <div class="product-users pt">
-                <span class="product-user-tag">Segurados</span>
-                <span class="product-user-tag">Beneficiários</span>
-                <span class="product-user-tag">Corretores</span>
-                <span class="product-user-tag">Empresas RH</span>
+              <div class="product-users">
+                <span class="product-user-tag"><span class="en-inline">Insured</span><span
+                    class="pt-inline">Segurados</span></span>
+                <span class="product-user-tag"><span class="en-inline">Beneficiaries</span><span
+                    class="pt-inline">Beneficiários</span></span>
+                <span class="product-user-tag"><span class="en-inline">Brokers</span><span
+                    class="pt-inline">Corretores</span></span>
+                <span class="product-user-tag"><span class="en-inline">HR Companies</span><span
+                    class="pt-inline">Empresas RH</span></span>
               </div>
             </div>
           </div>
@@ -2122,19 +2131,17 @@
               <p class="product-desc pt">Uma plataforma completa de regulação para analistas, gestores e parceiros — com
                 acesso diferenciado por perfil e integração com sistemas legados (SNGS e I4PRO). A fonte única de
                 verdade para toda a operação.</p>
-              <div class="product-users en">
-                <span class="product-user-tag">Technical Analysts</span>
-                <span class="product-user-tag">GESIN Managers</span>
-                <span class="product-user-tag">Medical Providers</span>
-                <span class="product-user-tag">Call Center</span>
-                <span class="product-user-tag">Legal</span>
-              </div>
-              <div class="product-users pt">
-                <span class="product-user-tag">Analistas Técnicos</span>
-                <span class="product-user-tag">Gerentes GESIN</span>
-                <span class="product-user-tag">Prestadores Médicos</span>
-                <span class="product-user-tag">Call Center</span>
-                <span class="product-user-tag">Jurídico</span>
+              <div class="product-users">
+                <span class="product-user-tag"><span class="en-inline">Technical Analysts</span><span
+                    class="pt-inline">Analistas Técnicos</span></span>
+                <span class="product-user-tag"><span class="en-inline">GESIN Managers</span><span
+                    class="pt-inline">Gerentes GESIN</span></span>
+                <span class="product-user-tag"><span class="en-inline">Medical Providers</span><span
+                    class="pt-inline">Prestadores Médicos</span></span>
+                <span class="product-user-tag"><span class="en-inline">Call Center</span><span class="pt-inline">Call
+                    Center</span></span>
+                <span class="product-user-tag"><span class="en-inline">Legal</span><span
+                    class="pt-inline">Jurídico</span></span>
               </div>
             </div>
           </div>
@@ -2173,7 +2180,8 @@
         </h2>
         <p class="cs-body-text en">To guide continuous improvement after launch, I defined a metrics strategy using the
           <strong>HEART framework</strong> — focusing on what truly reflects product quality, not just vanity metrics.
-          Each product got its own measurement plan aligned with its business and user objectives.</p>
+          Each product got its own measurement plan aligned with its business and user objectives.
+        </p>
         <p class="cs-body-text pt">Para guiar a melhoria contínua após o lançamento, defini uma estratégia de métricas
           usando o <strong>framework HEART</strong> — focando no que realmente reflete a qualidade do produto, não
           apenas métricas de vaidade. Cada produto recebeu seu próprio plano de medição alinhado aos seus objetivos de
@@ -2256,13 +2264,11 @@
                   <li>Tempo de carregamento de páginas</li>
                 </ul>
               </div>
-              <div class="product-users en" style="margin-top: 16px;">
-                <span class="product-user-tag">Happiness</span>
-                <span class="product-user-tag">Task Success</span>
-              </div>
-              <div class="product-users pt" style="margin-top: 16px;">
-                <span class="product-user-tag">Felicidade</span>
-                <span class="product-user-tag">Sucesso de Tarefas</span>
+              <div class="product-users" style="margin-top: 16px;">
+                <span class="product-user-tag"><span class="en-inline">Happiness</span><span
+                    class="pt-inline">Felicidade</span></span>
+                <span class="product-user-tag"><span class="en-inline">Task Success</span><span
+                    class="pt-inline">Sucesso de Tarefas</span></span>
               </div>
             </div>
           </div>
@@ -2300,13 +2306,11 @@
                   <li>Tempo de carregamento de páginas</li>
                 </ul>
               </div>
-              <div class="product-users en" style="margin-top: 16px;">
-                <span class="product-user-tag">Happiness</span>
-                <span class="product-user-tag">Task Success</span>
-              </div>
-              <div class="product-users pt" style="margin-top: 16px;">
-                <span class="product-user-tag">Felicidade</span>
-                <span class="product-user-tag">Sucesso de Tarefas</span>
+              <div class="product-users" style="margin-top: 16px;">
+                <span class="product-user-tag"><span class="en-inline">Happiness</span><span
+                    class="pt-inline">Felicidade</span></span>
+                <span class="product-user-tag"><span class="en-inline">Task Success</span><span
+                    class="pt-inline">Sucesso de Tarefas</span></span>
               </div>
             </div>
           </div>
@@ -2329,7 +2333,8 @@
               a todo o processo de sinistros — para clientes, corretores, analistas e gestores igualmente.</p>
             <p class="cs-body-text en">Visibility for clients and brokers. Reduced rework across internal teams. A
               <strong>single source of truth</strong> for the whole operation — replacing a fragmented, phone-dependent
-              process that left everyone operating blind.</p>
+              process that left everyone operating blind.
+            </p>
             <p class="cs-body-text pt">Visibilidade para clientes e corretores. Redução de retrabalho nas equipes
               internas. Uma <strong>fonte única de verdade</strong> para toda a operação — substituindo um processo
               fragmentado e dependente de telefone que deixava todos operando no escuro.</p>
