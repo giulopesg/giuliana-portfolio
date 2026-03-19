@@ -480,10 +480,48 @@ function submit(){
     return;
   }
   fd.nome=nome;fd.email=email;fd.proj=document.getElementById('inp-proj').value;
-  document.getElementById('formInner').style.display='none';
-  document.getElementById('formSuccess').style.display='block';
-  document.getElementById('progBar').style.width='100%';
+  fetch('https://formspree.io/f/xyknoagr', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nome: fd.nome,
+      email: fd.email,
+      projeto: fd.proj,
+      tipo: fd.s1
+    })
+  })
+  .then(() => {
+    document.getElementById('formInner').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    document.getElementById('progBar').style.width = '100%';
+    gtag('event', 'form_submit', {
+      event_category: 'lead',
+      event_label: fd.s1
+    });
+  })
+  .catch(() => alert('Erro ao enviar. Tenta pelo WhatsApp!'));
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  // CTA hero
+  const ctaHero = document.querySelector('.btn-primary');
+  if (ctaHero) ctaHero.addEventListener('click', () => {
+    gtag('event', 'cta_hero_click', { event_category: 'engagement' });
+  });
+
+  // WhatsApp — todos os links
+  document.querySelectorAll('a[href*="wa.me"]').forEach(el => {
+    el.addEventListener('click', () => {
+      gtag('event', 'whatsapp_click', { event_category: 'engagement' });
+    });
+  });
+
+  // Ver mais cases
+  const cases = document.querySelector('.btn-cases');
+  if (cases) cases.addEventListener('click', () => {
+    gtag('event', 'cases_click', { event_category: 'engagement' });
+  });
+});
 </script>
 </body>
 </html>
