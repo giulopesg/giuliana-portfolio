@@ -217,10 +217,10 @@ footer{border-top:0.5px solid var(--border);padding:32px 48px;max-width:1100px;m
 .footer-links a:hover{color:var(--text);}
 
 @media(max-width:900px){
-  nav{padding:16px 24px;}
-  .nav-links{gap:16px;}
-  .nav-links a{font-size:14px;}
-  .nav-cta{padding:6px 14px!important;}
+  nav{padding:16px 24px;gap:12px;}
+  .nav-links{gap:12px;}
+  .nav-links a{font-size:13px;}
+  .nav-cta{padding:6px 12px!important;font-size:12px!important;}
   .hero{grid-template-columns:1fr;min-height:auto;}
   .hero-photo{min-height:60vw;border-left:none;border-top:0.5px solid var(--border);order:-1;}
   .hero-left{padding:48px 24px 40px;}
@@ -254,6 +254,21 @@ footer{border-top:0.5px solid var(--border);padding:32px 48px;max-width:1100px;m
   footer{padding:24px 16px;}
 }
 html,body{overflow-x:hidden;}
+
+/* LANG TOGGLE */
+.lang-toggle{display:flex;gap:2px;background:transparent;border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:4px;}
+.lang-btn{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0.08em;padding:6px 14px;border-radius:16px;border:none;background:transparent;color:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.2s;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+
+/* LANG SWITCHING */
+.en-inline{display:inline;}
+.pt-inline{display:none;}
+.lang-pt .en-inline{display:none;}
+.lang-pt .pt-inline{display:inline;}
+.en{display:block;}
+.pt{display:none;}
+.lang-pt .en{display:none;}
+.lang-pt .pt{display:block;}
 </style>
 </head>
 <body>
@@ -261,37 +276,42 @@ html,body{overflow-x:hidden;}
 <nav>
   <span class="nav-logo">Giuliana Lopes Galvão</span>
   <ul class="nav-links">
-    <li><a href="https://www.giulopesgalvao.com.br">Portfólio</a></li>
+    <li><a href="https://www.giulopesgalvao.com.br"><span class="en-inline">Portfolio</span><span class="pt-inline">Portfólio</span></a></li>
     <li><a href="#cases">Cases</a></li>
-    <li><a href="#contato" class="nav-cta">Falar sobre meu projeto</a></li>
+    <li><a href="#contato" class="nav-cta"><span class="en-inline">Tell me about your project</span><span class="pt-inline">Falar sobre meu projeto</span></a></li>
   </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
     <div class="hero-eyebrow">
-      <span class="eyebrow-tag">Founders · PMEs · Agências</span>
+      <span class="eyebrow-tag"><span class="en-inline">Founders · SMBs · Agencies</span><span class="pt-inline">Founders · PMEs · Agências</span></span>
       <span class="eyebrow-sep">·</span>
-      <span class="eyebrow-accent">Produto digital com IA</span>
+      <span class="eyebrow-accent"><span class="en-inline">AI-powered digital product</span><span class="pt-inline">Produto digital com IA</span></span>
     </div>
     <h1>
-      Da ideia ao produto.<br>
-      <span class="italic">Em semanas, não meses.</span>
+      <span class="en-inline">From idea to product.</span><span class="pt-inline">Da ideia ao produto.</span><br>
+      <span class="italic"><span class="en-inline">In weeks, not months.</span><span class="pt-inline">Em semanas, não meses.</span></span>
     </h1>
     <p class="hero-sub">
-      Eu projeto e construo <strong>sites, apps e MVPs</strong> usando IA — com o método e a experiência de quem fez isso para Petrobras, Banco do Brasil e CPFL. Sem time grande, sem orçamento de enterprise.
+      <span class="en-inline">I design and build <strong>websites, apps and MVPs</strong> using AI — with the method and experience of someone who did it for Petrobras, Banco do Brasil and CPFL. No large team, no enterprise budget.</span>
+      <span class="pt-inline">Eu projeto e construo <strong>sites, apps e MVPs</strong> usando IA — com o método e a experiência de quem fez isso para Petrobras, Banco do Brasil e CPFL. Sem time grande, sem orçamento de enterprise.</span>
     </p>
     <div class="hero-actions">
-      <a href="#contato" class="btn-primary">Me conta seu projeto →</a>
-      <a href="https://www.giulopesgalvao.com.br" class="btn-ghost" target="_blank">Ver portfólio ↗</a>
+      <a href="#contato" class="btn-primary"><span class="en-inline">Tell me about your project →</span><span class="pt-inline">Me conta seu projeto →</span></a>
+      <a href="https://www.giulopesgalvao.com.br" class="btn-ghost" target="_blank"><span class="en-inline">View portfolio ↗</span><span class="pt-inline">Ver portfólio ↗</span></a>
     </div>
     <div class="hero-proof">
-      <div class="proof-item"><span class="proof-dot"></span>8 anos de experiência</div>
+      <div class="proof-item"><span class="proof-dot"></span><span class="en-inline">8 years experience</span><span class="pt-inline">8 anos de experiência</span></div>
       <span class="proof-sep">|</span>
-      <div class="proof-item"><span class="proof-dot"></span>React + IA + UX</div>
+      <div class="proof-item"><span class="proof-dot"></span><span class="en-inline">React + AI + UX</span><span class="pt-inline">React + IA + UX</span></div>
       <span class="proof-sep">|</span>
-      <div class="proof-item"><span class="proof-dot"></span>Remoto · Inglês C1</div>
+      <div class="proof-item"><span class="proof-dot"></span><span class="en-inline">Remote · English C1</span><span class="pt-inline">Remoto · Inglês C1</span></div>
     </div>
   </div>
 
@@ -307,39 +327,39 @@ html,body{overflow-x:hidden;}
 
 <!-- TRANSFORMATION -->
 <section class="transformation" id="o-que-entrego">
-  <p class="section-label">O que muda</p>
-  <h2 class="section-title transf-title">Do "nunca sai do papel" <em>ao produto no ar</em></h2>
+  <p class="section-label"><span class="en-inline">What changes</span><span class="pt-inline">O que muda</span></p>
+  <h2 class="section-title transf-title"><span class="en-inline">From "never ships" <em>to product in production</em></span><span class="pt-inline">Do "nunca sai do papel" <em>ao produto no ar</em></span></h2>
   <div class="before-after">
     <div class="ba-col">
-      <div class="ba-tag before-tag">Sem mim</div>
-      <div class="ba-item"><div class="ba-icon">⏳</div><div class="ba-text muted-txt">Meses de reunião antes de ver qualquer coisa funcionar</div></div>
-      <div class="ba-item"><div class="ba-icon">💸</div><div class="ba-text muted-txt">Time caro de dev + design + PM para um MVP simples</div></div>
-      <div class="ba-item"><div class="ba-icon">🌀</div><div class="ba-text muted-txt">Spec infinito no Notion que nunca vira produto</div></div>
-      <div class="ba-item"><div class="ba-icon">❓</div><div class="ba-text muted-txt">Ninguém sabe ao certo o que vai ser entregue</div></div>
+      <div class="ba-tag before-tag"><span class="en-inline">Without me</span><span class="pt-inline">Sem mim</span></div>
+      <div class="ba-item"><div class="ba-icon">⏳</div><div class="ba-text muted-txt"><span class="en-inline">Months of meetings before seeing anything work</span><span class="pt-inline">Meses de reunião antes de ver qualquer coisa funcionar</span></div></div>
+      <div class="ba-item"><div class="ba-icon">💸</div><div class="ba-text muted-txt"><span class="en-inline">Expensive dev + design + PM team for a simple MVP</span><span class="pt-inline">Time caro de dev + design + PM para um MVP simples</span></div></div>
+      <div class="ba-item"><div class="ba-icon">🌀</div><div class="ba-text muted-txt"><span class="en-inline">Endless spec in Notion that never becomes a product</span><span class="pt-inline">Spec infinito no Notion que nunca vira produto</span></div></div>
+      <div class="ba-item"><div class="ba-icon">❓</div><div class="ba-text muted-txt"><span class="en-inline">Nobody knows exactly what will be delivered</span><span class="pt-inline">Ninguém sabe ao certo o que vai ser entregue</span></div></div>
     </div>
     <div class="ba-arrow">→</div>
     <div class="ba-col after">
-      <div class="ba-tag after-tag">Com a Giuliana</div>
-      <div class="ba-item"><div class="ba-icon">⚡</div><div class="ba-text bright-txt">MVP funcional em 2–4 semanas, testável de verdade</div></div>
-      <div class="ba-item"><div class="ba-icon">🎯</div><div class="ba-text bright-txt">Uma pessoa que faz produto, UX e IA ao mesmo tempo</div></div>
-      <div class="ba-item"><div class="ba-icon">✅</div><div class="ba-text bright-txt">Decisões claras a cada etapa — sem surpresa no final</div></div>
-      <div class="ba-item"><div class="ba-icon">🚀</div><div class="ba-text bright-txt">Código real, deployado, com seu domínio no ar</div></div>
+      <div class="ba-tag after-tag"><span class="en-inline">With Giuliana</span><span class="pt-inline">Com a Giuliana</span></div>
+      <div class="ba-item"><div class="ba-icon">⚡</div><div class="ba-text bright-txt"><span class="en-inline">Working MVP in 2–4 weeks, actually testable</span><span class="pt-inline">MVP funcional em 2–4 semanas, testável de verdade</span></div></div>
+      <div class="ba-item"><div class="ba-icon">🎯</div><div class="ba-text bright-txt"><span class="en-inline">One person handling product, UX and AI at once</span><span class="pt-inline">Uma pessoa que faz produto, UX e IA ao mesmo tempo</span></div></div>
+      <div class="ba-item"><div class="ba-icon">✅</div><div class="ba-text bright-txt"><span class="en-inline">Clear decisions at every step — no surprises at the end</span><span class="pt-inline">Decisões claras a cada etapa — sem surpresa no final</span></div></div>
+      <div class="ba-item"><div class="ba-icon">🚀</div><div class="ba-text bright-txt"><span class="en-inline">Real code, deployed, with your domain live</span><span class="pt-inline">Código real, deployado, com seu domínio no ar</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- NEUROOT — PLACEHOLDER PARA PRINTS -->
+<!-- NEUROOT -->
 <section class="neuroot-section" id="cases">
   <div class="neuroot-inner">
     <div class="neuroot-grid">
       <div class="neuroot-img-wrap">
-        <img style="width:100%;display:block;mix-blend-mode:screen;filter:brightness(1.05);" src="/images/neuroot-mockup.png" loading="lazy" alt="Neuroot — app de recuperação pós-burnout">
+        <img style="width:100%;display:block;mix-blend-mode:screen;filter:brightness(1.05);" src="/images/neuroot-mockup.png" loading="lazy" alt="Neuroot — post-burnout recovery app">
       </div>
       <div class="neuroot-desc">
-        <p class="section-label">Case — Projeto pessoal</p>
-        <h2 class="section-title" style="margin-bottom:16px;">Neuroot — <em>app que eu construí do zero com IA</em></h2>
-        <p>App de recuperação pós-burnout. Sem equipe, sem agência, sem orçamento de startup. Só método, IA e 3 semanas.</p>
-        <p>Design Thinking definiu o problema. Shape Up definiu o escopo. Claude Code e Claude API construíram. Está no ar, funciona, e é a prova mais concreta do que entrego para os meus clientes.</p>
+        <p class="section-label"><span class="en-inline">Case — Personal project</span><span class="pt-inline">Case — Projeto pessoal</span></p>
+        <h2 class="section-title" style="margin-bottom:16px;"><span class="en-inline">Neuroot — <em>app I built from scratch with AI</em></span><span class="pt-inline">Neuroot — <em>app que eu construí do zero com IA</em></span></h2>
+        <p><span class="en-inline">Post-burnout recovery app. No team, no agency, no startup budget. Just method, AI and 3 weeks.</span><span class="pt-inline">App de recuperação pós-burnout. Sem equipe, sem agência, sem orçamento de startup. Só método, IA e 3 semanas.</span></p>
+        <p><span class="en-inline">Design Thinking defined the problem. Shape Up defined the scope. Claude Code and Claude API built it. It's live, it works, and it's the most concrete proof of what I deliver to my clients.</span><span class="pt-inline">Design Thinking definiu o problema. Shape Up definiu o escopo. Claude Code e Claude API construíram. Está no ar, funciona, e é a prova mais concreta do que entrego para os meus clientes.</span></p>
         <div class="neuroot-stack">
           <span class="stack-tag">React + TypeScript</span>
           <span class="stack-tag">Supabase</span>
@@ -347,8 +367,8 @@ html,body{overflow-x:hidden;}
           <span class="stack-tag">Figma Make</span>
           <span class="stack-tag">Vercel</span>
         </div>
-        <a href="https://neuroot.vercel.app" class="neuroot-link" target="_blank">Abrir o Neuroot ao vivo ↗</a>
-        <a href="https://www.giulopesgalvao.com.br#work" class="btn-cases" target="_blank">Ver mais cases →</a>
+        <a href="https://neuroot.vercel.app" class="neuroot-link" target="_blank"><span class="en-inline">Open Neuroot live ↗</span><span class="pt-inline">Abrir o Neuroot ao vivo ↗</span></a>
+        <a href="https://www.giulopesgalvao.com.br#work" class="btn-cases" target="_blank"><span class="en-inline">See more cases →</span><span class="pt-inline">Ver mais cases →</span></a>
       </div>
     </div>
   </div>
@@ -357,29 +377,29 @@ html,body{overflow-x:hidden;}
 <!-- SERVICES -->
 <section class="services">
   <div class="services-inner">
-    <p class="section-label">Como trabalho</p>
-    <h2 class="section-title" style="margin-bottom:52px;">Três formas de <em>entrar em ação</em></h2>
+    <p class="section-label"><span class="en-inline">How I work</span><span class="pt-inline">Como trabalho</span></p>
+    <h2 class="section-title" style="margin-bottom:52px;"><span class="en-inline">Three ways to <em>get started</em></span><span class="pt-inline">Três formas de <em>entrar em ação</em></span></h2>
     <div class="services-grid">
       <div class="service-card">
         <div class="s-num">01</div>
-        <div class="s-who">Founders · PMEs</div>
-        <h3 class="s-title">Construo seu produto</h3>
-        <p class="s-desc">Site, app ou MVP do zero. Eu projeto, escrevo os prompts, dirijo a IA e entrego código funcional — não protótipo estático.</p>
-        <div class="s-tags"><span class="s-tag">Site</span><span class="s-tag">App</span><span class="s-tag">MVP</span><span class="s-tag">React + IA</span></div>
+        <div class="s-who"><span class="en-inline">Founders · SMBs</span><span class="pt-inline">Founders · PMEs</span></div>
+        <h3 class="s-title"><span class="en-inline">I build your product</span><span class="pt-inline">Construo seu produto</span></h3>
+        <p class="s-desc"><span class="en-inline">Website, app or MVP from scratch. I design, write the prompts, direct the AI and deliver working code — not static prototypes.</span><span class="pt-inline">Site, app ou MVP do zero. Eu projeto, escrevo os prompts, dirijo a IA e entrego código funcional — não protótipo estático.</span></p>
+        <div class="s-tags"><span class="s-tag">Site</span><span class="s-tag">App</span><span class="s-tag">MVP</span><span class="s-tag"><span class="en-inline">React + AI</span><span class="pt-inline">React + IA</span></span></div>
       </div>
       <div class="service-card">
         <div class="s-num">02</div>
-        <div class="s-who">Empresas · Agências</div>
-        <h3 class="s-title">Consultoria de produto</h3>
-        <p class="s-desc">Seu time está travado ou indo devagar demais. Entro como sênior, entendo o problema real e destravamos juntos.</p>
-        <div class="s-tags"><span class="s-tag">Discovery</span><span class="s-tag">UX Research</span><span class="s-tag">Estratégia</span></div>
+        <div class="s-who"><span class="en-inline">Companies · Agencies</span><span class="pt-inline">Empresas · Agências</span></div>
+        <h3 class="s-title"><span class="en-inline">Product consulting</span><span class="pt-inline">Consultoria de produto</span></h3>
+        <p class="s-desc"><span class="en-inline">Your team is stuck or moving too slow. I come in as a senior, understand the real problem and we unblock together.</span><span class="pt-inline">Seu time está travado ou indo devagar demais. Entro como sênior, entendo o problema real e destravamos juntos.</span></p>
+        <div class="s-tags"><span class="s-tag">Discovery</span><span class="s-tag">UX Research</span><span class="s-tag"><span class="en-inline">Strategy</span><span class="pt-inline">Estratégia</span></span></div>
       </div>
       <div class="service-card">
         <div class="s-num">03</div>
         <div class="s-who">Designers · PMs</div>
-        <h3 class="s-title">Mentoria individual</h3>
-        <p class="s-desc">Para quem quer aprender a usar IA de verdade no trabalho — o método completo, não só o ChatGPT básico.</p>
-        <div class="s-tags"><span class="s-tag">1:1</span><span class="s-tag">IA aplicada</span><span class="s-tag">Design + produto</span></div>
+        <h3 class="s-title"><span class="en-inline">1:1 Mentoring</span><span class="pt-inline">Mentoria individual</span></h3>
+        <p class="s-desc"><span class="en-inline">For those who want to learn how to actually use AI at work — the full method, not just basic ChatGPT.</span><span class="pt-inline">Para quem quer aprender a usar IA de verdade no trabalho — o método completo, não só o ChatGPT básico.</span></p>
+        <div class="s-tags"><span class="s-tag">1:1</span><span class="s-tag"><span class="en-inline">Applied AI</span><span class="pt-inline">IA aplicada</span></span><span class="s-tag"><span class="en-inline">Design + product</span><span class="pt-inline">Design + produto</span></span></div>
       </div>
     </div>
   </div>
@@ -388,13 +408,13 @@ html,body{overflow-x:hidden;}
 <!-- FORM -->
 <section class="form-section" id="contato">
   <div class="form-left">
-    <p class="section-label">Vamos conversar</p>
-    <h2 class="section-title" style="margin-bottom:16px;">Duas perguntas.<br><em>Depois a gente fala.</em></h2>
-    <p class="form-desc">Não é formulário de contato — são as duas coisas que preciso saber para a conversa fazer sentido.</p>
+    <p class="section-label"><span class="en-inline">Let's talk</span><span class="pt-inline">Vamos conversar</span></p>
+    <h2 class="section-title" style="margin-bottom:16px;"><span class="en-inline">Two questions.<br><em>Then we talk.</em></span><span class="pt-inline">Duas perguntas.<br><em>Depois a gente fala.</em></span></h2>
+    <p class="form-desc"><span class="en-inline">This is not a contact form — these are the two things I need to know for the conversation to make sense.</span><span class="pt-inline">Não é formulário de contato — são as duas coisas que preciso saber para a conversa fazer sentido.</span></p>
     <div class="trust-list">
-      <div class="trust-item"><span class="trust-dot"></span>Respondo em até 24h úteis</div>
-      <div class="trust-item"><span class="trust-dot"></span>Sem compromisso, sem pitch forçado</div>
-      <div class="trust-item"><span class="trust-dot"></span><a href="https://wa.me/5511993862967" target="_blank" style="color:var(--accent);text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">Me chama direto no WhatsApp ↗</a></div>
+      <div class="trust-item"><span class="trust-dot"></span><span class="en-inline">I reply within 24 business hours</span><span class="pt-inline">Respondo em até 24h úteis</span></div>
+      <div class="trust-item"><span class="trust-dot"></span><span class="en-inline">No commitment, no forced pitch</span><span class="pt-inline">Sem compromisso, sem pitch forçado</span></div>
+      <div class="trust-item"><span class="trust-dot"></span><a href="https://wa.me/5511993862967" target="_blank" style="color:var(--accent);text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'"><span class="en-inline">Message me on WhatsApp ↗</span><span class="pt-inline">Me chama direto no WhatsApp ↗</span></a></div>
     </div>
   </div>
 
@@ -402,39 +422,39 @@ html,body{overflow-x:hidden;}
     <div class="form-prog"><div class="form-prog-bar" id="progBar"></div></div>
     <div class="form-inner" id="formInner">
       <div class="form-step active" id="s1">
-        <p class="step-ind">Pergunta 1 de 2</p>
-        <h3 class="fq">O que você está tentando resolver?</h3>
-        <p class="fhint">Escolha o que mais se aplica.</p>
+        <p class="step-ind"><span class="en-inline">Question 1 of 2</span><span class="pt-inline">Pergunta 1 de 2</span></p>
+        <h3 class="fq"><span class="en-inline">What are you trying to solve?</span><span class="pt-inline">O que você está tentando resolver?</span></h3>
+        <p class="fhint"><span class="en-inline">Pick the one that fits best.</span><span class="pt-inline">Escolha o que mais se aplica.</span></p>
         <div class="opts">
-          <div class="opt" data-s="1" data-v="construir"><span class="opt-ico">⚡</span><div><div class="opt-main">Quero construir um site, app ou MVP</div><div class="opt-sub">Tenho ideia — preciso de alguém que execute</div></div></div>
-          <div class="opt" data-s="1" data-v="travado"><span class="opt-ico">🧩</span><div><div class="opt-main">Meu produto ou time está travado</div><div class="opt-sub">Existe algo, mas não evolui como deveria</div></div></div>
-          <div class="opt" data-s="1" data-v="senior"><span class="opt-ico">🎯</span><div><div class="opt-main">Preciso de uma sênior no projeto</div><div class="opt-sub">Agência ou empresa buscando PJ especialista</div></div></div>
-          <div class="opt" data-s="1" data-v="aprender"><span class="opt-ico">🤖</span><div><div class="opt-main">Quero aprender IA aplicada a produto</div><div class="opt-sub">Designer, PM ou founder querendo evoluir</div></div></div>
+          <div class="opt" data-s="1" data-v="construir"><span class="opt-ico">⚡</span><div><div class="opt-main"><span class="en-inline">I want to build a website, app or MVP</span><span class="pt-inline">Quero construir um site, app ou MVP</span></div><div class="opt-sub"><span class="en-inline">I have an idea — I need someone to execute</span><span class="pt-inline">Tenho ideia — preciso de alguém que execute</span></div></div></div>
+          <div class="opt" data-s="1" data-v="travado"><span class="opt-ico">🧩</span><div><div class="opt-main"><span class="en-inline">My product or team is stuck</span><span class="pt-inline">Meu produto ou time está travado</span></div><div class="opt-sub"><span class="en-inline">Something exists, but it's not evolving as it should</span><span class="pt-inline">Existe algo, mas não evolui como deveria</span></div></div></div>
+          <div class="opt" data-s="1" data-v="senior"><span class="opt-ico">🎯</span><div><div class="opt-main"><span class="en-inline">I need a senior on the project</span><span class="pt-inline">Preciso de uma sênior no projeto</span></div><div class="opt-sub"><span class="en-inline">Agency or company looking for a specialist</span><span class="pt-inline">Agência ou empresa buscando PJ especialista</span></div></div></div>
+          <div class="opt" data-s="1" data-v="aprender"><span class="opt-ico">🤖</span><div><div class="opt-main"><span class="en-inline">I want to learn applied AI for product</span><span class="pt-inline">Quero aprender IA aplicada a produto</span></div><div class="opt-sub"><span class="en-inline">Designer, PM or founder looking to level up</span><span class="pt-inline">Designer, PM ou founder querendo evoluir</span></div></div></div>
         </div>
-        <div class="form-nav"><span></span><button class="btn-next" id="n1" disabled onclick="next(1)">Próxima →</button></div>
+        <div class="form-nav"><span></span><button class="btn-next" id="n1" disabled onclick="next(1)"><span class="en-inline">Next →</span><span class="pt-inline">Próxima →</span></button></div>
       </div>
 
       <div class="form-step" id="s2">
-        <p class="step-ind">Pergunta 2 de 2</p>
-        <h3 class="fq">Me fala mais sobre você</h3>
-        <p class="fhint">Nome, email e uma linha sobre o projeto — só isso.</p>
+        <p class="step-ind"><span class="en-inline">Question 2 of 2</span><span class="pt-inline">Pergunta 2 de 2</span></p>
+        <h3 class="fq"><span class="en-inline">Tell me more about you</span><span class="pt-inline">Me fala mais sobre você</span></h3>
+        <p class="fhint"><span class="en-inline">Name, email and one line about the project — that's it.</span><span class="pt-inline">Nome, email e uma linha sobre o projeto — só isso.</span></p>
         <div class="field-group">
-          <div class="field"><label class="flabel">Nome</label><input type="text" class="finput" id="inp-nome" placeholder="Como você se chama?"></div>
-          <div class="field"><label class="flabel">Email</label><input type="email" class="finput" id="inp-email" placeholder="seu@email.com"></div>
-          <div class="field"><label class="flabel">Uma linha sobre o projeto</label><input type="text" class="finput" id="inp-proj" placeholder="Ex: app de gestão para salões de beleza, ideia ainda no papel"></div>
+          <div class="field"><label class="flabel"><span class="en-inline">Name</span><span class="pt-inline">Nome</span></label><input type="text" class="finput" id="inp-nome" placeholder="Your name"></div>
+          <div class="field"><label class="flabel">Email</label><input type="email" class="finput" id="inp-email" placeholder="you@email.com"></div>
+          <div class="field"><label class="flabel"><span class="en-inline">One line about the project</span><span class="pt-inline">Uma linha sobre o projeto</span></label><input type="text" class="finput" id="inp-proj" placeholder="E.g.: management app for beauty salons, still just an idea"></div>
         </div>
         <div class="form-nav">
-          <button class="btn-back" onclick="back(2)">← Voltar</button>
-          <button class="btn-next" onclick="submit()">Enviar ✓</button>
+          <button class="btn-back" onclick="back(2)"><span class="en-inline">← Back</span><span class="pt-inline">← Voltar</span></button>
+          <button class="btn-next" onclick="submit()"><span class="en-inline">Submit ✓</span><span class="pt-inline">Enviar ✓</span></button>
         </div>
       </div>
     </div>
 
     <div class="form-success" id="formSuccess">
       <div class="suc-icon">✦</div>
-      <h3 class="suc-title">Recebi!</h3>
-      <p class="suc-desc">Vou ler com atenção e respondo em até 24h. Se quiser falar antes, me chama no WhatsApp.</p>
-      <a href="https://wa.me/5511993862967" class="btn-wa" target="_blank">Falar no WhatsApp agora</a>
+      <h3 class="suc-title"><span class="en-inline">Got it!</span><span class="pt-inline">Recebi!</span></h3>
+      <p class="suc-desc"><span class="en-inline">I'll read it carefully and reply within 24h. Want to talk sooner? Message me on WhatsApp.</span><span class="pt-inline">Vou ler com atenção e respondo em até 24h. Se quiser falar antes, me chama no WhatsApp.</span></p>
+      <a href="https://wa.me/5511993862967" class="btn-wa" target="_blank"><span class="en-inline">Chat on WhatsApp now</span><span class="pt-inline">Falar no WhatsApp agora</span></a>
     </div>
   </div>
 </section>
@@ -442,13 +462,34 @@ html,body{overflow-x:hidden;}
 <footer>
   <span class="footer-logo">Giuliana Lopes Galvão</span>
   <ul class="footer-links">
-    <li><a href="https://www.giulopesgalvao.com.br">Portfólio</a></li>
+    <li><a href="https://www.giulopesgalvao.com.br"><span class="en-inline">Portfolio</span><span class="pt-inline">Portfólio</span></a></li>
     <li><a href="mailto:giulopesg@gmail.com">giulopesg@gmail.com</a></li>
     <li><a href="https://linkedin.com/in/giulianalg">LinkedIn</a></li>
   </ul>
 </footer>
 
 <script>
+// ─── LANG TOGGLE ───
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.body.classList.toggle('lang-pt', lang === 'pt');
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+  localStorage.setItem('lang', lang);
+  // Update placeholders
+  const ph = {
+    en: { nome: 'Your name', email: 'you@email.com', proj: 'E.g.: management app for beauty salons, still just an idea' },
+    pt: { nome: 'Como você se chama?', email: 'seu@email.com', proj: 'Ex: app de gestão para salões de beleza, ideia ainda no papel' }
+  };
+  document.getElementById('inp-nome').placeholder = ph[lang].nome;
+  document.getElementById('inp-email').placeholder = ph[lang].email;
+  document.getElementById('inp-proj').placeholder = ph[lang].proj;
+}
+const savedLang = localStorage.getItem('lang');
+if (savedLang) setLang(savedLang);
+
 const fd={};
 document.querySelectorAll('.opt').forEach(o=>{
   o.addEventListener('click',()=>{
@@ -499,7 +540,7 @@ function submit(){
       event_label: fd.s1
     });
   })
-  .catch(() => alert('Erro ao enviar. Tenta pelo WhatsApp!'));
+  .catch(() => alert(currentLang === 'pt' ? 'Erro ao enviar. Tenta pelo WhatsApp!' : 'Error sending. Try WhatsApp instead!'));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
