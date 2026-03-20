@@ -78,12 +78,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;padding:18px 48px;display:flex;align-items:center;gap:28px;background:rgba(10,10,10,0.9);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border);z-index:100;}
 .nav-logo{font-family:'Syne',sans-serif;font-weight:500;font-size:16px;color:var(--text);margin-right:auto;}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
-.nav-links a{font-size:17px;color:var(--muted2);text-decoration:none;transition:color 0.2s;}
-.nav-links a:hover{color:var(--text);}
 .nav-cta{color:var(--accent);border:1px solid rgba(168,85,247,0.45);padding:7px 18px;border-radius:8px;transition:all 0.2s;font-weight:500;font-size:14px;text-decoration:none;white-space:nowrap;}
 .nav-cta:hover{background:var(--accent-dim);}
-.cta-short{display:none;}
 
 /* HERO */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:end;max-width:1200px;margin:0 auto;padding-top:70px;}
@@ -219,12 +215,6 @@ footer{border-top:0.5px solid var(--border);padding:32px 48px;max-width:1100px;m
 
 @media(max-width:900px){
   nav{padding:16px 24px;gap:12px;}
-  .nav-links{display:none;}
-  .cta-full{display:none!important;}
-  .cta-short{display:inline!important;}
-  .lang-pt .cta-short.en-inline{display:none!important;}
-  .lang-pt .cta-short.pt-inline{display:inline!important;}
-  .nav-cta{padding:6px 14px;font-size:13px;}
   .hero{grid-template-columns:1fr;min-height:auto;}
   .hero-photo{min-height:60vw;border-left:none;border-top:0.5px solid var(--border);order:-1;}
   .hero-left{padding:48px 24px 40px;}
@@ -295,11 +285,7 @@ nav{transition:background 0.4s,padding 0.4s,border-color 0.3s;}
 
 <nav>
   <span class="nav-logo">Giuliana Lopes Galvão</span>
-  <ul class="nav-links">
-    <li><a href="https://www.giulopesgalvao.com.br"><span class="en-inline">Portfolio</span><span class="pt-inline">Portfólio</span></a></li>
-    <li><a href="#cases">Cases</a></li>
-  </ul>
-  <a href="#contato" class="nav-cta"><span class="en-inline cta-full">Tell me about your project</span><span class="en-inline cta-short">Contact</span><span class="pt-inline cta-full">Falar sobre meu projeto</span><span class="pt-inline cta-short">Contato</span></a>
+  <a href="#contato" class="nav-cta"><span class="en-inline">Contact</span><span class="pt-inline">Contato</span></a>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')">EN</button>
     <button class="lang-btn" onclick="setLang('pt')">PT</button>
