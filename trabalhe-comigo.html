@@ -83,6 +83,8 @@ nav{position:fixed;top:0;left:0;right:0;padding:18px 48px;display:flex;align-ite
 .nav-links a:hover{color:var(--text);}
 .nav-cta{color:var(--accent)!important;border:1px solid rgba(168,85,247,0.45)!important;padding:7px 18px;border-radius:8px;transition:all 0.2s!important;font-weight:500;min-height:48px;display:inline-flex;align-items:center;}
 .nav-cta:hover{background:var(--accent-dim)!important;}
+.cta-short{display:none!important;}
+@media(max-width:900px){.cta-full{display:none!important;}.cta-short{display:inline!important;}.lang-pt .cta-short.en-inline{display:none!important;}.lang-pt .cta-short.pt-inline{display:inline!important;}}
 
 /* HERO */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:end;max-width:1200px;margin:0 auto;padding-top:70px;}
@@ -226,9 +228,8 @@ footer{border-top:0.5px solid var(--border);padding:32px 48px;max-width:1100px;m
   .hero-left{padding:48px 24px 40px;}
   .hero-proof{flex-wrap:wrap;}
   .transformation,.neuroot-section,.services,.form-section{padding:64px 24px;}
-  .before-after{grid-template-columns:1fr;gap:1px;}
-  .ba-arrow{padding:14px;justify-content:center;}
-  .ba-arrow{transform:rotate(90deg);}
+  .before-after{grid-template-columns:1fr;gap:0;}
+  .ba-arrow{display:none;}
   .neuroot-grid{grid-template-columns:1fr;gap:36px;}
   .neuroot-img-wrap{order:-1;}
   .services-grid{grid-template-columns:1fr;}
@@ -295,7 +296,7 @@ nav{transition:background 0.4s,padding 0.4s,border-color 0.3s;}
   <ul class="nav-links">
     <li><a href="https://www.giulopesgalvao.com.br"><span class="en-inline">Portfolio</span><span class="pt-inline">Portfólio</span></a></li>
     <li><a href="#cases">Cases</a></li>
-    <li><a href="#contato" class="nav-cta"><span class="en-inline">Tell me about your project</span><span class="pt-inline">Falar sobre meu projeto</span></a></li>
+    <li><a href="#contato" class="nav-cta"><span class="en-inline cta-full">Tell me about your project</span><span class="en-inline cta-short">Contact</span><span class="pt-inline cta-full">Falar sobre meu projeto</span><span class="pt-inline cta-short">Contato</span></a></li>
   </ul>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')">EN</button>
