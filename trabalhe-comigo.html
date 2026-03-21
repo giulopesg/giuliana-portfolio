@@ -24,24 +24,20 @@
   "jobTitle": "UX Designer & Product Builder",
   "description": "Construo sites, apps e MVPs com IA em semanas. UX Designer com 8 anos de experiência.",
   "url": "https://giulopesgalvao.com.br/trabalhe-comigo",
-  "sameAs": [
-    "https://linkedin.com/in/giulianalg",
-    "https://neuroot.vercel.app"
-  ],
-  "knowsAbout": ["UX Design", "Product Design", "Artificial Intelligence", "MVP Development", "Design Engineering"],
+  "sameAs": ["https://linkedin.com/in/giulianalg","https://neuroot.vercel.app"],
+  "knowsAbout": ["UX Design","Product Design","Artificial Intelligence","MVP Development","Design Engineering"],
   "offers": {
     "@type": "Offer",
     "name": "Consultoria de Produto Digital com IA",
     "description": "Construção de sites, apps e MVPs usando IA com método UX",
     "areaServed": "BR",
-    "availableLanguage": ["Portuguese", "English"]
+    "availableLanguage": ["Portuguese","English"]
   }
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-40LYDES9F0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -49,7 +45,6 @@
   gtag('js', new Date());
   gtag('config', 'G-40LYDES9F0');
 </script>
-<!-- Microsoft Clarity -->
 <script type="text/javascript">
   (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -77,7 +72,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;padding:18px 48px;display:flex;align-items:center;gap:28px;background:rgba(10,10,10,0.9);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border);z-index:100;}
-.nav-logo{font-family:'Syne',sans-serif;font-weight:500;font-size:16px;color:var(--text);margin-right:auto;}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:500;font-size:16px;color:var(--text);text-decoration:none;}
+.nav-back{font-size:13px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:5px;transition:color 0.2s;margin-right:auto;}
+.nav-back:hover{color:var(--text);}
 .nav-cta{color:var(--accent);border:1px solid rgba(168,85,247,0.45);padding:7px 18px;border-radius:8px;transition:all 0.2s;font-weight:500;font-size:14px;text-decoration:none;white-space:nowrap;}
 .nav-cta:hover{background:var(--accent-dim);}
 
@@ -132,14 +129,11 @@ nav{position:fixed;top:0;left:0;right:0;padding:18px 48px;display:flex;align-ite
 .muted-txt{color:var(--muted2);}
 .bright-txt{color:var(--text);}
 
-/* NEUROOT PLACEHOLDER */
+/* NEUROOT */
 .neuroot-section{background:var(--surface);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:100px 48px;}
 .neuroot-inner{max-width:1100px;margin:0 auto;}
 .neuroot-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:center;}
 .neuroot-img-wrap{overflow:visible;background:var(--surface);}
-
-
-
 .neuroot-desc .section-title{margin-bottom:16px;}
 .neuroot-desc p{font-size:16px;color:var(--muted2);line-height:1.75;margin-bottom:20px;}
 .neuroot-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px;}
@@ -149,19 +143,27 @@ nav{position:fixed;top:0;left:0;right:0;padding:18px 48px;display:flex;align-ite
 .btn-cases{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:12px 24px;border:1px solid rgba(168,85,247,0.5);border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none;transition:all 0.2s;background:transparent;}
 .btn-cases:hover{background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.8);}
 
-/* SERVICES */
+/* SERVICES — 2 cards only */
 .services{padding:100px 48px;}
 .services-inner{max-width:1100px;margin:0 auto;}
 .services .section-title{margin-bottom:52px;}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;}
-.service-card{background:var(--surface);padding:32px 28px;transition:background 0.2s;}
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;}
+.service-card{background:var(--surface);padding:40px 36px;transition:background 0.2s;}
 .service-card:hover{background:var(--surface2);}
 .s-num{font-family:'Syne',sans-serif;font-size:17px;color:var(--muted);letter-spacing:0.1em;margin-bottom:16px;}
 .s-who{display:inline-block;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
-.s-title{font-family:'Syne',sans-serif;font-weight:500;font-size:16px;color:var(--text);margin-bottom:9px;}
+.s-title{font-family:'Syne',sans-serif;font-weight:500;font-size:18px;color:var(--text);margin-bottom:9px;}
 .s-desc{font-size:17px;color:var(--muted2);line-height:1.7;margin-bottom:18px;}
 .s-tags{display:flex;flex-wrap:wrap;gap:5px;}
 .s-tag{font-size:11px;color:var(--muted);padding:2px 7px;border:0.5px solid var(--border);border-radius:4px;letter-spacing:0.03em;}
+
+/* LEARN CALLOUT */
+.learn-callout{max-width:1100px;margin:0 auto;padding:0 48px 80px;}
+.learn-banner{background:var(--surface);border:0.5px solid rgba(168,85,247,0.2);border-radius:12px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.learn-banner-text p{font-size:13px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+.learn-banner-text span{font-size:16px;color:var(--text);}
+.btn-learn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--accent);border:1px solid rgba(168,85,247,0.35);border-radius:8px;padding:10px 20px;text-decoration:none;transition:all 0.2s;font-family:'Syne',sans-serif;white-space:nowrap;}
+.btn-learn:hover{background:var(--accent-dim);border-color:rgba(168,85,247,0.6);}
 
 /* FORM */
 .form-section{max-width:1100px;margin:0 auto;padding:100px 48px;display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;}
@@ -213,41 +215,6 @@ footer{border-top:0.5px solid var(--border);padding:32px 48px;max-width:1100px;m
 .footer-links a{font-size:16px;color:var(--muted);text-decoration:none;transition:color 0.15s;}
 .footer-links a:hover{color:var(--text);}
 
-@media(max-width:900px){
-  nav{padding:16px 24px;gap:12px;}
-  .hero{grid-template-columns:1fr;min-height:auto;}
-  .hero-photo{min-height:60vw;border-left:none;border-top:0.5px solid var(--border);order:-1;}
-  .hero-left{padding:48px 24px 40px;}
-  .hero-proof{flex-wrap:wrap;}
-  .transformation,.neuroot-section,.services,.form-section{padding:64px 24px;}
-  .before-after{grid-template-columns:1fr;gap:0;}
-  .ba-arrow{display:none;}
-  .neuroot-grid{grid-template-columns:1fr;gap:36px;}
-  .neuroot-img-wrap{order:-1;}
-  .services-grid{grid-template-columns:1fr;}
-  .form-section{grid-template-columns:1fr;gap:36px;}
-  .form-left{position:static;}
-  .form-inner{padding:24px;}
-  .form-box{max-width:100%;}
-  .finput{font-size:16px;}
-  footer{flex-direction:column;gap:14px;text-align:center;padding:28px 24px;}
-}
-@media(max-width:400px){
-  nav{padding:14px 16px;}
-  .hero-left{padding:36px 16px 32px;}
-  .hero h1{font-size:32px;}
-  .hero h1 .italic{font-size:28px;}
-  .hero-sub{font-size:15px;}
-  .hero-proof{gap:8px;}
-  .proof-item{font-size:13px;}
-  .transformation,.neuroot-section,.services,.form-section{padding:48px 16px;}
-  .form-inner{padding:20px;}
-  .ba-col{padding:28px 20px;}
-  .service-card{padding:24px 20px;}
-  footer{padding:24px 16px;}
-}
-html,body{overflow-x:hidden;}
-
 /* SCROLL REVEAL */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1);}
 .reveal.visible{opacity:1;transform:translateY(0);}
@@ -269,8 +236,6 @@ nav{transition:background 0.4s,padding 0.4s,border-color 0.3s;}
 .lang-toggle{display:flex;gap:2px;background:transparent;border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:4px;}
 .lang-btn{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0.08em;padding:6px 14px;border-radius:16px;border:none;background:transparent;color:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.2s;}
 .lang-btn.active{background:var(--accent);color:#fff;}
-
-/* LANG SWITCHING */
 .en-inline{display:inline;}
 .pt-inline{display:none;}
 .lang-pt .en-inline{display:none;}
@@ -279,12 +244,44 @@ nav{transition:background 0.4s,padding 0.4s,border-color 0.3s;}
 .pt{display:none;}
 .lang-pt .en{display:none;}
 .lang-pt .pt{display:block;}
+html,body{overflow-x:hidden;}
+
+@media(max-width:900px){
+  nav{padding:16px 24px;gap:12px;}
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-photo{min-height:60vw;border-left:none;border-top:0.5px solid var(--border);order:-1;}
+  .hero-left{padding:48px 24px 40px;}
+  .hero-proof{flex-wrap:wrap;}
+  .transformation,.neuroot-section,.services,.form-section{padding:64px 24px;}
+  .learn-callout{padding:0 24px 64px;}
+  .before-after{grid-template-columns:1fr;gap:0;}
+  .ba-arrow{display:none;}
+  .neuroot-grid{grid-template-columns:1fr;gap:36px;}
+  .neuroot-img-wrap{order:-1;}
+  .services-grid{grid-template-columns:1fr;}
+  .form-section{grid-template-columns:1fr;gap:36px;}
+  .form-left{position:static;}
+  .form-inner{padding:24px;}
+  footer{flex-direction:column;gap:14px;text-align:center;padding:28px 24px;}
+}
+@media(max-width:400px){
+  nav{padding:14px 16px;}
+  .hero-left{padding:36px 16px 32px;}
+  .hero h1{font-size:32px;}
+  .hero h1 .italic{font-size:28px;}
+  .transformation,.neuroot-section,.services,.form-section{padding:48px 16px;}
+  .learn-callout{padding:0 16px 48px;}
+  .form-inner{padding:20px;}
+  .ba-col{padding:28px 20px;}
+  .service-card{padding:28px 20px;}
+  footer{padding:24px 16px;}
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <span class="nav-logo">Giuliana Lopes Galvão</span>
+  <a href="https://www.giulopesgalvao.com.br" class="nav-back">← <span class="en-inline">Home</span><span class="pt-inline">Página Inicial</span></a>
   <a href="#contato" class="nav-cta"><span class="en-inline">Contact</span><span class="pt-inline">Contato</span></a>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')">EN</button>
@@ -310,7 +307,7 @@ nav{transition:background 0.4s,padding 0.4s,border-color 0.3s;}
     </p>
     <div class="hero-actions reveal reveal-delay-3">
       <a href="#contato" class="btn-primary"><span class="en-inline">Tell me about your project →</span><span class="pt-inline">Me conta seu projeto →</span></a>
-      <a href="https://www.giulopesgalvao.com.br" class="btn-ghost" target="_blank"><span class="en-inline">View portfolio ↗</span><span class="pt-inline">Ver portfólio ↗</span></a>
+      <a href="https://www.giulopesgalvao.com.br" class="btn-ghost"><span class="en-inline">View portfolio ↗</span><span class="pt-inline">Ver portfólio ↗</span></a>
     </div>
     <div class="hero-proof reveal reveal-delay-4">
       <div class="proof-item"><span class="proof-dot"></span><span class="en-inline">8 years experience</span><span class="pt-inline">8 anos de experiência</span></div>
@@ -320,7 +317,6 @@ nav{transition:background 0.4s,padding 0.4s,border-color 0.3s;}
       <div class="proof-item"><span class="proof-dot"></span><span class="en-inline">Remote · English C1</span><span class="pt-inline">Remoto · Inglês C1</span></div>
     </div>
   </div>
-
   <div class="hero-photo reveal-right">
     <img src="/images/giuliana-hero.jpg" alt="Giuliana Lopes Galvão">
     <div class="photo-overlay"></div>
@@ -374,17 +370,17 @@ nav{transition:background 0.4s,padding 0.4s,border-color 0.3s;}
           <span class="stack-tag">Vercel</span>
         </div>
         <a href="https://neuroot.vercel.app" class="neuroot-link" target="_blank"><span class="en-inline">Open Neuroot live ↗</span><span class="pt-inline">Abrir o Neuroot ao vivo ↗</span></a>
-        <a href="https://www.giulopesgalvao.com.br#work" class="btn-cases" target="_blank"><span class="en-inline">See more cases →</span><span class="pt-inline">Ver mais cases →</span></a>
+        <a href="https://www.giulopesgalvao.com.br#work" class="btn-cases"><span class="en-inline">See more cases →</span><span class="pt-inline">Ver mais cases →</span></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- SERVICES — 2 cards, mentoria removed -->
 <section class="services">
   <div class="services-inner">
     <p class="section-label reveal"><span class="en-inline">How I work</span><span class="pt-inline">Como trabalho</span></p>
-    <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:52px;"><span class="en-inline">Three ways to <em>get started</em></span><span class="pt-inline">Três formas de <em>entrar em ação</em></span></h2>
+    <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:52px;"><span class="en-inline">Two ways to <em>get started</em></span><span class="pt-inline">Duas formas de <em>entrar em ação</em></span></h2>
     <div class="services-grid">
       <div class="service-card reveal reveal-delay-1">
         <div class="s-num">01</div>
@@ -400,16 +396,21 @@ nav{transition:background 0.4s,padding 0.4s,border-color 0.3s;}
         <p class="s-desc"><span class="en-inline">Your team is stuck or moving too slow. I come in as a senior, understand the real problem and we unblock together.</span><span class="pt-inline">Seu time está travado ou indo devagar demais. Entro como sênior, entendo o problema real e destravamos juntos.</span></p>
         <div class="s-tags"><span class="s-tag">Discovery</span><span class="s-tag">UX Research</span><span class="s-tag"><span class="en-inline">Strategy</span><span class="pt-inline">Estratégia</span></span></div>
       </div>
-      <div class="service-card reveal reveal-delay-3">
-        <div class="s-num">03</div>
-        <div class="s-who">Designers · PMs</div>
-        <h3 class="s-title"><span class="en-inline">1:1 Mentoring</span><span class="pt-inline">Mentoria individual</span></h3>
-        <p class="s-desc"><span class="en-inline">For those who want to learn how to actually use AI at work — the full method, not just basic ChatGPT.</span><span class="pt-inline">Para quem quer aprender a usar IA de verdade no trabalho — o método completo, não só o ChatGPT básico.</span></p>
-        <div class="s-tags"><span class="s-tag">1:1</span><span class="s-tag"><span class="en-inline">Applied AI</span><span class="pt-inline">IA aplicada</span></span><span class="s-tag"><span class="en-inline">Design + product</span><span class="pt-inline">Design + produto</span></span></div>
-      </div>
     </div>
   </div>
 </section>
+
+<!-- LEARN CALLOUT -->
+<div class="learn-callout">
+  <div class="learn-banner reveal">
+    <div class="learn-banner-text">
+      <p><span class="en-inline">For designers & PMs</span><span class="pt-inline">Para designers & PMs</span></p>
+      <span class="en-inline">Want to learn how to use AI in your own work? I offer 1:1 mentoring and courses.</span>
+      <span class="pt-inline">Quer aprender a usar IA no seu trabalho? Tenho mentoria 1:1 e cursos.</span>
+    </div>
+    <a href="/aprender" class="btn-learn"><span class="en-inline">See mentoring & courses →</span><span class="pt-inline">Ver mentoria e cursos →</span></a>
+  </div>
+</div>
 
 <!-- FORM -->
 <section class="form-section" id="contato">
@@ -435,7 +436,6 @@ nav{transition:background 0.4s,padding 0.4s,border-color 0.3s;}
           <div class="opt" data-s="1" data-v="construir"><span class="opt-ico">⚡</span><div><div class="opt-main"><span class="en-inline">I want to build a website, app or MVP</span><span class="pt-inline">Quero construir um site, app ou MVP</span></div><div class="opt-sub"><span class="en-inline">I have an idea — I need someone to execute</span><span class="pt-inline">Tenho ideia — preciso de alguém que execute</span></div></div></div>
           <div class="opt" data-s="1" data-v="travado"><span class="opt-ico">🧩</span><div><div class="opt-main"><span class="en-inline">My product or team is stuck</span><span class="pt-inline">Meu produto ou time está travado</span></div><div class="opt-sub"><span class="en-inline">Something exists, but it's not evolving as it should</span><span class="pt-inline">Existe algo, mas não evolui como deveria</span></div></div></div>
           <div class="opt" data-s="1" data-v="senior"><span class="opt-ico">🎯</span><div><div class="opt-main"><span class="en-inline">I need a senior on the project</span><span class="pt-inline">Preciso de uma sênior no projeto</span></div><div class="opt-sub"><span class="en-inline">Agency or company looking for a specialist</span><span class="pt-inline">Agência ou empresa buscando PJ especialista</span></div></div></div>
-          <div class="opt" data-s="1" data-v="aprender"><span class="opt-ico">🤖</span><div><div class="opt-main"><span class="en-inline">I want to learn applied AI for product</span><span class="pt-inline">Quero aprender IA aplicada a produto</span></div><div class="opt-sub"><span class="en-inline">Designer, PM or founder looking to level up</span><span class="pt-inline">Designer, PM ou founder querendo evoluir</span></div></div></div>
         </div>
         <div class="form-nav"><span></span><button class="btn-next" id="n1" disabled onclick="next(1)"><span class="en-inline">Next →</span><span class="pt-inline">Próxima →</span></button></div>
       </div>
@@ -469,14 +469,13 @@ nav{transition:background 0.4s,padding 0.4s,border-color 0.3s;}
   <span class="footer-logo">Giuliana Lopes Galvão</span>
   <ul class="footer-links">
     <li><a href="https://www.giulopesgalvao.com.br"><span class="en-inline">Portfolio</span><span class="pt-inline">Portfólio</span></a></li>
-    <li><a href="/aprender"><span class="en-inline">Learn</span><span class="pt-inline">Aprender</span></a></li>
+    <li><a href="/aprender"><span class="en-inline">Mentoring & courses</span><span class="pt-inline">Mentoria & cursos</span></a></li>
     <li><a href="mailto:giulopesg@gmail.com">giulopesg@gmail.com</a></li>
     <li><a href="https://linkedin.com/in/giulianalg">LinkedIn</a></li>
   </ul>
 </footer>
 
 <script>
-// ─── LANG TOGGLE ───
 let currentLang = 'en';
 function setLang(lang) {
   currentLang = lang;
@@ -485,7 +484,6 @@ function setLang(lang) {
     btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
   });
   localStorage.setItem('lang', lang);
-  // Update placeholders
   const ph = {
     en: { nome: 'Your name', email: 'you@email.com', proj: 'E.g.: management app for beauty salons, still just an idea' },
     pt: { nome: 'Como você se chama?', email: 'seu@email.com', proj: 'Ex: app de gestão para salões de beleza, ideia ainda no papel' }
@@ -523,68 +521,48 @@ function submit(){
   const nome=document.getElementById('inp-nome').value.trim();
   const email=document.getElementById('inp-email').value.trim();
   if(!nome||!email){
-    document.getElementById('inp-nome').style.borderColor=nome?'':' rgba(168,85,247,0.55)';
-    document.getElementById('inp-email').style.borderColor=email?'':' rgba(168,85,247,0.55)';
+    document.getElementById('inp-nome').style.borderColor=nome?'':'rgba(168,85,247,0.55)';
+    document.getElementById('inp-email').style.borderColor=email?'':'rgba(168,85,247,0.55)';
     return;
   }
   fd.nome=nome;fd.email=email;fd.proj=document.getElementById('inp-proj').value;
-  fetch('https://formspree.io/f/xyknoagr', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      nome: fd.nome,
-      email: fd.email,
-      projeto: fd.proj,
-      tipo: fd.s1
-    })
+  fetch('https://formspree.io/f/xyknoagr',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({nome:fd.nome,email:fd.email,projeto:fd.proj,tipo:fd.s1})
   })
-  .then(() => {
-    document.getElementById('formInner').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-    document.getElementById('progBar').style.width = '100%';
-    gtag('event', 'form_submit', {
-      event_category: 'lead',
-      event_label: fd.s1
-    });
+  .then(()=>{
+    document.getElementById('formInner').style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+    document.getElementById('progBar').style.width='100%';
+    gtag('event','form_submit',{event_category:'lead',event_label:fd.s1});
   })
-  .catch(() => alert(currentLang === 'pt' ? 'Erro ao enviar. Tenta pelo WhatsApp!' : 'Error sending. Try WhatsApp instead!'));
+  .catch(()=>alert(currentLang==='pt'?'Erro ao enviar. Tenta pelo WhatsApp!':'Error sending. Try WhatsApp instead!'));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // CTA hero
-  const ctaHero = document.querySelector('.btn-primary');
-  if (ctaHero) ctaHero.addEventListener('click', () => {
-    gtag('event', 'cta_hero_click', { event_category: 'engagement' });
-  });
+document.addEventListener('DOMContentLoaded',()=>{
+  const ctaHero=document.querySelector('.btn-primary');
+  if(ctaHero)ctaHero.addEventListener('click',()=>gtag('event','cta_hero_click',{event_category:'engagement'}));
+  document.querySelectorAll('a[href*="wa.me"]').forEach(el=>el.addEventListener('click',()=>gtag('event','whatsapp_click',{event_category:'engagement'})));
+  const cases=document.querySelector('.btn-cases');
+  if(cases)cases.addEventListener('click',()=>gtag('event','cases_click',{event_category:'engagement'}));
+});
 
-  // WhatsApp — todos os links
-  document.querySelectorAll('a[href*="wa.me"]').forEach(el => {
-    el.addEventListener('click', () => {
-      gtag('event', 'whatsapp_click', { event_category: 'engagement' });
-    });
-  });
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+const revealObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible');});
+},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});
+revealEls.forEach(el=>revealObserver.observe(el));
 
-  // Ver mais cases
-  const cases = document.querySelector('.btn-cases');
-  if (cases) cases.addEventListener('click', () => {
-    gtag('event', 'cases_click', { event_category: 'engagement' });
+// Hero elements are above the fold — fire immediately on load
+window.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.hero .reveal,.hero .reveal-right,.hero .reveal-left').forEach((el,i)=>{
+    setTimeout(()=>el.classList.add('visible'), i * 80);
   });
 });
 
-// ─── SCROLL REVEAL ───
-const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-revealEls.forEach(el => revealObserver.observe(el));
-
-// ─── NAV SCROLL ───
-window.addEventListener('scroll', () => {
-  document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 40);
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').classList.toggle('scrolled',window.scrollY>40);
 });
 </script>
 </body>

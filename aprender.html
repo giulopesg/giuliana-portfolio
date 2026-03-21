@@ -25,27 +25,16 @@
       "name": "Giuliana Lopes Galvão",
       "jobTitle": "UX Designer, Mentora & Instrutora",
       "url": "https://giulopesgalvao.com.br/aprender",
-      "sameAs": [
-        "https://linkedin.com/in/giulianalg",
-        "https://neuroot.vercel.app"
-      ]
+      "sameAs": ["https://linkedin.com/in/giulianalg","https://neuroot.vercel.app"]
     },
     {
       "@type": "Course",
       "name": "IA para UX Designers",
       "description": "Do conceito ao deploy — o método completo para designers que querem usar IA de verdade.",
-      "provider": {
-        "@type": "Person",
-        "name": "Giuliana Lopes Galvão"
-      },
+      "provider": {"@type": "Person","name": "Giuliana Lopes Galvão"},
       "educationalLevel": "Beginner",
       "courseMode": "Online",
-      "availableLanguage": ["Portuguese", "English"],
-      "numberOfCredits": "5 módulos",
-      "hasCourseInstance": {
-        "@type": "CourseInstance",
-        "courseMode": "Online"
-      }
+      "availableLanguage": ["Portuguese","English"]
     }
   ]
 }
@@ -53,7 +42,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-40LYDES9F0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -61,7 +49,6 @@
   gtag('js', new Date());
   gtag('config', 'G-40LYDES9F0');
 </script>
-<!-- Microsoft Clarity -->
 <script type="text/javascript">
   (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -83,13 +70,15 @@
   --accent:#A855F7;
   --accent-dim:rgba(168,85,247,0.08);
   --accent-dim2:rgba(168,85,247,0.16);
+  --green:#5ECE8B;
 }
 html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;padding:18px 48px;display:flex;align-items:center;gap:28px;background:rgba(10,10,10,0.9);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border);z-index:100;transition:background 0.4s,padding 0.4s,border-color 0.3s;}
-.nav-logo{font-family:'Syne',sans-serif;font-weight:500;font-size:16px;color:var(--text);margin-right:auto;text-decoration:none;}
+.nav-back{font-size:13px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:5px;transition:color 0.2s;margin-right:auto;}
+.nav-back:hover{color:var(--text);}
 .nav-cta{color:var(--accent);border:1px solid rgba(168,85,247,0.45);padding:7px 18px;border-radius:8px;transition:all 0.2s;font-weight:500;font-size:14px;text-decoration:none;white-space:nowrap;}
 .nav-cta:hover{background:var(--accent-dim);}
 nav.scrolled{background:rgba(10,10,10,0.95)!important;padding-top:12px!important;padding-bottom:12px!important;border-bottom-color:rgba(255,255,255,0.04)!important;}
@@ -98,8 +87,6 @@ nav.scrolled{background:rgba(10,10,10,0.95)!important;padding-top:12px!important
 .lang-toggle{display:flex;gap:2px;background:transparent;border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:4px;}
 .lang-btn{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0.08em;padding:6px 14px;border-radius:16px;border:none;background:transparent;color:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.2s;}
 .lang-btn.active{background:var(--accent);color:#fff;}
-
-/* LANG SWITCHING */
 .en-inline{display:inline;}
 .pt-inline{display:none;}
 .lang-pt .en-inline{display:none;}
@@ -128,18 +115,34 @@ nav.scrolled{background:rgba(10,10,10,0.95)!important;padding-top:12px!important
 .btn-ghost{font-size:14px;color:var(--muted2);text-decoration:none;display:flex;align-items:center;gap:5px;transition:color 0.2s;border:1px solid var(--border2);padding:12px 24px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:500;min-height:48px;}
 .btn-ghost:hover{color:var(--text);border-color:rgba(255,255,255,0.25);}
 
-/* MENTORIA */
+/* MENTORIA — protagonist */
 .mentoria{max-width:1100px;margin:0 auto;padding:100px 48px;}
-.mentoria .section-title{margin-bottom:52px;}
-.mentoria-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;}
+
+/* PRICE BADGE */
+.price-badge{display:inline-flex;align-items:center;gap:16px;background:var(--surface);border:0.5px solid rgba(168,85,247,0.25);border-radius:12px;padding:16px 24px;margin-bottom:36px;flex-wrap:wrap;}
+.price-main{font-family:'Syne',sans-serif;font-size:28px;font-weight:600;color:var(--text);}
+.price-sub{font-size:13px;color:var(--muted2);}
+.price-sep{width:1px;height:32px;background:var(--border2);}
+.price-free{display:flex;flex-direction:column;gap:2px;}
+.price-free-label{font-size:11px;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;font-weight:500;}
+.price-free-desc{font-size:13px;color:var(--muted2);}
+
+/* RESULTS */
+.results-list{display:flex;flex-direction:column;gap:10px;margin:28px 0 40px;}
+.result-item{display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--muted2);line-height:1.55;}
+.result-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0;margin-top:7px;}
+
+.mentoria .section-title{margin-bottom:24px;}
+.mentoria-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:40px;}
 .mentoria-card{background:var(--surface);padding:32px 28px;transition:background 0.2s;}
 .mentoria-card:hover{background:var(--surface2);}
 .m-icon{font-size:22px;margin-bottom:14px;}
 .m-title{font-family:'Syne',sans-serif;font-weight:500;font-size:16px;color:var(--text);margin-bottom:9px;}
 .m-desc{font-size:16px;color:var(--muted2);line-height:1.7;}
-.mentoria-cta{margin-top:40px;text-align:center;}
+.mentoria-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .btn-wa{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:white;font-size:14px;font-weight:600;padding:14px 28px;border-radius:8px;text-decoration:none;transition:all 0.2s;font-family:'Syne',sans-serif;min-height:48px;}
 .btn-wa:hover{background:#1db954;transform:translateY(-2px);}
+.mentoria-note{font-size:13px;color:var(--muted);line-height:1.5;}
 
 /* CURSO */
 .curso{background:var(--surface);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:100px 48px;}
@@ -147,6 +150,7 @@ nav.scrolled{background:rgba(10,10,10,0.95)!important;padding-top:12px!important
 .curso-header{margin-bottom:52px;}
 .curso-header .section-title{margin-bottom:10px;}
 .curso-subtitle{font-size:17px;color:var(--muted2);font-weight:300;}
+.curso-coming{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;background:var(--surface2);border:0.5px solid var(--border2);border-radius:20px;padding:5px 12px;margin-bottom:16px;}
 .modulos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:36px;}
 .modulo-card{background:var(--bg);border:0.5px solid var(--border2);border-radius:14px;padding:28px 24px;transition:border-color 0.2s;}
 .modulo-card:hover{border-color:rgba(168,85,247,0.3);}
@@ -184,8 +188,10 @@ nav.scrolled{background:rgba(10,10,10,0.95)!important;padding-top:12px!important
 .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
 .cta-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:14px;padding:40px 32px;text-align:center;transition:border-color 0.2s;}
 .cta-card:hover{border-color:rgba(168,85,247,0.3);}
+.cta-card.featured{border-color:rgba(168,85,247,0.35);background:var(--surface2);}
 .cta-card-label{font-size:12px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px;}
 .cta-card-title{font-family:'Syne',sans-serif;font-weight:600;font-size:22px;color:var(--text);margin-bottom:10px;}
+.cta-card-price{font-size:13px;color:var(--green);margin-bottom:10px;font-weight:500;}
 .cta-card-desc{font-size:15px;color:var(--muted2);line-height:1.65;margin-bottom:24px;}
 
 /* FOOTER */
@@ -209,10 +215,8 @@ footer{border-top:0.5px solid var(--border);padding:32px 48px;max-width:1100px;m
 .reveal-right.visible{opacity:1;transform:translateX(0);}
 .reveal-scale{opacity:0;transform:scale(0.95);transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1),transform 0.6s cubic-bezier(0.16,1,0.3,1);}
 .reveal-scale.visible{opacity:1;transform:scale(1);}
-
 html,body{overflow-x:hidden;}
 
-/* RESPONSIVE */
 @media(max-width:900px){
   nav{padding:16px 24px;gap:12px;}
   .hero{padding:120px 24px 64px;min-height:auto;}
@@ -224,20 +228,19 @@ html,body{overflow-x:hidden;}
   .instrutora-bio{max-width:100%;}
   .cta-grid{grid-template-columns:1fr;}
   footer{flex-direction:column;gap:14px;text-align:center;padding:28px 24px;}
+  .mentoria-cta{flex-direction:column;align-items:flex-start;}
+  .price-badge{flex-direction:column;align-items:flex-start;gap:12px;}
+  .price-sep{display:none;}
 }
 @media(max-width:400px){
   nav{padding:14px 16px;}
   .hero{padding:100px 16px 48px;}
   .hero h1{font-size:32px;}
   .hero h1 .italic{font-size:28px;}
-  .hero-sub{font-size:15px;}
   .hero-actions{flex-direction:column;width:100%;}
   .hero-actions a{width:100%;justify-content:center;}
   .mentoria,.instrutora,.cta-final{padding:48px 16px;}
   .curso{padding:48px 16px;}
-  .mentoria-card{padding:24px 20px;}
-  .modulo-card{padding:24px 20px;}
-  .cta-card{padding:32px 20px;}
   .waitlist-form{flex-direction:column;}
   .waitlist-form .wl-input{min-width:100%;}
   footer{padding:24px 16px;}
@@ -247,8 +250,8 @@ html,body{overflow-x:hidden;}
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">Giuliana Lopes Galvão</a>
-  <a href="#contato" class="nav-cta"><span class="en-inline">Contact</span><span class="pt-inline">Contato</span></a>
+  <a href="https://www.giulopesgalvao.com.br" class="nav-back">← <span class="en-inline">Home</span><span class="pt-inline">Página Inicial</span></a>
+  <a href="#mentoria" class="nav-cta"><span class="en-inline">Book a session</span><span class="pt-inline">Agendar sessão</span></a>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')">EN</button>
     <button class="lang-btn" onclick="setLang('pt')">PT</button>
@@ -258,8 +261,6 @@ html,body{overflow-x:hidden;}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-eyebrow reveal">
-    <span class="eyebrow-tag"><span class="en-inline">Education</span><span class="pt-inline">Educação</span></span>
-    <span class="eyebrow-sep">·</span>
     <span class="eyebrow-tag"><span class="en-inline">Mentoring</span><span class="pt-inline">Mentoria</span></span>
     <span class="eyebrow-sep">·</span>
     <span class="eyebrow-tag"><span class="en-inline">Courses</span><span class="pt-inline">Cursos</span></span>
@@ -273,19 +274,40 @@ html,body{overflow-x:hidden;}
     <span class="pt-inline">Mentoria 1:1 e cursos para designers que querem usar IA como ferramenta real — não só como buzzword.</span>
   </p>
   <div class="hero-actions reveal reveal-delay-3">
-    <a href="#mentoria" class="btn-primary"><span class="en-inline">1:1 Mentoring</span><span class="pt-inline">Mentoria 1:1</span></a>
-    <a href="#curso" class="btn-ghost"><span class="en-inline">See course →</span><span class="pt-inline">Ver curso →</span></a>
+    <a href="#mentoria" class="btn-primary"><span class="en-inline">Book 1:1 mentoring</span><span class="pt-inline">Agendar mentoria 1:1</span></a>
+    <a href="#curso" class="btn-ghost"><span class="en-inline">See the course →</span><span class="pt-inline">Ver o curso →</span></a>
   </div>
 </section>
 
-<!-- MENTORIA -->
+<!-- MENTORIA — PROTAGONIST -->
 <section class="mentoria" id="mentoria">
-  <p class="section-label reveal"><span class="en-inline">Mentoring</span><span class="pt-inline">Mentoria</span></p>
+  <p class="section-label reveal"><span class="en-inline">1:1 Mentoring</span><span class="pt-inline">Mentoria 1:1</span></p>
   <h2 class="section-title reveal reveal-delay-1">
     <span class="en-inline">Individual sessions<br><em>to unlock your next step</em></span>
     <span class="pt-inline">Sessões individuais<br><em>para destravar seu próximo passo</em></span>
   </h2>
-  <div class="mentoria-grid reveal-scale reveal-delay-2">
+
+  <!-- PRICE -->
+  <div class="price-badge reveal reveal-delay-2">
+    <div>
+      <div class="price-main"><span class="en-inline">R$250 / hour · U$50 / hour</span><span class="pt-inline">R$250 / hora · U$50 / hora</span></div>
+      <div class="price-sub"><span class="en-inline">1-hour sessions · Online · Flexible schedule</span><span class="pt-inline">Sessões de 1h · Online · Agenda flexível</span></div>
+    </div>
+    <div class="price-sep"></div>
+    <div class="price-free">
+      <span class="price-free-label"><span class="en-inline">First session free</span><span class="pt-inline">Primeira sessão grátis</span></span>
+      <span class="price-free-desc"><span class="en-inline">No commitment — we figure out if it makes sense</span><span class="pt-inline">Sem compromisso — a gente descobre se faz sentido</span></span>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-list reveal reveal-delay-2">
+    <div class="result-item"><span class="result-dot"></span><span class="en-inline">You leave with clarity and a concrete plan — not generic advice</span><span class="pt-inline">Você sai com clareza e um plano concreto — não conselho genérico</span></div>
+    <div class="result-item"><span class="result-dot"></span><span class="en-inline">Real AI workflow applied to your actual project or career situation</span><span class="pt-inline">Workflow real de IA aplicado ao seu projeto ou momento de carreira</span></div>
+    <div class="result-item"><span class="result-dot"></span><span class="en-inline">You know exactly what to do next and how to do it</span><span class="pt-inline">Você sabe exatamente o que fazer a seguir e como fazer</span></div>
+  </div>
+
+  <div class="mentoria-grid reveal-scale reveal-delay-3">
     <div class="mentoria-card">
       <div class="m-icon">🎯</div>
       <h3 class="m-title"><span class="en-inline">Who it's for</span><span class="pt-inline">Para quem</span></h3>
@@ -294,25 +316,31 @@ html,body{overflow-x:hidden;}
     <div class="mentoria-card">
       <div class="m-icon">💬</div>
       <h3 class="m-title"><span class="en-inline">How it works</span><span class="pt-inline">Como funciona</span></h3>
-      <p class="m-desc"><span class="en-inline">1-hour sessions, online, flexible schedule. We focus on what you need right now.</span><span class="pt-inline">Sessões de 1h, online, agenda flexível. Foco no que você precisa agora.</span></p>
+      <p class="m-desc"><span class="en-inline">1-hour session, online, you choose the schedule. We focus 100% on your specific situation.</span><span class="pt-inline">Sessão de 1h, online, você escolhe o horário. Foco 100% na sua situação específica.</span></p>
     </div>
     <div class="mentoria-card">
       <div class="m-icon">⚡</div>
       <h3 class="m-title"><span class="en-inline">What you get</span><span class="pt-inline">O que você ganha</span></h3>
-      <p class="m-desc"><span class="en-inline">Clarity, method and practical direction. No generic advice — real next steps.</span><span class="pt-inline">Clareza, método e direção prática. Sem conselho genérico — próximos passos reais.</span></p>
+      <p class="m-desc"><span class="en-inline">Clarity, method and practical direction. You leave knowing exactly what to do — and how.</span><span class="pt-inline">Clareza, método e direção prática. Você sai sabendo o que fazer — e como.</span></p>
     </div>
   </div>
-  <div class="mentoria-cta reveal reveal-delay-3">
-    <a href="https://wa.me/5511993862967?text=Ol%C3%A1%20Giuliana!%20Tenho%20interesse%20na%20mentoria%201:1." class="btn-wa" target="_blank" id="cta-mentoria">
-      <span class="en-inline">Book via WhatsApp →</span><span class="pt-inline">Agendar pelo WhatsApp →</span>
+
+  <div class="mentoria-cta reveal reveal-delay-4">
+    <a href="https://wa.me/5511993862967?text=Ol%C3%A1%20Giuliana!%20Quero%20agendar%20a%20sess%C3%A3o%20gratuita%20de%20mentoria." class="btn-wa" target="_blank" id="cta-mentoria">
+      <span class="en-inline">Book free first session →</span><span class="pt-inline">Agendar sessão gratuita →</span>
     </a>
+    <p class="mentoria-note">
+      <span class="en-inline">Send a message on WhatsApp — I'll reply within 24h to schedule.</span>
+      <span class="pt-inline">Manda uma mensagem no WhatsApp — respondo em até 24h para agendar.</span>
+    </p>
   </div>
 </section>
 
-<!-- CURSO -->
+<!-- CURSO — SECONDARY -->
 <section class="curso" id="curso">
   <div class="curso-inner">
     <div class="curso-header">
+      <div class="curso-coming reveal"><span class="en-inline">Coming soon</span><span class="pt-inline">Em breve</span></div>
       <p class="section-label reveal"><span class="en-inline">Course 01</span><span class="pt-inline">Curso 01</span></p>
       <h2 class="section-title reveal reveal-delay-1">
         <span class="en-inline">AI for UX Designers</span>
@@ -360,12 +388,12 @@ html,body{overflow-x:hidden;}
 
     <div class="curso-cta reveal">
       <form class="waitlist-form" id="waitlist-curso" onsubmit="return submitWaitlist(event, this)">
-        <input type="text" class="wl-input" name="nome" required>
-        <input type="email" class="wl-input" name="email" required>
+        <input type="text" class="wl-input" name="nome" required placeholder="Your name">
+        <input type="email" class="wl-input" name="email" required placeholder="you@email.com">
         <button type="submit" class="btn-primary"><span class="en-inline">Join waitlist →</span><span class="pt-inline">Entrar na lista →</span></button>
       </form>
       <div class="wl-success" id="wl-success-curso">
-        <span class="wl-success-text"><span class="en-inline">You're on the list! We'll be in touch soon.</span><span class="pt-inline">Você está na lista! Entraremos em contato em breve.</span></span>
+        <span class="wl-success-text"><span class="en-inline">You're on the list! I'll be in touch soon.</span><span class="pt-inline">Você está na lista! Entro em contato em breve.</span></span>
       </div>
       <p class="wl-error" id="wl-error-curso"><span class="en-inline">Something went wrong. Try again or message via WhatsApp.</span><span class="pt-inline">Algo deu errado. Tente novamente ou mande um WhatsApp.</span></p>
     </div>
@@ -403,21 +431,22 @@ html,body{overflow-x:hidden;}
     </h2>
   </div>
   <div class="cta-grid">
-    <div class="cta-card reveal reveal-delay-2">
-      <div class="cta-card-label"><span class="en-inline">Mentoring</span><span class="pt-inline">Mentoria</span></div>
+    <div class="cta-card featured reveal reveal-delay-2">
+      <div class="cta-card-label"><span class="en-inline">Mentoring · Available now</span><span class="pt-inline">Mentoria · Disponível agora</span></div>
       <h3 class="cta-card-title"><span class="en-inline">1:1 Session</span><span class="pt-inline">Sessão 1:1</span></h3>
-      <p class="cta-card-desc"><span class="en-inline">Direct conversation to unblock your career, product or process.</span><span class="pt-inline">Conversa direta para destravar sua carreira, produto ou processo.</span></p>
-      <a href="https://wa.me/5511993862967?text=Ol%C3%A1%20Giuliana!%20Tenho%20interesse%20na%20mentoria%201:1." class="btn-wa" target="_blank">
-        <span class="en-inline">WhatsApp →</span><span class="pt-inline">WhatsApp →</span>
+      <p class="cta-card-price"><span class="en-inline">R$250 / hour · U$50 / hour — first session free</span><span class="pt-inline">R$250 / hora · U$50 / hora — primeira sessão grátis</span></p>
+      <p class="cta-card-desc"><span class="en-inline">Direct conversation to unblock your career, product or process. No generic advice.</span><span class="pt-inline">Conversa direta para destravar sua carreira, produto ou processo. Sem conselho genérico.</span></p>
+      <a href="https://wa.me/5511993862967?text=Ol%C3%A1%20Giuliana!%20Quero%20agendar%20a%20sess%C3%A3o%20gratuita%20de%20mentoria." class="btn-wa" target="_blank">
+        <span class="en-inline">Book free session →</span><span class="pt-inline">Agendar sessão gratuita →</span>
       </a>
     </div>
     <div class="cta-card reveal reveal-delay-3">
-      <div class="cta-card-label"><span class="en-inline">Course</span><span class="pt-inline">Curso</span></div>
+      <div class="cta-card-label"><span class="en-inline">Course · Coming soon</span><span class="pt-inline">Curso · Em breve</span></div>
       <h3 class="cta-card-title"><span class="en-inline">AI for UX Designers</span><span class="pt-inline">IA para UX Designers</span></h3>
-      <p class="cta-card-desc"><span class="en-inline">From concept to deploy. Join the waitlist — launching soon.</span><span class="pt-inline">Do conceito ao deploy. Entre na lista de espera — em breve.</span></p>
+      <p class="cta-card-desc"><span class="en-inline">From concept to deploy. Join the waitlist and be the first to know when it launches.</span><span class="pt-inline">Do conceito ao deploy. Entre na lista e seja a primeira a saber quando lançar.</span></p>
       <form class="waitlist-form" id="waitlist-final" onsubmit="return submitWaitlist(event, this)" style="justify-content:center;">
-        <input type="text" class="wl-input" name="nome" required>
-        <input type="email" class="wl-input" name="email" required>
+        <input type="text" class="wl-input" name="nome" required placeholder="Your name">
+        <input type="email" class="wl-input" name="email" required placeholder="you@email.com">
         <button type="submit" class="btn-primary"><span class="en-inline">Join →</span><span class="pt-inline">Entrar →</span></button>
       </form>
       <div class="wl-success" id="wl-success-final">
@@ -439,7 +468,6 @@ html,body{overflow-x:hidden;}
 </footer>
 
 <script>
-// ─── LANG TOGGLE ───
 let currentLang = 'en';
 function setLang(lang) {
   currentLang = lang;
@@ -448,7 +476,6 @@ function setLang(lang) {
     btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
   });
   localStorage.setItem('lang', lang);
-  // Update placeholders
   const namePh = lang === 'pt' ? 'Seu nome' : 'Your name';
   const emailPh = lang === 'pt' ? 'seu@email.com' : 'you@email.com';
   document.querySelectorAll('.wl-input[name="nome"]').forEach(el => el.placeholder = namePh);
@@ -457,27 +484,24 @@ function setLang(lang) {
 const savedLang = localStorage.getItem('lang');
 if (savedLang) setLang(savedLang);
 
-// ─── WAITLIST SUBMIT ───
 function submitWaitlist(e, form) {
   e.preventDefault();
   const id = form.id.replace('waitlist-', '');
   const nome = form.nome.value.trim();
   const email = form.email.value.trim();
   if (!nome || !email) return false;
-
   const btn = form.querySelector('button');
   btn.disabled = true;
-
   fetch('https://formspree.io/f/xyknoagr', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nome, email, tipo: 'waitlist_curso_ia' })
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({nome, email, tipo: 'waitlist_curso_ia'})
   })
   .then(r => {
     if (!r.ok) throw new Error();
     form.style.display = 'none';
     document.getElementById('wl-success-' + id).style.display = 'block';
-    gtag('event', 'cta_waitlist_click', { event_category: 'engagement', event_label: id });
+    gtag('event', 'cta_waitlist_click', {event_category: 'engagement', event_label: id});
   })
   .catch(() => {
     document.getElementById('wl-error-' + id).style.display = 'block';
@@ -486,43 +510,26 @@ function submitWaitlist(e, form) {
   return false;
 }
 
-// ─── SCROLL REVEAL ───
-const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
 const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  entries.forEach(entry => {if(entry.isIntersecting) entry.target.classList.add('visible');});
+}, {threshold: 0.05, rootMargin: '0px 0px -20px 0px'});
 revealEls.forEach(el => revealObserver.observe(el));
 
-// ─── NAV SCROLL ───
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.hero .reveal, .hero .reveal-right, .hero .reveal-left').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), i * 80);
+  });
+});
+
 window.addEventListener('scroll', () => {
   document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 40);
 });
 
-// ─── GA4 EVENTS ───
 document.addEventListener('DOMContentLoaded', () => {
-  // Mentoria CTA
   const ctaMentoria = document.getElementById('cta-mentoria');
-  if (ctaMentoria) ctaMentoria.addEventListener('click', () => {
-    gtag('event', 'cta_mentoria_click', { event_category: 'engagement' });
-  });
-
-  // Waitlist CTAs
-  document.querySelectorAll('#cta-waitlist, #cta-waitlist-final').forEach(el => {
-    el.addEventListener('click', () => {
-      gtag('event', 'cta_waitlist_click', { event_category: 'engagement' });
-    });
-  });
-
-  // WhatsApp — all links
-  document.querySelectorAll('a[href*="wa.me"]').forEach(el => {
-    el.addEventListener('click', () => {
-      gtag('event', 'whatsapp_click', { event_category: 'engagement' });
-    });
-  });
+  if (ctaMentoria) ctaMentoria.addEventListener('click', () => gtag('event', 'cta_mentoria_click', {event_category: 'engagement'}));
+  document.querySelectorAll('a[href*="wa.me"]').forEach(el => el.addEventListener('click', () => gtag('event', 'whatsapp_click', {event_category: 'engagement'})));
 });
 </script>
 </body>
