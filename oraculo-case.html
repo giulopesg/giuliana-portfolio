@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Oráculo Pessoal · Life Planning App · Giuliana Lopes Galvão | UX Case Study</title>
+  <meta name="description"
+    content="UX case study: Meu Oráculo Pessoal, a personal life operating system blending astrology, numerology, neuroscience and project management. Built with vanilla JS, Supabase and Claude by Giuliana Lopes Galvão.">
+  <meta name="keywords"
+    content="UX case study, life OS, personal tool, astrology, numerology, neuroscience, project management, Supabase, vanilla JS, Giuliana Lopes Galvão">
+  <meta name="author" content="Giuliana Lopes Galvão">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.giulopesgalvao.com.br/oraculo-case.html">
+  <link rel="alternate" hreflang="en" href="https://www.giulopesgalvao.com.br/oraculo-case.html">
+  <link rel="alternate" hreflang="pt-BR" href="https://www.giulopesgalvao.com.br/oraculo-case.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.giulopesgalvao.com.br/oraculo-case.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title"
+    content="Meu Oráculo Pessoal · Life Planning App · Giuliana Lopes Galvão | UX Case Study">
+  <meta property="og:description"
+    content="A personal life operating system blending astrology, numerology, neuroscience and project management into one daily ritual. Designed and built solo.">
+  <meta property="og:image" content="https://www.giulopesgalvao.com.br/cases/oraculo/og-oraculo.png">
+  <meta property="og:url" content="https://www.giulopesgalvao.com.br/oraculo-case.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:site_name" content="Giuliana Lopes Galvão · UX Designer Portfolio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title"
+    content="Meu Oráculo Pessoal · Life Planning App · Giuliana Lopes Galvão | UX Case Study">
+  <meta name="twitter:description"
+    content="A personal life operating system blending astrology, numerology, neuroscience and project management into one daily ritual.">
+  <meta name="twitter:image" content="https://www.giulopesgalvao.com.br/cases/oraculo/og-oraculo.png">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Meu Oráculo Pessoal: A Life Planning App Built with UX + Astrology + Neuroscience",
+      "name": "Meu Oráculo Pessoal · Life Planning App",
+      "author": {
+        "@type": "Person",
+        "name": "Giuliana Lopes Galvão",
+        "url": "https://www.giulopesgalvao.com.br"
+      },
+      "description": "A personal life operating system that blends astrology, numerology, neuroscience and project management into one daily ritual. Zero dependencies, single HTML file, Supabase backend.",
+      "datePublished": "2026-04-01",
+      "dateModified": "2026-04-02",
+      "keywords": ["life OS", "personal tool", "astrology", "numerology", "neuroscience", "project management", "Supabase", "vanilla JS"],
+      "image": "https://www.giulopesgalvao.com.br/cases/oraculo/og-oraculo.png",
+      "url": "https://www.giulopesgalvao.com.br/oraculo-case.html",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.giulopesgalvao.com.br/oraculo-case.html"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".case-hero-title", ".case-hero-subtitle", ".cs-title", ".cs-body-text"]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Portfolio",
+          "item": "https://www.giulopesgalvao.com.br/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meu Oráculo Pessoal · Life Planning App",
+          "item": "https://www.giulopesgalvao.com.br/oraculo-case.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --plum: #6B4FA0;
+      --plum-light: #8B6FC0;
+      --plum-pale: #D4C8EF;
+      --plum-ghost: #F2EEF9;
+      --warm-cream: #FAF7F2;
+      --warm-stone: #EDE8E0;
+      --ink: #1C1917;
+      --ink-soft: #4A4542;
+      --ink-muted: #8A8480;
+      --accent-gold: #C4975A;
+      --gold: #d4a843;
+      --gold-dark: #b8922e;
+      --white: #FFFFFF;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      overflow-x: clip;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── LANG SWITCHING ── */
+    .en {
+      display: block;
+    }
+
+    .pt {
+      display: none;
+    }
+
+    .lang-pt .en {
+      display: none;
+    }
+
+    .lang-pt .pt {
+      display: block;
+    }
+
+    .en-inline {
+      display: inline;
+    }
+
+    .pt-inline {
+      display: none;
+    }
+
+    .lang-pt .en-inline {
+      display: none;
+    }
+
+    .lang-pt .pt-inline {
+      display: inline;
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      display: flex;
+      gap: 2px;
+      border-radius: 20px;
+      padding: 4px;
+      margin-left: auto;
+    }
+
+    .lang-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 16px;
+      border: none;
+      background: transparent;
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--plum);
+      color: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      padding: 24px 64px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--warm-stone);
+    }
+
+    .nav-back {
+      font-size: 13px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover {
+      color: var(--plum);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--warm-stone);
+    }
+
+    .nav-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    /* ── HERO ── */
+    .case-hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .case-hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 140px 64px 80px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .case-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+      align-items: center;
+    }
+
+    .ctag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(212, 168, 67, 0.5);
+      color: #f0d48a;
+      background: rgba(212, 168, 67, 0.12);
+    }
+
+    .case-hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #f0d48a;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .case-hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: #f0d48a;
+    }
+
+    .case-hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 6vw, 96px);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .case-hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2vw, 26px);
+      font-weight: 300;
+      font-style: italic;
+      color: #f0d48a;
+      margin-bottom: 48px;
+      line-height: 1.4;
+    }
+
+    .case-meta-row {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .case-meta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 6px;
+    }
+
+    .case-meta-value {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .case-hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-visual-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-visual-bg svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-quote-card {
+      position: relative;
+      z-index: 2;
+      max-width: 340px;
+      background: rgba(212, 168, 67, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 168, 67, 0.2);
+      padding: 40px 36px;
+      border-radius: 4px 24px 4px 24px;
+    }
+
+    .hero-quote-card blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .hero-quote-card cite {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f0d48a;
+      font-style: normal;
+    }
+
+    /* app video */
+    .app-video-wrap {
+      margin-top: 48px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-video-frame {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--warm-stone);
+      background: var(--ink);
+    }
+
+    .app-video-frame video {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── CONTENT ── */
+    .case-body {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .case-section {
+      padding: 96px 80px;
+      border-bottom: 1px solid var(--warm-stone);
+    }
+
+    .case-section:last-child {
+      border-bottom: none;
+    }
+
+    .cs-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--plum);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cs-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--plum);
+    }
+
+    .cs-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 48px;
+    }
+
+    .cs-title em {
+      font-style: italic;
+      color: var(--plum);
+    }
+
+    .cs-body-text {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      max-width: 680px;
+      margin-bottom: 28px;
+    }
+
+    .cs-body-text strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* 2-col layout */
+    .cs-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* callout block */
+    .callout {
+      background: var(--ink);
+      padding: 48px 52px;
+      border-radius: 4px;
+      margin: 48px 0;
+    }
+
+    .callout p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.5vw, 30px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.5;
+      max-width: 700px;
+    }
+
+    .callout p em {
+      color: #f0d48a;
+      font-style: normal;
+    }
+
+    .callout-source {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-top: 16px;
+    }
+
+    /* dimension cards */
+    .dim-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    .dim-card {
+      background: var(--white);
+      padding: 36px 32px;
+      position: relative;
+    }
+
+    .dim-card:first-child {
+      border-radius: 16px 4px 4px 4px;
+    }
+
+    .dim-card:nth-child(2) {
+      border-radius: 4px 16px 4px 4px;
+    }
+
+    .dim-card:nth-last-child(2) {
+      border-radius: 4px 4px 4px 16px;
+    }
+
+    .dim-card:last-child {
+      border-radius: 4px 4px 16px 4px;
+    }
+
+    .dim-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .dim-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .dim-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    /* screen cards */
+    .cs-4col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 2px;
+    }
+
+    .screen-card {
+      background: var(--white);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .screen-card:first-child {
+      border-radius: 16px 4px 4px 4px;
+    }
+
+    .screen-card:nth-child(2) {
+      border-radius: 4px;
+    }
+
+    .screen-card:nth-child(3) {
+      border-radius: 4px;
+    }
+
+    .screen-card:last-child {
+      border-radius: 4px 16px 4px 4px;
+    }
+
+    .screen-placeholder {
+      width: 100%;
+      aspect-ratio: 9/16;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: var(--plum-pale);
+    }
+
+    .screen-placeholder.gold-bg {
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.15) 0%, rgba(184, 146, 46, 0.08) 100%);
+    }
+
+    .screen-card-body {
+      padding: 28px 24px;
+    }
+
+    .screen-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .screen-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .screen-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    /* neuro tags */
+    .neuro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    .neuro-card {
+      background: var(--white);
+      padding: 32px 28px;
+      text-align: center;
+    }
+
+    .neuro-card:first-child {
+      border-radius: 16px 4px 4px 16px;
+    }
+
+    .neuro-card:last-child {
+      border-radius: 4px 16px 16px 4px;
+    }
+
+    .neuro-emoji {
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+
+    .neuro-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .neuro-system {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .neuro-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    /* stack section dark */
+    .case-section.dark {
+      background: var(--ink);
+    }
+
+    .case-section.dark .cs-label {
+      color: #f0d48a;
+    }
+
+    .case-section.dark .cs-label::before {
+      background: #f0d48a;
+    }
+
+    .case-section.dark .cs-title {
+      color: var(--white);
+    }
+
+    .case-section.dark .cs-title em {
+      color: #f0d48a;
+    }
+
+    .case-section.dark .cs-body-text {
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 700px;
+    }
+
+    .tools-stack {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    .tool-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 32px 28px;
+    }
+
+    .tool-card:first-child {
+      border-radius: 16px 4px 4px 16px;
+    }
+
+    .tool-card:last-child {
+      border-radius: 4px 16px 16px 4px;
+    }
+
+    .tool-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .tool-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f0d48a;
+      margin-bottom: 14px;
+    }
+
+    .tool-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    /* decision pills */
+    .decision-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    .decision-pill {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(212, 168, 67, 0.15);
+      border: 1px solid rgba(212, 168, 67, 0.25);
+      color: #f0d48a;
+    }
+
+    /* learning pills */
+    .learning-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .learning-item {
+      background: var(--white);
+      padding: 28px 32px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      border-top: 1px solid var(--warm-stone);
+    }
+
+    .learning-item:first-child {
+      border-radius: 16px 16px 0 0;
+      border-top: none;
+    }
+
+    .learning-item:last-child {
+      border-radius: 0 0 16px 16px;
+    }
+
+    .learning-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--gold);
+      flex-shrink: 0;
+      line-height: 1;
+      width: 32px;
+    }
+
+    .learning-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .learning-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    /* next steps */
+    .next-steps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .ns-item {
+      background: var(--white);
+      padding: 28px 32px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .ns-item:first-child {
+      border-radius: 16px 4px 4px 4px;
+    }
+
+    .ns-item:nth-child(2) {
+      border-radius: 4px 16px 4px 4px;
+    }
+
+    .ns-item:nth-last-child(2) {
+      border-radius: 4px 4px 4px 16px;
+    }
+
+    .ns-item:last-child {
+      border-radius: 4px 4px 16px 4px;
+    }
+
+    .ns-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .ns-text {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    /* CTA section */
+    .case-cta {
+      background: var(--plum);
+      padding: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .case-cta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--plum-pale);
+      margin-bottom: 12px;
+    }
+
+    .case-cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.15;
+    }
+
+    .case-cta-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.25s;
+      letter-spacing: 0.04em;
+    }
+
+    .cta-btn.white {
+      background: var(--white);
+      color: var(--plum);
+    }
+
+    .cta-btn.white:hover {
+      background: var(--warm-cream);
+      transform: translateY(-1px);
+    }
+
+    .cta-btn.outline {
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .cta-btn.outline:hover {
+      border-color: var(--white);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    /* footer nav */
+    .case-footer-nav {
+      background: var(--warm-cream);
+      padding: 64px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--warm-stone);
+    }
+
+    .footer-nav-link {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fnl-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    .fnl-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--ink);
+      transition: color 0.2s;
+    }
+
+    .footer-nav-link:hover .fnl-title {
+      color: var(--plum);
+    }
+
+    /* footer */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--ink-muted);
+      font-size: 13px;
+      border-top: 1px solid var(--warm-stone);
+    }
+
+    /* reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── ROLE ── */
+    .role-section {
+      background: var(--ink);
+      padding: 100px 80px;
+    }
+
+    .role-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .role-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #f0d48a;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .role-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: #f0d48a;
+    }
+
+    .role-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.3;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+
+    .role-attribution {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #f0d48a;
+    }
+
+    .role-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 24px;
+      background: rgba(212, 168, 67, 0.15);
+      border-radius: 12px;
+      border: 1px solid rgba(212, 168, 67, 0.2);
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .stat-desc {
+      font-size: 12px;
+      color: rgba(240, 212, 138, 0.7);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        padding: 18px 24px;
+      }
+
+      .case-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .case-hero-left {
+        padding: 120px 24px 60px;
+      }
+
+      .case-hero-right {
+        display: none;
+      }
+
+      .case-meta-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 32px;
+      }
+
+      .case-section {
+        padding: 64px 24px;
+      }
+
+      .cs-2col {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .cs-4col {
+        grid-template-columns: 1fr 1fr !important;
+      }
+
+      .dim-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .neuro-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tools-stack {
+        grid-template-columns: 1fr;
+      }
+
+      .tool-card:first-child,
+      .tool-card:last-child {
+        border-radius: 4px;
+      }
+
+      .next-steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cs-title {
+        margin-bottom: 32px;
+      }
+
+      .cs-body-text {
+        margin-bottom: 20px;
+      }
+
+      .case-cta {
+        padding: 48px 24px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .case-cta-links {
+        align-items: center;
+      }
+
+      .case-footer-nav {
+        padding: 40px 24px;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .role-section {
+        padding: 80px 24px;
+      }
+
+      .role-stats {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .nav-title,
+      .nav-divider {
+        display: none;
+      }
+
+      .case-meta-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .role-stats {
+        grid-template-columns: 1fr !important;
+      }
+
+      .cs-4col {
+        grid-template-columns: 1fr !important;
+      }
+
+      .dim-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .neuro-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">&larr; <span class="en-inline">Back to portfolio</span><span
+        class="pt-inline">Voltar ao portfólio</span></a>
+    <div class="nav-divider"></div>
+    <span class="nav-title">Meu Oráculo Pessoal</span>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ── HERO ── -->
+    <header class="case-hero">
+      <div class="case-hero-left">
+        <div class="case-tag-row">
+          <span class="ctag">Life OS</span>
+          <span class="ctag">UX Design</span>
+          <span class="ctag"><span class="en-inline">Self-knowledge</span><span class="pt-inline">Autoconhecimento</span></span>
+          <span class="ctag"><span class="en-inline">Cycle-aware</span><span class="pt-inline">Consciente do ciclo</span></span>
+          <span class="ctag">Vanilla JS</span>
+          <span class="ctag">Supabase</span>
+        </div>
+        <div class="case-hero-eyebrow">
+          <span class="en-inline">Personal project · 2026</span>
+          <span class="pt-inline">Projeto pessoal · 2026</span>
+        </div>
+        <h1 class="case-hero-title">Meu Oráculo<br>Pessoal</h1>
+        <p class="case-hero-subtitle">
+          <span class="en">A personal life operating system that integrates self-knowledge, cyclical awareness, neuroscience, and project management into one daily tool.</span>
+          <span class="pt">Um sistema operacional de vida pessoal que integra autoconhecimento, consciência cíclica, neurociência e gestão de projetos em uma ferramenta diária.</span>
+        </p>
+        <div class="case-meta-row">
+          <div class="case-meta-item">
+            <div class="case-meta-label"><span class="en-inline">Client</span><span class="pt-inline">Cliente</span>
+            </div>
+            <div class="case-meta-value"><span class="en-inline">Personal project</span><span class="pt-inline">Projeto
+                pessoal</span></div>
+          </div>
+          <div class="case-meta-item">
+            <div class="case-meta-label"><span class="en-inline">Year</span><span class="pt-inline">Ano</span></div>
+            <div class="case-meta-value">2026</div>
+          </div>
+          <div class="case-meta-item">
+            <div class="case-meta-label"><span class="en-inline">Role</span><span class="pt-inline">Função</span></div>
+            <div class="case-meta-value"><span class="en-inline">Designer + Developer</span><span class="pt-inline">Designer + Desenvolvedora</span></div>
+          </div>
+          <div class="case-meta-item">
+            <div class="case-meta-label"><span class="en-inline">Platform</span><span
+                class="pt-inline">Plataforma</span></div>
+            <div class="case-meta-value">Web SPA</div>
+          </div>
+          <div class="case-meta-item">
+            <div class="case-meta-label"><span class="en-inline">Main Tools</span><span
+                class="pt-inline">Ferramentas</span></div>
+            <div class="case-meta-value">HTML/CSS/JS, Supabase, Claude</div>
+          </div>
+          <div class="case-meta-item">
+            <div class="case-meta-label">Status</div>
+            <div class="case-meta-value"><span class="en-inline">Active / In use</span><span class="pt-inline">Ativo /
+                Em uso</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="case-hero-right">
+        <div class="hero-visual-bg">
+          <svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="bg2" cx="50%" cy="50%" r="70%">
+                <stop offset="0%" stop-color="#2A2415" />
+                <stop offset="100%" stop-color="#1C1917" />
+              </radialGradient>
+              <radialGradient id="orb3" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#d4a843" stop-opacity="0.3" />
+                <stop offset="100%" stop-color="#d4a843" stop-opacity="0" />
+              </radialGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="20" />
+              </filter>
+            </defs>
+            <rect width="600" height="800" fill="url(#bg2)" />
+            <ellipse cx="300" cy="400" rx="250" ry="250" fill="url(#orb3)" filter="url(#glow)" />
+            <!-- orbital rings -->
+            <ellipse cx="300" cy="400" rx="120" ry="120" fill="none" stroke="#d4a843" stroke-width="0.5"
+              opacity="0.3" />
+            <ellipse cx="300" cy="400" rx="180" ry="180" fill="none" stroke="#d4a843" stroke-width="0.5"
+              opacity="0.2" />
+            <ellipse cx="300" cy="400" rx="240" ry="240" fill="none" stroke="#d4a843" stroke-width="0.5"
+              opacity="0.12" />
+            <!-- constellation dots -->
+            <circle cx="300" cy="400" r="6" fill="#d4a843" opacity="0.8" />
+            <circle cx="300" cy="400" r="12" fill="none" stroke="#d4a843" stroke-width="1" opacity="0.3" />
+            <circle cx="420" cy="400" r="3" fill="#d4a843" opacity="0.5" />
+            <circle cx="180" cy="400" r="3" fill="#d4a843" opacity="0.5" />
+            <circle cx="300" cy="280" r="3" fill="#d4a843" opacity="0.5" />
+            <circle cx="300" cy="520" r="3" fill="#d4a843" opacity="0.5" />
+            <circle cx="385" cy="315" r="2.5" fill="#f0d48a" opacity="0.4" />
+            <circle cx="215" cy="485" r="2.5" fill="#f0d48a" opacity="0.4" />
+            <circle cx="215" cy="315" r="2.5" fill="#f0d48a" opacity="0.4" />
+            <circle cx="385" cy="485" r="2.5" fill="#f0d48a" opacity="0.4" />
+            <!-- connecting lines -->
+            <line x1="300" y1="280" x2="385" y2="315" stroke="#d4a843" stroke-width="0.5" opacity="0.25" />
+            <line x1="385" y1="315" x2="420" y2="400" stroke="#d4a843" stroke-width="0.5" opacity="0.25" />
+            <line x1="420" y1="400" x2="385" y2="485" stroke="#d4a843" stroke-width="0.5" opacity="0.25" />
+            <line x1="385" y1="485" x2="300" y2="520" stroke="#d4a843" stroke-width="0.5" opacity="0.25" />
+            <line x1="300" y1="520" x2="215" y2="485" stroke="#d4a843" stroke-width="0.5" opacity="0.25" />
+            <line x1="215" y1="485" x2="180" y2="400" stroke="#d4a843" stroke-width="0.5" opacity="0.25" />
+            <line x1="180" y1="400" x2="215" y2="315" stroke="#d4a843" stroke-width="0.5" opacity="0.25" />
+            <line x1="215" y1="315" x2="300" y2="280" stroke="#d4a843" stroke-width="0.5" opacity="0.25" />
+          </svg>
+        </div>
+        <div class="hero-quote-card">
+          <blockquote>
+            <span class="en">"Not a planner. Not a horoscope app. A personal oracle that knows who you are and tells you why each thing matters today."</span>
+            <span class="pt">"Não é um planner. Não é um app de horóscopo. Um oráculo pessoal que sabe quem você é e te diz por que cada coisa importa hoje."</span>
+          </blockquote>
+          <cite>
+            <span class="en-inline">The design intent</span>
+            <span class="pt-inline">A intenção do design</span>
+          </cite>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── BODY ── -->
+    <div class="case-body">
+
+      <!-- 01 ORIGIN -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">01. Origin</span><span class="pt-inline">01. Origem</span>
+        </div>
+        <h2 class="cs-title">
+          <span class="en">Five ventures, three anchors,<br>and <em>no app for that.</em></span>
+          <span class="pt">Cinco projetos, três âncoras,<br>e <em>nenhum app pra isso.</em></span>
+        </h2>
+        <div class="cs-2col">
+          <div>
+            <p class="cs-body-text en">In early 2026, I found myself running five projects simultaneously: a product launch, mentoring sessions, a course in development, a creative venture, and freelance consulting. I loved all of them. But I couldn't see the whole picture.</p>
+            <p class="cs-body-text pt">No início de 2026, eu me vi tocando cinco projetos simultaneamente: um lançamento de produto, mentorias, um curso em desenvolvimento, um projeto criativo e consultoria freelance. Eu amava todos eles. Mas não conseguia enxergar o quadro completo.</p>
+            <p class="cs-body-text en">I also use astrology, numerology, and body awareness as tools for self-knowledge and decision-making. None of the productivity apps on the market integrate these layers. They treat life as a flat list of tasks, ignoring that energy, creativity, and focus fluctuate in cycles.</p>
+            <p class="cs-body-text pt">Eu também uso astrologia, numerologia e consciência corporal como ferramentas de autoconhecimento e tomada de decisão. Nenhum app de produtividade no mercado integra essas camadas. Eles tratam a vida como uma lista plana de tarefas, ignorando que energia, criatividade e foco flutuam em ciclos.</p>
+            <p class="cs-body-text en"><strong>I needed a system that could hold the whole picture</strong>:projects, wellbeing practices, self-knowledge data, and cyclical awareness. Not four different apps. One oracle.</p>
+            <p class="cs-body-text pt"><strong>Eu precisava de um sistema que pudesse conter o quadro completo</strong>:projetos, práticas de bem-estar, dados de autoconhecimento e consciência cíclica. Não quatro apps diferentes. Um oráculo.</p>
+          </div>
+          <div>
+            <div class="callout">
+              <p class="en">"No app does this. <em>So I built my own.</em>"</p>
+              <p class="pt">"Nenhum app faz isso. <em>Então eu construí o meu.</em>"</p>
+              <div class="callout-source">
+                <span class="en-inline">The moment the project started</span>
+                <span class="pt-inline">O momento em que o projeto começou</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 PROBLEM -->
+      <section class="case-section reveal" style="background: var(--ink);">
+        <div class="cs-label" style="color: #f0d48a;">
+          <span style="display:block;width:24px;height:1px;background:#f0d48a;flex-shrink:0"></span>
+          <span class="en-inline">02. The Problem</span><span class="pt-inline">02. O Problema</span>
+        </div>
+        <h2 class="cs-title" style="color: var(--white);">
+          <span class="en">How do you organize a life<br>that runs on <em
+              style="color:#f0d48a">five different engines?</em></span>
+          <span class="pt">Como organizar uma vida<br>que funciona com <em style="color:#f0d48a">cinco motores
+              diferentes?</em></span>
+        </h2>
+        <p class="cs-body-text en" style="color: rgba(255,255,255,0.7); max-width: 700px;">Productivity tools treat life as a list of tasks. Astrology apps give you a daily vibe check. Journaling tools capture feelings but don't connect them to action. Neuroscience-based tools focus on habits but ignore context. <strong style="color: rgba(255,255,255,0.9);">None of them treat the user as a whole person, with a body that has cycles, a mind that has patterns, and a life that has seasons.</strong></p>
+        <p class="cs-body-text pt" style="color: rgba(255,255,255,0.7); max-width: 700px;">Ferramentas de produtividade tratam a vida como uma lista de tarefas. Apps de astrologia dão um check de vibe diário. Ferramentas de journaling capturam sentimentos mas não os conectam à ação. Ferramentas baseadas em neurociência focam em hábitos mas ignoram contexto. <strong style="color: rgba(255,255,255,0.9);">Nenhuma delas trata o usuário como uma pessoa inteira, com um corpo que tem ciclos, uma mente que tem padrões, e uma vida que tem estações.</strong></p>
+        <p class="cs-body-text en" style="color: rgba(255,255,255,0.7); max-width: 700px; margin-bottom: 48px;">I needed one system that could answer: <strong style="color: rgba(255,255,255,0.9);">What should I focus on today, given who I am, what I'm building, how my energy levels are, and where the bigger picture is pointing?</strong></p>
+        <p class="cs-body-text pt" style="color: rgba(255,255,255,0.7); max-width: 700px; margin-bottom: 48px;">Eu precisava de um sistema que pudesse responder: <strong style="color: rgba(255,255,255,0.9);">No que eu deveria focar hoje, dado quem eu sou, o que estou construindo, como está minha energia, e para onde o quadro maior está apontando?</strong></p>
+      </section>
+
+      <!-- 03 FRAMEWORK -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">03. Framework</span><span class="pt-inline">03.
+            Framework</span></div>
+        <h2 class="cs-title">
+          <span class="en">Four dimensions<br>of a <em>whole life.</em></span>
+          <span class="pt">Quatro dimensões<br>de uma <em>vida inteira.</em></span>
+        </h2>
+        <p class="cs-body-text en">The app is structured around four existential questions that together form a complete life operating system. Each dimension has its own data sources, rituals, and tracking mechanisms.</p>
+        <p class="cs-body-text pt">O app é estruturado em torno de quatro perguntas existenciais que juntas formam um sistema operacional de vida completo. Cada dimensão tem suas próprias fontes de dados, rituais e mecanismos de rastreamento.</p>
+        <div class="dim-grid reveal">
+          <div class="dim-card">
+            <div class="dim-icon">&#x1F52E;</div>
+            <div class="dim-name">
+              <span class="en">Who am I?</span>
+              <span class="pt">Quem eu sou?</span>
+            </div>
+            <div class="dim-desc">
+              <span class="en">A self-knowledge layer built from natal chart, numerology, and yearly transits. Four tabs deep: synthesis, numerology, astral map, annual forecast. The fixed identity and the moving sky.</span>
+              <span class="pt">Uma camada de autoconhecimento construída a partir do mapa natal, numerologia e trânsitos anuais. Quatro abas de profundidade: síntese, numerologia, mapa astral, previsão anual. A identidade fixa e o céu em movimento.</span>
+            </div>
+          </div>
+          <div class="dim-card">
+            <div class="dim-icon">&#x1F333;</div>
+            <div class="dim-name">
+              <span class="en">What keeps me alive?</span>
+              <span class="pt">O que me mantém viva?</span>
+            </div>
+            <div class="dim-desc">
+              <span class="en">Non-negotiable wellbeing anchors: movement, creativity, spirituality, therapy, studies, self-care. Each one configurable and tracked with neuroendocrine impact tags.</span>
+              <span class="pt">Âncoras inegociáveis de bem-estar: movimento, criatividade, espiritualidade, terapia, estudos, autocuidado. Cada uma configurável e rastreada com tags de impacto neuroendócrino.</span>
+            </div>
+          </div>
+          <div class="dim-card">
+            <div class="dim-icon">&#x1F680;</div>
+            <div class="dim-name">
+              <span class="en">What am I building?</span>
+              <span class="pt">O que estou construindo?</span>
+            </div>
+            <div class="dim-desc">
+              <span class="en">Multiple ventures managed in parallel, each with phase tracking, milestones, energy cost, and next action. A project dashboard that respects capacity, not just deadlines.</span>
+              <span class="pt">Múltiplos projetos gerenciados em paralelo, cada um com rastreamento de fase, marcos, custo energético e próxima ação. Um dashboard que respeita capacidade, não só prazos.</span>
+            </div>
+          </div>
+          <div class="dim-card">
+            <div class="dim-icon">&#x1F30C;</div>
+            <div class="dim-name">
+              <span class="en">Where am I going?</span>
+              <span class="pt">Para onde estou indo?</span>
+            </div>
+            <div class="dim-desc">
+              <span class="en">Current astrological transits, annual forecasts, and guiding questions. The temporal layer that shapes what to prioritize now vs. later, based on the user's own map.</span>
+              <span class="pt">Trânsitos astrológicos atuais, previsões anuais e perguntas-guia. A camada temporal que molda o que priorizar agora vs. depois, baseada no mapa do próprio usuário.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 DESIGN & SCREENS -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">04. Design & Screens</span><span class="pt-inline">04. Design
+            & Telas</span></div>
+        <h2 class="cs-title">
+          <span class="en">Five rituals,<br><em>five screens.</em></span>
+          <span class="pt">Cinco rituais,<br><em>cinco telas.</em></span>
+        </h2>
+        <p class="cs-body-text en">Each screen serves a specific moment in the day or week. The UI follows a principle of calm density: enough information to orient, not enough to overwhelm.</p>
+        <p class="cs-body-text pt">Cada tela serve a um momento específico do dia ou da semana. A UI segue um princípio de densidade calma: informação suficiente para orientar, mas não para sobrecarregar.</p>
+        <div class="cs-4col reveal" style="margin-top:48px; grid-template-columns: repeat(5, 1fr);">
+          <div class="screen-card">
+            <div class="screen-placeholder gold-bg">&#x2600;&#xFE0F;</div>
+            <div class="screen-card-body">
+              <div class="screen-num">01</div>
+              <div class="screen-name">
+                <span class="en">Bom Dia</span>
+                <span class="pt">Bom Dia</span>
+              </div>
+              <div class="screen-desc">
+                <span class="en">Morning ritual. Shows today's energy context, suggested anchor, oracle message, and one intention to set before starting the day.</span>
+                <span class="pt">Ritual matinal. Mostra o contexto energético de hoje, âncora sugerida, mensagem do oráculo e uma intenção para definir antes de começar o dia.</span>
+              </div>
+            </div>
+          </div>
+          <div class="screen-card">
+            <div class="screen-placeholder gold-bg">&#x1F319;</div>
+            <div class="screen-card-body">
+              <div class="screen-num">02</div>
+              <div class="screen-name">
+                <span class="en">Cycle + Moon</span>
+                <span class="pt">Ciclo + Lua</span>
+              </div>
+              <div class="screen-desc">
+                <span class="en">Cyclical awareness layer. Tracks hormonal phases and lunar phases simultaneously. Each combination triggers contextual oracle guidance.</span>
+                <span class="pt">Camada de consciência cíclica. Rastreia fases hormonais e fases lunares simultaneamente. Cada combinação dispara orientação contextual do oráculo.</span>
+              </div>
+            </div>
+          </div>
+          <div class="screen-card">
+            <div class="screen-placeholder gold-bg">&#x1F4CA;</div>
+            <div class="screen-card-body">
+              <div class="screen-num">03</div>
+              <div class="screen-name">Dashboard</div>
+              <div class="screen-desc">
+                <span class="en">All five ventures at a glance. Status, next action, energy cost, and neuro-tag for each
+                  active project.</span>
+                <span class="pt">Todos os cinco projetos de uma vez. Status, próxima ação, custo energético e neuro-tag
+                  para cada projeto ativo.</span>
+              </div>
+            </div>
+          </div>
+          <div class="screen-card">
+            <div class="screen-placeholder gold-bg">&#x1F4DD;</div>
+            <div class="screen-card-body">
+              <div class="screen-num">04</div>
+              <div class="screen-name">
+                <span class="en">Weekly Review</span>
+                <span class="pt">Revisão Semanal</span>
+              </div>
+              <div class="screen-desc">
+                <span class="en">End-of-week reflection. What moved, what stalled, which neuro-tags dominated. AI-generated insights with origin tags (natal, numerology, pattern).</span>
+                <span class="pt">Reflexão de fim de semana. O que avançou, o que travou, quais neuro-tags dominaram. Insights gerados com tags de origem (natal, numerologia, padrão).</span>
+              </div>
+            </div>
+          </div>
+          <div class="screen-card">
+            <div class="screen-placeholder gold-bg">&#x1F4BC;</div>
+            <div class="screen-card-body">
+              <div class="screen-num">05</div>
+              <div class="screen-name">Job Tracker</div>
+              <div class="screen-desc">
+                <span class="en">Pipeline of opportunities. Status, contacts, follow-up dates. The career layer that
+                  connects to life goals.</span>
+                <span class="pt">Pipeline de oportunidades. Status, contatos, datas de follow-up. A camada de carreira
+                  que conecta aos objetivos de vida.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="app-video-wrap reveal">
+          <div class="app-video-frame">
+            <video controls preload="metadata" poster="cases/meuoraculopessoal/media/mock.png">
+              <source src="cases/meuoraculopessoal/media/screen-recording.mp4" type="video/mp4">
+              <source src="cases/meuoraculopessoal/media/screen-recording.mov" type="video/quicktime">
+              <span class="en">Your browser does not support the video tag.</span>
+              <span class="pt">Seu navegador não suporta a tag de vídeo.</span>
+            </video>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 CYCLE + MOON -->
+      <section class="case-section reveal" style="background: var(--ink);">
+        <div class="cs-label" style="color: #f0d48a;">
+          <span style="display:block;width:24px;height:1px;background:#f0d48a;flex-shrink:0"></span>
+          <span class="en-inline">05. Cycle + Moon</span><span class="pt-inline">05. Ciclo + Lua</span>
+        </div>
+        <h2 class="cs-title" style="color: var(--white);">
+          <span class="en">The body has<br>its own <em style="color:#f0d48a">calendar.</em></span>
+          <span class="pt">O corpo tem<br>seu próprio <em style="color:#f0d48a">calendário.</em></span>
+        </h2>
+        <p class="cs-body-text en" style="color: rgba(255,255,255,0.7); max-width: 700px;">This is the feature most productivity tools would never build. The app tracks two overlapping cycles: the <strong style="color: rgba(255,255,255,0.9);">hormonal cycle</strong> (5 phases with distinct energy profiles) and the <strong style="color: rgba(255,255,255,0.9);">lunar cycle</strong> (8 phases fetched in real-time from the U.S. Naval Observatory API). When they align, the system triggers contextual oracle messages.</p>
+        <p class="cs-body-text pt" style="color: rgba(255,255,255,0.7); max-width: 700px;">Essa é a feature que a maioria das ferramentas de produtividade jamais construiria. O app rastreia dois ciclos sobrepostos: o <strong style="color: rgba(255,255,255,0.9);">ciclo hormonal</strong> (5 fases com perfis energéticos distintos) e o <strong style="color: rgba(255,255,255,0.9);">ciclo lunar</strong> (8 fases buscadas em tempo real via API do Observatório Naval dos EUA). Quando se alinham, o sistema dispara mensagens contextuais do oráculo.</p>
+
+        <div class="dim-grid reveal" style="margin-top:48px; grid-template-columns: repeat(5, 1fr);">
+          <div class="dim-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+            <div class="dim-icon">&#x1FA78;</div>
+            <div class="dim-name" style="color: var(--white);">
+              <span class="en">Menstrual</span>
+              <span class="pt">Menstrual</span>
+            </div>
+            <div class="dim-desc" style="color: rgba(255,255,255,0.6);">
+              <span class="en">Inner winter. Rest, plan, don't force. Exercise: light only. Projects: review, don't execute. Priority: restorative anchors.</span>
+              <span class="pt">Inverno interno. Descanse, planeje, não force. Exercício: leve. Projetos: revise, não execute. Prioridade: âncoras restaurativas.</span>
+            </div>
+          </div>
+          <div class="dim-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+            <div class="dim-icon">&#x1F331;</div>
+            <div class="dim-name" style="color: var(--white);">
+              <span class="en">Follicular</span>
+              <span class="pt">Folicular</span>
+            </div>
+            <div class="dim-desc" style="color: rgba(255,255,255,0.6);">
+              <span class="en">Spring. Creativity rising. Start new tasks, brainstorm, explore. Studies yield more now. The mind is open and curious.</span>
+              <span class="pt">Primavera. Criatividade subindo. Comece tarefas novas, brainstorm, explore. Estudos rendem mais agora. A mente está aberta e curiosa.</span>
+            </div>
+          </div>
+          <div class="dim-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+            <div class="dim-icon">&#x1F525;</div>
+            <div class="dim-name" style="color: var(--white);">
+              <span class="en">Ovulatory</span>
+              <span class="pt">Ovulatória</span>
+            </div>
+            <div class="dim-desc" style="color: rgba(255,255,255,0.6);">
+              <span class="en">Summer. Peak energy. Record, publish, present. Intense workouts welcome. Communication and creative expression at their peak.</span>
+              <span class="pt">Verão. Pico de energia. Grave, publique, apresente. Treinos intensos bem-vindos. Comunicação e expressão criativa no auge.</span>
+            </div>
+          </div>
+          <div class="dim-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+            <div class="dim-icon">&#x1F342;</div>
+            <div class="dim-name" style="color: var(--white);">
+              <span class="en">Luteal</span>
+              <span class="pt">Lútea</span>
+            </div>
+            <div class="dim-desc" style="color: rgba(255,255,255,0.6);">
+              <span class="en">Autumn. Close open cycles. Review, finalize, organize. Less socializing, more depth. The environment mirrors the internal.</span>
+              <span class="pt">Outono. Feche ciclos abertos. Revise, finalize, organize. Menos socialização, mais profundidade. O ambiente espelha o interno.</span>
+            </div>
+          </div>
+          <div class="dim-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);">
+            <div class="dim-icon">&#x1F30A;</div>
+            <div class="dim-name" style="color: var(--white);">
+              <span class="en">Pre-menstrual</span>
+              <span class="pt">Pré-menstrual</span>
+            </div>
+            <div class="dim-desc" style="color: rgba(255,255,255,0.6);">
+              <span class="en">High sensitivity. Don't make big decisions. Wait 48h before abandoning any project. Restorative and reflective anchors are essential now.</span>
+              <span class="pt">Sensibilidade alta. Não tome decisões grandes. Espere 48h antes de abandonar qualquer projeto. Âncoras restaurativas e reflexivas são essenciais agora.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:48px; background: rgba(212,168,67,0.12); border: 1px solid rgba(212,168,67,0.2);">
+          <p class="en" style="color: var(--white);">"The system cross-references both cycles and generates <em>contextual messages</em>. For example, when a rest phase aligns with a new moon, the oracle suggests planting intentions instead of pushing execution."</p>
+          <p class="pt" style="color: var(--white);">"O sistema cruza os dois ciclos e gera <em>mensagens contextuais</em>. Por exemplo, quando uma fase de descanso se alinha com a lua nova, o oráculo sugere plantar intenções ao invés de forçar execução."</p>
+          <div class="callout-source">
+            <span class="en-inline">Design principle: cycle-aware oracle engine</span>
+            <span class="pt-inline">Princípio de design: motor de oráculo consciente do ciclo</span>
+          </div>
+        </div>
+
+        <p class="cs-body-text en" style="color: rgba(255,255,255,0.7); max-width: 700px; margin-top: 48px;">This isn't wellness decoration. Each phase carries specific guidance for exercise, projects, and which wellbeing anchors to prioritize. The system includes a <strong style="color: rgba(255,255,255,0.9);">48-hour rule</strong> for high-sensitivity phases: don't abandon any project until the phase passes. It's a design pattern for protecting long-term goals from short-term emotional fluctuations.</p>
+        <p class="cs-body-text pt" style="color: rgba(255,255,255,0.7); max-width: 700px;">Isso não é decoração de wellness. Cada fase traz orientação específica para exercício, projetos e quais âncoras de bem-estar priorizar. O sistema inclui uma <strong style="color: rgba(255,255,255,0.9);">regra de 48 horas</strong> para fases de alta sensibilidade: não abandone nenhum projeto até a fase passar. É um design pattern para proteger objetivos de longo prazo de flutuações emocionais de curto prazo.</p>
+      </section>
+
+      <!-- 06 NEURO-TAGGING -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">06. Neuro-Tagging</span><span class="pt-inline">06.
+            Neuro-Tagging</span></div>
+        <h2 class="cs-title">
+          <span class="en">Every action tagged<br>by <em>what it costs your body.</em></span>
+          <span class="pt">Cada ação tagueada<br>por <em>o que custa ao seu corpo.</em></span>
+        </h2>
+        <p class="cs-body-text en">Instead of categorizing actions by project or priority, the system tags every action by its neuroendocrine impact. This reveals hidden patterns, like spending an entire week on high-cortisol tasks while neglecting oxytocin-producing activities. The weekly review makes these imbalances visible.</p>
+        <p class="cs-body-text pt">Em vez de categorizar ações por projeto ou prioridade, o sistema tagueia cada ação pelo seu impacto neuroendócrino. Isso revela padrões ocultos, como passar uma semana inteira em tarefas de alto cortisol enquanto negligencia atividades produtoras de ocitocina. A revisão semanal torna esses desequilíbrios visíveis.</p>
+        <div class="neuro-grid reveal">
+          <div class="neuro-card">
+            <div class="neuro-emoji">&#x26A1;</div>
+            <div class="neuro-name">Cortisol</div>
+            <div class="neuro-system"><span class="en-inline">Stress response</span><span class="pt-inline">Resposta ao estresse</span></div>
+            <div class="neuro-desc">
+              <span class="en">Deadlines, urgent tasks, conflict resolution. High energy cost, needs recovery
+                after.</span>
+              <span class="pt">Prazos, tarefas urgentes, resolução de conflitos. Alto custo energético, precisa de
+                recuperação depois.</span>
+            </div>
+          </div>
+          <div class="neuro-card">
+            <div class="neuro-emoji">&#x1F31F;</div>
+            <div class="neuro-name">
+              <span class="en">Dopamine</span>
+              <span class="pt">Dopamina</span>
+            </div>
+            <div class="neuro-system"><span class="en-inline">Reward circuit</span><span class="pt-inline">Circuito de recompensa</span></div>
+            <div class="neuro-desc">
+              <span class="en">Shipping features, completing milestones, learning something new. Motivating but
+                addictive.</span>
+              <span class="pt">Entregar features, completar marcos, aprender algo novo. Motivadora mas viciante.</span>
+            </div>
+          </div>
+          <div class="neuro-card">
+            <div class="neuro-emoji">&#x1F33F;</div>
+            <div class="neuro-name">
+              <span class="en">Serotonin</span>
+              <span class="pt">Serotonina</span>
+            </div>
+            <div class="neuro-system"><span class="en-inline">Stability & mood</span><span class="pt-inline">Estabilidade & humor</span></div>
+            <div class="neuro-desc">
+              <span class="en">Routines, walks, cooking, organizing. Low intensity but essential for baseline
+                wellbeing.</span>
+              <span class="pt">Rotinas, caminhadas, cozinhar, organizar. Baixa intensidade mas essencial para o
+                bem-estar base.</span>
+            </div>
+          </div>
+          <div class="neuro-card">
+            <div class="neuro-emoji">&#x1F49C;</div>
+            <div class="neuro-name">
+              <span class="en">Oxytocin</span>
+              <span class="pt">Ocitocina</span>
+            </div>
+            <div class="neuro-system"><span class="en-inline">Connection & trust</span><span class="pt-inline">Conexão & confiança</span></div>
+            <div class="neuro-desc">
+              <span class="en">Mentoring calls, deep conversations, quality time. The hormone that makes effort feel
+                shared.</span>
+              <span class="pt">Calls de mentoria, conversas profundas, tempo de qualidade. O hormônio que faz o esforço
+                parecer compartilhado.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 STACK -->
+      <section class="case-section dark reveal">
+        <div class="cs-label"><span class="en-inline">07. Stack & Decisions</span><span class="pt-inline">07. Stack &
+            Decisões</span></div>
+        <h2 class="cs-title">
+          <span class="en">Zero dependencies.<br><em>One HTML file.</em></span>
+          <span class="pt">Zero dependências.<br><em>Um arquivo HTML.</em></span>
+        </h2>
+        <p class="cs-body-text en" style="color: rgba(255,255,255,0.7); max-width: 700px;">A personal tool designed for maximum control and minimum maintenance. The architecture is <strong style="color: rgba(255,255,255,0.9);">whitelabel by design</strong>: all personal data lives in <code style="color:#f0d48a">config.js</code> (identity, astrology, projects, cycle phases, oracle messages), while the template lives in a single HTML file. Anyone could fork it, replace the config, and have their own life OS.</p>
+        <p class="cs-body-text pt" style="color: rgba(255,255,255,0.7); max-width: 700px;">Uma ferramenta pessoal projetada para máximo controle e mínima manutenção. A arquitetura é <strong style="color: rgba(255,255,255,0.9);">whitelabel por design</strong>: todos os dados pessoais vivem no <code style="color:#f0d48a">config.js</code> (identidade, astrologia, projetos, fases do ciclo, mensagens do oráculo), enquanto o template vive em um único arquivo HTML. Qualquer um pode fazer fork, substituir o config e ter seu próprio OS de vida.</p>
+        <div class="tools-stack reveal">
+          <div class="tool-card">
+            <div class="tool-name">Vanilla HTML/CSS/JS</div>
+            <div class="tool-type">Frontend</div>
+            <div class="tool-desc">
+              <span class="en">No React, no Vue, no build tools. Single HTML file with inline CSS and JS. Opens
+                instantly, editable anywhere.</span>
+              <span class="pt">Sem React, sem Vue, sem build tools. Um único arquivo HTML com CSS e JS inline. Abre
+                instantaneamente, editável de qualquer lugar.</span>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-name">Supabase</div>
+            <div class="tool-type">Backend + Auth</div>
+            <div class="tool-desc">
+              <span class="en">Postgres database with Row Level Security. Real-time sync, auth built-in. The simplest
+                way to have a persistent backend.</span>
+              <span class="pt">Banco Postgres com Row Level Security. Sync em tempo real, auth integrada. A forma mais
+                simples de ter um backend persistente.</span>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-name">Claude</div>
+            <div class="tool-type">AI Co-Builder</div>
+            <div class="tool-desc">
+              <span class="en">Used Claude Code to scaffold, debug, and iterate on 6000+ lines of code. AI as a
+                building partner, not a replacement.</span>
+              <span class="pt">Usei Claude Code para scaffolding, debug e iteração em 6000+ linhas de código. IA como
+                parceira de construção, não substituição.</span>
+            </div>
+          </div>
+        </div>
+        <div class="decision-row reveal">
+          <span class="decision-pill"><span class="en-inline">Zero dependencies</span><span class="pt-inline">Zero
+              dependências</span></span>
+          <span class="decision-pill"><span class="en-inline">Single HTML file</span><span class="pt-inline">Um único
+              arquivo HTML</span></span>
+          <span class="decision-pill"><span class="en-inline">Offline-first design</span><span
+              class="pt-inline">Offline-first</span></span>
+          <span class="decision-pill"><span class="en-inline">No build step</span><span class="pt-inline">Sem build
+              step</span></span>
+          <span class="decision-pill"><span class="en-inline">6000+ lines of code</span><span class="pt-inline">6000+
+              linhas de código</span></span>
+          <span class="decision-pill"><span class="en-inline">60+ trackable actions</span><span class="pt-inline">60+
+              ações rastreáveis</span></span>
+          <span class="decision-pill"><span class="en-inline">USNO moon phase API</span><span class="pt-inline">API de fase lunar USNO</span></span>
+          <span class="decision-pill"><span class="en-inline">Whitelabel architecture</span><span class="pt-inline">Arquitetura whitelabel</span></span>
+          <span class="decision-pill"><span class="en-inline">Cycle-aware UX</span><span class="pt-inline">UX consciente do ciclo</span></span>
+        </div>
+      </section>
+
+      <!-- 08 RESULTS -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">08. Results & Learnings</span><span class="pt-inline">08. Resultados & Aprendizados</span></div>
+        <h2 class="cs-title">
+          <span class="en">What changed<br>when <em>everything had a place.</em></span>
+          <span class="pt">O que mudou<br>quando <em>tudo tinha um lugar.</em></span>
+        </h2>
+        <div class="learning-list reveal">
+          <div class="learning-item">
+            <div class="learning-num">1</div>
+            <div class="learning-content">
+              <div class="learning-title">
+                <span class="en">Decision fatigue dropped</span>
+                <span class="pt">A fadiga de decisão caiu</span>
+              </div>
+              <div class="learning-desc">
+                <span class="en">The "Bom Dia" ritual replaced 20 minutes of morning anxiety with a 2-minute
+                  check-in. The system already knows what matters today.</span>
+                <span class="pt">O ritual "Bom Dia" substituiu 20 minutos de ansiedade matinal por um check-in de 2
+                  minutos. O sistema já sabe o que importa hoje.</span>
+              </div>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-num">2</div>
+            <div class="learning-content">
+              <div class="learning-title">
+                <span class="en">Neuro-tags revealed blind spots</span>
+                <span class="pt">Neuro-tags revelaram pontos cegos</span>
+              </div>
+              <div class="learning-desc">
+                <span class="en">I was spending 80% of my week on cortisol-heavy tasks and almost zero on
+                  oxytocin. The weekly review made this visible for the first time.</span>
+                <span class="pt">Eu gastava 80% da minha semana em tarefas pesadas de cortisol e quase zero em
+                  ocitocina. A revisão semanal tornou isso visível pela primeira vez.</span>
+              </div>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-num">3</div>
+            <div class="learning-content">
+              <div class="learning-title">
+                <span class="en">Astrology became actionable</span>
+                <span class="pt">Astrologia se tornou acionável</span>
+              </div>
+              <div class="learning-desc">
+                <span class="en">Instead of reading a horoscope passively, transit data now informs real
+                  decisions: when to push hard, when to rest, when to start new things.</span>
+                <span class="pt">Em vez de ler um horóscopo passivamente, dados de trânsitos agora informam decisões
+                  reais: quando forçar, quando descansar, quando começar coisas novas.</span>
+              </div>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-num">4</div>
+            <div class="learning-content">
+              <div class="learning-title">
+                <span class="en">Cycle awareness changed how I work</span>
+                <span class="pt">Consciência do ciclo mudou como eu trabalho</span>
+              </div>
+              <div class="learning-desc">
+                <span class="en">The cycle-aware layer taught me to stop scheduling high-stakes work during low-energy phases and to stop judging slow days as failures. The 48-hour rule alone prevented impulsive decisions that would have killed ongoing projects.</span>
+                <span class="pt">A camada de consciência cíclica me ensinou a parar de agendar trabalho de alto risco em fases de baixa energia e a parar de julgar dias lentos como fracassos. Só a regra de 48 horas já evitou decisões impulsivas que teriam matado projetos em andamento.</span>
+              </div>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-num">5</div>
+            <div class="learning-content">
+              <div class="learning-title">
+                <span class="en">Building for yourself is the best UX exercise</span>
+                <span class="pt">Construir para si mesmo é o melhor exercício de UX</span>
+              </div>
+              <div class="learning-desc">
+                <span class="en">When the user is you, every friction is felt immediately. No user testing delay.
+                  No assumption gap. The feedback loop is instant.</span>
+                <span class="pt">Quando o usuário é você, todo atrito é sentido imediatamente. Sem atraso de teste
+                  de usabilidade. Sem gap de suposição. O loop de feedback é instantâneo.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 NEXT STEPS -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">09. Next Steps</span><span class="pt-inline">09. Próximos
+            Passos</span></div>
+        <h2 class="cs-title">
+          <span class="en">The roadmap<br>is <em>the life itself.</em></span>
+          <span class="pt">O roadmap<br>é <em>a própria vida.</em></span>
+        </h2>
+        <div class="next-steps-grid reveal">
+          <div class="ns-item">
+            <div class="ns-dot"></div>
+            <div class="ns-text">
+              <span class="en"><strong>AI-powered daily briefing</strong>:Use Claude API to generate a personalized
+                morning summary based on transits + active projects + recent neuro-tag patterns.</span>
+              <span class="pt"><strong>Briefing diário com IA</strong>:Usar Claude API para gerar um resumo matinal
+                personalizado baseado em trânsitos + projetos ativos + padrões recentes de neuro-tags.</span>
+            </div>
+          </div>
+          <div class="ns-item">
+            <div class="ns-dot"></div>
+            <div class="ns-text">
+              <span class="en"><strong>Seasonal review templates</strong>:Quarterly reflections aligned with
+                astrological seasons and numerological cycles.</span>
+              <span class="pt"><strong>Templates de revisão sazonal</strong>:Reflexões trimestrais alinhadas com
+                estações astrológicas e ciclos numerológicos.</span>
+            </div>
+          </div>
+          <div class="ns-item">
+            <div class="ns-dot"></div>
+            <div class="ns-text">
+              <span class="en"><strong>Neuro-balance alerts</strong>:Automated warnings when one neuroendocrine tag
+                dominates for too many consecutive days.</span>
+              <span class="pt"><strong>Alertas de equilíbrio neuro</strong>:Avisos automáticos quando uma neuro-tag
+                domina por muitos dias consecutivos.</span>
+            </div>
+          </div>
+          <div class="ns-item">
+            <div class="ns-dot"></div>
+            <div class="ns-text">
+              <span class="en"><strong>Mobile-first redesign</strong>:Optimize the single-file architecture for
+                phone-first daily usage with PWA capabilities.</span>
+              <span class="pt"><strong>Redesign mobile-first</strong>:Otimizar a arquitetura de arquivo único para uso
+                diário phone-first com capacidades PWA.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <!-- /case-body -->
+
+    <!-- ── ROLE ── -->
+    <section class="role-section">
+      <div class="role-content">
+        <div class="role-eyebrow reveal">
+          <span class="en-inline">Giuliana's role in this project</span>
+          <span class="pt-inline">Papel da Giuliana no projeto</span>
+        </div>
+        <blockquote class="role-quote reveal">
+          <span class="en">"Designing a life operating system that integrates self-knowledge, project management, neuroscience, and cyclical awareness into one daily ritual, conceived, built, and used solo."</span>
+          <span class="pt">"Projetar um sistema operacional de vida que integra autoconhecimento, gestão de projetos, neurociência e consciência cíclica em um ritual diário, concebido, construído e usado solo."</span>
+        </blockquote>
+        <div class="role-attribution reveal">
+          <span class="en-inline">Designer + Developer · UX Strategy · Astrology Integration · Cycle + Moon Tracking · Neuro-Tagging</span>
+          <span class="pt-inline">Designer + Desenvolvedora · Estratégia de UX · Integração Astrológica · Rastreamento Ciclo + Lua · Neuro-Tagging</span>
+        </div>
+        <div class="role-stats reveal">
+          <div class="stat-card">
+            <div class="stat-num">01</div>
+            <div class="stat-desc"><span class="en-inline">Designer conceiving, building & using solo</span><span
+                class="pt-inline">Designer concebendo, construindo e usando solo</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">6k+</div>
+            <div class="stat-desc"><span class="en-inline">Lines of code in a single HTML file</span><span
+                class="pt-inline">Linhas de código em um único arquivo HTML</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">60+</div>
+            <div class="stat-desc"><span class="en-inline">Trackable actions with neuro-tags</span><span
+                class="pt-inline">Ações rastreáveis com neuro-tags</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">9</div>
+            <div class="stat-desc"><span class="en-inline">Integrated data layers (astral, neuro, cycle, lunar...)</span><span
+                class="pt-inline">Camadas de dados integradas (astral, neuro, ciclo, lunar...)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="case-cta">
+      <div class="case-cta-text">
+        <div class="case-cta-label"><span class="en-inline">Let's work together</span><span class="pt-inline">Vamos
+            trabalhar juntos</span></div>
+        <div class="case-cta-title">
+          <span class="en">Interested in how I think<br>through complex systems?</span>
+          <span class="pt">Interessado em como eu penso<br>sistemas complexos?</span>
+        </div>
+      </div>
+      <div class="case-cta-links">
+        <a href="mailto:giulopesg@gmail.com" class="cta-btn white"><svg width="18" height="18" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            style="vertical-align:middle;margin-right:6px">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="M22 4L12 13 2 4" />
+          </svg><span class="en-inline">Get in touch</span><span class="pt-inline">Entrar em contato</span></a>
+        <a href="index.html" class="cta-btn outline">&larr; <span class="en-inline">Back to portfolio</span><span
+            class="pt-inline">Voltar ao portfólio</span></a>
+      </div>
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="case-footer-nav">
+      <a href="cpfl-case.html" class="footer-nav-link">
+        <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span
+            class="pt-inline">Anterior</span></span>
+        <span class="fnl-title">CPFL Soluções</span>
+      </a>
+      <a href="neuroot-case.html" class="footer-nav-link" style="text-align:right;">
+        <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Próximo</span> &rarr;</span>
+        <span class="fnl-title">Neuroot</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Giuliana Lopes Galvão</p>
+  </footer>
+
+  <script>
+    // ─── LANG TOGGLE ───
+    let currentLang = 'en';
+    function setLang(lang) {
+      currentLang = lang;
+      document.body.classList.toggle('lang-pt', lang === 'pt');
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+      });
+      localStorage.setItem('lang', lang);
+    }
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang) setLang(savedLang);
+
+    // SCROLL REVEAL
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+    reveals.forEach(el => observer.observe(el));
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          el.classList.add('visible');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
