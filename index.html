@@ -291,6 +291,9 @@
   }
   .hero-left::-webkit-scrollbar { display: none; }
 
+  /* ─── HERO AUDIENCE PILLS (mobile only) ─── */
+  .hero-audience-mobile { display: none; }
+
   /* ─── AVAILABILITY BADGE ─── */
   .hero-available {
     display: inline-flex;
@@ -720,15 +723,16 @@
     section { padding: 80px 24px; }
     #hero { grid-template-columns: 1fr; min-height: auto; padding: 0; }
     .hero-left { padding: 100px 24px 40px; height: auto; position: static; align-self: auto; }
+    .hero-audience-mobile { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
     .hero-right { min-height: 60vh; }
     .about-grid { grid-template-columns: 1fr; gap: 48px; }
     .section-title { margin-bottom: 40px; }
     .cases-grid { grid-template-columns: 1fr; }
     .case-card:first-child, .case-card:nth-child(2) { border-radius: 4px; }
     .case-inner { padding: 32px 24px; min-height: 280px; gap: 16px; }
-    .case-card-img .case-inner { flex-direction: column-reverse; }
-    .case-mockup { flex: none; padding: 16px 16px 0; }
+    .case-mockup { position: static; width: 100%; padding: 24px 24px 0; display: flex; justify-content: center; }
     .case-mockup img { max-width: 180px; margin: 0 auto; }
+    .case-card-img .case-text { max-width: 100%; }
     .case-tags { gap: 6px; }
     .case-eyebrow { margin-bottom: 8px; }
     .case-featured { margin-bottom: 8px; }
@@ -818,6 +822,12 @@
   </div>
 
   <div class="hero-left">
+    <div class="hero-audience-mobile">
+      <a href="#recruiter-cta" class="nav-audience-link"><span class="en-inline">I'm a recruiter</span><span class="pt-inline">Sou recrutador</span></a>
+      <a href="/trabalhe-comigo" class="nav-audience-link"><span class="en-inline">I have a project</span><span class="pt-inline">Tenho um projeto</span></a>
+      <a href="/aprender" class="nav-audience-link"><span class="en-inline">I want to learn</span><span class="pt-inline">Quero aprender</span></a>
+    </div>
+
     <div class="hero-available">
       <span class="avail-dot"></span>
       <span class="en-inline">Available now · CLT · PJ · Freelance</span>
