@@ -572,6 +572,15 @@
   .case-card.case-wide { grid-column: 1 / -1; border-radius: 4px; }
   .case-card:nth-last-child(1):nth-child(odd) { grid-column: 1 / -1; }
 
+  /* ─── CASE CARD WITH IMAGE ─── */
+  .case-card-img { position: relative; }
+  .case-card-img .case-text { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 16px; min-width: 0; max-width: 60%; }
+  .case-arrow-abs { position: absolute; top: 24px; right: 24px; z-index: 3; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--ink-muted); transition: all 0.3s; }
+  .case-card:hover .case-arrow-abs { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5); color: var(--white); transform: rotate(45deg); }
+  .case-mockup { position: absolute; right: 16px; bottom: 24px; width: 38%; z-index: 2; pointer-events: none; }
+  .case-mockup img { width: 100%; max-width: 260px; height: auto; display: block; margin: 0 auto; }
+  .case-mockup img[src=""] { visibility: hidden; }
+
   .case-inner { padding: 52px 48px; min-height: 340px; display: flex; flex-direction: column; justify-content: space-between; position: relative; z-index: 2; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
   .case-card:hover .case-inner { transform: translateY(-4px); }
 
@@ -717,6 +726,9 @@
     .cases-grid { grid-template-columns: 1fr; }
     .case-card:first-child, .case-card:nth-child(2) { border-radius: 4px; }
     .case-inner { padding: 32px 24px; min-height: 280px; gap: 16px; }
+    .case-card-img .case-inner { flex-direction: column-reverse; }
+    .case-mockup { flex: none; padding: 16px 16px 0; }
+    .case-mockup img { max-width: 180px; margin: 0 auto; }
     .case-tags { gap: 6px; }
     .case-eyebrow { margin-bottom: 8px; }
     .case-featured { margin-bottom: 8px; }
@@ -881,10 +893,11 @@
   </h2>
 
   <div class="cases-grid">
-    <a href="neuroot-case.html" class="case-card reveal">
+    <a href="neuroot-case.html" class="case-card case-card-img reveal">
       <div class="case-bg case-bg-1"></div>
+      <div class="case-arrow case-arrow-abs">↗</div>
       <div class="case-inner">
-        <div class="case-top">
+        <div class="case-text">
           <div class="case-tags">
             <span class="case-tag new">New</span>
             <span class="case-tag">UX + AI</span>
@@ -892,138 +905,158 @@
             <span class="case-tag">Mobile PWA</span>
             <span class="case-tag">React + Supabase</span>
           </div>
-          <div class="case-arrow">↗</div>
+          <div class="case-bottom">
+            <div class="case-featured"><span class="en-inline">Personal project · app in development</span><span class="pt-inline">Projeto pessoal · app em desenvolvimento</span></div>
+            <h3 class="case-title">Neuroot</h3>
+            <p class="case-desc en">A post-burnout recovery app designed from personal experience. Behavioral Activation methodology and neuroplasticity as a foundation. One practice a day. A defined end. Built with Figma Make, Claude Code, and Claude API. The name grew from roots → neurons → a new beginning.</p>
+            <p class="case-desc pt">App de recuperação pós-burnout criado a partir da própria experiência. Ativação Comportamental e neuroplasticidade como base. Uma prática por dia. Um fim definido. Construído com Figma Make, Claude Code e Claude API. O nome nasceu de raízes → neurônios → um recomeço.</p>
+          </div>
         </div>
-        <div class="case-bottom">
-          <div class="case-featured"><span class="en-inline">Personal project · app in development</span><span class="pt-inline">Projeto pessoal · app em desenvolvimento</span></div>
-          <h3 class="case-title">Neuroot</h3>
-          <p class="case-desc en">A post-burnout recovery app designed from personal experience. Behavioral Activation methodology and neuroplasticity as a foundation. One practice a day. A defined end. Built with Figma Make, Claude Code, and Claude API. The name grew from roots → neurons → a new beginning.</p>
-          <p class="case-desc pt">App de recuperação pós-burnout criado a partir da própria experiência. Ativação Comportamental e neuroplasticidade como base. Uma prática por dia. Um fim definido. Construído com Figma Make, Claude Code e Claude API. O nome nasceu de raízes → neurônios → um recomeço.</p>
+        <div class="case-mockup">
+          <img src="images/neurootmockup2.png" alt="Neuroot app mockup" loading="lazy">
         </div>
       </div>
     </a>
 
-    <a href="portfolio-case.html" class="case-card reveal">
+    <a href="portfolio-case.html" class="case-card case-card-img reveal">
       <div class="case-bg case-bg-2"></div>
+      <div class="case-arrow case-arrow-abs">&#8599;</div>
       <div class="case-inner">
-        <div class="case-top">
+        <div class="case-text">
           <div class="case-tags">
             <span class="case-tag new">New</span>
             <span class="case-tag">Design Engineering</span>
             <span class="case-tag">AI-Assisted Dev</span>
           </div>
-          <div class="case-arrow">&#8599;</div>
+          <div class="case-bottom">
+            <div class="case-featured"><span class="en-inline">Personal project · 2026</span><span class="pt-inline">Projeto pessoal · 2026</span></div>
+            <h3 class="case-title">This Portfolio &mdash;<br><em>Built with AI</em></h3>
+            <p class="case-desc en">8 pages, 6 case studies, fully responsive and bilingual &mdash; designed and coded in 5 days using Claude Code as my engineering partner. Zero lines written manually.</p>
+            <p class="case-desc pt">8 p&aacute;ginas, 6 case studies, totalmente responsivo e bil&iacute;ngue &mdash; projetado e codificado em 5 dias usando Claude Code como parceiro de engenharia. Zero linhas escritas manualmente.</p>
+          </div>
         </div>
-        <div class="case-bottom">
-          <div class="case-featured"><span class="en-inline">Personal project · 2026</span><span class="pt-inline">Projeto pessoal · 2026</span></div>
-          <h3 class="case-title">This Portfolio &mdash;<br><em>Built with AI</em></h3>
-          <p class="case-desc en">8 pages, 6 case studies, fully responsive and bilingual &mdash; designed and coded in 5 days using Claude Code as my engineering partner. Zero lines written manually.</p>
-          <p class="case-desc pt">8 p&aacute;ginas, 6 case studies, totalmente responsivo e bil&iacute;ngue &mdash; projetado e codificado em 5 dias usando Claude Code como parceiro de engenharia. Zero linhas escritas manualmente.</p>
+        <div class="case-mockup">
+          <img src="" alt="Portfolio mockup" loading="lazy">
         </div>
       </div>
     </a>
 
-    <a href="petrobras-case.html" class="case-card reveal">
+    <a href="petrobras-case.html" class="case-card case-card-img reveal">
       <div class="case-bg" style="background: linear-gradient(135deg, #0A2A3A 0%, #0E4B6B 100%);"></div>
+      <div class="case-arrow case-arrow-abs">↗</div>
       <div class="case-inner">
-        <div class="case-top">
+        <div class="case-text">
           <div class="case-tags">
             <span class="case-tag new">New</span>
             <span class="case-tag">UX Research</span>
             <span class="case-tag">Usability Testing</span>
             <span class="case-tag">Accessibility</span>
           </div>
-          <div class="case-arrow">↗</div>
+          <div class="case-bottom">
+            <div class="case-eyebrow en">Oil &amp; Gas · Petrobras</div>
+            <div class="case-eyebrow pt">Energia · Petrobras</div>
+            <h3 class="case-title">Petrobras —<br><em>PCD Usability Testing</em></h3>
+            <p class="case-desc en">28 remote sessions with people with disabilities. An honest diagnosis of how Petrobras' institutional website fails, and how it can truly include.</p>
+            <p class="case-desc pt">28 sessões remotas com pessoas com deficiência. Um diagnóstico honesto de como o site institucional da Petrobras falha e como pode incluir de verdade.</p>
+          </div>
         </div>
-        <div class="case-bottom">
-          <div class="case-eyebrow en">Oil &amp; Gas · Petrobras</div>
-          <div class="case-eyebrow pt">Energia · Petrobras</div>
-          <h3 class="case-title">Petrobras —<br><em>PCD Usability Testing</em></h3>
-          <p class="case-desc en">28 remote sessions with people with disabilities. An honest diagnosis of how Petrobras' institutional website fails, and how it can truly include.</p>
-          <p class="case-desc pt">28 sessões remotas com pessoas com deficiência. Um diagnóstico honesto de como o site institucional da Petrobras falha e como pode incluir de verdade.</p>
+        <div class="case-mockup">
+          <img src="" alt="Petrobras case mockup" loading="lazy">
         </div>
       </div>
     </a>
 
-    <a href="techback-case.html" class="case-card reveal reveal-delay-1">
+    <a href="techback-case.html" class="case-card case-card-img reveal reveal-delay-1">
       <div class="case-bg case-bg-4"></div>
+      <div class="case-arrow case-arrow-abs">↗</div>
       <div class="case-inner">
-        <div class="case-top">
+        <div class="case-text">
           <div class="case-tags">
             <span class="case-tag">Service Design</span>
             <span class="case-tag">UX Research</span>
           </div>
-          <div class="case-arrow">↗</div>
+          <div class="case-bottom">
+            <div class="case-eyebrow en">Smart Waste · Banco do Brasil</div>
+            <div class="case-eyebrow pt">Resíduo Inteligente · Banco do Brasil</div>
+            <h3 class="case-title">TechBack BB —<br>Smart Waste Journey</h3>
+            <p class="case-desc en">End-to-end service design for a sustainable technology waste program.</p>
+            <p class="case-desc pt">Service design ponta a ponta para programa de descarte sustentável de tecnologia.</p>
+          </div>
         </div>
-        <div class="case-bottom">
-          <div class="case-eyebrow en">Smart Waste · Banco do Brasil</div>
-          <div class="case-eyebrow pt">Resíduo Inteligente · Banco do Brasil</div>
-          <h3 class="case-title">TechBack BB —<br>Smart Waste Journey</h3>
-          <p class="case-desc en">End-to-end service design for a sustainable technology waste program.</p>
-          <p class="case-desc pt">Service design ponta a ponta para programa de descarte sustentável de tecnologia.</p>
+        <div class="case-mockup">
+          <img src="" alt="TechBack case mockup" loading="lazy">
         </div>
       </div>
     </a>
 
-    <a href="cpfl-case.html" class="case-card reveal reveal-delay-1">
+    <a href="cpfl-case.html" class="case-card case-card-img reveal reveal-delay-1">
       <div class="case-bg case-bg-6"></div>
+      <div class="case-arrow case-arrow-abs">↗</div>
       <div class="case-inner">
-        <div class="case-top">
+        <div class="case-text">
           <div class="case-tags">
             <span class="case-tag">UX Research</span>
             <span class="case-tag">Stakeholder Interviews</span>
             <span class="case-tag">Strategy</span>
           </div>
-          <div class="case-arrow">↗</div>
+          <div class="case-bottom">
+            <div class="case-eyebrow en">Energy Sector · CPFL Soluções</div>
+            <div class="case-eyebrow pt">Setor de Energia · CPFL Soluções</div>
+            <h3 class="case-title">CPFL Soluções —<br><em>Stakeholder Research</em></h3>
+            <p class="case-desc en">14 strategic leaders interviewed across 8 departments. Stakeholder research, competitive analysis, and strategic proposals for a website redesign in the energy sector.</p>
+            <p class="case-desc pt">14 líderes estratégicos entrevistados em 8 departamentos. Pesquisa com stakeholders, análise competitiva e propostas estratégicas para o redesign do site no setor de energia.</p>
+          </div>
         </div>
-        <div class="case-bottom">
-          <div class="case-eyebrow en">Energy Sector · CPFL Soluções</div>
-          <div class="case-eyebrow pt">Setor de Energia · CPFL Soluções</div>
-          <h3 class="case-title">CPFL Soluções —<br><em>Stakeholder Research</em></h3>
-          <p class="case-desc en">14 strategic leaders interviewed across 8 departments. Stakeholder research, competitive analysis, and strategic proposals for a website redesign in the energy sector.</p>
-          <p class="case-desc pt">14 líderes estratégicos entrevistados em 8 departamentos. Pesquisa com stakeholders, análise competitiva e propostas estratégicas para o redesign do site no setor de energia.</p>
+        <div class="case-mockup">
+          <img src="" alt="CPFL case mockup" loading="lazy">
         </div>
       </div>
     </a>
 
-    <a href="bb-influencer-case.html" class="case-card reveal">
+    <a href="bb-influencer-case.html" class="case-card case-card-img reveal">
       <div class="case-bg case-bg-7"></div>
+      <div class="case-arrow case-arrow-abs">↗</div>
       <div class="case-inner">
-        <div class="case-top">
+        <div class="case-text">
           <div class="case-tags">
             <span class="case-tag">Gamification</span>
             <span class="case-tag">UX/UI Design</span>
             <span class="case-tag">Prototyping</span>
           </div>
-          <div class="case-arrow">↗</div>
+          <div class="case-bottom">
+            <div class="case-eyebrow en">Banking · Banco do Brasil</div>
+            <div class="case-eyebrow pt">Bancário · Banco do Brasil</div>
+            <h3 class="case-title">Banco do Brasil —<br><em>Influencer School Gamification</em></h3>
+            <p class="case-desc en">The gamification layer behind BB's existing course platform. 8+ admin modules, 4 gamification mechanics, evidence tracking, and ranking calibration — replacing manual spreadsheet operations. Validated with stakeholders.</p>
+            <p class="case-desc pt">A camada de gamificação por trás da plataforma de cursos existente do BB. 8+ módulos administrativos, 4 mecânicas de gamificação, rastreamento de evidências e calibragem de ranking — substituindo operações manuais em planilhas. Validado com stakeholders.</p>
+          </div>
         </div>
-        <div class="case-bottom">
-          <div class="case-eyebrow en">Banking · Banco do Brasil</div>
-          <div class="case-eyebrow pt">Bancário · Banco do Brasil</div>
-          <h3 class="case-title">Banco do Brasil —<br><em>Influencer School Gamification</em></h3>
-          <p class="case-desc en">The gamification layer behind BB's existing course platform. 8+ admin modules, 4 gamification mechanics, evidence tracking, and ranking calibration — replacing manual spreadsheet operations. Validated with stakeholders.</p>
-          <p class="case-desc pt">A camada de gamificação por trás da plataforma de cursos existente do BB. 8+ módulos administrativos, 4 mecânicas de gamificação, rastreamento de evidências e calibragem de ranking — substituindo operações manuais em planilhas. Validado com stakeholders.</p>
+        <div class="case-mockup">
+          <img src="" alt="BB Influencer case mockup" loading="lazy">
         </div>
       </div>
     </a>
 
-    <a href="previsul-case.html" class="case-card reveal">
+    <a href="previsul-case.html" class="case-card case-card-img reveal">
       <div class="case-bg" style="background: linear-gradient(135deg, #3A5080 0%, #5A7AAA 100%);"></div>
+      <div class="case-arrow case-arrow-abs">↗</div>
       <div class="case-inner">
-        <div class="case-top">
+        <div class="case-text">
           <div class="case-tags">
             <span class="case-tag">Service Design</span>
             <span class="case-tag">End-to-End</span>
             <span class="case-tag">UX Research</span>
           </div>
-          <div class="case-arrow">↗</div>
+          <div class="case-bottom">
+            <div class="case-eyebrow en">Insurance · Previsul</div>
+            <div class="case-eyebrow pt">Seguros · Previsul</div>
+            <h3 class="case-title">Previsul —<br><em>End-to-End Service Design</em></h3>
+            <p class="case-desc en">Full redesign of the insurance claims journey, from the 0800 call to final payment. 150+ screens, 40+ pain points, 22 stakeholders. Two connected products delivered.</p>
+            <p class="case-desc pt">Redesign completo da jornada de sinistros, do atendimento 0800 ao pagamento final. 150+ telas, 40+ pontos de dor, 22 stakeholders. Dois produtos conectados entregues.</p>
+          </div>
         </div>
-        <div class="case-bottom">
-          <div class="case-eyebrow en">Insurance · Previsul</div>
-          <div class="case-eyebrow pt">Seguros · Previsul</div>
-          <h3 class="case-title">Previsul —<br><em>End-to-End Service Design</em></h3>
-          <p class="case-desc en">Full redesign of the insurance claims journey, from the 0800 call to final payment. 150+ screens, 40+ pain points, 22 stakeholders. Two connected products delivered.</p>
-          <p class="case-desc pt">Redesign completo da jornada de sinistros, do atendimento 0800 ao pagamento final. 150+ telas, 40+ pontos de dor, 22 stakeholders. Dois produtos conectados entregues.</p>
+        <div class="case-mockup">
+          <img src="" alt="Previsul case mockup" loading="lazy">
         </div>
       </div>
     </a>
