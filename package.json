@@ -1,6 +1,6 @@
 {
   "name": "giuliana-portfolio",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Portfolio — Giuliana Galvão, Senior UX Designer",
   "scripts": {
     "dev": "vite",

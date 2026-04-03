@@ -205,3 +205,50 @@ Adicionada em todas as páginas onde aparece o badge de disponibilidade:
 5. **Manter o badge "Available now"** em todas as páginas até situação mudar
 6. **Hero elements nunca devem usar `.reveal`** no index.html — disparam direto
 7. **Observer sempre com** `threshold: 0.05` e `rootMargin: '0px 0px -20px 0px'` — evita conteúdo invisível
+
+---
+
+## Regras de desenvolvimento
+
+### Commits
+Conventional commits: `feat:` (nova página/seção), `fix:` (bug), `style:` (visual), `content:` (texto/imagem), `chore:` (config), `docs:` (documentação)
+
+### CSS variables (design system)
+```css
+--plum: #6B4FA0       /* accent principal */
+--warm-cream: #FAF7F2  /* background */
+--warm-stone: #EDE8E0  /* borders */
+--ink: #1C1917         /* texto */
+--ink-soft: #4A4542
+--ink-muted: #8A8480
+```
+Accent colors por case: definidos localmente no `<style>` de cada HTML.
+
+### Navegação entre cases (footer-nav)
+Ordem atual:
+```
+Neuroot → Oráculo → Portfolio → TechBack → Petrobras → Previsul → CPFL → BB Influencer
+```
+Ao adicionar novo case, atualizar o footer-nav dos vizinhos.
+
+### SEO obrigatório em toda página nova
+- title, meta description, keywords, author, robots, canonical, hreflang (en + pt-BR + x-default)
+- Open Graph + Twitter Card
+- JSON-LD com `@graph` (Article + BreadcrumbList)
+- Alt text descritivo + `loading="lazy"` em imagens below-the-fold
+- Adicionar URL no `sitemap.xml`
+- Adicionar entrada no `vite.config.js` rollupOptions
+
+### Checklist de novo case
+- [ ] Criar `[nome]-case.html` com accent color exclusiva
+- [ ] Adicionar card no grid do `index.html`
+- [ ] Atualizar footer-nav do case anterior e próximo
+- [ ] Adicionar imagens em `cases/[nome]/`
+- [ ] Adicionar no `sitemap.xml` e `vite.config.js`
+- [ ] Conteúdo bilíngue EN/PT em todos os spans
+
+### Regras gerais
+- Imagens sempre como arquivo, nunca base64. Caminhos relativos.
+- Google Fonts é o único CDN externo. Sem dependências de runtime.
+- Projeto 100% estático e público. Sem `.env`, sem backend.
+- Todo conteúdo novo usa classe `.reveal` (exceto hero do index.html).
