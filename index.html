@@ -598,11 +598,12 @@
   .case-bg-6 { background: linear-gradient(135deg, #2A3A5A 0%, #3A4A6A 100%); }
   .case-bg-7 { background: linear-gradient(135deg, #3A1800 0%, #B07800 100%); }
   .case-bg-8 { background: linear-gradient(135deg, #d4a843 0%, #b8922e 100%); }
-  .case-bg-8 ~ .case-mockup { width: 55%; right: -10px; bottom: 16px; }
+  .case-bg-8 ~ .case-mockup { width: 55%; right: -10px; bottom: 40px; }
   .case-bg-8 ~ .case-mockup img { max-width: 420px; }
-  .mockup-lg .case-mockup { width: 55%; right: -10px; bottom: 16px; }
-  .mockup-lg .case-mockup img { max-width: 420px; }
-  .mockup-top .case-mockup { width: 32%; right: 16px; bottom: 24px; }
+  .mockup-lg .case-mockup { width: 48%; right: -10px; bottom: 16px; }
+  .mockup-lg .case-mockup img { max-width: 360px; }
+  .mockup-up .case-mockup { bottom: 40px; }
+  .mockup-top .case-mockup { width: 38%; right: 0; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
   .mockup-top .case-mockup img { max-width: 220px; max-height: 260px; object-fit: contain; border-radius: 8px; }
 
   .case-top { display: flex; justify-content: space-between; align-items: flex-start; }
@@ -745,6 +746,7 @@
     .mockup-lg .case-mockup img { max-width: 200px; margin: 0 auto; }
     .mockup-top .case-mockup { position: static; width: 100%; right: auto; bottom: auto; padding: 24px 24px 0; display: flex; justify-content: center; }
     .mockup-top .case-mockup img { max-width: 180px; max-height: none; }
+    .mockup-up .case-mockup { bottom: auto; }
     .case-card-img .case-text { max-width: 100%; }
     .case-tags { gap: 6px; }
     .case-eyebrow { margin-bottom: 8px; }
@@ -1085,7 +1087,7 @@
       </div>
     </a>
 
-    <a href="previsul-case.html" class="case-card case-card-img mockup-lg reveal">
+    <a href="previsul-case.html" class="case-card case-card-img mockup-lg mockup-up reveal">
       <div class="case-bg" style="background: linear-gradient(135deg, #3A5080 0%, #5A7AAA 100%);"></div>
       <div class="case-arrow case-arrow-abs">↗</div>
       <div class="case-mockup">
