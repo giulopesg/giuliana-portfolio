@@ -3,6 +3,16 @@
   "buildCommand": "",
   "framework": null,
   "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/solana-wtf",
+      "destination": "https://solana-wtf.vercel.app/solana-wtf"
+    },
+    {
+      "source": "/solana-wtf/:path*",
+      "destination": "https://solana-wtf.vercel.app/solana-wtf/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
