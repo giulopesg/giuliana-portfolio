@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solana WTF — Gamified Glossary Platform · Giuliana Lopes Galvão | Case Study</title>
+  <meta name="description"
+    content="Case study: Solana WTF, a gamified learning platform built on the @stbr/solana-glossary SDK. AI decoder with 4 personality guides, 5 learning games, 3 languages. Built with Next.js 16, React 19, and Supabase.">
+  <meta name="keywords"
+    content="Solana, Web3, gamification, glossary, AI decoder, Next.js 16, React 19, Tailwind CSS, Supabase, hackathon, Giuliana Lopes Galvão">
+  <meta name="author" content="Giuliana Lopes Galvão">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.giulopesgalvao.com.br/solana-wtf-case.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Solana WTF — Gamified Glossary Platform · Giuliana Lopes Galvão">
+  <meta property="og:description"
+    content="Gamified Solana learning platform with AI decoder, 5 games, and unlockable character skins. Built on @stbr/solana-glossary SDK.">
+  <meta property="og:image" content="https://www.giulopesgalvao.com.br/cases/solanawtf/mockupsolanawtf.png">
+  <meta property="og:url" content="https://www.giulopesgalvao.com.br/solana-wtf-case.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Solana WTF — Gamified Glossary Platform · Giuliana Lopes Galvão">
+  <meta name="twitter:image" content="https://www.giulopesgalvao.com.br/cases/solanawtf/mockupsolanawtf.png">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Solana WTF — Gamified Glossary Platform with AI Decoder and Learning Games",
+      "author": { "@type": "Person", "name": "Giuliana Lopes Galvão", "url": "https://www.giulopesgalvao.com.br" },
+      "description": "Gamified Solana learning platform built on the @stbr/solana-glossary SDK. Features AI decoder with 4 personality guides, 5 learning games, unlockable skins, and cloud progress sync.",
+      "datePublished": "2026-04-07",
+      "image": "https://www.giulopesgalvao.com.br/cases/solanawtf/mockupsolanawtf.png",
+      "url": "https://www.giulopesgalvao.com.br/solana-wtf-case.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://www.giulopesgalvao.com.br/" },
+        { "@type": "ListItem", "position": 2, "name": "Solana WTF", "item": "https://www.giulopesgalvao.com.br/solana-wtf-case.html" }
+      ]
+    }
+  ]
+}
+</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --plum: #00CCBB;
+      --plum-light: #33DDCC;
+      --plum-pale: #B3EDE6;
+      --plum-ghost: #EBF9F7;
+      --warm-cream: #FAF7F2;
+      --warm-stone: #EDE8E0;
+      --ink: #1C1917;
+      --ink-soft: #4A4542;
+      --ink-muted: #8A8480;
+      --accent-gold: #C4975A;
+      --white: #FFFFFF;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: clip; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--ink); overflow-x: hidden; }
+
+    .en { display: block; } .pt { display: none; }
+    .lang-pt .en { display: none; } .lang-pt .pt { display: block; }
+    .en-inline { display: inline; } .pt-inline { display: none; }
+    .lang-pt .en-inline { display: none; } .lang-pt .pt-inline { display: inline; }
+
+    .lang-toggle { display: flex; gap: 2px; border-radius: 20px; padding: 4px; margin-left: auto; }
+    .lang-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; padding: 6px 14px; border-radius: 16px; border: none; background: transparent; color: var(--ink-muted); cursor: pointer; transition: all 0.2s; }
+    .lang-btn.active { background: var(--plum); color: var(--white); }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 99; padding: 24px 64px; display: flex; align-items: center; gap: 24px; background: rgba(250, 247, 242, 0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--warm-stone); }
+    .nav-back { font-size: 13px; color: var(--ink-muted); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--plum); }
+    .nav-divider { width: 1px; height: 16px; background: var(--warm-stone); }
+    .nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: var(--ink); }
+
+    .case-hero { min-height: 100vh; background: var(--ink); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; position: relative; }
+    .case-hero-left { display: flex; flex-direction: column; justify-content: flex-end; padding: 140px 64px 80px 80px; position: relative; z-index: 2; }
+    .case-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; align-items: center; }
+    .ctag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(0, 204, 187, 0.5); color: var(--plum-pale); background: rgba(0, 204, 187, 0.12); }
+    .case-hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--plum-pale); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .case-hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--plum-pale); }
+    .case-hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(64px, 8vw, 112px); font-weight: 300; line-height: 0.92; letter-spacing: -0.03em; color: var(--white); margin-bottom: 8px; }
+    .case-hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2vw, 26px); font-weight: 300; font-style: italic; color: var(--plum-pale); margin-bottom: 48px; line-height: 1.4; }
+    .case-meta-row { display: flex; gap: 48px; flex-wrap: wrap; }
+    .case-meta-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
+    .case-meta-value { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.8); }
+    .case-hero-right { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-tree-bg { position: absolute; inset: 0; }
+    .hero-tree-bg svg { width: 100%; height: 100%; }
+    .hero-quote-card { position: relative; z-index: 2; max-width: 340px; background: rgba(250,247,242,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); padding: 40px 36px; border-radius: 4px 24px 4px 24px; }
+    .hero-quote-card blockquote { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; font-style: italic; color: var(--white); line-height: 1.5; margin-bottom: 20px; }
+    .hero-quote-card cite { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--plum-pale); font-style: normal; }
+
+    .try-app-bar { background: var(--ink); padding: 16px 80px; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .try-app-bar strong { color: rgba(255,255,255,0.75); font-weight: 400; }
+    .try-app-bar p { margin: 0; }
+    .try-app-bar a { flex-shrink: 0; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--plum-pale); text-decoration: none; padding: 8px 20px; border: 1px solid var(--plum-pale); border-radius: 40px; transition: all 0.25s; }
+    .try-app-bar a:hover { background: var(--plum); color: var(--white); border-color: var(--plum); }
+
+    .case-body { max-width: 1200px; margin: 0 auto; }
+    .case-section { padding: 96px 80px; border-bottom: 1px solid var(--warm-stone); }
+    .case-section:last-child { border-bottom: none; }
+    .cs-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--plum); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .cs-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--plum); }
+    .cs-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 300; line-height: 1.1; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 48px; }
+    .cs-title em { font-style: italic; color: var(--plum); }
+    .cs-body-text { font-size: 17px; font-weight: 300; line-height: 1.8; color: var(--ink-soft); max-width: 680px; margin-bottom: 28px; }
+    .cs-body-text strong { color: var(--ink); font-weight: 500; }
+
+    .cs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .cs-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+
+    .screen-card { background: var(--white); padding: 0; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .screen-card:first-child { border-radius: 24px 4px 4px 4px; }
+    .screen-card:nth-child(2) { border-radius: 4px 24px 4px 4px; }
+    .screen-card:last-child { border-radius: 4px 4px 24px 4px; }
+    .screen-card-body { padding: 32px 28px; }
+    .screen-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; line-height: 1; color: var(--plum-pale); margin-bottom: 20px; }
+    .screen-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 12px; }
+    .screen-desc { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-soft); margin-bottom: 20px; }
+
+    .callout { background: var(--ink); padding: 48px 52px; border-radius: 4px; margin: 48px 0; }
+    .callout p { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 2.5vw, 30px); font-weight: 300; font-style: italic; color: var(--white); line-height: 1.5; max-width: 700px; }
+    .callout p em { color: var(--plum-pale); font-style: normal; }
+    .callout-source { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 16px; }
+
+    .learning-list { display: flex; flex-direction: column; gap: 0; margin-top: 48px; }
+    .learning-item { background: var(--white); padding: 28px 32px; display: flex; gap: 24px; align-items: flex-start; border-top: 1px solid var(--warm-stone); }
+    .learning-item:first-child { border-radius: 16px 16px 0 0; border-top: none; }
+    .learning-item:last-child { border-radius: 0 0 16px 16px; }
+    .learning-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--plum-pale); flex-shrink: 0; line-height: 1; width: 32px; }
+    .learning-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+    .learning-desc { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-soft); }
+
+    .profile-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .profile-card { background: var(--white); padding: 36px 32px; }
+    .profile-card:nth-child(1) { border-radius: 16px 4px 4px 4px; }
+    .profile-card:nth-child(2) { border-radius: 4px 16px 4px 4px; }
+    .profile-card:nth-child(3) { border-radius: 4px 4px 4px 16px; }
+    .profile-card:nth-child(4) { border-radius: 4px 4px 16px 4px; }
+    .profile-icon { font-size: 32px; margin-bottom: 16px; }
+    .profile-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 8px; }
+    .profile-desc { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-soft); }
+
+    .img-grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 48px 0; }
+    .img-grid-2col img { width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+
+    .tools-stack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+    .tool-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); padding: 32px 28px; }
+    .tool-card:first-child { border-radius: 16px 4px 4px 16px; }
+    .tool-card:last-child { border-radius: 4px 16px 16px 4px; }
+    .tool-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--white); margin-bottom: 6px; }
+    .tool-type { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--plum-pale); margin-bottom: 14px; }
+    .tool-desc { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.55); }
+
+    .app-video-wrap { margin-top: 48px; display: flex; justify-content: center; }
+    .app-video-frame { max-width: 800px; width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.15); border: 1px solid var(--warm-stone); background: var(--ink); }
+    .app-video-frame video { width: 100%; display: block; }
+
+    .role-section { background: var(--ink); padding: 100px 80px; }
+    .role-content { max-width: 800px; margin: 0 auto; text-align: center; }
+    .role-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--plum-pale); margin-bottom: 40px; display: flex; align-items: center; gap: 12px; justify-content: center; }
+    .role-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--plum-pale); }
+    .role-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3.5vw, 46px); font-weight: 300; font-style: italic; line-height: 1.3; color: var(--white); margin-bottom: 32px; }
+    .role-attribution { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--plum-pale); }
+    .role-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; }
+    .stat-box { text-align: center; padding: 24px; background: rgba(0,204,187,0.08); border-radius: 12px; border: 1px solid rgba(179,237,230,0.15); }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--white); margin-bottom: 8px; }
+    .stat-label { font-size: 12px; color: rgba(179,237,230,0.6); line-height: 1.5; }
+
+    .case-cta { background: var(--plum); padding: 80px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 32px; }
+    .case-cta-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--plum-pale); margin-bottom: 12px; }
+    .case-cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 44px); font-weight: 300; color: var(--white); line-height: 1.15; }
+    .case-cta-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 40px; font-size: 13px; font-weight: 400; text-decoration: none; transition: all 0.25s; letter-spacing: 0.04em; }
+    .cta-btn.white { background: var(--white); color: var(--plum); }
+    .cta-btn.white:hover { background: var(--warm-cream); transform: translateY(-1px); }
+    .cta-btn.outline { border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); }
+    .cta-btn.outline:hover { border-color: var(--white); color: var(--white); transform: translateY(-1px); }
+
+    .case-footer-nav { background: var(--warm-cream); padding: 64px 80px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--warm-stone); }
+    .footer-nav-link { text-decoration: none; display: flex; flex-direction: column; gap: 8px; }
+    .fnl-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--ink-muted); text-transform: uppercase; }
+    .fnl-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--ink); transition: color 0.2s; }
+    .footer-nav-link:hover .fnl-title { color: var(--plum); }
+
+    footer { text-align: center; padding: 32px 24px; color: var(--ink-muted); font-size: 13px; border-top: 1px solid var(--warm-stone); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .case-hero { grid-template-columns: 1fr; }
+      .case-hero-left { padding: 120px 24px 60px; }
+      .case-hero-right { display: none; }
+      .case-meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
+      .try-app-bar { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
+      .case-section { padding: 64px 24px; }
+      .cs-2col, .cs-3col, .profile-grid-2x2, .img-grid-2col { grid-template-columns: 1fr; }
+      .cs-title { margin-bottom: 32px; }
+      .tools-stack { grid-template-columns: 1fr; }
+      .tool-card:first-child, .tool-card:last-child { border-radius: 4px; }
+      .role-section { padding: 64px 24px; }
+      .role-stats { grid-template-columns: 1fr 1fr; }
+      .case-cta { padding: 48px 24px; flex-direction: column; text-align: center; }
+      .case-cta-links { justify-content: center; }
+      .case-footer-nav { padding: 48px 24px; flex-direction: column; gap: 32px; text-align: center; }
+      .footer-nav-link { align-items: center; }
+      .app-video-frame { max-width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="index.html" class="nav-back">
+      <span class="en-inline">&larr; Back to portfolio</span>
+      <span class="pt-inline">&larr; Voltar ao portfólio</span>
+    </a>
+    <div class="nav-divider"></div>
+    <span class="nav-title">Solana WTF — Case Study</span>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <header class="case-hero">
+      <div class="case-hero-left">
+        <div class="case-tag-row">
+          <span class="ctag">Web3 + AI</span>
+          <span class="ctag">Gamification</span>
+          <span class="ctag">Front-end Dev</span>
+          <span class="ctag">Hackathon</span>
+        </div>
+        <div class="case-hero-eyebrow">
+          <span class="en-inline">Personal project &middot; 2026</span>
+          <span class="pt-inline">Projeto pessoal &middot; 2026</span>
+        </div>
+        <h1 class="case-hero-title">Solana WTF</h1>
+        <p class="case-hero-subtitle">
+          <span class="en">What The Fork?! &mdash; turning a glossary SDK into a gamified learning platform</span>
+          <span class="pt">What The Fork?! &mdash; transformando um SDK de glossário em uma plataforma gamificada de aprendizado</span>
+        </p>
+        <div class="case-meta-row">
+          <div><div class="case-meta-label">Year</div><div class="case-meta-value">2026</div></div>
+          <div><div class="case-meta-label">Role</div><div class="case-meta-value">Design + Development</div></div>
+          <div><div class="case-meta-label">Platform</div><div class="case-meta-value">Web (responsive)</div></div>
+          <div><div class="case-meta-label">Stack</div><div class="case-meta-value">Next.js 16 &middot; React 19 &middot; Tailwind v4</div></div>
+          <div><div class="case-meta-label">Status</div><div class="case-meta-value">Live</div></div>
+          <div><div class="case-meta-label">Built for</div><div class="case-meta-value">Superteam Brazil Hackathon</div></div>
+        </div>
+      </div>
+      <div class="case-hero-right">
+        <div class="hero-tree-bg">
+          <svg viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialGradient id="glow1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#00CCBB" stop-opacity="0.15"/><stop offset="100%" stop-color="#00CCBB" stop-opacity="0"/></radialGradient></defs>
+            <circle cx="300" cy="400" r="300" fill="url(#glow1)"/>
+            <circle cx="200" cy="300" r="3" fill="#00CCBB" opacity="0.4"/>
+            <circle cx="400" cy="500" r="2" fill="#9945FF" opacity="0.3"/>
+            <circle cx="150" cy="600" r="2" fill="#14F195" opacity="0.3"/>
+            <circle cx="450" cy="200" r="3" fill="#DC1FFF" opacity="0.25"/>
+            <line x1="200" y1="300" x2="400" y2="500" stroke="#00CCBB" stroke-width="0.5" opacity="0.15"/>
+            <line x1="400" y1="500" x2="450" y2="200" stroke="#9945FF" stroke-width="0.5" opacity="0.1"/>
+          </svg>
+        </div>
+        <div class="hero-quote-card">
+          <blockquote>
+            <span class="en">"Dry glossaries don't teach &mdash; play does."</span>
+            <span class="pt">"Glossários secos não ensinam &mdash; jogar sim."</span>
+          </blockquote>
+          <cite>
+            <span class="en-inline">&mdash; Core product philosophy</span>
+            <span class="pt-inline">&mdash; Filosofia central do produto</span>
+          </cite>
+        </div>
+      </div>
+    </header>
+
+    <!-- TRY APP BAR -->
+    <div class="try-app-bar">
+      <p>
+        <span class="en">Solana WTF is live &mdash; explore <strong>1001 terms</strong>, play <strong>5 games</strong>, and unlock <strong>AI personalities</strong>.</span>
+        <span class="pt">Solana WTF está no ar &mdash; explore <strong>1001 termos</strong>, jogue <strong>5 jogos</strong> e desbloqueie <strong>personalidades IA</strong>.</span>
+      </p>
+      <a href="https://giulopesgalvao.com.br/solana-wtf" target="_blank" rel="noopener">
+        <span class="en-inline">Open Solana WTF</span><span class="pt-inline">Abrir Solana WTF</span> &rarr;
+      </a>
+    </div>
+
+    <div class="case-body">
+
+      <!-- 01 THE CHALLENGE -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">01 &mdash; The Challenge</span><span class="pt-inline">01 &mdash; O Desafio</span></div>
+        <h2 class="cs-title">
+          <span class="en">1001 terms. Zero <em>engagement</em>.</span>
+          <span class="pt">1001 termos. Zero <em>engajamento</em>.</span>
+        </h2>
+        <div class="cs-2col">
+          <div>
+            <p class="cs-body-text en">The <strong>@stbr/solana-glossary</strong> SDK contains 1001 Solana terms across 14 categories with translations in PT-BR and Spanish. It's a rich data source &mdash; but raw JSON files and term lookups don't teach anyone. The challenge: turn static data into something people actually want to use and come back to.</p>
+            <p class="cs-body-text pt">O SDK <strong>@stbr/solana-glossary</strong> contém 1001 termos Solana em 14 categorias com traduções em PT-BR e espanhol. É uma fonte rica de dados &mdash; mas arquivos JSON e consultas de termos não ensinam ninguém. O desafio: transformar dados estáticos em algo que as pessoas realmente queiram usar e voltar.</p>
+          </div>
+          <div>
+            <div class="callout" style="margin:0;">
+              <p>
+                <span class="en">"People don't learn by reading definitions. They learn by using concepts in context &mdash; <em>under pressure, with feedback, and with personality.</em>"</span>
+                <span class="pt">"Pessoas não aprendem lendo definições. Aprendem usando conceitos em contexto &mdash; <em>sob pressão, com feedback e com personalidade.</em>"</span>
+              </p>
+              <div class="callout-source">
+                <span class="en-inline">Design philosophy</span>
+                <span class="pt-inline">Filosofia de design</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 THE SOLUTION -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">02 &mdash; The Solution</span><span class="pt-inline">02 &mdash; A Solução</span></div>
+        <h2 class="cs-title">
+          <span class="en">Decode. Browse. <em>Play</em>.</span>
+          <span class="pt">Decodifique. Explore. <em>Jogue</em>.</span>
+        </h2>
+        <div class="cs-3col">
+          <div class="screen-card">
+            <div class="screen-card-body">
+              <div class="screen-num">01</div>
+              <div class="screen-name">AI Decoder</div>
+              <p class="screen-desc">
+                <span class="en">Paste any error, code, or question. 4 AI personality guides explain Solana concepts in their own style.</span>
+                <span class="pt">Cole qualquer erro, código ou pergunta. 4 guias IA explicam conceitos Solana no estilo deles.</span>
+              </p>
+            </div>
+          </div>
+          <div class="screen-card">
+            <div class="screen-card-body">
+              <div class="screen-num">02</div>
+              <div class="screen-name"><span class="en-inline">Glossary Browser</span><span class="pt-inline">Navegador de Glossário</span></div>
+              <p class="screen-desc">
+                <span class="en">Search, filter, and explore 1001 terms across 14 categories. Full i18n support.</span>
+                <span class="pt">Busque, filtre e explore 1001 termos em 14 categorias. Suporte completo a 3 idiomas.</span>
+              </p>
+            </div>
+          </div>
+          <div class="screen-card">
+            <div class="screen-card-body">
+              <div class="screen-num">03</div>
+              <div class="screen-name"><span class="en-inline">Learning Games</span><span class="pt-inline">Jogos de Aprendizado</span></div>
+              <p class="screen-desc">
+                <span class="en">5 games to reinforce knowledge: Daily, Speed Run, Connections, Lost in Translation, Category Blitz.</span>
+                <span class="pt">5 jogos para reforçar o conhecimento: Diário, Speed Run, Conexões, Lost in Translation, Blitz de Categorias.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 PERSONALITY SYSTEM -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">03 &mdash; Personality System</span><span class="pt-inline">03 &mdash; Sistema de Personalidades</span></div>
+        <h2 class="cs-title">
+          <span class="en">4 guides. 4 <em>voices</em>.</span>
+          <span class="pt">4 guias. 4 <em>vozes</em>.</span>
+        </h2>
+        <div class="cs-2col">
+          <div>
+            <p class="cs-body-text en">Instead of generic AI responses, the decoder uses <strong>template-based personality guides</strong> &mdash; zero API cost. Each guide explains the same concepts in a radically different voice, making repeated lookups feel fresh.</p>
+            <p class="cs-body-text pt">Em vez de respostas genéricas de IA, o decoder usa <strong>guias de personalidade template-based</strong> &mdash; custo zero de API. Cada guia explica os mesmos conceitos com uma voz radicalmente diferente, fazendo consultas repetidas parecerem novas.</p>
+          </div>
+          <div>
+            <div class="profile-grid-2x2">
+              <div class="profile-card"><div class="profile-icon">🎀</div><div class="profile-name">Maid-chan</div><p class="profile-desc"><span class="en">Kawaii explanations with emoji and enthusiasm</span><span class="pt">Explicações kawaii com emoji e entusiasmo</span></p></div>
+              <div class="profile-card"><div class="profile-icon">🔥</div><div class="profile-name">Degen Sensei</div><p class="profile-desc"><span class="en">CT slang, "ser", "few understand this"</span><span class="pt">Gírias de CT, "ser", "poucos entendem isso"</span></p></div>
+              <div class="profile-card"><div class="profile-icon">🤖</div><div class="profile-name">GLaDOS</div><p class="profile-desc"><span class="en">Passive-aggressive, sarcastic precision</span><span class="pt">Precisão passivo-agressiva e sarcástica</span></p></div>
+              <div class="profile-card"><div class="profile-icon">🎲</div><div class="profile-name">DnD Master</div><p class="profile-desc"><span class="en">Epic fantasy narration for every concept</span><span class="pt">Narração épica de fantasia para cada conceito</span></p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 PROGRESSION & UNLOCKS -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">04 &mdash; Progression &amp; Unlocks</span><span class="pt-inline">04 &mdash; Progressão &amp; Desbloqueios</span></div>
+        <h2 class="cs-title">
+          <span class="en">Play more. <em>Unlock more</em>.</span>
+          <span class="pt">Jogue mais. <em>Desbloqueie mais</em>.</span>
+        </h2>
+        <p class="cs-body-text en">The app uses a progression system inspired by gacha games. Playing games and using the decoder unlocks new personalities and character skins, with a cinematic fullscreen reveal animation.</p>
+        <p class="cs-body-text pt">O app usa um sistema de progressão inspirado em jogos gacha. Jogar e usar o decoder desbloqueia novas personalidades e skins, com uma animação cinematográfica de revelação em tela cheia.</p>
+
+        <div class="img-grid-2col reveal">
+          <img src="cases/solanawtf/Screenshot-UNLOCKEDMAID.png" alt="Maid-chan skin unlock reveal" loading="lazy">
+          <img src="cases/solanawtf/Screenshot-UNLOCKEDDED.png" alt="DnD Master skin unlock reveal" loading="lazy">
+        </div>
+
+        <div class="learning-list">
+          <div class="learning-item"><div class="learning-num">1</div><div class="learning-content"><div class="learning-title">Degen Sensei</div><div class="learning-desc"><span class="en">Unlocked after scoring in 3 different games</span><span class="pt">Desbloqueado após pontuar em 3 jogos diferentes</span></div></div></div>
+          <div class="learning-item"><div class="learning-num">2</div><div class="learning-content"><div class="learning-title">GLaDOS</div><div class="learning-desc"><span class="en">Unlocked daily or after 3 games played</span><span class="pt">Desbloqueado diariamente ou após 3 jogos</span></div></div></div>
+          <div class="learning-item"><div class="learning-num">3</div><div class="learning-content"><div class="learning-title"><span class="en-inline">Character Skins</span><span class="pt-inline">Skins de Personagem</span></div><div class="learning-desc"><span class="en">Unlocked at 5, 10, and 15 decodes per personality</span><span class="pt">Desbloqueadas com 5, 10 e 15 decodificações por personalidade</span></div></div></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FULL-WIDTH IMAGE -->
+    <div class="reveal" style="padding: 64px 0;">
+      <div style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+        <img src="cases/solanawtf/screencapture-giulopesgalvao-br-solana-wtf-home.png" alt="Solana WTF homepage" loading="lazy" style="width: 100%; border-radius: 12px; box-shadow: 0 16px 64px rgba(0,0,0,0.08);">
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- 05 DESIGN SYSTEM -->
+      <section class="case-section reveal" style="background: var(--ink); border-bottom-color: rgba(255,255,255,0.06);">
+        <div class="cs-label" style="color: var(--plum-pale);"><span style="display:block;width:24px;height:1px;background:var(--plum-pale);flex-shrink:0"></span><span class="en-inline">05 &mdash; Design System</span><span class="pt-inline">05 &mdash; Design System</span></div>
+        <h2 class="cs-title" style="color: var(--white);"><span class="en">Cyberpunk meets <em style="color:var(--plum-pale)">Solana</em>.</span><span class="pt">Cyberpunk encontra <em style="color:var(--plum-pale)">Solana</em>.</span></h2>
+        <p class="cs-body-text en" style="color: rgba(255,255,255,0.7);">Deep navy palette with Solana's official accent colors. Every element &mdash; from chamfered corners to neon glow cards &mdash; reinforces the cyberpunk aesthetic while maintaining readability and accessibility.</p>
+        <p class="cs-body-text pt" style="color: rgba(255,255,255,0.7);">Paleta navy profunda com as cores oficiais da Solana. Cada elemento &mdash; de cantos chanfrados a cards com brilho neon &mdash; reforça a estética cyberpunk mantendo legibilidade e acessibilidade.</p>
+        <div class="tools-stack">
+          <div class="tool-card"><div class="tool-name"><span class="en-inline">Color Palette</span><span class="pt-inline">Paleta de Cores</span></div><div class="tool-type">Brand Colors</div><p class="tool-desc">Purple #9945FF &middot; Green #14F195 &middot; Cyan #03E1FF &middot; Magenta #DC1FFF</p></div>
+          <div class="tool-card" style="border-radius:4px;"><div class="tool-name"><span class="en-inline">Typography</span><span class="pt-inline">Tipografia</span></div><div class="tool-type">Font Stack</div><p class="tool-desc">Orbitron (titles) &middot; Rajdhani (nav) &middot; Fira Code (mono) &middot; Inter (body)</p></div>
+          <div class="tool-card"><div class="tool-name">UI Components</div><div class="tool-type"><span class="en-inline">Design Tokens</span><span class="pt-inline">Tokens de Design</span></div><p class="tool-desc">glow-card &middot; neon-btn &middot; gradient-text &middot; pixel-badge &middot; category-pill</p></div>
+        </div>
+      </section>
+
+      <!-- VIDEO -->
+      <section class="case-section reveal" style="border-bottom: none;">
+        <div class="app-video-wrap" style="margin-top:0;">
+          <div class="app-video-frame">
+            <video autoplay loop muted playsinline>
+              <source src="cases/solanawtf/explorandoosolanawtf.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 TECH STACK -->
+      <section class="case-section reveal" style="background: var(--ink); border-bottom-color: rgba(255,255,255,0.06);">
+        <div class="cs-label" style="color: var(--plum-pale);"><span style="display:block;width:24px;height:1px;background:var(--plum-pale);flex-shrink:0"></span><span class="en-inline">06 &mdash; Tech Stack</span><span class="pt-inline">06 &mdash; Tech Stack</span></div>
+        <h2 class="cs-title" style="color: var(--white);"><span class="en">Built with <em style="color:var(--plum-pale)">modern tools</em>.</span><span class="pt">Construído com <em style="color:var(--plum-pale)">ferramentas modernas</em>.</span></h2>
+        <div class="tools-stack">
+          <div class="tool-card"><div class="tool-name">Next.js 16</div><div class="tool-type">Framework</div><p class="tool-desc">App Router, Turbopack, Server Components, 1001 static pages</p></div>
+          <div class="tool-card" style="border-radius:4px;"><div class="tool-name">React 19</div><div class="tool-type">UI Library</div><p class="tool-desc">useSyncExternalStore, createPortal, CustomEvent bus</p></div>
+          <div class="tool-card"><div class="tool-name">Tailwind CSS v4</div><div class="tool-type">Styling</div><p class="tool-desc">Inline theme config, responsive cyberpunk design system</p></div>
+          <div class="tool-card"><div class="tool-name">TypeScript</div><div class="tool-type"><span class="en-inline">Type Safety</span><span class="pt-inline">Segurança de Tipos</span></div><p class="tool-desc"><span class="en">Full type safety across components and API routes</span><span class="pt">Segurança de tipos completa em componentes e rotas de API</span></p></div>
+          <div class="tool-card" style="border-radius:4px;"><div class="tool-name">Supabase</div><div class="tool-type">Auth + Database</div><p class="tool-desc">Auth (Google + Wallet), cloud progress sync, RLS policies</p></div>
+          <div class="tool-card"><div class="tool-name">@stbr/solana-glossary</div><div class="tool-type">Data SDK</div><p class="tool-desc">1001 terms, 14 categories, i18n data (PT-BR, ES)</p></div>
+        </div>
+      </section>
+
+      <!-- 07 SDK INTEGRATION -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">07 &mdash; SDK Integration</span><span class="pt-inline">07 &mdash; Integração com o SDK</span></div>
+        <h2 class="cs-title"><span class="en">Deep SDK <em>integration</em>.</span><span class="pt">Integração profunda com o <em>SDK</em>.</span></h2>
+        <p class="cs-body-text en">Every feature in Solana WTF is powered by the <strong>@stbr/solana-glossary</strong> data. The custom server-side wrapper provides cached lookups, search, category filtering, and locale-aware translations.</p>
+        <p class="cs-body-text pt">Cada funcionalidade do Solana WTF é alimentada pelos dados do <strong>@stbr/solana-glossary</strong>. O wrapper server-side customizado fornece lookups em cache, busca, filtro por categoria e traduções com suporte a idiomas.</p>
+        <div class="learning-list">
+          <div class="learning-item"><div class="learning-num">1</div><div class="learning-content"><div class="learning-title">Terms API</div><div class="learning-desc">getAllTerms(), getTerm(id), searchTerms(query)</div></div></div>
+          <div class="learning-item"><div class="learning-num">2</div><div class="learning-content"><div class="learning-title">Categories</div><div class="learning-desc">getTermsByCategory(), getCategories() &mdash; 14 categories</div></div></div>
+          <div class="learning-item"><div class="learning-num">3</div><div class="learning-content"><div class="learning-title">i18n</div><div class="learning-desc">getLocalizedTerms(locale) &mdash; PT-BR and ES translations</div></div></div>
+          <div class="learning-item"><div class="learning-num">4</div><div class="learning-content"><div class="learning-title">Games</div><div class="learning-desc"><span class="en">getRandomTerm(), shuffled term selection for all 5 games</span><span class="pt">getRandomTerm(), seleção aleatória de termos para os 5 jogos</span></div></div></div>
+          <div class="learning-item"><div class="learning-num">5</div><div class="learning-content"><div class="learning-title">Decoder</div><div class="learning-desc"><span class="en">Term detection in user input + personality-based explanations</span><span class="pt">Detecção de termos no input do usuário + explicações por personalidade</span></div></div></div>
+          <div class="learning-item"><div class="learning-num">6</div><div class="learning-content"><div class="learning-title">Static Gen</div><div class="learning-desc"><span class="en">1001 term detail pages pre-rendered at build time</span><span class="pt">1001 páginas de detalhe de termos pré-renderizadas no build</span></div></div></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ROLE -->
+    <section class="role-section">
+      <div class="role-content">
+        <div class="role-eyebrow reveal">
+          <span class="en-inline">Giuliana's role in this project</span>
+          <span class="pt-inline">Papel da Giuliana no projeto</span>
+        </div>
+        <blockquote class="role-quote reveal">
+          <span class="en">"I designed and built this entire platform solo &mdash; from the cyberpunk UI system and progression mechanics to the AI personality templates and cloud sync architecture."</span>
+          <span class="pt">"Projetei e construí toda esta plataforma solo &mdash; do sistema de UI cyberpunk e mecânicas de progressão aos templates de personalidade IA e arquitetura de sincronização na nuvem."</span>
+        </blockquote>
+        <div class="role-attribution reveal">Designer + Developer &middot; Built with Claude Code</div>
+        <div class="role-stats reveal">
+          <div class="stat-box"><div class="stat-num">1001</div><div class="stat-label"><span class="en-inline">Terms</span><span class="pt-inline">Termos</span></div></div>
+          <div class="stat-box"><div class="stat-num">5</div><div class="stat-label"><span class="en-inline">Games</span><span class="pt-inline">Jogos</span></div></div>
+          <div class="stat-box"><div class="stat-num">4</div><div class="stat-label"><span class="en-inline">AI Guides</span><span class="pt-inline">Guias IA</span></div></div>
+          <div class="stat-box"><div class="stat-num">3</div><div class="stat-label"><span class="en-inline">Languages</span><span class="pt-inline">Idiomas</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="case-cta">
+      <div>
+        <div class="case-cta-label"><span class="en-inline">Let's work together</span><span class="pt-inline">Vamos trabalhar juntos</span></div>
+        <div class="case-cta-title"><span class="en">Interested in<br>this project?</span><span class="pt">Interessado<br>neste projeto?</span></div>
+      </div>
+      <div class="case-cta-links">
+        <a href="mailto:giulopesg@gmail.com" class="cta-btn white"><span class="en-inline">Get in touch</span><span class="pt-inline">Entrar em contato</span></a>
+        <a href="index.html" class="cta-btn outline">&larr; <span class="en-inline">Back to portfolio</span><span class="pt-inline">Voltar ao portfólio</span></a>
+      </div>
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="case-footer-nav">
+      <a href="neuroot-case.html" class="footer-nav-link">
+        <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
+        <span class="fnl-title">Neuroot</span>
+      </a>
+      <a href="oraculo-case.html" class="footer-nav-link" style="text-align:right;">
+        <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Próximo</span> &rarr;</span>
+        <span class="fnl-title">Meu Oráculo Pessoal</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Giuliana Lopes Galvão</p>
+  </footer>
+
+  <script>
+    let currentLang = 'en';
+    function setLang(lang) {
+      currentLang = lang;
+      document.body.classList.toggle('lang-pt', lang === 'pt');
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+      });
+      localStorage.setItem('lang', lang);
+    }
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang) setLang(savedLang);
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+      });
+    });
+  </script>
+</body>
+
+</html>
