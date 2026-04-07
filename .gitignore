@@ -6,3 +6,4 @@ dist/
 *.mov
 ChatGPT*
 screencapture-*
+!cases/**/screencapture-*
