@@ -21,6 +21,8 @@ export default defineConfig({
         previsul:       resolve(__dirname, 'previsul-case.html'),
         cpfl:           resolve(__dirname, 'cpfl-case.html'),
         bbInfluencer:   resolve(__dirname, 'bb-influencer-case.html'),
+        solanaWtf:      resolve(__dirname, 'solana-wtf-case.html'),
+        nudge:          resolve(__dirname, 'nudge-case.html'),
       }
     }
   }

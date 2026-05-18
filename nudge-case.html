@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nudge — Behavioral Intelligence for DeFi Lending · Giuliana Lopes Galvão | Case Study</title>
+  <meta name="description"
+    content="Case study: Nudge, a behavioral intelligence layer for DeFi lending on Solana. Monitors Kamino Finance positions and sends personalized Telegram alerts to prevent liquidations, panic selling, and neglect. Built with Next.js 16, React 19, and Kamino SDK.">
+  <meta name="keywords"
+    content="Nudge, DeFi, Solana, behavioral finance, Kamino Finance, liquidation prevention, Telegram bot, health factor, Next.js 16, React 19, hackathon, Giuliana Lopes Galvão">
+  <meta name="author" content="Giuliana Lopes Galvão">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.giulopesgalvao.com.br/nudge-case.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Nudge — Behavioral Intelligence for DeFi Lending · Giuliana Lopes Galvão">
+  <meta property="og:description"
+    content="Behavioral intelligence layer for DeFi lending on Solana. Monitors Kamino positions, prevents liquidations through personalized Telegram nudges.">
+  <meta property="og:image" content="https://www.giulopesgalvao.com.br/cases/nudge/LYRA.png">
+  <meta property="og:url" content="https://www.giulopesgalvao.com.br/nudge-case.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nudge — Behavioral Intelligence for DeFi Lending · Giuliana Lopes Galvão">
+  <meta name="twitter:image" content="https://www.giulopesgalvao.com.br/cases/nudge/LYRA.png">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Nudge — Behavioral Intelligence Layer for DeFi Lending on Solana",
+      "author": { "@type": "Person", "name": "Giuliana Lopes Galvão", "url": "https://www.giulopesgalvao.com.br" },
+      "description": "Behavioral intelligence layer for DeFi lending on Solana. Monitors Kamino Finance positions and sends contextual, personalized Telegram alerts to prevent liquidations, panic selling, and position neglect.",
+      "datePublished": "2026-05-18",
+      "image": "https://www.giulopesgalvao.com.br/cases/nudge/LYRA.png",
+      "url": "https://www.giulopesgalvao.com.br/nudge-case.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://www.giulopesgalvao.com.br/" },
+        { "@type": "ListItem", "position": 2, "name": "Nudge", "item": "https://www.giulopesgalvao.com.br/nudge-case.html" }
+      ]
+    }
+  ]
+}
+</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --plum: #FF6B6B;
+      --plum-light: #FF8A8A;
+      --plum-pale: #FFB8B8;
+      --plum-ghost: #FFF0F0;
+      --warm-cream: #FAF7F2;
+      --warm-stone: #EDE8E0;
+      --ink: #1C1917;
+      --ink-soft: #4A4542;
+      --ink-muted: #8A8480;
+      --accent-gold: #C4975A;
+      --white: #FFFFFF;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      overflow-x: clip;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    .en {
+      display: block;
+    }
+
+    .pt {
+      display: none;
+    }
+
+    .lang-pt .en {
+      display: none;
+    }
+
+    .lang-pt .pt {
+      display: block;
+    }
+
+    .en-inline {
+      display: inline;
+    }
+
+    .pt-inline {
+      display: none;
+    }
+
+    .lang-pt .en-inline {
+      display: none;
+    }
+
+    .lang-pt .pt-inline {
+      display: inline;
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 2px;
+      border-radius: 20px;
+      padding: 4px;
+      margin-left: auto;
+    }
+
+    .lang-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 16px;
+      border: none;
+      background: transparent;
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--plum);
+      color: var(--white);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      padding: 24px 64px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--warm-stone);
+    }
+
+    .nav-back {
+      font-size: 13px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover {
+      color: var(--plum);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--warm-stone);
+    }
+
+    .nav-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .case-hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .case-hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 140px 64px 80px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .case-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+      align-items: center;
+    }
+
+    .ctag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 107, 107, 0.5);
+      color: var(--plum-pale);
+      background: rgba(255, 107, 107, 0.12);
+    }
+
+    .case-hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--plum-pale);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .case-hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--plum-pale);
+    }
+
+    .case-hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(64px, 8vw, 112px);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .case-hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2vw, 26px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--plum-pale);
+      margin-bottom: 48px;
+      line-height: 1.4;
+    }
+
+    .case-meta-row {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .case-meta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 6px;
+    }
+
+    .case-meta-value {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .case-hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-tree-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-tree-bg svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-quote-card {
+      position: relative;
+      z-index: 2;
+      max-width: 340px;
+      background: rgba(250, 247, 242, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px 36px;
+      border-radius: 4px 24px 4px 24px;
+    }
+
+    .hero-quote-card blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .hero-quote-card cite {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--plum-pale);
+      font-style: normal;
+    }
+
+    .try-app-bar {
+      background: var(--ink);
+      padding: 16px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.5;
+    }
+
+    .try-app-bar strong {
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 400;
+    }
+
+    .try-app-bar p {
+      margin: 0;
+    }
+
+    .try-app-bar a {
+      flex-shrink: 0;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--plum-pale);
+      text-decoration: none;
+      padding: 8px 20px;
+      border: 1px solid var(--plum-pale);
+      border-radius: 40px;
+      transition: all 0.25s;
+    }
+
+    .try-app-bar a:hover {
+      background: var(--plum);
+      color: var(--white);
+      border-color: var(--plum);
+    }
+
+    .case-body {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .case-section {
+      padding: 96px 80px;
+      border-bottom: 1px solid var(--warm-stone);
+    }
+
+    .case-section:last-child {
+      border-bottom: none;
+    }
+
+    .cs-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--plum);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cs-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--plum);
+    }
+
+    .cs-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 48px;
+    }
+
+    .cs-title em {
+      font-style: italic;
+      color: var(--plum);
+    }
+
+    .cs-body-text {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      max-width: 680px;
+      margin-bottom: 28px;
+    }
+
+    .cs-body-text strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .cs-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .cs-3col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+    }
+
+    .screen-card {
+      background: var(--white);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .screen-card:first-child {
+      border-radius: 24px 4px 4px 4px;
+    }
+
+    .screen-card:nth-child(2) {
+      border-radius: 4px 24px 4px 4px;
+    }
+
+    .screen-card:last-child {
+      border-radius: 4px 4px 24px 4px;
+    }
+
+    .screen-card-body {
+      padding: 32px 28px;
+    }
+
+    .screen-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--plum-pale);
+      margin-bottom: 20px;
+    }
+
+    .screen-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .screen-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+    }
+
+    .callout {
+      background: var(--ink);
+      padding: 48px 52px;
+      border-radius: 4px;
+      margin: 48px 0;
+    }
+
+    .callout p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.5vw, 30px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.5;
+      max-width: 700px;
+    }
+
+    .callout p em {
+      color: var(--plum-pale);
+      font-style: normal;
+    }
+
+    .callout-source {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-top: 16px;
+    }
+
+    .learning-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 48px;
+    }
+
+    .learning-item {
+      background: var(--white);
+      padding: 28px 32px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      border-top: 1px solid var(--warm-stone);
+    }
+
+    .learning-item:first-child {
+      border-radius: 16px 16px 0 0;
+      border-top: none;
+    }
+
+    .learning-item:last-child {
+      border-radius: 0 0 16px 16px;
+    }
+
+    .learning-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--plum-pale);
+      flex-shrink: 0;
+      line-height: 1;
+      width: 32px;
+    }
+
+    .learning-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .learning-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    .profile-grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .profile-card {
+      background: var(--white);
+      padding: 36px 32px;
+    }
+
+    .profile-card:nth-child(1) {
+      border-radius: 16px 4px 4px 4px;
+    }
+
+    .profile-card:nth-child(2) {
+      border-radius: 4px 16px 4px 4px;
+    }
+
+    .profile-card:nth-child(3) {
+      border-radius: 4px 4px 4px 16px;
+    }
+
+    .profile-card:nth-child(4) {
+      border-radius: 4px 4px 16px 4px;
+    }
+
+    .profile-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .profile-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .profile-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    .img-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 48px 0;
+    }
+
+    .img-grid-2col img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .img-full {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      margin: 48px 0;
+    }
+
+    .tools-stack {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    .tool-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 32px 28px;
+    }
+
+    .tool-card:first-child {
+      border-radius: 16px 4px 4px 16px;
+    }
+
+    .tool-card:last-child {
+      border-radius: 4px 16px 16px 4px;
+    }
+
+    .tool-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .tool-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--plum-pale);
+      margin-bottom: 14px;
+    }
+
+    .tool-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .role-section {
+      background: var(--ink);
+      padding: 100px 80px;
+    }
+
+    .role-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .role-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--plum-pale);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .role-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--plum-pale);
+    }
+
+    .role-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.3;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+
+    .role-attribution {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--plum-pale);
+    }
+
+    .role-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 24px;
+      background: rgba(255, 107, 107, 0.08);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 184, 184, 0.15);
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255, 184, 184, 0.6);
+      line-height: 1.5;
+    }
+
+    .case-cta {
+      background: var(--plum);
+      padding: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .case-cta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--plum-pale);
+      margin-bottom: 12px;
+    }
+
+    .case-cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.15;
+    }
+
+    .case-cta-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.25s;
+      letter-spacing: 0.04em;
+    }
+
+    .cta-btn.white {
+      background: var(--white);
+      color: var(--plum);
+    }
+
+    .cta-btn.white:hover {
+      background: var(--warm-cream);
+      transform: translateY(-1px);
+    }
+
+    .cta-btn.outline {
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .cta-btn.outline:hover {
+      border-color: var(--white);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .case-footer-nav {
+      background: var(--warm-cream);
+      padding: 64px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--warm-stone);
+    }
+
+    .footer-nav-link {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fnl-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    .fnl-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--ink);
+      transition: color 0.2s;
+    }
+
+    .footer-nav-link:hover .fnl-title {
+      color: var(--plum);
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--ink-muted);
+      font-size: 13px;
+      border-top: 1px solid var(--warm-stone);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        padding: 18px 24px;
+      }
+
+      .case-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .case-hero-left {
+        padding: 120px 24px 60px;
+      }
+
+      .case-hero-right {
+        display: none;
+      }
+
+      .case-meta-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 32px;
+      }
+
+      .try-app-bar {
+        padding: 16px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .case-section {
+        padding: 64px 24px;
+      }
+
+      .cs-2col,
+      .cs-3col,
+      .profile-grid-2x2,
+      .img-grid-2col {
+        grid-template-columns: 1fr;
+      }
+
+      .cs-title {
+        margin-bottom: 32px;
+      }
+
+      .tools-stack {
+        grid-template-columns: 1fr;
+      }
+
+      .tool-card:first-child,
+      .tool-card:last-child {
+        border-radius: 4px;
+      }
+
+      .role-section {
+        padding: 64px 24px;
+      }
+
+      .role-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .case-cta {
+        padding: 48px 24px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .case-cta-links {
+        justify-content: center;
+      }
+
+      .case-footer-nav {
+        padding: 48px 24px;
+        flex-direction: column;
+        gap: 32px;
+        text-align: center;
+      }
+
+      .footer-nav-link {
+        align-items: center;
+      }
+
+      .quiz-flow {
+        flex-direction: row !important;
+        gap: 8px !important;
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+
+      .quiz-flow img {
+        width: 45% !important;
+        min-width: 160px;
+        flex-shrink: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="index.html" class="nav-back">
+      <span class="en-inline">&larr; Back to portfolio</span>
+      <span class="pt-inline">&larr; Voltar ao portfólio</span>
+    </a>
+    <div class="nav-divider"></div>
+    <span class="nav-title">Nudge &mdash; Case Study</span>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <header class="case-hero">
+      <div class="case-hero-left">
+        <div class="case-tag-row">
+          <span class="ctag">Web3</span>
+          <span class="ctag">DeFi</span>
+          <span class="ctag">Behavioral Design</span>
+          <span class="ctag">Full-stack</span>
+          <span class="ctag">Hackathon</span>
+        </div>
+        <div class="case-hero-eyebrow">
+          <span class="en-inline">Personal project &middot; 2026</span>
+          <span class="pt-inline">Projeto pessoal &middot; 2026</span>
+        </div>
+        <h1 class="case-hero-title">Nudge</h1>
+        <p class="case-hero-subtitle">
+          <span class="en">Behavioral intelligence for DeFi lending &mdash; protecting users from themselves</span>
+          <span class="pt">Intelig&ecirc;ncia comportamental para lending DeFi &mdash; protegendo usu&aacute;rios deles mesmos</span>
+        </p>
+        <div class="case-meta-row">
+          <div>
+            <div class="case-meta-label">Year</div>
+            <div class="case-meta-value">2026</div>
+          </div>
+          <div>
+            <div class="case-meta-label">Role</div>
+            <div class="case-meta-value">Full-stack Design</div>
+          </div>
+          <div>
+            <div class="case-meta-label">Platform</div>
+            <div class="case-meta-value">Web (responsive)</div>
+          </div>
+          <div>
+            <div class="case-meta-label">Stack</div>
+            <div class="case-meta-value">Next.js 16 &middot; React 19 &middot; Solana</div>
+          </div>
+          <div>
+            <div class="case-meta-label">Status</div>
+            <div class="case-meta-value"><span class="en-inline">Submitted</span><span class="pt-inline">Submetido</span></div>
+          </div>
+          <div>
+            <div class="case-meta-label">Built for</div>
+            <div class="case-meta-value">Solana Frontier Hackathon</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-hero-right">
+        <div class="hero-tree-bg">
+          <svg viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FF6B6B" stop-opacity="0.15" />
+                <stop offset="100%" stop-color="#FF6B6B" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <circle cx="300" cy="400" r="300" fill="url(#glow1)" />
+            <circle cx="200" cy="300" r="3" fill="#FF6B6B" opacity="0.4" />
+            <circle cx="400" cy="500" r="2" fill="#9945FF" opacity="0.3" />
+            <circle cx="150" cy="600" r="2" fill="#14F195" opacity="0.3" />
+            <circle cx="450" cy="200" r="3" fill="#DC1FFF" opacity="0.25" />
+            <line x1="200" y1="300" x2="400" y2="500" stroke="#FF6B6B" stroke-width="0.5" opacity="0.15" />
+            <line x1="400" y1="500" x2="450" y2="200" stroke="#9945FF" stroke-width="0.5" opacity="0.1" />
+          </svg>
+        </div>
+        <div class="hero-quote-card">
+          <blockquote>
+            <span class="en">"Nudge protects you from yourself."</span>
+            <span class="pt">"Nudge protege voc&ecirc; de voc&ecirc; mesmo."</span>
+          </blockquote>
+          <cite>
+            <span class="en-inline">&mdash; Core product philosophy</span>
+            <span class="pt-inline">&mdash; Filosofia central do produto</span>
+          </cite>
+        </div>
+      </div>
+    </header>
+
+    <!-- TRY APP BAR -->
+    <div class="try-app-bar">
+      <p>
+        <span class="en">Nudge was built for the <strong>Solana Frontier Hackathon 2026</strong> &mdash; $397K+ in prizes across <strong>51 tracks</strong>.</span>
+        <span class="pt">Nudge foi constru&iacute;do para o <strong>Solana Frontier Hackathon 2026</strong> &mdash; $397K+ em pr&ecirc;mios em <strong>51 tracks</strong>.</span>
+      </p>
+      <a href="https://github.com/giulopesg/nudge" target="_blank" rel="noopener">
+        <span class="en-inline">View on GitHub</span><span class="pt-inline">Ver no GitHub</span> &rarr;
+      </a>
+    </div>
+
+    <div class="case-body">
+
+      <!-- 00 THE CONTEXT -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">00 &mdash; The Context</span><span class="pt-inline">00 &mdash; O Contexto</span></div>
+        <h2 class="cs-title">
+          <span class="en">Built for <em>Frontier</em>.</span>
+          <span class="pt">Constru&iacute;do para o <em>Frontier</em>.</span>
+        </h2>
+        <p class="cs-body-text en">Nudge was born during the <strong>Solana Frontier Hackathon 2026</strong> &mdash; the largest global Solana competition of the year. The challenge: build something that solves a real problem for DeFi users on Solana. I identified a gap nobody was addressing &mdash; <strong>behavioral mistakes</strong> in lending protocols. Not a lack of tools, but a lack of protection from our own impulses.</p>
+        <p class="cs-body-text pt">Nudge nasceu durante o <strong>Solana Frontier Hackathon 2026</strong> &mdash; a maior competi&ccedil;&atilde;o global Solana do ano. O desafio: construir algo que resolva um problema real para usu&aacute;rios DeFi na Solana. Identifiquei uma lacuna que ningu&eacute;m estava endere&ccedil;ando &mdash; <strong>erros comportamentais</strong> em protocolos de lending. N&atilde;o falta de ferramentas, mas falta de prote&ccedil;&atilde;o contra nossos pr&oacute;prios impulsos.</p>
+      </section>
+
+      <!-- 01 THE PROBLEM -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">01 &mdash; The Problem</span><span class="pt-inline">01 &mdash; O Problema</span></div>
+        <h2 class="cs-title">
+          <span class="en">10&ndash;20% lost to <em>behavior</em>, not strategy.</span>
+          <span class="pt">10&ndash;20% perdidos por <em>comportamento</em>, n&atilde;o estrat&eacute;gia.</span>
+        </h2>
+        <div class="cs-2col">
+          <div>
+            <p class="cs-body-text en">DeFi users don't lose money because they pick bad protocols or use wrong strategies. They lose because they <strong>panic sell during crashes</strong>, <strong>ignore health factors</strong> until liquidation, and <strong>forget about positions</strong> for weeks. These are behavioral problems &mdash; and no existing DeFi tool addresses them.</p>
+            <p class="cs-body-text pt">Usu&aacute;rios DeFi n&atilde;o perdem dinheiro por escolher protocolos ruins ou usar estrat&eacute;gias erradas. Perdem porque <strong>vendem em p&acirc;nico durante quedas</strong>, <strong>ignoram health factors</strong> at&eacute; a liquida&ccedil;&atilde;o e <strong>esquecem de posi&ccedil;&otilde;es</strong> por semanas. S&atilde;o problemas comportamentais &mdash; e nenhuma ferramenta DeFi existente os aborda.</p>
+          </div>
+          <div>
+            <div class="callout" style="margin:0;">
+              <p>
+                <span class="en">"The biggest risk in DeFi isn't the protocol. It's <em>the person using it.</em>"</span>
+                <span class="pt">"O maior risco em DeFi n&atilde;o &eacute; o protocolo. &Eacute; <em>a pessoa usando.</em>"</span>
+              </p>
+              <div class="callout-source">
+                <span class="en-inline">Design insight</span>
+                <span class="pt-inline">Insight de design</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 THE SOLUTION -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">02 &mdash; The Solution</span><span class="pt-inline">02 &mdash; A Solu&ccedil;&atilde;o</span></div>
+        <h2 class="cs-title">
+          <span class="en">Profile. Monitor. <em>Nudge</em>.</span>
+          <span class="pt">Perfil. Monitoramento. <em>Nudge</em>.</span>
+        </h2>
+        <div class="cs-3col">
+          <div class="screen-card">
+            <div class="screen-card-body">
+              <div class="screen-num">01</div>
+              <div class="screen-name"><span class="en-inline">Behavioral Profiling</span><span class="pt-inline">Perfil Comportamental</span></div>
+              <p class="screen-desc">
+                <span class="en">A quiz maps your behavioral patterns into neurotags &mdash; how you react under pressure, your knowledge level, and your goals. Nudge adapts its voice to you.</span>
+                <span class="pt">Um quiz mapeia seus padr&otilde;es comportamentais em neurotags &mdash; como voc&ecirc; reage sob press&atilde;o, seu n&iacute;vel de conhecimento e seus objetivos. Nudge adapta a voz para voc&ecirc;.</span>
+              </p>
+            </div>
+          </div>
+          <div class="screen-card">
+            <div class="screen-card-body">
+              <div class="screen-num">02</div>
+              <div class="screen-name"><span class="en-inline">Position Monitoring</span><span class="pt-inline">Monitoramento de Posi&ccedil;&otilde;es</span></div>
+              <p class="screen-desc">
+                <span class="en">Reads your Kamino lending positions in real time &mdash; health factor, collateral, debt. The dashboard shows your Nudge Score and portfolio health at a glance.</span>
+                <span class="pt">L&ecirc; suas posi&ccedil;&otilde;es de lending Kamino em tempo real &mdash; health factor, colateral, d&iacute;vida. O dashboard mostra seu Nudge Score e sa&uacute;de do portf&oacute;lio de relance.</span>
+              </p>
+            </div>
+          </div>
+          <div class="screen-card">
+            <div class="screen-card-body">
+              <div class="screen-num">03</div>
+              <div class="screen-name"><span class="en-inline">Contextual Alerts</span><span class="pt-inline">Alertas Contextuais</span></div>
+              <p class="screen-desc">
+                <span class="en">When your health factor drops or market volatility spikes, Nudge alerts you in the tone that matches your profile &mdash; context, not fear.</span>
+                <span class="pt">Quando seu health factor cai ou a volatilidade do mercado dispara, Nudge te alerta no tom que combina com seu perfil &mdash; contexto, n&atilde;o medo.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 BEHAVIORAL PROFILING -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">03 &mdash; Behavioral Profiling</span><span class="pt-inline">03 &mdash; Perfil Comportamental</span></div>
+        <h2 class="cs-title">
+          <span class="en">14 neurotags. 4 <em>voices</em>.</span>
+          <span class="pt">14 neurotags. 4 <em>vozes</em>.</span>
+        </h2>
+        <div class="cs-2col">
+          <div>
+            <p class="cs-body-text en">During onboarding, a quiz maps users to <strong>14 behavioral neurotag categories</strong> across 5 dimensions: autonomy, pressure response, attention, knowledge, and goals. Each combination generates a personalized <strong>communication profile</strong> that determines how Nudge talks to you.</p>
+            <p class="cs-body-text pt">Durante o onboarding, um quiz mapeia usu&aacute;rios em <strong>14 categorias de neurotags comportamentais</strong> em 5 dimens&otilde;es: autonomia, resposta &agrave; press&atilde;o, aten&ccedil;&atilde;o, conhecimento e objetivos. Cada combina&ccedil;&atilde;o gera um <strong>perfil de comunica&ccedil;&atilde;o</strong> personalizado que determina como o Nudge fala com voc&ecirc;.</p>
+          </div>
+          <div>
+            <div class="profile-grid-2x2">
+              <div class="profile-card">
+                <div class="profile-icon">🌸</div>
+                <div class="profile-name">Gentle</div>
+                <p class="profile-desc"><span class="en">Reassuring, explanatory &mdash; for risk-averse and inexperienced users</span><span class="pt">Tranquilizador, explicativo &mdash; para usu&aacute;rios avessos a risco e inexperientes</span></p>
+              </div>
+              <div class="profile-card">
+                <div class="profile-icon">🌱</div>
+                <div class="profile-name">Encouraging</div>
+                <p class="profile-desc"><span class="en">Supportive, growth-oriented &mdash; for learners and explorers</span><span class="pt">Apoiador, orientado a crescimento &mdash; para aprendizes e exploradores</span></p>
+              </div>
+              <div class="profile-card">
+                <div class="profile-icon">⚡</div>
+                <div class="profile-name">Direct</div>
+                <p class="profile-desc"><span class="en">Crisp, efficient, action-oriented &mdash; for experienced users</span><span class="pt">Direto, eficiente, orientado a a&ccedil;&atilde;o &mdash; para usu&aacute;rios experientes</span></p>
+              </div>
+              <div class="profile-card">
+                <div class="profile-icon">🔬</div>
+                <div class="profile-name">Technical</div>
+                <p class="profile-desc"><span class="en">Data-driven, detailed options &mdash; for advanced DeFi users</span><span class="pt">Orientado a dados, op&ccedil;&otilde;es detalhadas &mdash; para usu&aacute;rios DeFi avan&ccedil;ados</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-flow reveal" style="display:flex; gap:16px; margin-top:48px; justify-content:center; align-items:flex-start;">
+          <img src="cases/nudge/mobile-quizscreen1.png" alt="Nudge quiz — identity question" loading="lazy" style="width:30%; max-width:260px; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.1);">
+          <img src="cases/nudge/mobile-quizscreenending.png" alt="Nudge quiz — goals selection" loading="lazy" style="width:30%; max-width:260px; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.1);">
+          <img src="cases/nudge/mobile-quizresult.png" alt="Nudge quiz — Sentinel profile result with neurotags" loading="lazy" style="width:30%; max-width:260px; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.1);">
+        </div>
+      </section>
+
+      <!-- 04 THE DASHBOARD -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">04 &mdash; The Dashboard</span><span class="pt-inline">04 &mdash; O Dashboard</span></div>
+        <h2 class="cs-title">
+          <span class="en">Your positions. <em>At a glance</em>.</span>
+          <span class="pt">Suas posi&ccedil;&otilde;es. <em>De relance</em>.</span>
+        </h2>
+        <p class="cs-body-text en">The dashboard gives users a complete view of their DeFi health: <strong>Nudge Score</strong> (behavioral wellness), <strong>Kamino position data</strong> (health factor, collateral, debt), <strong>portfolio breakdown</strong>, and <strong>alert history</strong>. A first-steps checklist guides new users through profile setup and on-chain registration.</p>
+        <p class="cs-body-text pt">O dashboard d&aacute; aos usu&aacute;rios uma vis&atilde;o completa da sa&uacute;de DeFi: <strong>Nudge Score</strong> (bem-estar comportamental), <strong>dados da posi&ccedil;&atilde;o Kamino</strong> (health factor, colateral, d&iacute;vida), <strong>composi&ccedil;&atilde;o do portf&oacute;lio</strong> e <strong>hist&oacute;rico de alertas</strong>. Um checklist de primeiros passos guia novos usu&aacute;rios pela configura&ccedil;&atilde;o de perfil e registro on-chain.</p>
+
+        <div class="img-grid-2col reveal">
+          <img src="cases/nudge/dashboard.png" alt="Nudge dashboard — Nudge Score, portfolio, and Kamino lending data" loading="lazy">
+          <img src="cases/nudge/profile.png" alt="Nudge profile — Scholar class with stats, neurotags, and inventory" loading="lazy">
+        </div>
+
+        <div class="learning-list">
+          <div class="learning-item">
+            <div class="learning-num">1</div>
+            <div class="learning-content">
+              <div class="learning-title"><span class="en-inline">Nudge Score</span><span class="pt-inline">Nudge Score</span></div>
+              <div class="learning-desc"><span class="en">Behavioral wellness score (0&ndash;100) based on position health, activity, and profile completeness</span><span class="pt">Score de bem-estar comportamental (0&ndash;100) baseado na sa&uacute;de da posi&ccedil;&atilde;o, atividade e completude do perfil</span></div>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-num">2</div>
+            <div class="learning-content">
+              <div class="learning-title"><span class="en-inline">Lending Card</span><span class="pt-inline">Card de Lending</span></div>
+              <div class="learning-desc"><span class="en">Health factor, collateral, debt, safety margin &mdash; reads live data from Kamino</span><span class="pt">Health factor, colateral, d&iacute;vida, margem de seguran&ccedil;a &mdash; l&ecirc; dados ao vivo do Kamino</span></div>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-num">3</div>
+            <div class="learning-content">
+              <div class="learning-title"><span class="en-inline">RPG Character</span><span class="pt-inline">Personagem RPG</span></div>
+              <div class="learning-desc"><span class="en">Gamified profile with class, level, stats, and inventory &mdash; tied to behavioral neurotags</span><span class="pt">Perfil gamificado com classe, n&iacute;vel, stats e invent&aacute;rio &mdash; ligados aos neurotags comportamentais</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FULL-WIDTH IMAGE -->
+    <div class="reveal" style="padding: 64px 0;">
+      <div style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+        <img src="cases/nudge/home.png" alt="Nudge landing page — Blockchain is freedom" loading="lazy"
+          style="width: 100%; border-radius: 12px; box-shadow: 0 16px 64px rgba(0,0,0,0.08);">
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- 05 DESIGN SYSTEM -->
+      <section class="case-section reveal" style="background: var(--ink); border-bottom-color: rgba(255,255,255,0.06);">
+        <div class="cs-label" style="color: var(--plum-pale);"><span style="display:block;width:24px;height:1px;background:var(--plum-pale);flex-shrink:0"></span><span class="en-inline">05 &mdash; Design System</span><span class="pt-inline">05 &mdash; Design System</span></div>
+        <h2 class="cs-title" style="color: var(--white);"><span class="en">Cypherpunk meets <em style="color:var(--plum-pale)">behavioral care</em>.</span><span class="pt">Cypherpunk encontra <em style="color:var(--plum-pale)">cuidado comportamental</em>.</span></h2>
+        <p class="cs-body-text en" style="color: rgba(255,255,255,0.7);">Deep dark palette with neon teal accents. Chamfered corners, scanline effects, and glow cards create a cypherpunk aesthetic &mdash; while the behavioral layer uses warm, human language to build trust and reduce anxiety.</p>
+        <p class="cs-body-text pt" style="color: rgba(255,255,255,0.7);">Paleta dark profunda com acentos teal neon. Cantos chanfrados, efeitos de scanline e cards com brilho criam uma est&eacute;tica cypherpunk &mdash; enquanto a camada comportamental usa linguagem humana e acolhedora para construir confian&ccedil;a e reduzir ansiedade.</p>
+        <div class="tools-stack">
+          <div class="tool-card">
+            <div class="tool-name"><span class="en-inline">Color Palette</span><span class="pt-inline">Paleta de Cores</span></div>
+            <div class="tool-type">Brand Colors</div>
+            <p class="tool-desc">Dark #050408 &middot; Teal #00CCBB &middot; Plum #6B4FA0 &middot; Alert #FF6B6B</p>
+          </div>
+          <div class="tool-card" style="border-radius:4px;">
+            <div class="tool-name"><span class="en-inline">Typography</span><span class="pt-inline">Tipografia</span></div>
+            <div class="tool-type">Font Stack</div>
+            <p class="tool-desc">Orbitron (titles) &middot; Rajdhani (nav) &middot; Fira Code (mono) &middot; Inter (body)</p>
+          </div>
+          <div class="tool-card">
+            <div class="tool-name">UI Components</div>
+            <div class="tool-type"><span class="en-inline">Design Tokens</span><span class="pt-inline">Tokens de Design</span></div>
+            <p class="tool-desc">n2- namespace &middot; glow cards &middot; neon buttons &middot; gradient text &middot; status badges</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 TECH STACK -->
+      <section class="case-section reveal" style="background: var(--ink); border-bottom-color: rgba(255,255,255,0.06);">
+        <div class="cs-label" style="color: var(--plum-pale);"><span style="display:block;width:24px;height:1px;background:var(--plum-pale);flex-shrink:0"></span><span class="en-inline">06 &mdash; Tech Stack</span><span class="pt-inline">06 &mdash; Tech Stack</span></div>
+        <h2 class="cs-title" style="color: var(--white);"><span class="en">Built with <em style="color:var(--plum-pale)">modern tools</em>.</span><span class="pt">Constru&iacute;do com <em style="color:var(--plum-pale)">ferramentas modernas</em>.</span></h2>
+        <div class="tools-stack">
+          <div class="tool-card">
+            <div class="tool-name">Next.js 16</div>
+            <div class="tool-type">Framework</div>
+            <p class="tool-desc">App Router, Turbopack, Server Components, API Routes</p>
+          </div>
+          <div class="tool-card" style="border-radius:4px;">
+            <div class="tool-name">React 19</div>
+            <div class="tool-type">UI Library</div>
+            <p class="tool-desc">Tailwind CSS v4, cypherpunk design system, i18n (PT-BR)</p>
+          </div>
+          <div class="tool-card">
+            <div class="tool-name">Kamino SDK</div>
+            <div class="tool-type">DeFi Integration</div>
+            <p class="tool-desc">@kamino-finance/klend-sdk &mdash; health factor, collateral, debt reading</p>
+          </div>
+          <div class="tool-card">
+            <div class="tool-name">Solana</div>
+            <div class="tool-type">Blockchain</div>
+            <p class="tool-desc">@solana/web3.js, wallet-adapter, Memo Program, Helius RPC</p>
+          </div>
+          <div class="tool-card" style="border-radius:4px;">
+            <div class="tool-name">Jupiter Price API</div>
+            <div class="tool-type"><span class="en-inline">Market Data</span><span class="pt-inline">Dados de Mercado</span></div>
+            <p class="tool-desc"><span class="en">Real-time token prices, volatility detection, portfolio valuation</span><span class="pt">Pre&ccedil;os de tokens em tempo real, detec&ccedil;&atilde;o de volatilidade, avalia&ccedil;&atilde;o de portf&oacute;lio</span></p>
+          </div>
+          <div class="tool-card">
+            <div class="tool-name">TypeScript</div>
+            <div class="tool-type"><span class="en-inline">Type Safety</span><span class="pt-inline">Seguran&ccedil;a de Tipos</span></div>
+            <p class="tool-desc"><span class="en">Full type safety across components, hooks, and API routes</span><span class="pt">Seguran&ccedil;a de tipos completa em componentes, hooks e rotas de API</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 ARCHITECTURE -->
+      <section class="case-section reveal">
+        <div class="cs-label"><span class="en-inline">07 &mdash; Architecture</span><span class="pt-inline">07 &mdash; Arquitetura</span></div>
+        <h2 class="cs-title">
+          <span class="en">How <em>Nudge</em> works.</span>
+          <span class="pt">Como o <em>Nudge</em> funciona.</span>
+        </h2>
+        <div class="cs-2col">
+          <div>
+            <p class="cs-body-text en">On wallet connect, Nudge reads lending positions from <strong>Kamino's klend-sdk</strong> and token prices from <strong>Jupiter Price API</strong>. The behavioral quiz generates a neurotag profile that determines how the dashboard communicates risk. Everything runs client-side with Vercel serverless API routes for data fetching.</p>
+            <p class="cs-body-text pt">Ao conectar a wallet, Nudge l&ecirc; posi&ccedil;&otilde;es de lending do <strong>klend-sdk do Kamino</strong> e pre&ccedil;os de tokens da <strong>Jupiter Price API</strong>. O quiz comportamental gera um perfil de neurotags que determina como o dashboard comunica risco. Tudo roda no client-side com rotas de API serverless da Vercel para busca de dados.</p>
+          </div>
+          <div>
+            <div class="learning-list" style="margin-top:0;">
+              <div class="learning-item" style="border-top:none;">
+                <div class="learning-num">1</div>
+                <div class="learning-content">
+                  <div class="learning-title"><span class="en-inline">Wallet connect</span><span class="pt-inline">Conex&atilde;o da wallet</span></div>
+                  <div class="learning-desc"><span class="en">Phantom / Solflare adapter reads public key, fetches Kamino positions</span><span class="pt">Adapter Phantom / Solflare l&ecirc; chave p&uacute;blica, busca posi&ccedil;&otilde;es Kamino</span></div>
+                </div>
+              </div>
+              <div class="learning-item">
+                <div class="learning-num">2</div>
+                <div class="learning-content">
+                  <div class="learning-title"><span class="en-inline">Behavioral quiz</span><span class="pt-inline">Quiz comportamental</span></div>
+                  <div class="learning-desc"><span class="en">Maps answers to 14 neurotag categories, generates communication profile</span><span class="pt">Mapeia respostas para 14 categorias de neurotags, gera perfil de comunica&ccedil;&atilde;o</span></div>
+                </div>
+              </div>
+              <div class="learning-item">
+                <div class="learning-num">3</div>
+                <div class="learning-content">
+                  <div class="learning-title"><span class="en-inline">Live data</span><span class="pt-inline">Dados ao vivo</span></div>
+                  <div class="learning-desc"><span class="en">Health factor, collateral, debt from Kamino &middot; token prices from Jupiter</span><span class="pt">Health factor, colateral, d&iacute;vida do Kamino &middot; pre&ccedil;os de tokens do Jupiter</span></div>
+                </div>
+              </div>
+              <div class="learning-item">
+                <div class="learning-num">4</div>
+                <div class="learning-content">
+                  <div class="learning-title"><span class="en-inline">Personalized UI</span><span class="pt-inline">UI personalizada</span></div>
+                  <div class="learning-desc"><span class="en">Dashboard messages, alerts, and tone adapt to the user's neurotag profile</span><span class="pt">Mensagens do dashboard, alertas e tom se adaptam ao perfil de neurotags do usu&aacute;rio</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ROLE -->
+    <section class="role-section">
+      <div class="role-content">
+        <div class="role-eyebrow reveal">
+          <span class="en-inline">Giuliana's role in this project</span>
+          <span class="pt-inline">Papel da Giuliana no projeto</span>
+        </div>
+        <blockquote class="role-quote reveal">
+          <span class="en">"I designed and built this entire product solo &mdash; from the behavioral profiling system and RPG gamification to the Kamino SDK integration, cypherpunk UI, and personalized communication engine."</span>
+          <span class="pt">"Projetei e constru&iacute; todo este produto solo &mdash; do sistema de perfil comportamental e gamifica&ccedil;&atilde;o RPG &agrave; integra&ccedil;&atilde;o com Kamino SDK, UI cypherpunk e motor de comunica&ccedil;&atilde;o personalizada."</span>
+        </blockquote>
+        <div class="role-attribution reveal">Full-stack Designer &middot; Built with Claude Code</div>
+        <div class="role-stats reveal">
+          <div class="stat-box">
+            <div class="stat-num">3</div>
+            <div class="stat-label"><span class="en-inline">Nudge Types</span><span class="pt-inline">Tipos de Nudge</span></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">14</div>
+            <div class="stat-label"><span class="en-inline">Neurotag Categories</span><span class="pt-inline">Categorias de Neurotag</span></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">4</div>
+            <div class="stat-label"><span class="en-inline">Comm. Profiles</span><span class="pt-inline">Perfis de Comunica&ccedil;&atilde;o</span></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">5</div>
+            <div class="stat-label"><span class="en-inline">Quiz Dimensions</span><span class="pt-inline">Dimens&otilde;es do Quiz</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="case-cta">
+      <div>
+        <div class="case-cta-label"><span class="en-inline">Let's work together</span><span class="pt-inline">Vamos trabalhar juntos</span></div>
+        <div class="case-cta-title"><span class="en">Interested in<br>this project?</span><span class="pt">Interessado<br>neste projeto?</span></div>
+      </div>
+      <div class="case-cta-links">
+        <a href="mailto:giulopesg@gmail.com" class="cta-btn white"><span class="en-inline">Get in touch</span><span class="pt-inline">Entrar em contato</span></a>
+        <a href="index.html" class="cta-btn outline">&larr; <span class="en-inline">Back to portfolio</span><span class="pt-inline">Voltar ao portf&oacute;lio</span></a>
+      </div>
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="case-footer-nav">
+      <a href="solana-wtf-case.html" class="footer-nav-link">
+        <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
+        <span class="fnl-title">Solana WTF</span>
+      </a>
+      <a href="neuroot-case.html" class="footer-nav-link" style="text-align:right;">
+        <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Pr&oacute;ximo</span> &rarr;</span>
+        <span class="fnl-title">Neuroot</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Giuliana Lopes Galvão</p>
+  </footer>
+
+  <script>
+    let currentLang = 'en';
+    function setLang(lang) {
+      currentLang = lang;
+      document.body.classList.toggle('lang-pt', lang === 'pt');
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+      });
+      localStorage.setItem('lang', lang);
+    }
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang) setLang(savedLang);
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+      });
+    });
+  </script>
+</body>
+
+</html>
