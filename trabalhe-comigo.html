@@ -129,19 +129,25 @@ nav{position:fixed;top:0;left:0;right:0;padding:18px 48px;display:flex;align-ite
 .muted-txt{color:var(--muted2);}
 .bright-txt{color:var(--text);}
 
-/* NEUROOT */
-.neuroot-section{background:var(--surface);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:100px 48px;}
-.neuroot-inner{max-width:1100px;margin:0 auto;}
-.neuroot-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:center;}
-.neuroot-img-wrap{overflow:visible;background:var(--surface);}
-.neuroot-desc .section-title{margin-bottom:16px;}
-.neuroot-desc p{font-size:16px;color:var(--muted2);line-height:1.75;margin-bottom:20px;}
-.neuroot-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px;}
+/* CASES CAROUSEL */
+.cases-section{background:var(--surface);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:100px 48px;overflow:hidden;}
+.cases-inner{max-width:1100px;margin:0 auto;}
+.carousel-viewport{overflow:hidden;position:relative;}
+.carousel-track{display:flex;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);will-change:transform;}
+.carousel-slide{min-width:100%;flex-shrink:0;}
+.case-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:center;}
+.case-img-wrap{overflow:visible;background:var(--surface);}
+.case-desc .section-title{margin-bottom:16px;}
+.case-desc p{font-size:16px;color:var(--muted2);line-height:1.75;margin-bottom:20px;}
+.case-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px;}
 .stack-tag{font-size:11px;color:var(--muted2);padding:2px 8px;border:0.5px solid var(--border2);border-radius:4px;}
-.neuroot-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--muted2);text-decoration:none;margin-top:20px;font-weight:400;transition:color 0.2s;}
-.neuroot-link:hover{color:var(--text);}
+.case-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--muted2);text-decoration:none;margin-top:20px;font-weight:400;transition:color 0.2s;}
+.case-link:hover{color:var(--text);}
 .btn-cases{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:12px 24px;border:1px solid rgba(168,85,247,0.5);border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none;transition:all 0.2s;background:transparent;}
 .btn-cases:hover{background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.8);}
+.carousel-dots{display:flex;gap:8px;justify-content:center;margin-top:40px;}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);border:none;cursor:pointer;transition:all 0.3s;padding:0;}
+.carousel-dot.active{background:var(--accent);width:24px;border-radius:4px;}
 
 /* SERVICES — 2 cards only */
 .services{padding:100px 48px;}
@@ -252,12 +258,12 @@ html,body{overflow-x:hidden;}
   .hero-photo{min-height:60vw;border-left:none;border-top:0.5px solid var(--border);order:-1;}
   .hero-left{padding:48px 24px 40px;}
   .hero-proof{flex-wrap:wrap;}
-  .transformation,.neuroot-section,.services,.form-section{padding:64px 24px;}
+  .transformation,.cases-section,.services,.form-section{padding:64px 24px;}
   .learn-callout{padding:0 24px 64px;}
   .before-after{grid-template-columns:1fr;gap:0;}
   .ba-arrow{display:none;}
-  .neuroot-grid{grid-template-columns:1fr;gap:36px;}
-  .neuroot-img-wrap{order:-1;}
+  .case-grid{grid-template-columns:1fr;gap:36px;}
+  .case-img-wrap{order:-1;}
   .services-grid{grid-template-columns:1fr;}
   .form-section{grid-template-columns:1fr;gap:36px;}
   .form-left{position:static;}
@@ -269,7 +275,7 @@ html,body{overflow-x:hidden;}
   .hero-left{padding:36px 16px 32px;}
   .hero h1{font-size:32px;}
   .hero h1 .italic{font-size:28px;}
-  .transformation,.neuroot-section,.services,.form-section{padding:48px 16px;}
+  .transformation,.cases-section,.services,.form-section{padding:48px 16px;}
   .learn-callout{padding:0 16px 48px;}
   .form-inner{padding:20px;}
   .ba-col{padding:28px 20px;}
@@ -350,28 +356,90 @@ html,body{overflow-x:hidden;}
   </div>
 </section>
 
-<!-- NEUROOT -->
-<section class="neuroot-section" id="cases">
-  <div class="neuroot-inner">
-    <div class="neuroot-grid">
-      <div class="neuroot-img-wrap reveal-left">
-        <img style="width:100%;display:block;mix-blend-mode:screen;filter:brightness(1.05);" src="/images/neuroot-mockup.png" loading="lazy" alt="Neuroot — post-burnout recovery app">
-      </div>
-      <div class="neuroot-desc">
-        <p class="section-label reveal"><span class="en-inline">Case — Personal project</span><span class="pt-inline">Case — Projeto pessoal</span></p>
-        <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:16px;"><span class="en-inline">Neuroot — <em>app I built from scratch with AI</em></span><span class="pt-inline">Neuroot — <em>app que eu construí do zero com IA</em></span></h2>
-        <p><span class="en-inline">Post-burnout recovery app. No team, no agency, no startup budget. Just method, AI and 3 weeks.</span><span class="pt-inline">App de recuperação pós-burnout. Sem equipe, sem agência, sem orçamento de startup. Só método, IA e 3 semanas.</span></p>
-        <p><span class="en-inline">Design Thinking defined the problem. Shape Up defined the scope. Claude Code and Claude API built it. It's live, it works, and it's the most concrete proof of what I deliver to my clients.</span><span class="pt-inline">Design Thinking definiu o problema. Shape Up definiu o escopo. Claude Code e Claude API construíram. Está no ar, funciona, e é a prova mais concreta do que entrego para os meus clientes.</span></p>
-        <div class="neuroot-stack">
-          <span class="stack-tag">React + TypeScript</span>
-          <span class="stack-tag">Supabase</span>
-          <span class="stack-tag">Claude API</span>
-          <span class="stack-tag">Figma Make</span>
-          <span class="stack-tag">Vercel</span>
+<!-- CASES CAROUSEL -->
+<section class="cases-section" id="cases">
+  <div class="cases-inner">
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="carouselTrack">
+
+        <!-- SLIDE 1: NEUROOT -->
+        <div class="carousel-slide">
+          <div class="case-grid">
+            <div class="case-img-wrap">
+              <img style="width:100%;display:block;mix-blend-mode:screen;filter:brightness(1.05);" src="/images/neuroot-mockup.png" loading="lazy" alt="Neuroot — post-burnout recovery app">
+            </div>
+            <div class="case-desc">
+              <p class="section-label"><span class="en-inline">Case — Personal project</span><span class="pt-inline">Case — Projeto pessoal</span></p>
+              <h2 class="section-title" style="margin-bottom:16px;"><span class="en-inline">Neuroot — <em>app I built from scratch with AI</em></span><span class="pt-inline">Neuroot — <em>app que eu construí do zero com IA</em></span></h2>
+              <p><span class="en-inline">Post-burnout recovery app. No team, no agency, no startup budget. Just method, AI and 3 weeks.</span><span class="pt-inline">App de recuperação pós-burnout. Sem equipe, sem agência, sem orçamento de startup. Só método, IA e 3 semanas.</span></p>
+              <p><span class="en-inline">Design Thinking defined the problem. Shape Up defined the scope. Claude Code and Claude API built it. It's live, it works, and it's the most concrete proof of what I deliver to my clients.</span><span class="pt-inline">Design Thinking definiu o problema. Shape Up definiu o escopo. Claude Code e Claude API construíram. Está no ar, funciona, e é a prova mais concreta do que entrego para os meus clientes.</span></p>
+              <div class="case-stack">
+                <span class="stack-tag">React + TypeScript</span>
+                <span class="stack-tag">Supabase</span>
+                <span class="stack-tag">Claude API</span>
+                <span class="stack-tag">Figma Make</span>
+                <span class="stack-tag">Vercel</span>
+              </div>
+              <a href="https://neuroot.vercel.app" class="case-link" target="_blank"><span class="en-inline">Open Neuroot live ↗</span><span class="pt-inline">Abrir o Neuroot ao vivo ↗</span></a>
+              <a href="https://www.giulopesgalvao.com.br/neuroot-case.html" class="btn-cases"><span class="en-inline">Read full case →</span><span class="pt-inline">Ler case completo →</span></a>
+            </div>
+          </div>
         </div>
-        <a href="https://neuroot.vercel.app" class="neuroot-link" target="_blank"><span class="en-inline">Open Neuroot live ↗</span><span class="pt-inline">Abrir o Neuroot ao vivo ↗</span></a>
-        <a href="https://www.giulopesgalvao.com.br#work" class="btn-cases"><span class="en-inline">See more cases →</span><span class="pt-inline">Ver mais cases →</span></a>
+
+        <!-- SLIDE 2: NUDGE -->
+        <div class="carousel-slide">
+          <div class="case-grid">
+            <div class="case-img-wrap">
+              <img style="width:100%;display:block;mix-blend-mode:screen;filter:brightness(1.05);" src="/cases/nudge/mockup.png" loading="lazy" alt="Nudge — behavioral coach for crypto on Solana">
+            </div>
+            <div class="case-desc">
+              <p class="section-label"><span class="en-inline">Case — Solana Frontier Hackathon</span><span class="pt-inline">Case — Solana Frontier Hackathon</span></p>
+              <h2 class="section-title" style="margin-bottom:16px;"><span class="en-inline">Nudge — <em>behavioral coach for crypto users</em></span><span class="pt-inline">Nudge — <em>coach comportamental para quem usa cripto</em></span></h2>
+              <p><span class="en-inline">Built for people with low DeFi literacy. Connects your wallet, reads your positions across Kamino and Jupiter, and helps you not make mistakes you didn't even know you were making.</span><span class="pt-inline">Feito para pessoas com baixa literacia em DeFi. Conecta sua wallet, lê suas posições em Kamino e Jupiter, e te ajuda a não cometer erros que você nem sabia que estava cometendo.</span></p>
+              <p><span class="en-inline">Behavioral quiz, RPG classes, Lyra conversational AI, and a Nudge Score from 0 to 100. Built solo with Claude Code for the largest global Solana hackathon of 2026.</span><span class="pt-inline">Quiz comportamental, classes de RPG, IA conversacional Lyra e um Nudge Score de 0 a 100. Construído solo com Claude Code para o maior hackathon global Solana de 2026.</span></p>
+              <div class="case-stack">
+                <span class="stack-tag">Next.js 16</span>
+                <span class="stack-tag">React 19</span>
+                <span class="stack-tag">Solana Web3.js</span>
+                <span class="stack-tag">Kamino SDK</span>
+                <span class="stack-tag">TypeScript</span>
+              </div>
+              <a href="https://nudge.giulopesgalvao.com.br/" class="case-link" target="_blank"><span class="en-inline">Open Nudge live ↗</span><span class="pt-inline">Abrir o Nudge ao vivo ↗</span></a>
+              <a href="https://www.giulopesgalvao.com.br/nudge-case.html" class="btn-cases"><span class="en-inline">Read full case →</span><span class="pt-inline">Ler case completo →</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: SOLANA WTF -->
+        <div class="carousel-slide">
+          <div class="case-grid">
+            <div class="case-img-wrap">
+              <img style="width:100%;display:block;mix-blend-mode:screen;filter:brightness(1.05);" src="/cases/solanawtf/mockupsolanawtf.png" loading="lazy" alt="Solana WTF — gamified learning platform">
+            </div>
+            <div class="case-desc">
+              <p class="section-label"><span class="en-inline">Case — Solana Frontier Hackathon</span><span class="pt-inline">Case — Solana Frontier Hackathon</span></p>
+              <h2 class="section-title" style="margin-bottom:16px;"><span class="en-inline">Solana WTF — <em>gamified crypto learning</em></span><span class="pt-inline">Solana WTF — <em>aprendizado cripto gamificado</em></span></h2>
+              <p><span class="en-inline">What The Fork?! — turning a glossary SDK with 1001 Solana terms into a gamified learning platform. AI decoder, glossary browser, and 5 learning games. Because people don't learn by reading definitions.</span><span class="pt-inline">What The Fork?! — transformando um SDK de glossário com 1001 termos Solana em uma plataforma gamificada de aprendizado. Decodificador com IA, navegador de glossário e 5 jogos. Porque ninguém aprende lendo definições.</span></p>
+              <p><span class="en-inline">4 AI personality guides, 3 languages, progression system with unlockable characters. Built solo with Claude Code.</span><span class="pt-inline">4 guias de personalidade com IA, 3 idiomas, sistema de progressão com personagens desbloqueáveis. Construído solo com Claude Code.</span></p>
+              <div class="case-stack">
+                <span class="stack-tag">Next.js 16</span>
+                <span class="stack-tag">React 19</span>
+                <span class="stack-tag">Tailwind CSS v4</span>
+                <span class="stack-tag">Supabase</span>
+                <span class="stack-tag">TypeScript</span>
+              </div>
+              <a href="https://giulopesgalvao.com.br/solana-wtf/" class="case-link" target="_blank"><span class="en-inline">Open Solana WTF live ↗</span><span class="pt-inline">Abrir o Solana WTF ao vivo ↗</span></a>
+              <a href="https://www.giulopesgalvao.com.br/solana-wtf-case.html" class="btn-cases"><span class="en-inline">Read full case →</span><span class="pt-inline">Ler case completo →</span></a>
+            </div>
+          </div>
+        </div>
+
       </div>
+    </div>
+    <div class="carousel-dots" id="carouselDots">
+      <button class="carousel-dot active" data-slide="0" aria-label="Neuroot"></button>
+      <button class="carousel-dot" data-slide="1" aria-label="Nudge"></button>
+      <button class="carousel-dot" data-slide="2" aria-label="Solana WTF"></button>
     </div>
   </div>
 </section>
@@ -564,6 +632,51 @@ window.addEventListener('DOMContentLoaded',()=>{
 window.addEventListener('scroll',()=>{
   document.querySelector('nav').classList.toggle('scrolled',window.scrollY>40);
 });
+
+// Cases carousel
+(function(){
+  const track=document.getElementById('carouselTrack');
+  const dots=document.querySelectorAll('.carousel-dot');
+  let current=0;
+  const total=dots.length;
+  let autoTimer;
+
+  function goTo(i){
+    current=i;
+    track.style.transform='translateX(-'+current*100+'%)';
+    dots.forEach((d,idx)=>d.classList.toggle('active',idx===current));
+  }
+
+  function autoNext(){
+    goTo((current+1)%total);
+  }
+
+  function startAuto(){
+    clearInterval(autoTimer);
+    autoTimer=setInterval(autoNext,6000);
+  }
+
+  dots.forEach(d=>d.addEventListener('click',()=>{
+    goTo(parseInt(d.dataset.slide));
+    startAuto();
+  }));
+
+  // Touch/swipe support
+  let touchStartX=0;
+  let touchEndX=0;
+  track.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX;},{passive:true});
+  track.addEventListener('touchend',e=>{
+    touchEndX=e.changedTouches[0].screenX;
+    const diff=touchStartX-touchEndX;
+    if(Math.abs(diff)>50){
+      if(diff>0) goTo(Math.min(current+1,total-1));
+      else goTo(Math.max(current-1,0));
+      startAuto();
+    }
+  },{passive:true});
+
+  startAuto();
+})();
 </script>
 </body>
 </html>
