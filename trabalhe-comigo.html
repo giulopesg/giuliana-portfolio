@@ -132,18 +132,20 @@ nav{position:fixed;top:0;left:0;right:0;padding:18px 48px;display:flex;align-ite
 /* CASES CAROUSEL */
 .cases-section{background:var(--surface);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:100px 48px;overflow:hidden;}
 .cases-inner{max-width:1100px;margin:0 auto;}
-.carousel-viewport{overflow:hidden;position:relative;}
-.carousel-track{display:flex;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);will-change:transform;}
-.carousel-slide{min-width:100%;flex-shrink:0;}
+.carousel-viewport{overflow:hidden;position:relative;width:100%;}
+.carousel-track{display:flex;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);will-change:transform;width:100%;}
+.carousel-slide{flex:0 0 100%;width:100%;min-width:0;}
 .case-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:center;}
 .case-img-wrap{overflow:visible;background:var(--surface);}
+.case-img-wrap img{width:100%;display:block;}
 .case-desc .section-title{margin-bottom:16px;}
 .case-desc p{font-size:16px;color:var(--muted2);line-height:1.75;margin-bottom:20px;}
 .case-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px;}
 .stack-tag{font-size:11px;color:var(--muted2);padding:2px 8px;border:0.5px solid var(--border2);border-radius:4px;}
-.case-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--muted2);text-decoration:none;margin-top:20px;font-weight:400;transition:color 0.2s;}
+.case-links{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:20px;}
+.case-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--muted2);text-decoration:none;font-weight:400;transition:color 0.2s;}
 .case-link:hover{color:var(--text);}
-.btn-cases{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:12px 24px;border:1px solid rgba(168,85,247,0.5);border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none;transition:all 0.2s;background:transparent;}
+.btn-cases{display:inline-flex;align-items:center;gap:10px;padding:12px 24px;border:1px solid rgba(168,85,247,0.5);border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none;transition:all 0.2s;background:transparent;}
 .btn-cases:hover{background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.8);}
 .carousel-dots{display:flex;gap:8px;justify-content:center;margin-top:40px;}
 .carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);border:none;cursor:pointer;transition:all 0.3s;padding:0;}
@@ -366,7 +368,7 @@ html,body{overflow-x:hidden;}
         <div class="carousel-slide">
           <div class="case-grid">
             <div class="case-img-wrap">
-              <img style="width:100%;display:block;mix-blend-mode:screen;filter:brightness(1.05);" src="/images/neuroot-mockup.png" loading="lazy" alt="Neuroot — post-burnout recovery app">
+              <img src="/images/neuroot-mockup.png" loading="lazy" alt="Neuroot — post-burnout recovery app" style="mix-blend-mode:screen;filter:brightness(1.05);">
             </div>
             <div class="case-desc">
               <p class="section-label"><span class="en-inline">Case — Personal project</span><span class="pt-inline">Case — Projeto pessoal</span></p>
@@ -380,8 +382,10 @@ html,body{overflow-x:hidden;}
                 <span class="stack-tag">Figma Make</span>
                 <span class="stack-tag">Vercel</span>
               </div>
-              <a href="https://neuroot.vercel.app" class="case-link" target="_blank"><span class="en-inline">Open Neuroot live ↗</span><span class="pt-inline">Abrir o Neuroot ao vivo ↗</span></a>
-              <a href="https://www.giulopesgalvao.com.br/neuroot-case.html" class="btn-cases"><span class="en-inline">Read full case →</span><span class="pt-inline">Ler case completo →</span></a>
+              <div class="case-links">
+                <a href="https://neuroot.vercel.app" class="case-link" target="_blank"><span class="en-inline">Open Neuroot live ↗</span><span class="pt-inline">Abrir o Neuroot ao vivo ↗</span></a>
+                <a href="https://www.giulopesgalvao.com.br/neuroot-case.html" class="btn-cases"><span class="en-inline">Read full case →</span><span class="pt-inline">Ler case completo →</span></a>
+              </div>
             </div>
           </div>
         </div>
@@ -390,7 +394,7 @@ html,body{overflow-x:hidden;}
         <div class="carousel-slide">
           <div class="case-grid">
             <div class="case-img-wrap">
-              <img style="width:100%;display:block;mix-blend-mode:screen;filter:brightness(1.05);" src="/cases/nudge/mockup.png" loading="lazy" alt="Nudge — behavioral coach for crypto on Solana">
+              <img src="/cases/nudge/mockup.png" loading="lazy" alt="Nudge — behavioral coach for crypto on Solana" style="mix-blend-mode:screen;filter:brightness(1.05);">
             </div>
             <div class="case-desc">
               <p class="section-label"><span class="en-inline">Case — Solana Frontier Hackathon</span><span class="pt-inline">Case — Solana Frontier Hackathon</span></p>
@@ -404,8 +408,10 @@ html,body{overflow-x:hidden;}
                 <span class="stack-tag">Kamino SDK</span>
                 <span class="stack-tag">TypeScript</span>
               </div>
-              <a href="https://nudge.giulopesgalvao.com.br/" class="case-link" target="_blank"><span class="en-inline">Open Nudge live ↗</span><span class="pt-inline">Abrir o Nudge ao vivo ↗</span></a>
-              <a href="https://www.giulopesgalvao.com.br/nudge-case.html" class="btn-cases"><span class="en-inline">Read full case →</span><span class="pt-inline">Ler case completo →</span></a>
+              <div class="case-links">
+                <a href="https://nudge.giulopesgalvao.com.br/" class="case-link" target="_blank"><span class="en-inline">Open Nudge live ↗</span><span class="pt-inline">Abrir o Nudge ao vivo ↗</span></a>
+                <a href="https://www.giulopesgalvao.com.br/nudge-case.html" class="btn-cases"><span class="en-inline">Read full case →</span><span class="pt-inline">Ler case completo →</span></a>
+              </div>
             </div>
           </div>
         </div>
@@ -414,7 +420,7 @@ html,body{overflow-x:hidden;}
         <div class="carousel-slide">
           <div class="case-grid">
             <div class="case-img-wrap">
-              <img style="width:100%;display:block;mix-blend-mode:screen;filter:brightness(1.05);" src="/cases/solanawtf/mockupsolanawtf.png" loading="lazy" alt="Solana WTF — gamified learning platform">
+              <img src="/cases/solanawtf/mockupsolanawtf.png" loading="lazy" alt="Solana WTF — gamified learning platform" style="mix-blend-mode:screen;filter:brightness(1.05);">
             </div>
             <div class="case-desc">
               <p class="section-label"><span class="en-inline">Case — Solana Frontier Hackathon</span><span class="pt-inline">Case — Solana Frontier Hackathon</span></p>
@@ -428,8 +434,10 @@ html,body{overflow-x:hidden;}
                 <span class="stack-tag">Supabase</span>
                 <span class="stack-tag">TypeScript</span>
               </div>
-              <a href="https://giulopesgalvao.com.br/solana-wtf/" class="case-link" target="_blank"><span class="en-inline">Open Solana WTF live ↗</span><span class="pt-inline">Abrir o Solana WTF ao vivo ↗</span></a>
-              <a href="https://www.giulopesgalvao.com.br/solana-wtf-case.html" class="btn-cases"><span class="en-inline">Read full case →</span><span class="pt-inline">Ler case completo →</span></a>
+              <div class="case-links">
+                <a href="https://giulopesgalvao.com.br/solana-wtf/" class="case-link" target="_blank"><span class="en-inline">Open Solana WTF live ↗</span><span class="pt-inline">Abrir o Solana WTF ao vivo ↗</span></a>
+                <a href="https://www.giulopesgalvao.com.br/solana-wtf-case.html" class="btn-cases"><span class="en-inline">Read full case →</span><span class="pt-inline">Ler case completo →</span></a>
+              </div>
             </div>
           </div>
         </div>
