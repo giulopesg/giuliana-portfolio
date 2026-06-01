@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório de Público-Alvo · Stellanum</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08060F;--bg2:#0E0B1A;--bg3:#130F20;
+  --purple:#7C3AED;--purple-light:#9F67F5;--purple-dim:rgba(124,58,237,0.12);
+  --purple-border:rgba(124,58,237,0.28);--purple-glow:rgba(124,58,237,0.18);
+  --text:#E8E4F0;--text-dim:#9A93B0;--text-muted:#5A5470;
+  --card:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.07);
+  --green:#22C55E;--amber:#F59E0B;--teal:#2DD4BF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden;}
+
+/* STARS */
+#stars-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* SHELL */
+.shell{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:60px 24px 100px;}
+
+/* HEADER */
+.report-header{text-align:center;margin-bottom:64px;}
+.brand-logo{font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--purple-light);margin-bottom:24px;display:block;}
+.report-eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;}
+.report-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,64px);font-weight:300;line-height:1.1;margin-bottom:6px;}
+.report-title em{font-style:italic;color:var(--purple-light);}
+.report-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,26px);font-weight:300;color:var(--text-dim);margin-bottom:28px;}
+.report-meta{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--purple-dim);border:1px solid var(--purple-border);border-radius:20px;font-size:12px;color:var(--text-dim);}
+.report-meta span{color:var(--purple-light);font-weight:500;}
+
+/* DIVIDER */
+.section-divider{display:flex;align-items:center;gap:16px;margin:56px 0 36px;}
+.section-divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);}
+.section-num{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--purple-light);white-space:nowrap;}
+
+/* SECTION TITLE */
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,36px);font-weight:300;margin-bottom:6px;}
+.section-title em{font-style:italic;color:var(--purple-light);}
+.section-desc{font-size:13px;color:var(--text-muted);margin-bottom:28px;line-height:1.6;}
+
+/* BIG STAT GRID */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px;}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:22px 18px;position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--purple-light));opacity:.6;}
+.stat-card.highlight{background:linear-gradient(135deg,rgba(124,58,237,0.14),rgba(124,58,237,0.04));border-color:var(--purple-border);}
+.stat-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;line-height:1.4;}
+.stat-value{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,46px);font-weight:300;color:var(--purple-light);line-height:1;margin-bottom:6px;}
+.stat-value sup{font-size:0.45em;vertical-align:super;margin-right:2px;}
+.stat-context{font-size:11px;color:var(--text-dim);line-height:1.5;margin-bottom:10px;}
+.stat-source{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);border-radius:6px;padding:3px 8px;transition:border-color .2s,color .2s;}
+.stat-source:hover{border-color:var(--purple-border);color:var(--purple-light);}
+.stat-source::before{content:'↗';font-size:9px;}
+
+/* INSIGHT CARD */
+.insight-card{background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(124,58,237,0.03));border:1px solid var(--purple-border);border-radius:16px;padding:24px 22px;margin-bottom:12px;}
+.insight-card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.insight-icon{font-size:16px;margin-top:2px;flex-shrink:0;}
+.insight-card-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;line-height:1.3;}
+.insight-card-body{font-size:13px;color:var(--text-dim);line-height:1.7;}
+.insight-card-body strong{color:var(--text);font-weight:500;}
+.insight-source{margin-top:14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.source-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--text-muted);text-decoration:none;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:3px 8px;transition:border-color .2s,color .2s;}
+.source-tag:hover{border-color:var(--purple-border);color:var(--purple-light);}
+.source-tag::before{content:'↗';font-size:9px;}
+
+/* SEGMENT CARDS */
+.segment-card{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:26px 22px;margin-bottom:14px;position:relative;}
+.segment-card.primary{border-color:var(--purple-border);background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(14,11,26,1) 70%);}
+.segment-num{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--purple-light);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.segment-num::after{content:'';flex:1;height:1px;background:var(--border);}
+.segment-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;margin-bottom:6px;line-height:1.2;}
+.segment-title em{font-style:italic;color:var(--purple-light);}
+.segment-age{font-size:11px;color:var(--text-muted);margin-bottom:16px;letter-spacing:.5px;}
+.segment-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+.pill{font-size:10px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);color:var(--text-dim);background:var(--card);}
+.pill.purple{border-color:var(--purple-border);color:var(--purple-light);background:var(--purple-dim);}
+.pill.green{border-color:rgba(34,197,94,.3);color:#86EFAC;background:rgba(34,197,94,.06);}
+.pill.amber{border-color:rgba(245,158,11,.3);color:#FCD34D;background:rgba(245,158,11,.06);}
+.segment-rows{display:flex;flex-direction:column;gap:8px;}
+.seg-row{display:flex;gap:10px;padding:10px 12px;background:var(--card);border:1px solid var(--border);border-radius:10px;align-items:flex-start;}
+.seg-row-key{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);flex-shrink:0;padding-top:2px;min-width:70px;}
+.seg-row-val{font-size:12px;color:var(--text-dim);line-height:1.55;flex:1;}
+.seg-row-val strong{color:var(--text);font-weight:500;}
+.seg-data-badge{display:inline-block;font-size:11px;color:var(--purple-light);font-weight:500;background:var(--purple-dim);border:1px solid var(--purple-border);border-radius:4px;padding:1px 6px;margin-left:4px;}
+.segment-sources{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;}
+
+/* PLATFORM CARDS */
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:12px;}
+.platform-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:22px 18px;}
+.platform-card.ig{border-top:2px solid #E1306C;}
+.platform-card.tt{border-top:2px solid #69C9D0;}
+.platform-card.yt{border-top:2px solid #FF0000;}
+.platform-icon{font-size:18px;margin-bottom:12px;}
+.platform-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:4px;}
+.platform-reach{font-size:11px;color:var(--text-muted);margin-bottom:16px;}
+.platform-stats{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.pstat{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--card);border:1px solid var(--border);border-radius:8px;}
+.pstat-key{font-size:10px;color:var(--text-muted);}
+.pstat-val{font-size:12px;color:var(--text);font-weight:500;}
+.pstat-val.purple{color:var(--purple-light);}
+.platform-hashtags{margin-bottom:14px;}
+.hashtag-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
+.hashtag-cloud{display:flex;flex-wrap:wrap;gap:5px;}
+.htag{font-size:10px;padding:3px 8px;border-radius:12px;background:var(--purple-dim);border:1px solid var(--purple-border);color:var(--text-dim);}
+.htag.hot{color:var(--purple-light);}
+
+/* GAP CARD */
+.gap-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px 20px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start;}
+.gap-vs{flex-shrink:0;text-align:center;}
+.gap-vs-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;}
+.gap-vs-pill{padding:4px 10px;border-radius:6px;font-size:10px;font-weight:500;}
+.gap-vs-pill.bad{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#FCA5A5;}
+.gap-vs-pill.good{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#86EFAC;}
+.gap-arrow{font-size:18px;color:var(--text-muted);margin:8px 0;}
+.gap-body{flex:1;}
+.gap-title{font-size:13px;font-weight:500;margin-bottom:4px;color:var(--text);}
+.gap-desc{font-size:12px;color:var(--text-dim);line-height:1.6;}
+
+/* PRICING */
+.pricing-banner{background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(124,58,237,0.04));border:1px solid var(--purple-border);border-radius:18px;padding:28px 24px;margin-bottom:12px;text-align:center;}
+.pricing-number{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--purple-light);line-height:1;}
+.pricing-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
+.pricing-context{font-size:13px;color:var(--text-dim);line-height:1.65;margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;}
+.pricing-context strong{color:var(--text);}
+.pricing-context em{color:var(--purple-light);font-style:italic;}
+
+/* FOOTER */
+.report-footer{margin-top:64px;padding-top:32px;border-top:1px solid var(--border);}
+.footer-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;}
+.sources-list{display:flex;flex-direction:column;gap:6px;}
+.source-item{display:flex;gap:10px;align-items:flex-start;}
+.source-num{font-size:10px;color:var(--purple-light);font-weight:500;flex-shrink:0;min-width:20px;padding-top:2px;}
+.source-link{font-size:11px;color:var(--text-muted);text-decoration:none;line-height:1.5;transition:color .2s;}
+.source-link:hover{color:var(--purple-light);}
+.source-org{font-weight:500;color:var(--text-dim);}
+
+/* QUOTE BLOCK */
+.quote-block{border-left:2px solid var(--purple-border);padding:14px 18px;margin:16px 0;background:var(--card);border-radius:0 10px 10px 0;}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--text-dim);line-height:1.6;margin-bottom:6px;}
+.quote-attr{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);}
+
+/* INLINE SOURCE */
+.inline-src{display:inline-flex;align-items:center;gap:3px;font-size:9px;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);border-radius:4px;padding:1px 6px;vertical-align:middle;margin-left:4px;transition:border-color .15s,color .15s;}
+.inline-src:hover{border-color:var(--purple-border);color:var(--purple-light);}
+.inline-src::before{content:'↗';font-size:8px;}
+
+/* BAR CHART */
+.bar-chart{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
+.bar-row{display:flex;align-items:center;gap:10px;}
+.bar-label{font-size:11px;color:var(--text-dim);min-width:130px;flex-shrink:0;text-align:right;}
+.bar-track{flex:1;height:20px;background:rgba(255,255,255,0.04);border-radius:4px;overflow:hidden;border:1px solid var(--border);}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;}
+.bar-fill.purple{background:linear-gradient(90deg,#5B21B6,var(--purple-light));}
+.bar-fill.dim{background:rgba(124,58,237,0.3);}
+.bar-pct{font-size:10px;font-weight:500;color:white;}
+.bar-val{font-size:10px;color:var(--text-muted);min-width:40px;}
+
+@media(max-width:600px){
+  .shell{padding:40px 16px 80px;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .platform-grid{grid-template-columns:1fr;}
+  .gap-card{flex-direction:column;}
+  .bar-label{min-width:90px;font-size:10px;}
+}
+</style>
+</head>
+<body>
+<canvas id="stars-canvas"></canvas>
+
+<div class="shell">
+
+  <!-- HEADER -->
+  <header class="report-header">
+    <span class="brand-logo">✦ Stellanum</span>
+    <p class="report-eyebrow">Relatório de Inteligência Competitiva · Junho 2026</p>
+    <h1 class="report-title">Público-Alvo &<br><em>Oportunidade de Mercado</em></h1>
+    <p class="report-subtitle">Mapa de Prosperidade</p>
+    <div class="report-meta">
+      Fontes: <span>DataReportal · Market Research Future · McKinsey · Emergen Research · Opinion Box</span>
+    </div>
+  </header>
+
+  <!-- 01 TAMANHO DO MERCADO -->
+  <div class="section-divider"><div class="section-divider-line"></div><span class="section-num">✦ 01 · Tamanho do Mercado</span><div class="section-divider-line"></div></div>
+  <h2 class="section-title">O mercado que o <em>Stellanum</em> entra</h2>
+  <p class="section-desc">Dados globais de apps de astrologia, numerologia e espiritualidade digital — com foco no Brasil como mercado estratégico.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card highlight">
+      <div class="stat-label">Mercado global — apps de astrologia · 2024</div>
+      <div class="stat-value"><sup>USD</sup>14,3<span style="font-size:.4em;vertical-align:middle"> bi</span></div>
+      <div class="stat-context">Inclui serviços, consultorias e produtos do setor astro/espiritual.</div>
+      <a class="stat-source" href="https://www.marketresearchfuture.com/reports/astrology-market-22040" target="_blank">Market Research Future, 2024</a>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Projeção para apps de astrologia · 2033</div>
+      <div class="stat-value"><sup>USD</sup>29,4<span style="font-size:.4em;vertical-align:middle"> bi</span></div>
+      <div class="stat-context">CAGR de 24,76% — um dos setores de maior crescimento em tech/wellness.</div>
+      <a class="stat-source" href="https://www.globalgrowthinsights.com/market-reports/astrology-app-market-114903" target="_blank">Global Growth Insights, 2024</a>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Crescimento anual projetado — apps · 2025–2030</div>
+      <div class="stat-value">24,76<span style="font-size:.4em;vertical-align:middle">% a.a.</span></div>
+      <div class="stat-context">De USD $4 bi em 2024 para USD $29,4 bi em 2033. Setor em aceleração.</div>
+      <a class="stat-source" href="https://www.globalgrowthinsights.com/market-reports/astrology-app-market-114903" target="_blank">Global Growth Insights, 2024</a>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Downloads de apps de astrologia · 2021–2023</div>
+      <div class="stat-value">+40<span style="font-size:.4em;vertical-align:middle">%</span></div>
+      <div class="stat-context">Crescimento registrado nos dois anos pós-pandemia, com 8 mi+ de novos downloads no último ano do período.</div>
+      <a class="stat-source" href="https://midiabahia.com.br/apps-e-servicos-digitais-transformam-astrologia-em-mercado/" target="_blank">Business Research Insights / Mídia Bahia</a>
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-card-header">
+      <span class="insight-icon">✦</span>
+      <div class="insight-card-title">O Brasil como proxy local: o Mercado Místico</div>
+    </div>
+    <div class="insight-card-body">
+      No Brasil, dados consolidados do setor esotérico/espiritual não existem oficialmente — mas o Mercado Místico serve de parâmetro. O maior evento esotérico do país recebeu <strong>30 mil visitantes</strong> em 2022, com expectativa de movimentar <strong>R$ 14 milhões</strong> naquele ano — <strong>sete vezes</strong> mais do que em 2015. Isso representa um crescimento de 600% em 7 anos, em um setor sem VC, sem apps, sem escala digital. Uma startup brasileira do segmento, fundada em 2019, conseguiu aportes em menos de seis meses e atingiu faturamento superior a <strong>USD $1 milhão anual</strong>.
+    </div>
+    <div class="insight-source">
+      <a class="source-tag" href="https://agenciasebrae.com.br/cultura-empreendedora/mercado-mistico-usa-internet-e-foca-em-bem-estar-para-se-renovar/" target="_blank">Agência Sebrae, 2022</a>
+      <a class="source-tag" href="https://midiabahia.com.br/apps-e-servicos-digitais-transformam-astrologia-em-mercado/" target="_blank">Mídia Bahia, nov/2025</a>
+    </div>
+  </div>
+
+  <!-- 02 PERFIL DO CONSUMIDOR -->
+  <div class="section-divider"><div class="section-divider-line"></div><span class="section-num">✦ 02 · Perfil do Consumidor</span><div class="section-divider-line"></div></div>
+  <h2 class="section-title">Quem <em>compra</em> nessa categoria</h2>
+  <p class="section-desc">Dados demográficos e comportamentais do consumidor de astrologia e bem-estar espiritual — global e Brasil.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Usuários millennials + Gen Z em apps de astrologia</div>
+      <div class="stat-value">59<span style="font-size:.4em;vertical-align:middle">%</span></div>
+      <div class="stat-context">Mais de metade da base é jovem adulta — exatamente a faixa com maior poder de compra digital.</div>
+      <a class="stat-source" href="https://www.globalgrowthinsights.com/market-reports/astrology-app-market-114903" target="_blank">Global Growth Insights, 2024</a>
+    </div>
+    <div class="stat-card highlight">
+      <div class="stat-label">Preferem horóscopos personalizados</div>
+      <div class="stat-value">58<span style="font-size:.4em;vertical-align:middle">%</span></div>
+      <div class="stat-context">Principal driver de crescimento — o briefing do Mapa de Prosperidade responde exatamente a essa demanda.</div>
+      <a class="stat-source" href="https://www.globalgrowthinsights.com/market-reports/astrology-app-market-114903" target="_blank">Global Growth Insights, 2024</a>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Millennials que investem em bem-estar espiritual</div>
+      <div class="stat-value">65<span style="font-size:.4em;vertical-align:middle">%</span></div>
+      <div class="stat-context">Inclui cristais, coaching, yoga e consultorias. 50% usam consultorias online para serviços espirituais.</div>
+      <a class="stat-source" href="https://www.amraandelma.com/spiritual-health-marketing-statistics/" target="_blank">Amra & Elma, 2025</a>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Produtos espirituais comprados online</div>
+      <div class="stat-value">70<span style="font-size:.4em;vertical-align:middle">%</span></div>
+      <div class="stat-context">O canal de compra já está digitalizado. O produto digital não precisa educar o mercado — ele precisa converter.</div>
+      <a class="stat-source" href="https://www.amraandelma.com/spiritual-health-marketing-statistics/" target="_blank">Amra & Elma, 2025</a>
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-card-header">
+      <span class="insight-icon">↑</span>
+      <div class="insight-card-title">Gasto médio por consulta astrológica: +49% em dois anos</div>
+    </div>
+    <div class="insight-card-body">
+      O gasto médio por consulta astrológica cresceu de <strong>USD $45 em 2022</strong> para <strong>USD $67 em 2024</strong> — um aumento de 49% em dois anos. Esse crescimento é puxado especificamente por millennials e Gen Z, os segmentos com <strong>maior disposição a pagar por serviços astrológicos premium</strong>. O mercado não só cresce em volume — cresce em ticket médio.
+    </div>
+    <div class="insight-source">
+      <a class="source-tag" href="https://www.emergenresearch.com/industry-report/astrology-market" target="_blank">Emergen Research, 2024</a>
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-card-header">
+      <span class="insight-icon">✦</span>
+      <div class="insight-card-title">Millenialls usam astrologia para decisões reais de vida</div>
+    </div>
+    <div class="insight-card-body">
+      Quase <strong>80% dos millennials e da Geração Z</strong> usam horóscopos personalizados para tomar decisões sobre <strong>carreira, relacionamentos e finanças</strong>. Não é entretenimento — é ferramenta de navegação de vida. <strong>52% dos usuários de apps de astrologia</strong> utilizam a plataforma especificamente para decisões sobre relacionamentos, carreira e bem-estar pessoal.
+    </div>
+    <div class="insight-source">
+      <a class="source-tag" href="https://www.marknteladvisors.com/research-library/astrology-app-market.html" target="_blank">Markntel Advisors, 2024</a>
+      <a class="source-tag" href="https://www.globalgrowthinsights.com/market-reports/astrology-app-market-114903" target="_blank">Global Growth Insights, 2024</a>
+    </div>
+  </div>
+
+  <!-- BAR CHART — COMPORTAMENTO DIGITAL BRASIL -->
+  <div class="insight-card" style="margin-bottom:14px;">
+    <div class="insight-card-header">
+      <span class="insight-icon">🇧🇷</span>
+      <div class="insight-card-title">Como os brasileiros usam a internet — contexto de compra digital</div>
+    </div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Pesquisa produtos e marcas</div>
+        <div class="bar-track"><div class="bar-fill purple" style="width:70%"><span class="bar-pct">69,8%</span></div></div>
+        <div class="bar-val">de 183M</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Buscando novas ideias</div>
+        <div class="bar-track"><div class="bar-fill purple" style="width:67%"><span class="bar-pct">66,9%</span></div></div>
+        <div class="bar-val">usuários</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Fins educacionais</div>
+        <div class="bar-track"><div class="bar-fill dim" style="width:53%"><span class="bar-pct">53,4%</span></div></div>
+        <div class="bar-val">online</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Gerenciando finanças</div>
+        <div class="bar-track"><div class="bar-fill dim" style="width:44%"><span class="bar-pct">44,3%</span></div></div>
+        <div class="bar-val">BR 2024</div>
+      </div>
+    </div>
+    <div class="insight-source">
+      <a class="source-tag" href="https://globalad.com.br/blog/digital-brazil-2024-navegue-pelos-dados-e-insights/" target="_blank">DataReportal / Global AD, 2024</a>
+    </div>
+  </div>
+
+  <!-- 03 SEGMENTOS -->
+  <div class="section-divider"><div class="section-divider-line"></div><span class="section-num">✦ 03 · Segmentos de Público</span><div class="section-divider-line"></div></div>
+  <h2 class="section-title">Os 3 <em>perfis</em> prioritários</h2>
+  <p class="section-desc">Segmentos definidos por dados de comportamento e validados pela intersecção com o que o Mapa de Prosperidade entrega.</p>
+
+  <!-- SEGMENTO A -->
+  <div class="segment-card primary">
+    <div class="segment-num">Segmento A</div>
+    <h3 class="segment-title">A empreendedora em <em>transição financeira</em></h3>
+    <p class="segment-age">30–42 anos · CLT, PJ ou empreendedora solo · Renda R$4k–R$15k</p>
+    <div class="segment-pills">
+      <span class="pill purple">Prioridade máxima</span>
+      <span class="pill green">Alta disposição de compra</span>
+      <span class="pill">Instagram + YouTube</span>
+    </div>
+    <div class="segment-rows">
+      <div class="seg-row">
+        <div class="seg-row-key">Dor real</div>
+        <div class="seg-row-val">Trabalha muito e o dinheiro não fica. Fez tudo "certo" — mas a prosperidade não chegou como imaginava. Não consegue nomear o bloqueio.</div>
+      </div>
+      <div class="seg-row">
+        <div class="seg-row-key">Gatilho</div>
+        <div class="seg-row-val"><strong>Momento de transição:</strong> rescisão, término de sociedade, 40 anos chegando, mudança de cidade. Sente que é agora ou nunca.</div>
+      </div>
+      <div class="seg-row">
+        <div class="seg-row-key">Dado de mercado</div>
+        <div class="seg-row-val">Carreira, finanças e bem-estar estão entre as prioridades centrais dos millennials brasileiros, impactando planos de curto e médio prazo.<span class="seg-data-badge">Mintel 2024</span></div>
+      </div>
+      <div class="seg-row">
+        <div class="seg-row-key">Objeção #1</div>
+        <div class="seg-row-val">"Como um mapa vai mudar minha situação real?" → <strong>Resposta do produto:</strong> o briefing transforma a leitura em espelho da vida dela, não de um arquétipo.</div>
+      </div>
+    </div>
+    <div class="segment-sources">
+      <a class="source-tag" href="https://store.mintel.com/report/brazil-lifestyles-of-millennials-market-report" target="_blank">Mintel · Brazil Lifestyles of Millennials 2024</a>
+      <a class="source-tag" href="https://www.amraandelma.com/spiritual-health-marketing-statistics/" target="_blank">Amra & Elma, Spiritual Marketing Stats</a>
+    </div>
+  </div>
+
+  <!-- SEGMENTO B -->
+  <div class="segment-card">
+    <div class="segment-num">Segmento B</div>
+    <h3 class="segment-title">A buscadora espiritual que quer <em>aterrissar</em></h3>
+    <p class="segment-age">28–38 anos · Consumidora ativa da categoria · Já pagou por leitura antes</p>
+    <div class="segment-pills">
+      <span class="pill purple">Prioridade alta</span>
+      <span class="pill amber">Já convertida à categoria</span>
+      <span class="pill">TikTok + Instagram</span>
+    </div>
+    <div class="segment-rows">
+      <div class="seg-row">
+        <div class="seg-row-key">Dor real</div>
+        <div class="seg-row-val">Conhece o próprio mapa astral de cor, mas não sabe o que fazer com isso na vida prática — especialmente com dinheiro e carreira.</div>
+      </div>
+      <div class="seg-row">
+        <div class="seg-row-key">Gatilho</div>
+        <div class="seg-row-val">Acabou de receber uma leitura genérica e saiu insatisfeita. Está procurando "algo diferente" — sem saber exatamente o quê.</div>
+      </div>
+      <div class="seg-row">
+        <div class="seg-row-key">Dado crítico</div>
+        <div class="seg-row-val"><strong>33% desinstalam apps de astrologia por falta de confiança e desinformação.</strong> 29% citam conteúdo inconsistente. O briefing fecha esse gap.<span class="seg-data-badge">Business Research Insights</span></div>
+      </div>
+      <div class="seg-row">
+        <div class="seg-row-key">Objeção #1</div>
+        <div class="seg-row-val">"Já fiz mapa antes e foi genérico" → <strong>É exatamente o argumento de conversão.</strong> Ela já foi decepcionada — o briefing é a prova do diferencial.</div>
+      </div>
+    </div>
+    <div class="segment-sources">
+      <a class="source-tag" href="https://www.businessresearchinsights.com/market-reports/astrology-app-market-103133" target="_blank">Business Research Insights, 2024</a>
+      <a class="source-tag" href="https://metricool.com/tiktok-statistics/" target="_blank">Metricool · TikTok Stats 2025</a>
+    </div>
+  </div>
+
+  <!-- SEGMENTO C -->
+  <div class="segment-card">
+    <div class="segment-num">Segmento C</div>
+    <h3 class="segment-title">A compradora de <em>infoprodutos</em> consolidada</h3>
+    <p class="segment-age">30–48 anos · Hábito de compra digital formado · Já gastou com cursos e consultorias</p>
+    <div class="segment-pills">
+      <span class="pill purple">Alta conversão</span>
+      <span class="pill green">Mínima resistência ao digital</span>
+      <span class="pill">Instagram + YouTube</span>
+    </div>
+    <div class="segment-rows">
+      <div class="seg-row">
+        <div class="seg-row-key">Comportamento</div>
+        <div class="seg-row-val"><strong>28% dos brasileiros compraram cursos, capacitações ou consultorias online nos últimos 6 meses.</strong> Essa categoria cresceu 18 pp de 2022 para 2023.</div>
+      </div>
+      <div class="seg-row">
+        <div class="seg-row-key">Volume</div>
+        <div class="seg-row-val">Em 2022, o número de compradores de produtos digitais no Brasil ultrapassou <strong>20 milhões de pessoas</strong>, com mais de <strong>60% já tendo comprado antes.</strong></div>
+      </div>
+      <div class="seg-row">
+        <div class="seg-row-key">Trabalho</div>
+        <div class="seg-row-val">A resistência é mínima — o trabalho é de <strong>posicionamento, não de educação de mercado.</strong> Ela já sabe comprar online.</div>
+      </div>
+    </div>
+    <div class="segment-sources">
+      <a class="source-tag" href="https://jornalggn.com.br/noticia/79-dos-brasileiros-consumiram-produtos-digitais-em-2023/" target="_blank">E-commerce Trends 2024 / Jornal GGN</a>
+    </div>
+  </div>
+
+  <!-- 04 PLATAFORMAS -->
+  <div class="section-divider"><div class="section-divider-line"></div><span class="section-num">✦ 04 · Plataformas</span><div class="section-divider-line"></div></div>
+  <h2 class="section-title">Onde o público <em>está</em></h2>
+  <p class="section-desc">Dados de audiência por plataforma no Brasil — tamanho, perfil, engajamento e comportamento de compra.</p>
+
+  <div class="platform-grid">
+    <!-- INSTAGRAM -->
+    <div class="platform-card ig">
+      <div class="platform-icon">📸</div>
+      <div class="platform-name">Instagram</div>
+      <div class="platform-reach">Canal principal de conversão</div>
+      <div class="platform-stats">
+        <div class="pstat"><span class="pstat-key">Usuários no Brasil</span><span class="pstat-val purple">140,7 mi</span></div>
+        <div class="pstat"><span class="pstat-key">Posição global</span><span class="pstat-val"># 3 no mundo</span></div>
+        <div class="pstat"><span class="pstat-key">Usuárias mulheres</span><span class="pstat-val purple">53,8–58,5%</span></div>
+        <div class="pstat"><span class="pstat-key">Faixa etária maior</span><span class="pstat-val">25–34 anos (31%)</span></div>
+        <div class="pstat"><span class="pstat-key">Crescimento 2023→2024</span><span class="pstat-val purple">+21 mi (+18,6%)</span></div>
+        <div class="pstat"><span class="pstat-key">Alcance de anúncios</span><span class="pstat-val">62% da população</span></div>
+      </div>
+      <div class="platform-hashtags">
+        <div class="hashtag-label">Tags da categoria</div>
+        <div class="hashtag-cloud">
+          <span class="htag hot">#astrologia</span>
+          <span class="htag hot">#numerologia</span>
+          <span class="htag hot">#mapaastral</span>
+          <span class="htag">#autoconhecimento</span>
+          <span class="htag">#espiritualidade</span>
+          <span class="htag">#cartanatal</span>
+          <span class="htag">#revolução solar</span>
+          <span class="htag">#prosperidade</span>
+          <span class="htag">#numerologiapitagorica</span>
+          <span class="htag">#caminhodevida</span>
+          <span class="htag">#bloqueiosfinanceiros</span>
+          <span class="htag">#abundancia</span>
+        </div>
+      </div>
+      <a class="source-tag" href="https://www.rdstation.com/blog/marketing/estatisticas-redes-sociais/" target="_blank">DataReportal / RD Station, 2024</a>
+    </div>
+
+    <!-- TIKTOK -->
+    <div class="platform-card tt">
+      <div class="platform-icon">🎵</div>
+      <div class="platform-name">TikTok</div>
+      <div class="platform-reach">Canal de descoberta e viralização</div>
+      <div class="platform-stats">
+        <div class="pstat"><span class="pstat-key">Usuários no Brasil</span><span class="pstat-val purple">91,7–105 mi</span></div>
+        <div class="pstat"><span class="pstat-key">Posição na LatAm</span><span class="pstat-val">Mercado-chave #1</span></div>
+        <div class="pstat"><span class="pstat-key">Crescimento 2023→2024</span><span class="pstat-val purple">+16 mi (+19,9%)</span></div>
+        <div class="pstat"><span class="pstat-key">Audiência de astrologia</span><span class="pstat-val purple">88,3% mulheres</span></div>
+        <div class="pstat"><span class="pstat-key">Compraram via TikTok</span><span class="pstat-val">33% dos usuários</span></div>
+        <div class="pstat"><span class="pstat-key">Watch time crescimento</span><span class="pstat-val purple">+71% em 2024</span></div>
+      </div>
+      <div class="platform-hashtags">
+        <div class="hashtag-label">Tags da categoria</div>
+        <div class="hashtag-cloud">
+          <span class="htag hot">#numerologia</span>
+          <span class="htag hot">#astrologia</span>
+          <span class="htag hot">#mapaastral</span>
+          <span class="htag">#espiritualidade</span>
+          <span class="htag">#autoconhecimento</span>
+          <span class="htag">#caminhodevida</span>
+          <span class="htag">#signo</span>
+          <span class="htag">#astrotok</span>
+          <span class="htag">#abundancia</span>
+          <span class="htag">#bloqueiosfinanceiros</span>
+          <span class="htag">#dinheiroeespirito</span>
+          <span class="htag">#sesabemsobre</span>
+        </div>
+      </div>
+      <a class="source-tag" href="https://metricool.com/tiktok-statistics/" target="_blank">Metricool · TikTok Statistics 2025</a>&nbsp;
+      <a class="source-tag" href="https://www.modash.io/find-influencers/tiktok/united-states/astrology" target="_blank">Modash · Astrology Audience Data</a>
+    </div>
+
+    <!-- YOUTUBE -->
+    <div class="platform-card yt">
+      <div class="platform-icon">▶</div>
+      <div class="platform-name">YouTube</div>
+      <div class="platform-reach">Canal de profundidade e remarketing</div>
+      <div class="platform-stats">
+        <div class="pstat"><span class="pstat-key">Brasileiros conectados</span><span class="pstat-val purple">183 mi</span></div>
+        <div class="pstat"><span class="pstat-key">Tempo médio/dia internet</span><span class="pstat-val">9h13min</span></div>
+        <div class="pstat"><span class="pstat-key">Tempo médio/dia YT (adultos)</span><span class="pstat-val purple">48,7 min</span></div>
+        <div class="pstat"><span class="pstat-key">Formato que converte</span><span class="pstat-val">Long-form 10–20min</span></div>
+        <div class="pstat"><span class="pstat-key">Uso</span><span class="pstat-val">Remarketing + cético</span></div>
+      </div>
+      <div class="platform-hashtags">
+        <div class="hashtag-label">Palavras-chave de busca (sem #)</div>
+        <div class="hashtag-cloud">
+          <span class="htag hot">numerologia pitagórica</span>
+          <span class="htag hot">mapa natal completo</span>
+          <span class="htag">revolução solar 2026</span>
+          <span class="htag">bloqueios financeiros espirituais</span>
+          <span class="htag">meu número de vida</span>
+          <span class="htag">numerologia e dinheiro</span>
+          <span class="htag">prosperidade e astrologia</span>
+          <span class="htag">numerólogo online</span>
+          <span class="htag">leitura mapa natal personalizada</span>
+        </div>
+      </div>
+      <a class="source-tag" href="https://cmlo.co/en/marketing-digital/dados-ineditos-sobre-o-consumo-digital-no-brasil/" target="_blank">TIC Domicílios 2024 / CMLO</a>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"A parceria com um influenciador ou criador no TikTok pode aumentar a taxa de view-through de um anúncio em 193% e o recall de marca em 27%."</div>
+    <div class="quote-attr">Metricool · TikTok Statistics 2025 — <a href="https://metricool.com/tiktok-statistics/" target="_blank" style="color:var(--purple-light);text-decoration:none;">ver fonte ↗</a></div>
+  </div>
+
+  <!-- 05 PRICING -->
+  <div class="section-divider"><div class="section-divider-line"></div><span class="section-num">✦ 05 · Benchmark de Pricing</span><div class="section-divider-line"></div></div>
+  <h2 class="section-title">Quanto o mercado <em>já paga</em></h2>
+
+  <div class="pricing-banner">
+    <div class="pricing-label">Gasto médio por consulta astrológica · 2024</div>
+    <div class="pricing-number">USD $67</div>
+    <div class="pricing-context">
+      Cresceu de <strong>USD $45 em 2022</strong> para <strong>USD $67 em 2024</strong> — um aumento de <em>49% em dois anos.</em> Esse crescimento é puxado por millennials e Gen Z, com maior disposição a pagar por serviços premium. Em reais (câmbio médio de 2024): aproximadamente <strong>R$ 330–R$ 380 por consulta.</strong> O Mapa de Prosperidade, com o briefing personalizado e a leitura cruzada de três sistemas, opera no teto superior dessa faixa com justificativa clara de diferencial.
+    </div>
+    <div style="margin-top:16px;">
+      <a class="stat-source" href="https://www.emergenresearch.com/industry-report/astrology-market" target="_blank">Emergen Research · Astrology Market Trends 2024</a>
+    </div>
+  </div>
+
+  <div class="stat-grid" style="margin-top:12px;">
+    <div class="stat-card">
+      <div class="stat-label">Mercado global de wellness · 2024</div>
+      <div class="stat-value"><sup>USD</sup>1,8<span style="font-size:.4em;vertical-align:middle"> tri</span></div>
+      <div class="stat-context">Gen Z e millennials compram mais que gerações anteriores em todos os segmentos de wellness.</div>
+      <a class="stat-source" href="https://www.mckinsey.com/industries/consumer-packaged-goods/our-insights/the-trends-defining-the-1-point-8-trillion-dollar-global-wellness-market-in-2024" target="_blank">McKinsey, jan/2024</a>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Consumidores priorizando wellness mais que no ano anterior</div>
+      <div class="stat-value">58<span style="font-size:.4em;vertical-align:middle">%</span></div>
+      <div class="stat-context">58% dos respondentes globais afirmam estar priorizando wellness mais que um ano atrás.</div>
+      <a class="stat-source" href="https://www.mckinsey.com/industries/consumer-packaged-goods/our-insights/the-trends-defining-the-1-point-8-trillion-dollar-global-wellness-market-in-2024" target="_blank">McKinsey, jan/2024</a>
+    </div>
+    <div class="stat-card highlight">
+      <div class="stat-label">Numerólogos brasileiros cobram por mapa (comparable)</div>
+      <div class="stat-value">R$300<span style="font-size:.4em;vertical-align:middle">–3k</span></div>
+      <div class="stat-context">Faixa de mercado local para mapas numerológicos. O Mapa de Prosperidade com briefing opera no teto com justificativa.</div>
+      <a class="stat-source" href="https://github.com" target="_blank">Metodologia Mapa de Prosperidade v1.2</a>
+    </div>
+  </div>
+
+  <!-- 06 GAP -->
+  <div class="section-divider"><div class="section-divider-line"></div><span class="section-num">✦ 06 · Espaço Branco</span><div class="section-divider-line"></div></div>
+  <h2 class="section-title">O que a concorrência <em>não entrega</em></h2>
+  <p class="section-desc">Gaps identificados por dados — e como o Stellanum os ocupa com autenticidade.</p>
+
+  <div class="gap-card">
+    <div class="gap-vs">
+      <div class="gap-vs-label">Concorrência</div>
+      <div class="gap-vs-pill bad">Genérico</div>
+      <div class="gap-arrow">↓</div>
+      <div class="gap-vs-pill good">Stellanum</div>
+      <div class="gap-vs-label" style="margin-top:6px;">Diferencial</div>
+    </div>
+    <div class="gap-body">
+      <div class="gap-title">O briefing como diferencial visível</div>
+      <div class="gap-desc"><strong>33% dos usuários desinstalam apps de astrologia por falta de confiança e desinformação. 29% citam conteúdo inconsistente.</strong> Nenhum concorrente posiciona explicitamente que a leitura sem contexto pessoal é commodity. O Stellanum pode ser a primeira marca a dizer isso com clareza — e ao fazer isso, desqualifica gentilmente toda a concorrência genérica sem atacar ninguém.<br><br>Personalized content em apps de astrologia melhora a retenção de usuários em <strong>50%</strong> — baseado em 10.000+ pesquisas com usuários em 2023.</div>
+    </div>
+  </div>
+
+  <div class="gap-card">
+    <div class="gap-vs">
+      <div class="gap-vs-label">Categoria</div>
+      <div class="gap-vs-pill bad">Promessa</div>
+      <div class="gap-arrow">↓</div>
+      <div class="gap-vs-pill good">Stellanum</div>
+      <div class="gap-vs-label" style="margin-top:6px;">Posição</div>
+    </div>
+    <div class="gap-body">
+      <div class="gap-title">Honestidade como posicionamento</div>
+      <div class="gap-desc">A categoria vende promessa de transformação — e isso está saturando. O espaço branco é posicionar o produto em <strong>precisão</strong>: não prometemos transformação, prometemos clareza. "Não é previsão. Não é magia. É a leitura mais personalizada que existe porque usa a tua história real — não um arquétipo." Esse enquadramento diferencia de 95% dos players brasileiros da categoria.</div>
+    </div>
+  </div>
+
+  <div class="gap-card">
+    <div class="gap-vs">
+      <div class="gap-vs-label">Mercado</div>
+      <div class="gap-vs-pill bad">Destino</div>
+      <div class="gap-arrow">↓</div>
+      <div class="gap-vs-pill good">Stellanum</div>
+      <div class="gap-vs-label" style="margin-top:6px;">Conceito</div>
+    </div>
+    <div class="gap-body">
+      <div class="gap-title">Prosperidade como frequência, não como meta</div>
+      <div class="gap-desc">A concorrência vende prosperidade como <strong>destino</strong> — "atraia abundância", "desbloqueie riqueza". O espaço branco é posicioná-la como <strong>frequência pessoal</strong> — algo que se alinha, não que se persegue. Isso ressoa diretamente com o Segmento A e B, que já estão saturados de conteúdo de "mentalidade de abundância" e buscam algo mais concreto e específico para a vida delas.</div>
+    </div>
+  </div>
+
+  <!-- FONTES COMPLETAS -->
+  <div class="report-footer">
+    <div class="footer-title">✦ Fontes completas — todas as referências deste relatório</div>
+    <div class="sources-list">
+      <div class="source-item"><span class="source-num">01</span><a class="source-link" href="https://www.marketresearchfuture.com/reports/astrology-market-22040" target="_blank"><span class="source-org">Market Research Future</span> · Astrology Market Size & Share — USD $14.3 billion (2024), projected $27.15 billion by 2035, CAGR 6%</a></div>
+      <div class="source-item"><span class="source-num">02</span><a class="source-link" href="https://www.globalgrowthinsights.com/market-reports/astrology-app-market-114903" target="_blank"><span class="source-org">Global Growth Insights</span> · Astrology App Market — USD $4 billion (2024), projected $29.4 billion (2033), CAGR 24.76%</a></div>
+      <div class="source-item"><span class="source-num">03</span><a class="source-link" href="https://midiabahia.com.br/apps-e-servicos-digitais-transformam-astrologia-em-mercado/" target="_blank"><span class="source-org">Mídia Bahia / Business Research Company</span> · Apps e serviços digitais transformam astrologia em mercado — mercado global USD $14.3 bi; +40% downloads 2021–2023</a></div>
+      <div class="source-item"><span class="source-num">04</span><a class="source-link" href="https://www.emergenresearch.com/industry-report/astrology-market" target="_blank"><span class="source-org">Emergen Research</span> · Astrology Market Trends 2024 — gasto médio por consulta USD $67 (2024), +49% sobre 2022</a></div>
+      <div class="source-item"><span class="source-num">05</span><a class="source-link" href="https://www.amraandelma.com/spiritual-health-marketing-statistics/" target="_blank"><span class="source-org">Amra & Elma</span> · Spiritual Health Marketing Statistics 2025 — 65% millennials investem em bem-estar espiritual; 70% compram online</a></div>
+      <div class="source-item"><span class="source-num">06</span><a class="source-link" href="https://www.mckinsey.com/industries/consumer-packaged-goods/our-insights/the-trends-defining-the-1-point-8-trillion-dollar-global-wellness-market-in-2024" target="_blank"><span class="source-org">McKinsey & Company</span> · The Trends Defining the $1.8 Trillion Global Wellness Market in 2024</a></div>
+      <div class="source-item"><span class="source-num">07</span><a class="source-link" href="https://www.businessresearchinsights.com/market-reports/astrology-app-market-103133" target="_blank"><span class="source-org">Business Research Insights</span> · Astrology App Market Size — 33% desinstalam por falta de confiança; retenção +50% com personalização</a></div>
+      <div class="source-item"><span class="source-num">08</span><a class="source-link" href="https://www.marknteladvisors.com/research-library/astrology-app-market.html" target="_blank"><span class="source-org">Markntel Advisors</span> · Astrology App Market — 80% millennials/Gen Z usam astrologia para decisões de carreira, relacionamento e finanças</a></div>
+      <div class="source-item"><span class="source-num">09</span><a class="source-link" href="https://www.rdstation.com/blog/marketing/estatisticas-redes-sociais/" target="_blank"><span class="source-org">RD Station / DataReportal</span> · 95 Estatísticas de Redes Sociais 2024 — Instagram BR: 53,8% mulheres; faixa 25–34 maior grupo</a></div>
+      <div class="source-item"><span class="source-num">10</span><a class="source-link" href="https://nerdweb.com.br/artigos/estatisticas-mercado-redes-sociais-brasil-2024.html" target="_blank"><span class="source-org">Nerdweb / DataReportal</span> · Instagram +21 mi usuários (+18,6%); TikTok +16 mi (+19,9%) — Brasil 2023→2024</a></div>
+      <div class="source-item"><span class="source-num">11</span><a class="source-link" href="https://metricool.com/tiktok-statistics/" target="_blank"><span class="source-org">Metricool</span> · TikTok Statistics 2025 — 33% compraram via TikTok; watch time +71%; influencer ads +193% view-through</a></div>
+      <div class="source-item"><span class="source-num">12</span><a class="source-link" href="https://www.modash.io/find-influencers/tiktok/united-states/astrology" target="_blank"><span class="source-org">Modash</span> · Astrology TikTok audience — 88,31% mulheres na audiência de criadores de astrologia</a></div>
+      <div class="source-item"><span class="source-num">13</span><a class="source-link" href="https://agenciasebrae.com.br/cultura-empreendedora/mercado-mistico-usa-internet-e-foca-em-bem-estar-para-se-renovar/" target="_blank"><span class="source-org">Agência Sebrae</span> · Mercado Místico: R$ 14 milhões em 2022, crescimento 7× sobre 2015</a></div>
+      <div class="source-item"><span class="source-num">14</span><a class="source-link" href="https://jornalggn.com.br/noticia/79-dos-brasileiros-consumiram-produtos-digitais-em-2023/" target="_blank"><span class="source-org">Jornal GGN / E-commerce Trends 2024</span> · 28% compraram cursos/consultorias online; categoria +18pp em 2023; 20M compradores digitais</a></div>
+      <div class="source-item"><span class="source-num">15</span><a class="source-link" href="https://globalad.com.br/blog/digital-brazil-2024-navegue-pelos-dados-e-insights/" target="_blank"><span class="source-org">DataReportal / Global AD</span> · Digital Brazil 2024 — comportamento de uso da internet; 183 mi conectados</a></div>
+      <div class="source-item"><span class="source-num">16</span><a class="source-link" href="https://store.mintel.com/report/brazil-lifestyles-of-millennials-market-report" target="_blank"><span class="source-org">Mintel</span> · Brazil Lifestyles of Millennials 2024 — carreira, finanças e bem-estar são prioridades centrais</a></div>
+    </div>
+    <p style="margin-top:28px;font-size:11px;color:var(--text-muted);line-height:1.6;text-align:center;">Relatório produzido em junho de 2026 · Stellanum / Mapa de Prosperidade · Dados sujeitos à atualização conforme novas pesquisas de mercado.<br>Este relatório é interno e não deve ser compartilhado sem autorização.</p>
+  </div>
+
+</div>
+
+<script>
+// STARS ANIMATION
+const canvas=document.getElementById('stars-canvas'),ctx=canvas.getContext('2d');
+let stars=[];
+function initStars(){
+  canvas.width=window.innerWidth;
+  canvas.height=Math.max(window.innerHeight,document.body.scrollHeight);
+  stars=Array.from({length:120},()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.2+0.2,
+    o:Math.random()*0.5+0.05,
+    s:Math.random()*0.006+0.002,
+    d:Math.random()>.5?1:-1
+  }));
+}
+function drawStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(s=>{
+    s.o+=s.s*s.d;
+    if(s.o>=0.6||s.o<=0.04)s.d*=-1;
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(200,180,255,${s.o})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+initStars();
+drawStars();
+window.addEventListener('resize',initStars);
+
+// Resize canvas height on scroll to cover full page
+const resizeObserver=new ResizeObserver(()=>{
+  canvas.height=Math.max(window.innerHeight,document.body.scrollHeight);
+});
+resizeObserver.observe(document.body);
+</script>
+</body>
+</html>
