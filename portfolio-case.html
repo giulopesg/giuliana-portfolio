@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>This Portfolio — Built with AI · Giuliana Lopes Galvão | Design Engineering Case Study</title>
+  <title>This Portfolio · Giuliana Lopes Galvão | Design Engineering Case Study</title>
   <meta name="description"
-    content="Design engineering case study: a fully responsive, bilingual portfolio built in 5 days using Claude Code as engineering partner. 8 pages, 6 case studies, zero lines written manually.">
+    content="Design engineering case study: a bilingual, responsive portfolio I designed and developed in 5 days. 8 pages and 6 case studies in the first release.">
   <meta name="keywords"
     content="design engineering, AI-assisted development, Claude Code, portfolio, HTML CSS, Vercel, bilingual, responsive design, UX designer, Giuliana Lopes Galvão">
   <meta name="author" content="Giuliana Lopes Galvão">
@@ -18,10 +18,10 @@
 
   <!-- Open Graph -->
   <meta property="og:title"
-    content="This Portfolio — Built with AI · Giuliana Lopes Galvão | Design Engineering Case Study">
+    content="This Portfolio · Giuliana Lopes Galvão | Design Engineering Case Study">
   <meta property="og:description"
-    content="A fully responsive, bilingual portfolio built in 5 days using Claude Code. 8 pages, 6 case studies, zero lines written manually.">
-  <meta property="og:image" content="https://www.giulopesgalvao.com.br/cases/portfolio/og-portfolio-case.png">
+    content="Design engineering case study: a bilingual, responsive portfolio I designed and developed in 5 days. 8 pages and 6 case studies in the first release.">
+  <meta property="og:image" content="https://www.giulopesgalvao.com.br/cases/portfolio/giumock.png">
   <meta property="og:url" content="https://www.giulopesgalvao.com.br/portfolio-case.html">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="en_US">
@@ -31,10 +31,10 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title"
-    content="This Portfolio — Built with AI · Giuliana Lopes Galvão | Design Engineering Case Study">
+    content="This Portfolio · Giuliana Lopes Galvão | Design Engineering Case Study">
   <meta name="twitter:description"
-    content="A fully responsive, bilingual portfolio built in 5 days using Claude Code. 8 pages, 6 case studies, zero lines written manually.">
-  <meta name="twitter:image" content="https://www.giulopesgalvao.com.br/cases/portfolio/og-portfolio-case.png">
+    content="Design engineering case study: a bilingual, responsive portfolio I designed and developed in 5 days. 8 pages and 6 case studies in the first release.">
+  <meta name="twitter:image" content="https://www.giulopesgalvao.com.br/cases/portfolio/giumock.png">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -43,18 +43,18 @@
   "@graph": [
     {
       "@type": "Article",
-      "headline": "This Portfolio — Built with AI. Design Engineering with Claude Code.",
-      "name": "Portfolio — Built with AI",
+      "headline": "This Portfolio. Design Engineering Case Study.",
+      "name": "This Portfolio",
       "author": {
         "@type": "Person",
         "name": "Giuliana Lopes Galvão",
         "url": "https://www.giulopesgalvao.com.br"
       },
-      "description": "A fully responsive, bilingual portfolio built in 5 days using Claude Code as engineering partner. 8 pages, 6 case studies, zero lines written manually. Design engineering case study documenting the process of going from idea to deploy without a developer.",
+      "description": "Design engineering case study: a bilingual, responsive portfolio I designed and developed in 5 days. 8 pages and 6 case studies in the first release.",
       "datePublished": "2026-03-12",
       "dateModified": "2026-03-12",
       "keywords": ["design engineering", "AI-assisted development", "Claude Code", "portfolio", "HTML CSS", "Vercel", "bilingual", "responsive design"],
-      "image": "https://www.giulopesgalvao.com.br/cases/portfolio/og-portfolio-case.png",
+      "image": "https://www.giulopesgalvao.com.br/cases/portfolio/giumock.png",
       "url": "https://www.giulopesgalvao.com.br/portfolio-case.html",
       "mainEntityOfPage": {
         "@type": "WebPage",
@@ -77,7 +77,7 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "This Portfolio — Built with AI",
+          "name": "This Portfolio",
           "item": "https://www.giulopesgalvao.com.br/portfolio-case.html"
         }
       ]
@@ -165,7 +165,6 @@
       gap: 2px;
       border-radius: 20px;
       padding: 4px;
-      margin-left: auto;
     }
 
     .lang-btn {
@@ -187,47 +186,31 @@
     }
 
     /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      padding: 24px 64px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      background: rgba(250, 247, 242, 0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--warm-stone);
-    }
-
-    .nav-back {
-      font-size: 13px;
-      color: var(--ink-muted);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: color 0.2s;
-    }
-
-    .nav-back:hover {
-      color: var(--plum);
-    }
-
-    .nav-divider {
-      width: 1px;
-      height: 16px;
-      background: var(--warm-stone);
-    }
-
-    .nav-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px;
-      font-weight: 400;
-      color: var(--ink);
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 22px 80px; display: flex; align-items: center; gap: 20px; background: rgba(0,0,0,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: background 0.4s, padding 0.4s, border-color 0.3s; }
+    nav.scrolled { background: rgba(0,0,0,0.95); padding-top: 14px; padding-bottom: 14px; border-bottom-color: rgba(255,255,255,0.06); }
+    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: rgba(255,255,255,0.9); text-decoration: none; }
+    .nav-links { margin-left: auto; display: flex; gap: 24px; align-items: center; list-style: none; }
+    .nav-link { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-link:hover { color: #D4C8EF; }
+    .nav-link.active { color: #fff; }
+    .btn-nav-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; background: #5ECE8B; color: #0B2A18; padding: 11px 20px; border-radius: 40px; text-decoration: none; min-height: 44px; box-sizing: border-box; transition: all 0.25s; }
+    .btn-nav-cta:hover { background: #4abe79; transform: translateY(-1px); }
+    .btn-nav-cta svg { flex-shrink: 0; }
+    .lang-toggle { display: flex; gap: 2px; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 4px; flex-shrink: 0; }
+    .lang-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; padding: 6px 12px; border-radius: 16px; border: none; background: transparent; color: rgba(255,255,255,0.55); cursor: pointer; transition: all 0.2s; }
+    .lang-btn.active { background: rgba(255,255,255,0.15); color: #fff; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; margin-left: auto; }
+    .nav-burger span { display: block; width: 20px; height: 2px; background: rgba(255,255,255,0.8); transition: all 0.3s; }
+    .nav-mobile { display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 99; flex-direction: column; padding: 24px; gap: 8px; background: rgba(0,0,0,0.95); border-bottom: 1px solid rgba(255,255,255,0.06); backdrop-filter: blur(16px); }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-size: 15px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 12px 0; transition: color 0.2s; }
+    .nav-mobile a:hover { color: #D4C8EF; }
+    .nav-mobile a.active { color: #fff; }
+    .nav-mobile .btn-nav-cta { text-align: center; justify-content: center; margin-top: 8px; color: #0B2A18; }
+    .nav-mobile .lang-toggle { justify-content: center; margin-top: 8px; border-color: rgba(255,255,255,0.15); }
+    .case-back { font-family: 'DM Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.5); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px; transition: color 0.2s; letter-spacing: 0.04em; }
+    .case-back:hover { color: rgba(255,255,255,0.8); }
+    .ctag-service { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
 
     /* ── HERO ── */
     .case-hero {
@@ -978,9 +961,9 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      nav {
-        padding: 18px 24px;
-      }
+      nav { padding: 16px 24px; }
+      .nav-links, nav .lang-toggle { display: none; }
+      .nav-burger { display: flex; }
 
       .case-hero {
         grid-template-columns: 1fr;
@@ -1077,15 +1060,21 @@
 
     @media (max-width: 600px) {
 
-      .nav-title,
-      .nav-divider {
-        display: none;
-      }
-
       .case-meta-row {
         grid-template-columns: 1fr;
         gap: 16px;
       }
+    }
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 280ms; }
+    nav { view-transition-name: navbar; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.01ms !important; }
     }
   </style>
 </head>
@@ -1093,38 +1082,66 @@
 <body>
 
   <!-- NAV -->
-  <nav>
-    <a href="index.html" class="nav-back">&larr; <span class="en-inline">Back to portfolio</span><span
-        class="pt-inline">Voltar ao portf&oacute;lio</span></a>
-    <div class="nav-divider"></div>
-    <span class="nav-title">Portfolio &mdash; Case Study</span>
-    <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('pt')">PT</button>
-    </div>
-  </nav>
+<nav id="navbar">
+  <a href="index.html" class="nav-name">Giuliana Lopes Galvão</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link active"><span class="pt-inline">Serviços</span><span class="en-inline">Services</span></a></li>
+    <li><a href="about.html" class="nav-link"><span class="pt-inline">Sobre</span><span class="en-inline">About</span></a></li>
+    <li><a href="recrutadores.html" class="nav-link"><span class="pt-inline">Recrutadores</span><span class="en-inline">Recruiters</span></a></li>
+    <li>
+      <a href="index.html#contato" class="btn-nav-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20l1.3-5.1A8.4 8.4 0 1 1 21 11.5z"/></svg>
+        <span class="pt-inline">Vamos conversar</span>
+        <span class="en-inline">Let's talk</span>
+      </a>
+    </li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+  <button class="nav-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html" class="active" onclick="closeMobileMenu()"><span class="pt-inline">Serviços</span><span class="en-inline">Services</span></a>
+  <a href="about.html"><span class="pt-inline">Sobre</span><span class="en-inline">About</span></a>
+  <a href="recrutadores.html"><span class="pt-inline">Recrutadores</span><span class="en-inline">Recruiters</span></a>
+  <a href="index.html#contato" class="btn-nav-cta" onclick="closeMobileMenu()">
+    <span class="pt-inline">Vamos conversar</span>
+    <span class="en-inline">Let's talk</span>
+  </a>
+  <div class="lang-toggle">
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
 
   <main>
     <!-- ── HERO ── -->
     <header class="case-hero">
       <div class="case-hero-left">
+        <a href="index.html#trabalhos" class="case-back">
+          <span class="pt-inline">&larr; Início</span>
+          <span class="en-inline">&larr; Home</span>
+        </a>
         <div class="case-tag-row">
+          <span class="ctag ctag-service"><span class="pt-inline">Sites e plataformas</span><span class="en-inline">Sites &amp; platforms</span></span>
           <span class="ctag">Design Engineering</span>
-          <span class="ctag">AI-Assisted Development</span>
+          <span class="ctag">Front-end Development</span>
         </div>
         <div class="case-hero-eyebrow">
           <span class="en-inline">Personal project &middot; 2026</span>
           <span class="pt-inline">Projeto pessoal &middot; 2026</span>
         </div>
         <h1 class="case-hero-title">
-          <span class="en">This Portfolio &mdash;<br><em>Built with AI.</em></span>
-          <span class="pt">Este Portf&oacute;lio &mdash;<br><em>Constru&iacute;do com IA.</em></span>
+          <span class="en">This Portfolio &mdash;<br><em>Designed &amp; built by me.</em></span>
+          <span class="pt">Este Portf&oacute;lio &mdash;<br><em>Desenhado e constru&iacute;do por mim.</em></span>
         </h1>
         <p class="case-hero-subtitle">
-          <span class="en">8 pages, 6 case studies, fully responsive and bilingual &mdash; designed and coded in 5 days
-            using Claude Code as my engineering partner.</span>
-          <span class="pt">8 p&aacute;ginas, 6 case studies, totalmente responsivo e bil&iacute;ngue &mdash; projetado e
-            codificado em 5 dias usando Claude Code como parceiro de engenharia.</span>
+          <span class="en">8 pages and 6 case studies in the first release, responsive and bilingual. Designed and developed by me in 5 days, with Claude Code as a coding tool.</span>
+          <span class="pt">8 p&aacute;ginas e 6 cases na primeira entrega, responsivo e bil&iacute;ngue. Desenhado e desenvolvido por mim em 5 dias, com Claude Code como ferramenta de c&oacute;digo.</span>
         </p>
         <div class="case-meta-row">
           <div class="case-meta-item">
@@ -1174,9 +1191,9 @@
             <ellipse cx="300" cy="400" rx="300" ry="300" fill="url(#orb3)" filter="url(#glow)" />
             <!-- Terminal-like decorative lines -->
             <g opacity="0.15" stroke="#D4C8EF" stroke-width="1" fill="none">
-              <text x="60" y="180" font-family="monospace" font-size="12" fill="#D4C8EF" opacity="0.3">&gt; claude
-                code</text>
-              <text x="60" y="210" font-family="monospace" font-size="12" fill="#8B6FC0" opacity="0.25"> generating
+              <text x="60" y="180" font-family="monospace" font-size="12" fill="#D4C8EF" opacity="0.3">&gt; npm run
+                dev</text>
+              <text x="60" y="210" font-family="monospace" font-size="12" fill="#8B6FC0" opacity="0.25"> building
                 portfolio...</text>
               <text x="60" y="260" font-family="monospace" font-size="12" fill="#D4C8EF" opacity="0.2">&lt;html
                 lang="en"&gt;</text>
@@ -1218,9 +1235,9 @@
                 at&eacute; o deploy</span></div>
           </div>
           <div class="hero-stat-card">
-            <div class="hero-stat-num">0</div>
-            <div class="hero-stat-label"><span class="en-inline">Lines written manually</span><span
-                class="pt-inline">Linhas escritas manualmente</span></div>
+            <div class="hero-stat-num">2</div>
+            <div class="hero-stat-label"><span class="en-inline">Languages (PT &middot; EN)</span><span
+                class="pt-inline">Idiomas (PT &middot; EN)</span></div>
           </div>
         </div>
       </div>
@@ -1239,16 +1256,8 @@
         </h2>
         <div class="cs-2col">
           <div>
-            <p class="cs-body-text en">After 8 years as a UX Designer, <strong>AI changed the equation</strong>. Claude
-              Code made it possible to go from idea to deploy without depending on templates, CMS, or an external
-              developer. This portfolio became the first real test of a new capability: <strong>design
-                engineering</strong> &mdash; the ability to go from design to production using AI as a building tool.
-            </p>
-            <p class="cs-body-text pt">Ap&oacute;s 8 anos como UX Designer, <strong>a IA mudou a
-                equa&ccedil;&atilde;o</strong>. Claude Code tornou poss&iacute;vel ir da ideia ao deploy sem depender de
-              templates, CMS ou dev externo. Este portf&oacute;lio se tornou o primeiro teste real de uma nova
-              habilidade: <strong>design engineering</strong> &mdash; a capacidade de ir do design &agrave;
-              produ&ccedil;&atilde;o usando IA como ferramenta de constru&ccedil;&atilde;o.</p>
+            <p class="cs-body-text en">After 10+ years designing products, I wanted to close the loop and ship what I design, without templates, a CMS or an outside developer. This portfolio was the first real test of that: <strong>design engineering</strong>, going from design to production with the right tools, AI included.</p>
+            <p class="cs-body-text pt">Depois de mais de 10 anos desenhando produtos, eu quis fechar o ciclo e colocar no ar o que desenho, sem depender de template, CMS ou dev externo. Este portf&oacute;lio foi o primeiro teste real disso: <strong>design engineering</strong>, ir do design &agrave; produ&ccedil;&atilde;o com as ferramentas certas, IA inclu&iacute;da.</p>
           </div>
           <div class="callout">
             <p>
@@ -1284,13 +1293,8 @@
           <span class="en">Conversational<br><em>development.</em></span>
           <span class="pt">Desenvolvimento<br><em>conversacional.</em></span>
         </h2>
-        <p class="cs-body-text en">Not &ldquo;no-code&rdquo; or &ldquo;low-code&rdquo; &mdash; it&rsquo;s <strong>full
-            code, with AI as the execution engine</strong>. I describe what I want, Claude Code generates it, I review
-          in the browser, iterate with feedback, commit and deploy. The feedback loop shrunk from days to minutes.</p>
-        <p class="cs-body-text pt">N&atilde;o &eacute; &ldquo;no-code&rdquo; nem &ldquo;low-code&rdquo; &mdash; &eacute;
-          <strong>c&oacute;digo completo, com IA como motor de execu&ccedil;&atilde;o</strong>. Descrevo o que quero,
-          Claude Code gera, reviso no browser, itero com feedback, comito e fa&ccedil;o deploy. O ciclo de feedback
-          encolheu de dias para minutos.</p>
+        <p class="cs-body-text en">It isn&rsquo;t no-code or low-code. It&rsquo;s real code. I define structure and behavior, Claude Code speeds up the writing, I review in the browser, adjust, commit and deploy. The feedback loop shrank from days to minutes.</p>
+        <p class="cs-body-text pt">N&atilde;o &eacute; no-code nem low-code. &Eacute; c&oacute;digo de verdade. Eu defino estrutura e comportamento, o Claude Code acelera a escrita, eu reviso no navegador, ajusto, fa&ccedil;o commit e deploy. O ciclo de feedback encolheu de dias pra minutos.</p>
 
         <div class="process-cards">
           <div class="process-card">
@@ -1307,9 +1311,8 @@
             <div class="process-num">02</div>
             <div class="process-name">Generate + Review</div>
             <p class="process-desc">
-              <span class="en-inline">Claude Code generates HTML/CSS/JS, I validate in the browser and give
-                feedback.</span>
-              <span class="pt-inline">Claude Code gera HTML/CSS/JS, eu valido no browser e dou feedback.</span>
+              <span class="en-inline">I define and validate in the browser. Claude Code speeds up the HTML/CSS/JS.</span>
+              <span class="pt-inline">Eu defino e valido no navegador. O Claude Code acelera o HTML/CSS/JS.</span>
             </p>
           </div>
           <div class="process-card">
@@ -1328,9 +1331,7 @@
           <img src="cases/portfolio/terminal-claude-code.png"
             alt="Terminal showing Claude Code generating portfolio files, committing and deploying" loading="lazy">
         </div>
-        <p class="showcase-caption"><span class="en-inline">Claude Code in action &mdash; generating, committing,
-            deploying</span><span class="pt-inline">Claude Code em a&ccedil;&atilde;o &mdash; gerando, commitando,
-            fazendo deploy</span></p>
+        <p class="showcase-caption"><span class="en-inline">Development flow: code, review, commit and deploy</span><span class="pt-inline">Fluxo de desenvolvimento: c&oacute;digo, revis&atilde;o, commit e deploy</span></p>
       </section>
 
     </div>
@@ -1358,16 +1359,16 @@
               <div class="tool-name">Claude Code</div>
               <div class="tool-type">Development Engine</div>
               <p class="tool-desc">
-                <span class="en-inline">Generates and edits code via conversation. The AI engineering partner.</span>
-                <span class="pt-inline">Gera e edita c&oacute;digo via conversa. O parceiro de engenharia IA.</span>
+                <span class="en-inline">Generates and edits code via conversation. The development partner.</span>
+                <span class="pt-inline">Gera e edita c&oacute;digo via conversa. O parceiro de desenvolvimento.</span>
               </p>
             </div>
             <div class="tool-card">
               <div class="tool-name">GitHub</div>
               <div class="tool-type">Version Control</div>
               <p class="tool-desc">
-                <span class="en-inline">23+ commits with Claude co-authorship. Full project history.</span>
-                <span class="pt-inline">23+ commits com co-autoria Claude. Hist&oacute;rico completo do projeto.</span>
+                <span class="en-inline">23+ commits. Full project history.</span>
+                <span class="pt-inline">23+ commits. Hist&oacute;rico completo do projeto.</span>
               </p>
             </div>
             <div class="tool-card">
@@ -1397,9 +1398,7 @@
           <img src="cases/portfolio/git-log-history.png"
             alt="Git log showing commit history with Claude co-authorship across all portfolio commits" loading="lazy">
         </div>
-        <p class="showcase-caption" style="color:rgba(255,255,255,0.35);"><span class="en-inline">Git history &mdash;
-            every commit co-authored with Claude</span><span class="pt-inline">Hist&oacute;rico Git &mdash; cada commit
-            co-autorado com Claude</span></p>
+        <p class="showcase-caption" style="color:rgba(255,255,255,0.35);"><span class="en-inline">Project Git history</span><span class="pt-inline">Hist&oacute;rico Git do projeto</span></p>
       </div>
     </div>
 
@@ -1416,13 +1415,13 @@
         <div class="scope-list">
           <div class="scope-item">
             <span class="scope-dot"></span>
-            <span><span class="en-inline">8 HTML pages (index, about, 6 case studies)</span><span class="pt-inline">8
-                p&aacute;ginas HTML (index, about, 6 case studies)</span></span>
+            <span><span class="en-inline">8 HTML pages (index, about and 6 case studies)</span><span class="pt-inline">8
+                p&aacute;ginas HTML (index, about e 6 case studies)</span></span>
           </div>
           <div class="scope-item">
             <span class="scope-dot"></span>
-            <span><span class="en-inline">6 complete case studies with hero, body sections, CTA, footer nav</span><span
-                class="pt-inline">6 case studies completos com hero, body sections, CTA, footer nav</span></span>
+            <span><span class="en-inline">6 complete case studies with hero, body sections, CTA and footer nav</span><span
+                class="pt-inline">6 case studies completos com hero, se&ccedil;&otilde;es, CTA e navega&ccedil;&atilde;o</span></span>
           </div>
           <div class="scope-item">
             <span class="scope-dot"></span>
@@ -1539,9 +1538,9 @@
               </div>
               <p class="learning-desc">
                 <span class="en-inline">I don&rsquo;t need to write CSS from memory. I need to know how to read, review,
-                  and give direction. AI executes, I steer.</span>
+                  and give direction. I build, AI helps.</span>
                 <span class="pt-inline">N&atilde;o preciso saber escrever CSS de cor. Preciso saber ler, revisar e dar
-                  dire&ccedil;&atilde;o. A IA executa, eu dirijo.</span>
+                  dire&ccedil;&atilde;o. Eu construo, IA ajuda.</span>
               </p>
             </div>
           </div>
@@ -1568,36 +1567,27 @@
     <!-- CTA -->
     <div class="case-cta">
       <div class="case-cta-text">
-        <div class="case-cta-label"><span class="en-inline">Let&rsquo;s work together</span><span
-            class="pt-inline">Vamos trabalhar juntos</span></div>
+        <div class="case-cta-label"><span class="en-inline">Need a website that works for you?</span><span class="pt-inline">Precisa de um site que trabalhe por voc&ecirc;?</span></div>
         <div class="case-cta-title">
-          <span class="en">Interested in how I think<br>through complex products?</span>
-          <span class="pt">Interessado em como eu penso<br>produtos complexos?</span>
+          <span class="en">Need something like this? <em>Let's talk.</em></span>
+          <span class="pt">Precisa de algo parecido? <em>Vamos conversar.</em></span>
         </div>
       </div>
       <div class="case-cta-links">
-        <a href="mailto:giulopesg@gmail.com" class="cta-btn white"><svg width="18" height="18" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            style="vertical-align:middle;margin-right:6px">
-            <rect x="2" y="4" width="20" height="16" rx="2" />
-            <path d="M22 4L12 13 2 4" />
-          </svg><span class="en-inline">Get in touch</span><span class="pt-inline">Entrar em contato</span></a>
-        <a href="index.html" class="cta-btn outline">&larr; <span class="en-inline">Back to portfolio</span><span
-            class="pt-inline">Voltar ao portf&oacute;lio</span></a>
+        <a href="index.html#contato" class="cta-btn white"><span class="en-inline">Tell me about your project</span><span class="pt-inline">Me conta seu projeto</span> &rarr;</a>
+        <a href="https://wa.me/5511993862967" target="_blank" rel="noopener" class="cta-btn outline">WhatsApp &nearr;</a>
       </div>
     </div>
 
     <!-- FOOTER NAV -->
     <div class="case-footer-nav">
-      <a href="neuroot-case.html" class="footer-nav-link">
-        <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span
-            class="pt-inline">Anterior</span></span>
-        <span class="fnl-title">Neuroot</span>
+      <a href="oraculo-case.html" class="footer-nav-link">
+        <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
+        <span class="fnl-title">Meu Or&aacute;culo Pessoal</span>
       </a>
-      <a href="techback-case.html" class="footer-nav-link" style="text-align:right;">
-        <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Pr&oacute;ximo</span>
-          &rarr;</span>
-        <span class="fnl-title">TechBack BB</span>
+      <a href="petrobras-case.html" class="footer-nav-link" style="text-align:right;">
+        <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Pr&oacute;ximo</span> &rarr;</span>
+        <span class="fnl-title">Petrobras</span>
       </a>
     </div>
   </main>
@@ -1618,7 +1608,7 @@
       localStorage.setItem('lang', lang);
     }
     const savedLang = localStorage.getItem('lang');
-    if (savedLang) setLang(savedLang);
+    setLang(savedLang || 'pt');
 
     // SCROLL REVEAL
     const reveals = document.querySelectorAll('.reveal');
@@ -1632,6 +1622,15 @@
           el.classList.add('visible');
         }
       });
+    });
+    function toggleMobileMenu() {
+      document.getElementById('nav-mobile').classList.toggle('open');
+    }
+    function closeMobileMenu() {
+      document.getElementById('nav-mobile').classList.remove('open');
+    }
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
     });
   </script>
 </body>

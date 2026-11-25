@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neuroot — Post-Burnout Recovery App · Giuliana Lopes Galvão | UX Case Study</title>
   <meta name="description"
-    content="UX case study: Neuroot, an AI-native post-burnout recovery app. Built with Figma Make, Claude Code, and Claude API. Behavioral Activation methodology and neuroplasticity-based design by Giuliana Lopes Galvão.">
+    content="UX case study: Neuroot, a post-burnout recovery app from research to code. Behavioral Activation methodology and neuroplasticity-based design by Giuliana Lopes Galvão.">
   <meta name="keywords"
     content="UX case study, AI-native product, burnout recovery app, Figma Make, Claude Code, behavioral activation, neuroplasticity, product design, mobile PWA, Giuliana Lopes Galvão">
   <meta name="author" content="Giuliana Lopes Galvão">
@@ -19,8 +19,8 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Neuroot — Post-Burnout Recovery App · Giuliana Lopes Galvão | UX Case Study">
   <meta property="og:description"
-    content="AI-native post-burnout recovery app built with Figma Make, Claude Code, and Claude API. Behavioral Activation methodology meets neuroplasticity-based UX design.">
-  <meta property="og:image" content="https://www.giulopesgalvao.com.br/cases/neuroot/mockup-neuroot.png">
+    content="Post-burnout recovery app, from research to code. Behavioral Activation methodology meets neuroplasticity-based UX design.">
+  <meta property="og:image" content="https://www.giulopesgalvao.com.br/cases/neuroot/neurootmock.png">
   <meta property="og:url" content="https://www.giulopesgalvao.com.br/neuroot-case.html">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="en_US">
@@ -31,8 +31,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Neuroot — Post-Burnout Recovery App · Giuliana Lopes Galvão | UX Case Study">
   <meta name="twitter:description"
-    content="AI-native post-burnout recovery app built with Figma Make, Claude Code, and Claude API. Behavioral Activation methodology meets neuroplasticity-based UX design.">
-  <meta name="twitter:image" content="https://www.giulopesgalvao.com.br/cases/neuroot/mockup-neuroot.png">
+    content="Post-burnout recovery app, from research to code. Behavioral Activation methodology meets neuroplasticity-based UX design.">
+  <meta name="twitter:image" content="https://www.giulopesgalvao.com.br/cases/neuroot/neurootmock.png">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -41,18 +41,18 @@
   "@graph": [
     {
       "@type": "Article",
-      "headline": "Neuroot — A Post-Burnout Recovery App Built with UX + AI Methodology",
+      "headline": "Neuroot — A Post-Burnout Recovery App, from Research to Code",
       "name": "Neuroot — Post-Burnout Recovery App",
       "author": {
         "@type": "Person",
         "name": "Giuliana Lopes Galvão",
         "url": "https://www.giulopesgalvao.com.br"
       },
-      "description": "AI-native post-burnout recovery app designed from personal experience. Built with Figma Make, Claude Code, and Claude API. Uses Behavioral Activation methodology and neuroplasticity as foundation. One practice a day with a defined end.",
+      "description": "Post-burnout recovery app designed from personal experience, from research to code. Uses Behavioral Activation methodology and neuroplasticity as foundation. One practice a day with a defined end.",
       "datePublished": "2026-01-01",
       "dateModified": "2026-03-11",
       "keywords": ["AI-native product", "burnout recovery", "mobile PWA", "Claude Code", "Figma Make", "behavioral activation", "neuroplasticity", "product design"],
-      "image": "https://www.giulopesgalvao.com.br/cases/neuroot/mockup-neuroot.png",
+      "image": "https://www.giulopesgalvao.com.br/cases/neuroot/neurootmock.png",
       "url": "https://www.giulopesgalvao.com.br/neuroot-case.html",
       "mainEntityOfPage": {
         "@type": "WebPage",
@@ -163,7 +163,6 @@
       gap: 2px;
       border-radius: 20px;
       padding: 4px;
-      margin-left: auto;
     }
 
     .lang-btn {
@@ -185,47 +184,32 @@
     }
 
     /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      padding: 24px 64px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      background: rgba(250, 247, 242, 0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--warm-stone);
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 22px 80px; display: flex; align-items: center; gap: 20px; background: rgba(0,0,0,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: background 0.4s, padding 0.4s, border-color 0.3s; }
+    nav.scrolled { background: rgba(0,0,0,0.95); padding-top: 14px; padding-bottom: 14px; border-bottom-color: rgba(255,255,255,0.06); }
+    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: rgba(255,255,255,0.9); text-decoration: none; }
+    .nav-links { margin-left: auto; display: flex; gap: 24px; align-items: center; list-style: none; }
+    .nav-link { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-link:hover { color: #D4C8EF; }
+    .nav-link.active { color: #fff; }
+    .btn-nav-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; background: #5ECE8B; color: #0B2A18; padding: 11px 20px; border-radius: 40px; text-decoration: none; min-height: 44px; box-sizing: border-box; transition: all 0.25s; }
+    .btn-nav-cta:hover { background: #4abe79; transform: translateY(-1px); }
+    .btn-nav-cta svg { flex-shrink: 0; }
+    .lang-toggle { display: flex; gap: 2px; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 4px; flex-shrink: 0; }
+    .lang-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; padding: 6px 12px; border-radius: 16px; border: none; background: transparent; color: rgba(255,255,255,0.55); cursor: pointer; transition: all 0.2s; }
+    .lang-btn.active { background: rgba(255,255,255,0.15); color: #fff; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; margin-left: auto; }
+    .nav-burger span { display: block; width: 20px; height: 2px; background: rgba(255,255,255,0.8); transition: all 0.3s; }
+    .nav-mobile { display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 99; flex-direction: column; padding: 24px; gap: 8px; background: rgba(0,0,0,0.95); border-bottom: 1px solid rgba(255,255,255,0.06); backdrop-filter: blur(16px); }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-size: 15px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 12px 0; transition: color 0.2s; }
+    .nav-mobile a:hover { color: #D4C8EF; }
+    .nav-mobile a.active { color: #fff; }
+    .nav-mobile .btn-nav-cta { text-align: center; justify-content: center; margin-top: 8px; color: #0B2A18; }
+    .nav-mobile .lang-toggle { justify-content: center; margin-top: 8px; border-color: rgba(255,255,255,0.15); }
 
-    .nav-back {
-      font-size: 13px;
-      color: var(--ink-muted);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: color 0.2s;
-    }
-
-    .nav-back:hover {
-      color: var(--plum);
-    }
-
-    .nav-divider {
-      width: 1px;
-      height: 16px;
-      background: var(--warm-stone);
-    }
-
-    .nav-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px;
-      font-weight: 400;
-      color: var(--ink);
-    }
+    .case-back { font-family: 'DM Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.5); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px; transition: color 0.2s; letter-spacing: 0.04em; }
+    .case-back:hover { color: rgba(255,255,255,0.8); }
+    .ctag-service { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
 
     /* ── HERO ── */
     .case-hero {
@@ -1225,9 +1209,9 @@
     }
 
     @media (max-width: 900px) {
-      nav {
-        padding: 18px 24px;
-      }
+      nav { padding: 16px 24px; }
+      .nav-links, nav .lang-toggle { display: none; }
+      .nav-burger { display: flex; }
 
       .case-hero {
         grid-template-columns: 1fr;
@@ -1325,11 +1309,6 @@
 
     @media (max-width: 600px) {
 
-      .nav-title,
-      .nav-divider {
-        display: none;
-      }
-
       .case-meta-row {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -1339,29 +1318,70 @@
         grid-template-columns: 1fr;
       }
     }
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 280ms; }
+    nav { view-transition-name: navbar; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 
 <body>
 
   <!-- NAV -->
-  <nav>
-    <a href="index.html" class="nav-back">← <span class="en-inline">Back to portfolio</span><span
-        class="pt-inline">Voltar ao portfólio</span></a>
-    <div class="nav-divider"></div>
-    <span class="nav-title">Neuroot — Case Study</span>
-    <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('pt')">PT</button>
-    </div>
-  </nav>
+<nav id="navbar">
+  <a href="index.html" class="nav-name">Giuliana Lopes Galvão</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link active"><span class="pt-inline">Serviços</span><span class="en-inline">Services</span></a></li>
+    <li><a href="about.html" class="nav-link"><span class="pt-inline">Sobre</span><span class="en-inline">About</span></a></li>
+    <li><a href="recrutadores.html" class="nav-link"><span class="pt-inline">Recrutadores</span><span class="en-inline">Recruiters</span></a></li>
+    <li>
+      <a href="index.html#contato" class="btn-nav-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20l1.3-5.1A8.4 8.4 0 1 1 21 11.5z"/></svg>
+        <span class="pt-inline">Vamos conversar</span>
+        <span class="en-inline">Let's talk</span>
+      </a>
+    </li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+  <button class="nav-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html" class="active" onclick="closeMobileMenu()"><span class="pt-inline">Serviços</span><span class="en-inline">Services</span></a>
+  <a href="about.html"><span class="pt-inline">Sobre</span><span class="en-inline">About</span></a>
+  <a href="recrutadores.html"><span class="pt-inline">Recrutadores</span><span class="en-inline">Recruiters</span></a>
+  <a href="index.html#contato" class="btn-nav-cta" onclick="closeMobileMenu()">
+    <span class="pt-inline">Vamos conversar</span>
+    <span class="en-inline">Let's talk</span>
+  </a>
+  <div class="lang-toggle">
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
 
   <main>
     <!-- ── HERO ── -->
     <header class="case-hero">
       <div class="case-hero-left">
+        <a href="index.html#trabalhos" class="case-back">
+          <span class="pt-inline">&larr; Início</span>
+          <span class="en-inline">&larr; Home</span>
+        </a>
         <div class="case-tag-row">
-          <span class="ctag">UX + AI</span>
+          <span class="ctag ctag-service"><span class="pt-inline">Sistemas e apps</span><span class="en-inline">Systems &amp; apps</span></span>
+          <span class="ctag">Design Engineering</span>
           <span class="ctag">Product Design</span>
           <span class="ctag">Mobile PWA</span>
           <span class="ctag">React + Supabase</span>
@@ -1373,9 +1393,8 @@
         </div>
         <h1 class="case-hero-title">Neuroot</h1>
         <p class="case-hero-subtitle">
-          <span class="en">O caminho do meio.<br>A post-burnout recovery app built with UX + AI methodology.</span>
-          <span class="pt">O caminho do meio.<br>Um app de recuperação pós-burnout construído com metodologia UX +
-            IA.</span>
+          <span class="en">O caminho do meio.<br>A post-burnout recovery app, from research to code.</span>
+          <span class="pt">O caminho do meio.<br>Um app de recuperação pós-burnout, da pesquisa ao código.</span>
         </p>
         <div class="case-meta-row">
           <div class="case-meta-item">
@@ -1739,13 +1758,13 @@
       <section class="case-section reveal">
         <div class="cs-label"><span class="en-inline">05 — My Process</span><span class="pt-inline">05 — Meu
             Processo</span></div>
-        <h2 class="cs-title">Design Thinking → Shape Up<br>→ PRD → <em><span class="en-inline">AI executes.</span><span
-              class="pt-inline">IA executa.</span></em></h2>
+        <h2 class="cs-title">Design Thinking → Shape Up<br>→ PRD → <em><span class="en-inline">Build.</span><span
+              class="pt-inline">Construção.</span></em></h2>
 
         <p class="cs-body-text en">This project was built following the methodology I use for every complex product:
-          human exploration first, then decisive shaping, then AI-assisted execution. Each phase gates the next.</p>
+          human exploration first, then decisive shaping, then building. Each phase gates the next.</p>
         <p class="cs-body-text pt">Este projeto foi construído seguindo a metodologia que uso para todo produto
-          complexo: exploração humana primeiro, depois shaping decisivo, depois execução assistida por IA. Cada fase
+          complexo: exploração humana primeiro, depois shaping decisivo, depois construção. Cada fase
           habilita a próxima.</p>
 
         <div class="method-flow-bar">
@@ -1773,7 +1792,7 @@
           </div>
           <div class="mf-step">
             <div class="mf-num">05</div>
-            <div class="mf-name"><span class="en-inline">AI Executes</span><span class="pt-inline">IA Executa</span>
+            <div class="mf-name"><span class="en-inline">Build</span><span class="pt-inline">Construção</span>
             </div>
             <div class="mf-tool">Claude Code · Claude API · Figma Make</div>
           </div>
@@ -1798,13 +1817,8 @@
               devagar.</p>
           </div>
           <div>
-            <p class="cs-body-text en"><strong>Development with Claude Code</strong> — I built the full app using Claude
-              Code — writing prompts, reviewing code, iterating on behavior — without a technical co-founder. Stack:
-              React + TypeScript, Supabase for auth and database, GitHub for version control, Vercel for deployment.</p>
-            <p class="cs-body-text pt"><strong>Desenvolvimento com Claude Code</strong> — Construí o app completo usando
-              Claude Code — escrevendo prompts, revisando código, iterando no comportamento — sem cofundador técnico.
-              Stack: React + TypeScript, Supabase para auth e banco de dados, GitHub para controle de versão, Vercel
-              para deploy.</p>
+            <p class="cs-body-text en"><strong>Development</strong>. I developed the full app without a technical co-founder, using Claude Code to speed up the code: I define, review and iterate every behavior. Stack: React + TypeScript, Supabase for auth and database, GitHub for version control, Vercel for deploy.</p>
+            <p class="cs-body-text pt"><strong>Desenvolvimento</strong>. Desenvolvi o app completo sem cofundador técnico, usando Claude Code pra acelerar o código: eu defino, reviso e itero cada comportamento. Stack: React + TypeScript, Supabase pra auth e banco de dados, GitHub pra versionamento, Vercel pra deploy.</p>
             <p class="cs-body-text en"><strong>AI in the onboarding</strong> — The Claude API powers a conversational
               onboarding. Instead of a form, the app opens with a question: <em>"What did you used to do with ease, but
                 now your body freezes just thinking about?"</em> The AI generates personalized practices from the user's
@@ -1836,7 +1850,6 @@
             <video autoplay loop muted playsinline
               aria-label="Neuroot app prototype demonstration — AI-native post-burnout recovery experience">
               <source src="cases/neuroot/neurootapp.mp4" type="video/mp4">
-              <source src="cases/neuroot/neurootapp.mov" type="video/quicktime">
             </video>
           </div>
         </div>
@@ -2033,16 +2046,12 @@
           <div class="learning-item">
             <div class="learning-num">3</div>
             <div class="learning-content">
-              <div class="learning-title"><span class="en-inline">Building alone with AI is a new design
-                  skill.</span><span class="pt-inline">Construir sozinha com IA é uma nova habilidade de design.</span>
+              <div class="learning-title"><span class="en-inline">Designing and developing on my own is a new design
+                  skill.</span><span class="pt-inline">Desenhar e desenvolver sozinha é uma nova habilidade de design.</span>
               </div>
               <div class="learning-desc">
-                <span class="en">I wrote the prompts, reviewed the output, directed the iterations, and caught the
-                  errors. The ability to think in product terms and translate that into precise instructions for AI —
-                  that's a skill that didn't exist before this project became possible.</span>
-                <span class="pt">Eu escrevi os prompts, revisei o output, direcionei as iterações e identifiquei os
-                  erros. A capacidade de pensar em termos de produto e traduzir isso em instruções precisas para IA —
-                  essa é uma habilidade que não existia antes deste projeto se tornar possível.</span>
+                <span class="en">I defined the product, designed it, wrote the specs, reviewed every delivery and corrected course when needed. Thinking in product terms and turning that into precise instructions is what got the project off the ground.</span>
+                <span class="pt">Eu defini o produto, desenhei, escrevi as especificações, revisei cada entrega e corrigi o rumo quando precisou. Pensar em produto e traduzir isso em instruções precisas foi o que tirou o projeto do papel.</span>
               </div>
             </div>
           </div>
@@ -2359,9 +2368,7 @@
           </div>
           <div class="ns-item">
             <div class="ns-dot"></div>
-            <div class="ns-text"><span class="en">Document the full build process as an AI for UX Designers
-                course</span><span class="pt">Documentar o processo completo de construção como um curso de IA para UX
-                Designers</span></div>
+            <div class="ns-text"><span class="en">Document the full build process to share with other designers</span><span class="pt">Documentar o processo completo de construção pra compartilhar com outros designers</span></div>
           </div>
           <div class="ns-item">
             <div class="ns-dot"></div>
@@ -2381,14 +2388,11 @@
           <span class="pt-inline">Papel da Giuliana no projeto</span>
         </div>
         <blockquote class="role-quote reveal">
-          <span class="en">"Conceiving the product from scratch — PRD, design, code and deploy — using AI as an
-            execution partner, not a shortcut. Every design decision was born from my own experience with
-            burnout."</span>
-          <span class="pt">"Conceber o produto do zero — PRD, design, código e deploy — usando IA como parceira de
-            execução, não como atalho. Cada decisão de design nasceu da própria experiência com burnout."</span>
+          <span class="en">"Building the product from scratch, from PRD to deploy, with AI as a tool, not a shortcut. Every design decision came from my own experience with burnout."</span>
+          <span class="pt">"Conceber o produto do zero, do PRD ao deploy, com IA como ferramenta e não como atalho. Cada decisão de design nasceu da minha própria experiência com burnout."</span>
         </blockquote>
         <div class="role-attribution reveal">
-          UX Designer + Builder · PRD · Product Design · AI-Assisted Development · Microcopy Strategy
+          UX Designer + Builder · PRD · Product Design · Microcopy Strategy
         </div>
         <div class="role-stats reveal">
           <div
@@ -2404,16 +2408,15 @@
             <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">
               5</div>
             <div style="font-size:12px; color:rgba(212,200,239,0.6); line-height:1.5;"><span
-                class="en-inline">Methodology tabs from Design Thinking to AI</span><span class="pt-inline">Etapas
-                metodológicas do Design Thinking à IA</span></div>
+                class="en-inline">Methodology steps, from Design Thinking to building</span><span class="pt-inline">Etapas
+                metodológicas, do Design Thinking à construção</span></div>
           </div>
           <div
             style="text-align:center; padding: 24px; background: rgba(107,79,160,0.3); border-radius: 12px; border: 1px solid rgba(212,200,239,0.1);">
             <div style="font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--white); margin-bottom:8px;">
               3</div>
             <div style="font-size:12px; color:rgba(212,200,239,0.6); line-height:1.5;"><span class="en-inline">AI tools
-                integrated: Claude Code, Claude API, Figma Make</span><span class="pt-inline">Ferramentas de IA
-                integradas: Claude Code, Claude API, Figma Make</span></div>
+                Tools: Claude Code, Claude API, Figma Make</span><span class="pt-inline">Ferramentas: Claude Code, Claude API, Figma Make</span></div>
           </div>
           <div
             style="text-align:center; padding: 24px; background: rgba(107,79,160,0.3); border-radius: 12px; border: 1px solid rgba(212,200,239,0.1);">
@@ -2430,34 +2433,27 @@
     <!-- CTA -->
     <div class="case-cta">
       <div class="case-cta-text">
-        <div class="case-cta-label"><span class="en-inline">Let's work together</span><span class="pt-inline">Vamos
-            trabalhar juntos</span></div>
+        <div class="case-cta-label"><span class="en-inline">Have an app idea to bring to life?</span><span class="pt-inline">Tem uma ideia de app pra tirar do papel?</span></div>
         <div class="case-cta-title">
-          <span class="en">Interested in how I think<br>through complex products?</span>
-          <span class="pt">Interessado em como eu penso<br>produtos complexos?</span>
+          <span class="en">Need something like this? <em>Let's talk.</em></span>
+          <span class="pt">Precisa de algo parecido? <em>Vamos conversar.</em></span>
         </div>
       </div>
       <div class="case-cta-links">
-        <a href="mailto:giulopesg@gmail.com" class="cta-btn white"><svg width="18" height="18" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            style="vertical-align:middle;margin-right:6px">
-            <rect x="2" y="4" width="20" height="16" rx="2" />
-            <path d="M22 4L12 13 2 4" />
-          </svg><span class="en-inline">Get in touch</span><span class="pt-inline">Entrar em contato</span></a>
-        <a href="index.html" class="cta-btn outline">← <span class="en-inline">Back to portfolio</span><span
-            class="pt-inline">Voltar ao portfólio</span></a>
+        <a href="index.html#contato" class="cta-btn white"><span class="en-inline">Tell me about your project</span><span class="pt-inline">Me conta seu projeto</span> &rarr;</a>
+        <a href="https://wa.me/5511993862967" target="_blank" rel="noopener" class="cta-btn outline">WhatsApp &nearr;</a>
       </div>
     </div>
 
     <!-- FOOTER NAV -->
     <div class="case-footer-nav">
-      <a href="oraculo-case.html" class="footer-nav-link">
-        <span class="fnl-label">← <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
-        <span class="fnl-title">Meu Oráculo Pessoal</span>
+      <a href="solana-wtf-case.html" class="footer-nav-link">
+        <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
+        <span class="fnl-title">Solana WTF</span>
       </a>
-      <a href="portfolio-case.html" class="footer-nav-link" style="text-align:right;">
-        <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Próximo</span> →</span>
-        <span class="fnl-title">Portfolio — Built with AI</span>
+      <a href="oraculo-case.html" class="footer-nav-link" style="text-align:right;">
+        <span class="fnl-label"><span class="en-inline">Next</span><span class="pt-inline">Próximo</span> &rarr;</span>
+        <span class="fnl-title">Meu Oráculo Pessoal</span>
       </a>
     </div>
   </main>
@@ -2466,7 +2462,6 @@
     <p>© 2026 Giuliana Lopes Galvão</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
     // ─── LANG TOGGLE ───
     let currentLang = 'en';
@@ -2479,7 +2474,7 @@
       localStorage.setItem('lang', lang);
     }
     const savedLang = localStorage.getItem('lang');
-    if (savedLang) setLang(savedLang);
+    setLang(savedLang || 'pt');
 
     // SCROLL REVEAL
     const reveals = document.querySelectorAll('.reveal');
@@ -2494,6 +2489,15 @@
         }
       });
     });
+function toggleMobileMenu() {
+  document.getElementById('nav-mobile').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('nav-mobile').classList.remove('open');
+}
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
   </script>
 </body>
 

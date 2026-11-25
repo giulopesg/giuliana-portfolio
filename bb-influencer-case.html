@@ -22,7 +22,7 @@
   <meta property="og:description"
     content="Gamification platform for BB's Influencer School: 8+ admin modules, 4 mechanics, evidence tracking, ranking calibration. Replacing manual spreadsheet operations.">
   <meta property="og:image"
-    content="https://www.giulopesgalvao.com.br/cases/bancodobrasil-escoladeinfluenciadores/mockupprodutofinal.png">
+    content="https://www.giulopesgalvao.com.br/cases/bancodobrasil-escoladeinfluenciadores/bancomock.png">
   <meta property="og:url" content="https://www.giulopesgalvao.com.br/bb-influencer-case.html">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="en_US">
@@ -36,7 +36,7 @@
   <meta name="twitter:description"
     content="Gamification platform for BB's Influencer School: 8+ admin modules, 4 mechanics, evidence tracking, ranking calibration.">
   <meta name="twitter:image"
-    content="https://www.giulopesgalvao.com.br/cases/bancodobrasil-escoladeinfluenciadores/mockupprodutofinal.png">
+    content="https://www.giulopesgalvao.com.br/cases/bancodobrasil-escoladeinfluenciadores/bancomock.png">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -56,7 +56,7 @@
       "datePublished": "2025-01-01",
       "dateModified": "2026-03-11",
       "keywords": ["gamification", "UX/UI design", "prototyping", "stakeholder validation", "enterprise design", "Banco do Brasil"],
-      "image": "https://www.giulopesgalvao.com.br/cases/bancodobrasil-escoladeinfluenciadores/mockupprodutofinal.png",
+      "image": "https://www.giulopesgalvao.com.br/cases/bancodobrasil-escoladeinfluenciadores/bancomock.png",
       "url": "https://www.giulopesgalvao.com.br/bb-influencer-case.html",
       "mainEntityOfPage": {
         "@type": "WebPage",
@@ -167,54 +167,38 @@
     }
 
     /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      padding: 24px 64px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      background: rgba(250, 247, 242, 0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--warm-stone);
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 22px 80px; display: flex; align-items: center; gap: 20px; background: rgba(0,0,0,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: background 0.4s, padding 0.4s, border-color 0.3s; }
+    nav.scrolled { background: rgba(0,0,0,0.95); padding-top: 14px; padding-bottom: 14px; border-bottom-color: rgba(255,255,255,0.06); }
+    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: rgba(255,255,255,0.9); text-decoration: none; }
+    .nav-links { margin-left: auto; display: flex; gap: 24px; align-items: center; list-style: none; }
+    .nav-link { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-link:hover { color: #D4C8EF; }
+    .nav-link.active { color: #fff; }
+    .btn-nav-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; background: #5ECE8B; color: #0B2A18; padding: 11px 20px; border-radius: 40px; text-decoration: none; min-height: 44px; box-sizing: border-box; transition: all 0.25s; }
+    .btn-nav-cta:hover { background: #4abe79; transform: translateY(-1px); }
+    .btn-nav-cta svg { flex-shrink: 0; }
+    .lang-toggle { display: flex; gap: 2px; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 4px; flex-shrink: 0; }
+    .lang-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; padding: 6px 12px; border-radius: 16px; border: none; background: transparent; color: rgba(255,255,255,0.55); cursor: pointer; transition: all 0.2s; }
+    .lang-btn.active { background: rgba(255,255,255,0.15); color: #fff; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; margin-left: auto; }
+    .nav-burger span { display: block; width: 20px; height: 2px; background: rgba(255,255,255,0.8); transition: all 0.3s; }
+    .nav-mobile { display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 99; flex-direction: column; padding: 24px; gap: 8px; background: rgba(0,0,0,0.95); border-bottom: 1px solid rgba(255,255,255,0.06); backdrop-filter: blur(16px); }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-size: 15px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 12px 0; transition: color 0.2s; }
+    .nav-mobile a:hover { color: #D4C8EF; }
+    .nav-mobile a.active { color: #fff; }
+    .nav-mobile .btn-nav-cta { text-align: center; justify-content: center; margin-top: 8px; color: #0B2A18; }
+    .nav-mobile .lang-toggle { justify-content: center; margin-top: 8px; border-color: rgba(255,255,255,0.15); }
 
-    .nav-back {
-      font-size: 13px;
-      color: var(--ink-muted);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: color 0.2s;
-    }
-
-    .nav-back:hover {
-      color: var(--amber-deep);
-    }
-
-    .nav-divider {
-      width: 1px;
-      height: 16px;
-      background: var(--warm-stone);
-    }
-
-    .nav-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px;
-      font-weight: 400;
-      color: var(--ink);
-    }
+    .case-back { font-family: 'DM Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.5); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px; transition: color 0.2s; letter-spacing: 0.04em; }
+    .case-back:hover { color: rgba(255,255,255,0.8); }
+    .ctag-service { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
 
     .lang-toggle {
       display: flex;
       gap: 2px;
       border-radius: 20px;
       padding: 4px;
-      margin-left: auto;
     }
 
     .lang-btn {
@@ -1182,9 +1166,9 @@
     }
 
     @media (max-width: 900px) {
-      nav {
-        padding: 18px 24px;
-      }
+      nav { padding: 16px 24px; }
+      .nav-links, nav .lang-toggle { display: none; }
+      .nav-burger { display: flex; }
 
       .case-hero {
         grid-template-columns: 1fr;
@@ -1261,11 +1245,6 @@
 
     @media (max-width: 600px) {
 
-      .nav-title,
-      .nav-divider {
-        display: none;
-      }
-
       .case-meta-row {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -1279,35 +1258,69 @@
         grid-template-columns: 1fr;
       }
     }
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 280ms; }
+    nav { view-transition-name: navbar; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 
 <body>
 
   <!-- NAV -->
-  <nav>
-    <a href="index.html" class="nav-back">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-      </svg>
-      <span class="en-inline">Back to work</span><span class="pt-inline">Voltar ao trabalho</span>
-    </a>
-    <div class="nav-divider"></div>
-    <span class="nav-title">
-      <span class="en-inline">Banco do Brasil — Influencer School</span>
-      <span class="pt-inline">Banco do Brasil — Escola de Influenciadores</span>
-    </span>
-    <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('pt')">PT</button>
-    </div>
-  </nav>
+<nav id="navbar">
+  <a href="index.html" class="nav-name">Giuliana Lopes Galvão</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link active"><span class="pt-inline">Serviços</span><span class="en-inline">Services</span></a></li>
+    <li><a href="about.html" class="nav-link"><span class="pt-inline">Sobre</span><span class="en-inline">About</span></a></li>
+    <li><a href="recrutadores.html" class="nav-link"><span class="pt-inline">Recrutadores</span><span class="en-inline">Recruiters</span></a></li>
+    <li>
+      <a href="index.html#contato" class="btn-nav-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20l1.3-5.1A8.4 8.4 0 1 1 21 11.5z"/></svg>
+        <span class="pt-inline">Vamos conversar</span>
+        <span class="en-inline">Let's talk</span>
+      </a>
+    </li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+  <button class="nav-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html" class="active" onclick="closeMobileMenu()"><span class="pt-inline">Serviços</span><span class="en-inline">Services</span></a>
+  <a href="about.html"><span class="pt-inline">Sobre</span><span class="en-inline">About</span></a>
+  <a href="recrutadores.html"><span class="pt-inline">Recrutadores</span><span class="en-inline">Recruiters</span></a>
+  <a href="index.html#contato" class="btn-nav-cta" onclick="closeMobileMenu()">
+    <span class="pt-inline">Vamos conversar</span>
+    <span class="en-inline">Let's talk</span>
+  </a>
+  <div class="lang-toggle">
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
 
   <main>
     <!-- HERO -->
     <section class="case-hero">
       <div class="case-hero-left">
+        <a href="index.html#trabalhos" class="case-back">
+          <span class="pt-inline">&larr; Início</span>
+          <span class="en-inline">&larr; Home</span>
+        </a>
         <div class="case-tag-row">
+          <span class="ctag ctag-service"><span class="pt-inline">Sistemas e apps</span><span class="en-inline">Systems &amp; apps</span></span>
           <span class="ctag"><span class="en-inline">Gamification</span><span
               class="pt-inline">Gamificação</span></span>
           <span class="ctag"><span class="en-inline">UX/UI Design</span><span class="pt-inline">Design
@@ -1857,7 +1870,7 @@
           <div class="deliverable-card full-width">
             <div class="deliverable-media">
               <video controls playsinline preload="metadata"
-                poster="cases/bancodobrasil-escoladeinfluenciadores/mockupprodutofinal.png"
+                poster="cases/bancodobrasil-escoladeinfluenciadores/bancomock.png"
                 aria-label="GAMIFY BB prototype navigation walkthrough — high-fidelity interactive demo of the admin platform">
                 <source src="cases/bancodobrasil-escoladeinfluenciadores/navegacaoprototipo.mp4" type="video/mp4">
               </video>
@@ -1878,7 +1891,7 @@
 
           <div class="deliverable-card full-width">
             <div class="deliverable-media">
-              <img src="cases/bancodobrasil-escoladeinfluenciadores/mockupprodutofinal.png"
+              <img src="cases/bancodobrasil-escoladeinfluenciadores/bancomock.png"
                 alt="GAMIFY BB — final high-fidelity product mockup showing admin dashboard and mobile screens for Banco do Brasil Influencer School gamification platform"
                 loading="lazy">
             </div>
@@ -1999,37 +2012,22 @@
     <!-- CTA -->
     <div class="case-cta">
       <div class="case-cta-text">
-        <div class="case-cta-label">
-          <span class="en-inline">Let's work together</span>
-          <span class="pt-inline">Vamos trabalhar juntos</span>
-        </div>
+        <div class="case-cta-label"><span class="en-inline">Want to take a manual operation off spreadsheets?</span><span class="pt-inline">Quer tirar uma operação manual da planilha?</span></div>
         <div class="case-cta-title">
-          <span class="en">Interested in how I design gamified experiences?</span>
-          <span class="pt">Interessado em como eu desenho experiências gamificadas?</span>
+          <span class="en">Need something like this? <em>Let's talk.</em></span>
+          <span class="pt">Precisa de algo parecido? <em>Vamos conversar.</em></span>
         </div>
       </div>
       <div class="case-cta-links">
-        <a href="mailto:giulopesg@gmail.com" class="cta-btn amber">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle">
-            <rect x="2" y="4" width="20" height="16" rx="2" />
-            <path d="M22 4L12 13 2 4" />
-          </svg>
-          <span class="en-inline">Get in touch</span>
-          <span class="pt-inline">Entrar em contato</span>
-        </a>
-        <a href="index.html" class="cta-btn outline">
-          <span class="en-inline">&larr; Back to portfolio</span>
-          <span class="pt-inline">&larr; Voltar ao portfólio</span>
-        </a>
+        <a href="index.html#contato" class="cta-btn amber"><span class="en-inline">Tell me about your project</span><span class="pt-inline">Me conta seu projeto</span> &rarr;</a>
+        <a href="https://wa.me/5511993862967" target="_blank" rel="noopener" class="cta-btn outline">WhatsApp &nearr;</a>
       </div>
     </div>
 
     <!-- FOOTER NAV -->
     <div class="case-footer-nav">
       <a href="cpfl-case.html" class="footer-nav-link">
-        <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span
-            class="pt-inline">Anterior</span></span>
+        <span class="fnl-label">&larr; <span class="en-inline">Previous</span><span class="pt-inline">Anterior</span></span>
         <span class="fnl-title">CPFL Soluções</span>
       </a>
       <a href="previsul-case.html" class="footer-nav-link" style="text-align:right;">
@@ -2055,13 +2053,23 @@
       localStorage.setItem('lang', lang);
     }
     const savedLang = localStorage.getItem('lang');
-    if (savedLang) setLang(savedLang);
+    setLang(savedLang || 'pt');
 
     // Scroll reveal
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function toggleMobileMenu() {
+      document.getElementById('nav-mobile').classList.toggle('open');
+    }
+    function closeMobileMenu() {
+      document.getElementById('nav-mobile').classList.remove('open');
+    }
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+    });
   </script>
 </body>
 
