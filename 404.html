@@ -25,10 +25,11 @@
   body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:9999;}
 
   /* lang */
-  .en{display:block;}.pt{display:none;}
-  .lang-pt .en{display:none;}.lang-pt .pt{display:block;}
-  .en-inline{display:inline;}.pt-inline{display:none;}
-  .lang-pt .en-inline{display:none;}.lang-pt .pt-inline{display:inline;}
+  body:not(.lang-pt) .pt,body:not(.lang-pt) .pt-inline{display:none !important;}
+  body.lang-pt .en,body.lang-pt .en-inline{display:none !important;}
+  .lang-pt .pt{display:block;}
+  .en-inline{display:inline;}
+  .lang-pt .pt-inline{display:inline;}
 
   /* nav */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 80px;display:flex;align-items:center;gap:20px;background:rgba(0,0,0,0.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);}

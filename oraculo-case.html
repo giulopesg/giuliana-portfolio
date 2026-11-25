@@ -133,33 +133,11 @@
       display: block;
     }
 
-    .pt {
-      display: none;
-    }
-
-    .lang-pt .en {
-      display: none;
-    }
-
-    .lang-pt .pt {
-      display: block;
-    }
-
-    .en-inline {
-      display: inline;
-    }
-
-    .pt-inline {
-      display: none;
-    }
-
-    .lang-pt .en-inline {
-      display: none;
-    }
-
-    .lang-pt .pt-inline {
-      display: inline;
-    }
+    body:not(.lang-pt) .pt, body:not(.lang-pt) .pt-inline { display: none !important; }
+    body.lang-pt .en, body.lang-pt .en-inline { display: none !important; }
+    .lang-pt .pt { display: block; }
+    .en-inline { display: inline; }
+    .lang-pt .pt-inline { display: inline; }
 
     /* ── LANG TOGGLE ── */
     .lang-toggle {
