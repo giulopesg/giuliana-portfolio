@@ -1,8 +1,8 @@
-# Giuliana Galvão — Portfolio
+# Giuliana Galvão — Site de Serviços
 
-Portfolio de UX Design. HTML estatico hospedado na Vercel.
+Site de serviços de UX Design e engenharia de IA. HTML estático hospedado na Vercel.
 
-**Dominio:** [giulopesgalvao.com.br](https://www.giulopesgalvao.com.br)
+**Domínio:** [giulopesgalvao.com.br](https://www.giulopesgalvao.com.br)
 
 ## Stack
 - HTML5 + CSS3 + Vanilla JS
@@ -13,32 +13,44 @@ Portfolio de UX Design. HTML estatico hospedado na Vercel.
 ## Estrutura
 ```
 /
-├── index.html                ← Home
-├── about.html                ← Sobre
-├── neuroot-case.html         ← Case: Neuroot (accent: plum)
-├── techback-case.html        ← Case: TechBack BB (accent: green-deep)
-├── petrobras-case.html       ← Case: Petrobras PCD (accent: petro-deep)
-├── previsul-case.html        ← Case: Previsul (accent: blue-deep)
-├── cpfl-case.html            ← Case: CPFL Solucoes (accent: blue-mid)
-├── bb-influencer-case.html   ← Case: BB Influencer School (accent: amber)
+├── index.html                ← Home de serviços
+├── recrutadores.html         ← Perfil profissional (recrutadores)
+├── about.html                ← Sobre (tema claro)
+├── aprender.html             ← Mentoria e cursos (noindex, fora do menu)
+├── design-system-case.html   ← Case: Design System SISP (Projetos públicos + Sistemas)
+├── nudge-case.html           ← Case: Nudge (Sistemas e apps)
+├── solana-wtf-case.html      ← Case: Solana WTF (Sites e plataformas)
+├── neuroot-case.html         ← Case: Neuroot (Sistemas e apps)
+├── oraculo-case.html         ← Case: Meu Oráculo Pessoal (Sistemas e apps)
+├── portfolio-case.html       ← Case: Portfolio com IA (Sites e plataformas)
+├── petrobras-case.html       ← Case: Petrobras acessibilidade (Consultoria UX)
+├── techback-case.html        ← Case: TechBack BB (Consultoria UX)
+├── cpfl-case.html            ← Case: CPFL Soluções (Consultoria UX)
+├── bb-influencer-case.html   ← Case: BB Escola de Influenciadores (Sistemas e apps)
+├── previsul-case.html        ← Case: Previsul (Consultoria UX)
 ├── robots.txt                ← SEO: crawl rules
-├── sitemap.xml               ← SEO: sitemap for search engines
-├── vercel.json               ← Vercel config: headers, caching
+├── sitemap.xml               ← SEO: sitemap
+├── vercel.json               ← Vercel config: redirects, headers, cache
 ├── images/                   ← Fotos da Giuliana
 ├── cases/                    ← Assets dos cases
+│   ├── design-system/
+│   ├── nudge/
+│   ├── solanawtf/
 │   ├── neuroot/
+│   ├── meuoraculopessoal/
+│   ├── portfolio/
 │   ├── techback/
 │   ├── previsul/
 │   ├── cpflsolucoes/
 │   └── bancodobrasil-escoladeinfluenciadores/
-├── public/images/techback/   ← Field research screenshots (field-01..15.png)
+├── files/                    ← CV e documentos
 ├── vite.config.js
 └── package.json
 ```
 
 ## Comandos
 
-### Instalar dependencias
+### Instalar dependências
 ```bash
 npm install
 ```
@@ -49,7 +61,7 @@ npm run dev
 ```
 Abre em http://localhost:5173
 
-### Build para producao
+### Build para produção
 ```bash
 npm run build
 ```
@@ -61,27 +73,28 @@ npm run preview
 ```
 
 ## Deploy (Vercel)
-O deploy e automatico via Vercel. Cada push na `main` dispara um novo deploy.
+O deploy é automático via Vercel. Cada push na `main` dispara um novo deploy.
 - Dashboard: Vercel project settings
-- Dominio: giulopesgalvao.com.br (configurado na Vercel)
+- Domínio: giulopesgalvao.com.br (configurado na Vercel)
 
-## SEO & GEO
-Todas as paginas incluem:
+## SEO
+Todas as páginas incluem:
 - Meta tags: title, description, keywords, author, robots
 - Canonical URLs + hreflang (en, pt-BR, x-default)
 - Open Graph + Twitter Card
-- JSON-LD structured data (Article, BreadcrumbList, ProfilePage, Person, WebSite)
-- Speakable schema (GEO — Generative Engine Optimization)
+- JSON-LD structured data (ProfessionalService, BreadcrumbList, WebSite)
 - robots.txt + sitemap.xml
 - Alt text descritivo em todas as imagens
 - `loading="lazy"` em imagens below-the-fold
-- Vercel headers: security + cache de longa duracao para assets
+- Vercel headers: security + cache de longa duração para assets
 
-## Navegacao entre cases (footer-nav)
+## Navegação entre cases (footer-nav)
+Ordem circular:
 ```
-← Neuroot → TechBack → Petrobras → Previsul → CPFL → BB Influencer →
+Design System SISP → Nudge → Solana WTF → Neuroot → Meu Oráculo Pessoal → Portfolio → Petrobras → TechBack BB → CPFL Soluções → BB Escola de Influenciadores → Previsul → (volta)
 ```
 
-## Cases pendentes (sem HTML ainda)
-- [ ] Investe Brasil
-- [ ] Banco PAN — Intranet Redesign
+## Cases pendentes (sem página HTML)
+- [ ] Caixalote (Identidade visual) — falta imagem
+- [ ] Meloon (Identidade visual) — falta imagem
+- [ ] Workshop de Discovery SISP (Consultoria UX + Projetos públicos) — falta imagem

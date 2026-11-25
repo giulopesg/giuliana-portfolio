@@ -7,3 +7,12 @@ dist/
 ChatGPT*
 screencapture-*
 !cases/**/screencapture-*
+cases/bancodobrasil-escoladeinfluenciadores/*.pdf
+design-system-case.html
+cases/design-system/
+docs/
+_backup-23nov/
+_to_delete/
+_acervo/
+.claude/
+SESSION_LOG.md

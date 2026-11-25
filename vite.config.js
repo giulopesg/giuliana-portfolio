@@ -11,8 +11,7 @@ export default defineConfig({
       input: {
         main:           resolve(__dirname, 'index.html'),
         about:          resolve(__dirname, 'about.html'),
-        trabalheComigo: resolve(__dirname, 'trabalhe-comigo.html'),
-        aprender:       resolve(__dirname, 'aprender.html'),
+        notFound:       resolve(__dirname, '404.html'),
         neuroot:        resolve(__dirname, 'neuroot-case.html'),
         oraculo:        resolve(__dirname, 'oraculo-case.html'),
         portfolio:      resolve(__dirname, 'portfolio-case.html'),
@@ -23,6 +22,7 @@ export default defineConfig({
         bbInfluencer:   resolve(__dirname, 'bb-influencer-case.html'),
         solanaWtf:      resolve(__dirname, 'solana-wtf-case.html'),
         nudge:          resolve(__dirname, 'nudge-case.html'),
+        recrutadores:   resolve(__dirname, 'recrutadores.html'),
       }
     }
   }

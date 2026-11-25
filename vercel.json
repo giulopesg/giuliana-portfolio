@@ -3,6 +3,18 @@
   "buildCommand": "",
   "framework": null,
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/trabalhe-comigo",
+      "destination": "/#contato",
+      "statusCode": 301
+    },
+    {
+      "source": "/aprender",
+      "destination": "/",
+      "statusCode": 302
+    }
+  ],
   "rewrites": [
     {
       "source": "/solana-wtf",
