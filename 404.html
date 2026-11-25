@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 · Giuliana Lopes Galvão</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #6B4FA0;
+    --plum-mid: #8B6BBE;
+    --plum-pale: #C4AEE0;
+    --warm-cream: #FAF7F2;
+    --warm-stone: #EDE8E0;
+    --ink: #1C1917;
+    --ink-soft: #4A4542;
+    --ink-muted: #8A8480;
+    --green: #5ECE8B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;background:var(--ink);color:#fff;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:9999;}
+
+  /* lang */
+  .en{display:block;}.pt{display:none;}
+  .lang-pt .en{display:none;}.lang-pt .pt{display:block;}
+  .en-inline{display:inline;}.pt-inline{display:none;}
+  .lang-pt .en-inline{display:none;}.lang-pt .pt-inline{display:inline;}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 80px;display:flex;align-items:center;gap:20px;background:rgba(0,0,0,0.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);}
+  .nav-name{font-family:'Cormorant Garamond',serif;font-size:19px;color:#fff;text-decoration:none;}
+  .nav-links{margin-left:auto;display:flex;gap:24px;align-items:center;list-style:none;}
+  .nav-link{font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s;}
+  .nav-link:hover{color:#fff;}
+  .btn-nav-cta{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;background:#5ECE8B;color:#0B2A18;padding:11px 20px;border-radius:40px;text-decoration:none;min-height:44px;box-sizing:border-box;transition:all 0.25s;}
+  .btn-nav-cta:hover{opacity:0.85;transform:translateY(-1px);}
+  .btn-nav-cta svg{flex-shrink:0;}
+  .lang-toggle{display:flex;gap:2px;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:4px;flex-shrink:0;}
+  .lang-btn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;padding:6px 14px;border-radius:16px;border:none;background:transparent;color:rgba(255,255,255,0.4);cursor:pointer;transition:all 0.2s;}
+  .lang-btn.active{background:var(--plum);color:#fff;}
+  .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-left:auto;}
+  .nav-burger span{display:block;width:20px;height:2px;background:rgba(255,255,255,0.7);transition:all 0.3s;}
+  .nav-mobile{display:none;position:fixed;top:60px;left:0;right:0;z-index:99;flex-direction:column;padding:24px;gap:8px;background:rgba(0,0,0,0.95);border-bottom:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(16px);}
+  .nav-mobile.open{display:flex;}
+  .nav-mobile a{font-size:15px;color:rgba(255,255,255,0.5);text-decoration:none;padding:12px 0;transition:color 0.2s;}
+  .nav-mobile a:hover{color:#fff;}
+  .nav-mobile .btn-nav-cta{text-align:center;justify-content:center;margin-top:8px;color:#0B2A18;}
+  .nav-mobile .lang-toggle{justify-content:center;margin-top:8px;}
+
+  /* content */
+  main{flex:1;display:flex;align-items:center;justify-content:center;padding:120px 80px 80px;}
+  .error-wrap{text-align:center;max-width:520px;}
+  .error-code{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--plum-pale);margin-bottom:24px;}
+  .error-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,64px);font-weight:300;line-height:1.1;color:#fff;margin-bottom:20px;}
+  .error-title em{font-style:italic;color:var(--plum-pale);}
+  .error-sub{font-size:15px;font-weight:300;line-height:1.7;color:rgba(255,255,255,0.5);margin-bottom:40px;}
+  .btn-home{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;background:var(--plum);color:#fff;padding:14px 28px;border-radius:40px;text-decoration:none;transition:all 0.25s;}
+  .btn-home:hover{background:var(--plum-mid);transform:translateY(-2px);}
+
+  /* footer */
+  footer{padding:28px 80px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;}
+  .footer-copy{font-size:12px;font-weight:300;color:rgba(255,255,255,0.3);letter-spacing:0.04em;}
+
+  @media(max-width:900px){
+    nav{padding:16px 24px;}
+    .nav-links,nav .lang-toggle{display:none;}
+    .nav-burger{display:flex;}
+    main{padding:100px 24px 60px;}
+    footer{padding:24px;flex-direction:column;gap:12px;text-align:center;}
+  }
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 280ms; }
+  nav { view-transition-name: navbar; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body class="lang-pt">
+
+<nav>
+  <a href="index.html" class="nav-name">Giuliana Lopes Galvão</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link"><span class="pt-inline">Serviços</span><span class="en-inline">Services</span></a></li>
+    <li><a href="about.html" class="nav-link"><span class="pt-inline">Sobre</span><span class="en-inline">About</span></a></li>
+    <li><a href="recrutadores.html" class="nav-link"><span class="pt-inline">Recrutadores</span><span class="en-inline">Recruiters</span></a></li>
+    <li>
+      <a href="index.html#contato" class="btn-nav-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20l1.3-5.1A8.4 8.4 0 1 1 21 11.5z"/></svg>
+        <span class="pt-inline">Vamos conversar</span>
+        <span class="en-inline">Let's talk</span>
+      </a>
+    </li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+  <button class="nav-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html" onclick="closeMobileMenu()"><span class="pt-inline">Serviços</span><span class="en-inline">Services</span></a>
+  <a href="about.html" onclick="closeMobileMenu()"><span class="pt-inline">Sobre</span><span class="en-inline">About</span></a>
+  <a href="recrutadores.html" onclick="closeMobileMenu()"><span class="pt-inline">Recrutadores</span><span class="en-inline">Recruiters</span></a>
+  <a href="index.html#contato" class="btn-nav-cta" onclick="closeMobileMenu()">
+    <span class="pt-inline">Vamos conversar</span>
+    <span class="en-inline">Let's talk</span>
+  </a>
+  <div class="lang-toggle">
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<main>
+  <div class="error-wrap">
+    <div class="error-code">404</div>
+    <h1 class="error-title">
+      <span class="pt">Essa página<br><em>não existe.</em></span>
+      <span class="en">This page<br><em>doesn't exist.</em></span>
+    </h1>
+    <p class="error-sub">
+      <span class="pt">Pode ter sido movida ou o endereço está errado.</span>
+      <span class="en">It may have been moved or the address is wrong.</span>
+    </p>
+    <a href="index.html" class="btn-home">
+      <span class="pt-inline">&larr; Voltar pro início</span>
+      <span class="en-inline">&larr; Back to home</span>
+    </a>
+  </div>
+</main>
+
+<footer>
+  <span class="footer-copy">Giuliana Lopes Galvão © 2026 · <span class="en-inline">UX, design &amp; code</span><span class="pt-inline">UX, design e código</span></span>
+</footer>
+
+<script>
+let currentLang = 'pt';
+function setLang(lang) {
+  currentLang = lang;
+  document.body.classList.toggle('lang-pt', lang === 'pt');
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+  localStorage.setItem('lang', lang);
+}
+const savedLang = localStorage.getItem('lang');
+if (savedLang) setLang(savedLang);
+else setLang('pt');
+
+function toggleMobileMenu() {
+  document.getElementById('nav-mobile').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('nav-mobile').classList.remove('open');
+}
+</script>
+</body>
+</html>
