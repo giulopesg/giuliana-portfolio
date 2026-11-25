@@ -114,10 +114,11 @@
   body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.02; pointer-events: none; z-index: 9999; }
 
   /* ── LANG ── */
-  .en { display: block; } .pt { display: none; }
-  .lang-pt .en { display: none; } .lang-pt .pt { display: block; }
-  .en-inline { display: inline; } .pt-inline { display: none; }
-  .lang-pt .en-inline { display: none; } .lang-pt .pt-inline { display: inline; }
+  body:not(.lang-pt) .pt, body:not(.lang-pt) .pt-inline { display: none !important; }
+  body.lang-pt .en, body.lang-pt .en-inline { display: none !important; }
+  .lang-pt .pt { display: block; }
+  .en-inline { display: inline; }
+  .lang-pt .pt-inline { display: inline; }
 
   /* ── NAV ── */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 22px 80px; display: flex; align-items: center; gap: 20px; background: rgba(0,0,0,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: background 0.4s, padding 0.4s, border-color 0.3s; }
@@ -353,8 +354,8 @@
     </h1>
 
     <p class="hero-sub">
-      <span class="pt">Mais de 10 anos em pesquisa, discovery e design de serviço. Hoje também desenvolvo, do design ao código no ar. Liderei chapters de UX e projetos pra Banco do Brasil, Petrobras, CPFL, Vivo, GPA e Carrefour. Pesquiso, projeto e construo.</span>
-      <span class="en">10+ years in research, discovery and service design. Today I also develop, from design to live code. Led UX chapters and projects for Banco do Brasil, Petrobras, CPFL, Vivo, GPA and Carrefour. I research, design and build.</span>
+      <span class="pt">Mais de 10 anos em pesquisa, discovery e design de servi&ccedil;o. Hoje tamb&eacute;m desenvolvo com engenharia de IA, do design ao c&oacute;digo no ar. Liderei chapters de UX e projetos pra Banco do Brasil, Petrobras, CPFL, Vivo, GPA e Carrefour. Pesquiso, projeto e construo.</span>
+      <span class="en">10+ years in research, discovery and service design. Today I also develop with AI engineering, from design to live code. Led UX chapters and projects for Banco do Brasil, Petrobras, CPFL, Vivo, GPA and Carrefour. I research, design and build.</span>
     </p>
 
     <div class="hero-actions">
@@ -717,7 +718,7 @@
     <ol class="traj-list">
       <li class="traj-item">
         <span class="traj-date">2024 &middot; <span class="pt-inline">atual</span><span class="en-inline">now</span></span>
-        <span class="traj-role"><b><span class="pt-inline">Consultora independente</span><span class="en-inline">Independent consultant</span></b> <span>&middot; UX, <span class="pt-inline">design e código</span><span class="en-inline">design &amp; code</span></span></span>
+        <span class="traj-role"><b><span class="pt-inline">Consultora independente</span><span class="en-inline">Independent consultant</span></b> <span>&middot; UX, <span class="pt-inline">design e engenharia de IA</span><span class="en-inline">design &amp; AI engineering</span></span></span>
       </li>
       <li class="traj-item">
         <span class="traj-date">2019 &middot; 2024</span>

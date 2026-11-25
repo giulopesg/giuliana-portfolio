@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Giuliana Lopes Galvão · UX Designer & Design Engineer</title>
-<meta name="description" content="Desenho e construo marcas, sites, plataformas e sistemas. UX, design e código com mais de 10 anos de experiência. Remoto, pro Brasil e pro mundo.">
+<meta name="description" content="Desenho e construo marcas, sites, plataformas e sistemas. UX, design e engenharia de IA com mais de 10 anos de experiência. Remoto, pro Brasil e pro mundo.">
 <meta name="keywords" content="UX designer, design engineer, identidade visual, sites, plataformas, sistemas, consultoria UX, projetos públicos, design e código, remoto, Brasil">
 <meta name="author" content="Giuliana Lopes Galvão">
 <meta name="robots" content="index, follow">
@@ -15,7 +15,7 @@
 
 <!-- Open Graph -->
 <meta property="og:title" content="Giuliana Lopes Galvão · UX Designer & Design Engineer">
-<meta property="og:description" content="Desenho e construo marcas, sites, plataformas e sistemas. UX, design e código com mais de 10 anos de experiência.">
+<meta property="og:description" content="Desenho e construo marcas, sites, plataformas e sistemas. UX, design e engenharia de IA com mais de 10 anos de experiência.">
 <meta property="og:image" content="https://www.giulopesgalvao.com.br/images/giuliana-preto-1-1.png">
 <meta property="og:url" content="https://www.giulopesgalvao.com.br/index.html">
 <meta property="og:type" content="website">
@@ -26,7 +26,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Giuliana Lopes Galvão · UX Designer & Design Engineer">
-<meta name="twitter:description" content="Desenho e construo marcas, sites, plataformas e sistemas. UX, design e código com mais de 10 anos de experiência.">
+<meta name="twitter:description" content="Desenho e construo marcas, sites, plataformas e sistemas. UX, design e engenharia de IA com mais de 10 anos de experiência.">
 <meta name="twitter:image" content="https://www.giulopesgalvao.com.br/images/giuliana-preto-1-1.png">
 
 <!-- JSON-LD -->
@@ -117,10 +117,11 @@
   body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.02; pointer-events: none; z-index: 9999; }
 
   /* ── LANG ── */
-  .en { display: block; } .pt { display: none; }
-  .lang-pt .en { display: none; } .lang-pt .pt { display: block; }
-  .en-inline { display: inline; } .pt-inline { display: none; }
-  .lang-pt .en-inline { display: none; } .lang-pt .pt-inline { display: inline; }
+  body:not(.lang-pt) .pt, body:not(.lang-pt) .pt-inline { display: none !important; }
+  body.lang-pt .en, body.lang-pt .en-inline { display: none !important; }
+  .lang-pt .pt { display: block; }
+  .en-inline { display: inline; }
+  .lang-pt .pt-inline { display: inline; }
 
   /* ── NAV ── */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 22px 80px; display: flex; align-items: center; gap: 20px; background: rgba(0,0,0,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: background 0.4s, padding 0.4s, border-color 0.3s; }
@@ -438,8 +439,8 @@
         </div>
 
         <div class="hero-label">
-          <span class="pt-inline">Experiência do usuário · Design e código</span>
-          <span class="en-inline">User experience · Design & code</span>
+          <span class="pt-inline">Experiência do usu&aacute;rio · Engenharia de IA</span>
+          <span class="en-inline">User experience · AI engineering</span>
         </div>
 
         <h1 class="hero-title">
@@ -453,8 +454,8 @@
         </p>
 
         <p class="hero-sub">
-          <span class="pt">Pesquiso, desenho e desenvolvo, do primeiro rascunho ao produto no ar. São mais de 10 anos em projetos pra Petrobras, Banco do Brasil e CPFL. Hoje trabalho remoto, com negócios em crescimento, startups, agências e projetos públicos.</span>
-          <span class="en">I research, design and develop, from first sketch to live product. 10+ years on projects for Petrobras, Banco do Brasil and CPFL. Today I work remotely with growing businesses, startups, agencies and public projects.</span>
+          <span class="pt">Pesquiso, desenho e desenvolvo, do primeiro rascunho ao produto no ar, com engenharia de IA pra chegar mais r&aacute;pido sem abrir m&atilde;o do m&eacute;todo. S&atilde;o mais de 10 anos em projetos pra Petrobras, Banco do Brasil e CPFL. Hoje trabalho remoto, com neg&oacute;cios em crescimento, startups, ag&ecirc;ncias e projetos p&uacute;blicos.</span>
+          <span class="en">I research, design and develop, from first sketch to live product, using AI engineering to move faster without giving up method. 10+ years on projects for Petrobras, Banco do Brasil and CPFL. Today I work remotely with growing businesses, startups, agencies and public projects.</span>
         </p>
 
         <div class="hero-actions">
@@ -474,8 +475,8 @@
             <div class="hero-stat-label"><span class="pt-inline">anos em experiência do usuário</span><span class="en-inline">years in user experience</span></div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num sm"><span class="pt-inline">Ponta a ponta</span><span class="en-inline">End to end</span></div>
-            <div class="hero-stat-label"><span class="pt-inline">da pesquisa ao produto no ar</span><span class="en-inline">from research to live product</span></div>
+            <div class="hero-stat-num"><span class="pt-inline">IA</span><span class="en-inline">AI</span></div>
+            <div class="hero-stat-label"><span class="pt-inline">engenharia de IA no meu fluxo</span><span class="en-inline">AI engineering in my workflow</span></div>
           </div>
           <div class="hero-stat">
             <div class="hero-stat-num">&lt;&gt;</div>
@@ -606,8 +607,8 @@
           <span class="en">Specify what will be built.</span>
         </div>
         <p class="metodo-step-desc">
-          <span class="pt">Transformo o que foi decidido em especificação: o que construir, como e com qual critério.</span>
-          <span class="en">I turn decisions into a spec: what to build, how, and by which criteria.</span>
+          <span class="pt">Transformo o que foi decidido em especifica&ccedil;&atilde;o e instru&ccedil;&otilde;es precisas. &Eacute; aqui que entra a engenharia de IA: quanto mais claro o problema, melhor a IA executa.</span>
+          <span class="en">I turn decisions into specs and precise instructions. This is where AI engineering comes in: the clearer the problem, the better AI executes.</span>
         </p>
       </li>
       <li class="metodo-step">
@@ -627,8 +628,8 @@
     </ol>
 
     <blockquote class="metodo-quote">
-      <span class="pt">"O Design Thinking define o campo. O Shape Up define o jogo. Eu conduzo a partida."</span>
-      <span class="en">"Design Thinking defines the field. Shape Up defines the game. I run the play."</span>
+      <span class="pt">&ldquo;O Design Thinking define o campo. O Shape Up define o jogo. Eu conduzo a partida, e a IA acelera.&rdquo;</span>
+      <span class="en">&ldquo;Design Thinking defines the field. Shape Up defines the game. I run the play, and AI speeds it up.&rdquo;</span>
     </blockquote>
   </div>
 </section>
@@ -652,8 +653,8 @@
         <span class="en">I've been a user experience designer for 10+ years, with a background in graphic design. I led projects for Banco do Brasil, Petrobras, CPFL, Vivo, GPA and Carrefour. My focus is always the human problem first. Method comes after.</span>
       </p>
       <p>
-        <span class="pt">Hoje também desenvolvo o que desenho e entrego código de verdade, no ar. Trabalho remoto, pra quem toca o próprio negócio, pra startup, agência ou projeto público.</span>
-        <span class="en">Today I also develop what I design and ship real code, live. I work remotely for business owners, startups, agencies and public projects.</span>
+        <span class="pt">Hoje tamb&eacute;m desenvolvo o que desenho, com engenharia de IA no fluxo, e entrego c&oacute;digo de verdade, no ar. Trabalho remoto, pra quem toca o pr&oacute;prio neg&oacute;cio, pra startup, ag&ecirc;ncia ou projeto p&uacute;blico.</span>
+        <span class="en">Today I also develop what I design, with AI engineering in my workflow, and ship real code, live. I work remotely for business owners, startups, agencies and public projects.</span>
       </p>
       <a href="about.html" class="sobre-link">
         <span class="pt-inline">Mais sobre mim →</span>
@@ -786,9 +787,9 @@ const WORK = [
   { tags: ['Consultoria UX', 'Projetos públicos'], client: { pt: 'Governo · segurança pública', en: 'Government · public safety' }, title: 'Workshop de Discovery SISP', desc: { pt: 'Formação de 2 dias pro time de produto: 7 módulos, de demanda a problema até IA como copiloto no discovery. Conteúdo e facilitação meus.', en: '2-day training for the product team: 7 modules, from demand to problem to AI as a discovery copilot. Content and facilitation by me.' }, tileBig: '2 dias', tileSmall: { pt: '7 módulos de discovery', en: '7 discovery modules' }, hidden: true },
   { tags: ['Sistemas e apps'], client: 'Solana Frontier Hackathon', title: 'Nudge', desc: { pt: 'Coach comportamental pra quem usa cripto na Solana, com IA conversacional e Nudge Score.', en: 'Behavioral coach for Solana crypto users, with conversational AI and Nudge Score.' }, img: 'cases/nudge/mockup.png', link: 'nudge-case.html' },
   { tags: ['Sites e plataformas'], client: 'Hackathon Superteam Brazil', title: 'Solana WTF', desc: { pt: 'Plataforma gamificada de aprendizado com decoder de IA, guias e 5 jogos.', en: 'Gamified learning platform with AI decoder, guides and 5 games.' }, img: 'cases/solanawtf/mockupsolanawtf.png', link: 'solana-wtf-case.html' },
-  { tags: ['Sistemas e apps'], client: { pt: 'Produto próprio', en: 'Own product' }, title: 'Neuroot', desc: { pt: 'App de recuperação pós-burnout. Pesquisa, produto, design e código meus.', en: 'Post-burnout recovery app. Research, product, design and code by me.' }, img: 'cases/neuroot/neurootmock.png', link: 'neuroot-case.html' },
+  { tags: ['Sistemas e apps'], client: { pt: 'Produto próprio', en: 'Own product' }, title: 'Neuroot', desc: { pt: 'App de recuperação pós-burnout. Pesquisa, produto, design e código meus, com Claude Code e Claude API.', en: 'Post-burnout recovery app. Research, product, design and code by me, with Claude Code and Claude API.' }, img: 'cases/neuroot/neurootmock.png', link: 'neuroot-case.html' },
   { tags: ['Sistemas e apps'], client: { pt: 'Produto próprio', en: 'Own product' }, title: 'Meu Oráculo Pessoal', desc: { pt: 'Sistema operacional de vida pessoal num único arquivo, 6000+ linhas, zero dependências.', en: 'Personal life operating system in a single file, 6000+ lines, zero dependencies.' }, img: 'cases/meuoraculopessoal/media/mock.png', link: 'oraculo-case.html' },
-  { tags: ['Sites e plataformas'], client: { pt: 'Este site', en: 'This website' }, title: { pt: 'Este portfólio', en: 'This portfolio' }, desc: { pt: 'Bilíngue e responsivo, desenhado e desenvolvido por mim em 5 dias.', en: 'Bilingual and responsive, designed and developed by me in 5 days.' }, img: 'cases/portfolio/giumock.png', link: 'portfolio-case.html' },
+  { tags: ['Sites e plataformas'], client: { pt: 'Este site', en: 'This website' }, title: { pt: 'Este portfólio', en: 'This portfolio' }, desc: { pt: 'Bilíngue e responsivo, desenhado e desenvolvido por mim em 5 dias, com Claude Code.', en: 'Bilingual and responsive, designed and developed by me in 5 days, with Claude Code.' }, img: 'cases/portfolio/giumock.png', link: 'portfolio-case.html' },
   { tags: ['Consultoria UX'], client: { pt: 'Energia · Petrobras', en: 'Energy · Petrobras' }, title: { pt: 'Petrobras · acessibilidade', en: 'Petrobras · accessibility' }, desc: { pt: '28 sessões de teste com pessoas com deficiência. Um diagnóstico honesto de onde o site institucional falha e como incluir de verdade.', en: '28 testing sessions with people with disabilities. An honest diagnosis of where the institutional site fails and how to truly include.' }, tileBig: '28', tileSmall: { pt: 'testes com pessoas com deficiência', en: 'tests with people with disabilities' }, link: 'petrobras-case.html' },
   { tags: ['Consultoria UX'], client: 'Banco do Brasil', title: 'TechBack BB', desc: { pt: 'Design de serviço de ponta a ponta pra um programa de descarte sustentável de tecnologia.', en: 'End-to-end service design for a sustainable tech disposal program.' }, img: 'cases/techback/techbackmock.jpeg', link: 'techback-case.html' },
   { tags: ['Consultoria UX'], client: { pt: 'Energia · CPFL Soluções', en: 'Energy · CPFL Soluções' }, title: 'CPFL Soluções', desc: { pt: '14 líderes entrevistados em 8 áreas. Pesquisa e propostas pro redesign do site.', en: '14 leaders interviewed across 8 areas. Research and proposals for site redesign.' }, img: 'cases/cpflsolucoes/cpflmock.png', link: 'cpfl-case.html' },
@@ -799,7 +800,7 @@ const WORK = [
 const SERVICES = [
   { id: 'Identidade visual', num: '01', title: { pt: 'Identidade visual', en: 'Visual identity' }, desc: { pt: 'Logo, cores e guia de marca, prontos pra registrar no INPI.', en: 'Logo, colors and brand guide, ready for trademark registration.' } },
   { id: 'Sites e plataformas', num: '02', title: { pt: 'Sites e plataformas', en: 'Websites & platforms' }, desc: { pt: 'Rápidos, acessíveis e fáceis de encontrar no Google.', en: 'Fast, accessible and easy to find on Google.' } },
-  { id: 'Sistemas e apps', num: '03', title: { pt: 'Sistemas e apps', en: 'Systems & apps' }, desc: { pt: 'Sistema sob medida ou MVP, desenhado e desenvolvido por mim, com código real no ar. IA dentro do produto quando faz sentido.', en: 'Custom system or MVP, designed and developed by me, with real code in production. AI inside the product when it makes sense.' } },
+  { id: 'Sistemas e apps', num: '03', title: { pt: 'Sistemas e apps', en: 'Systems & apps' }, desc: { pt: 'Sistema sob medida ou MVP, desenhado e desenvolvido por mim com engenharia de IA, com código real no ar. E IA dentro do produto quando faz sentido.', en: 'Custom system or MVP, designed and developed by me with AI engineering, with real code in production. And AI inside the product when it makes sense.' } },
   { id: 'Consultoria UX', num: '04', title: { pt: 'Consultoria de UX', en: 'UX Consulting' }, desc: { pt: 'Pesquisa, discovery, design de serviço e workshops pra times e startups.', en: 'Research, discovery, service design and workshops for teams and startups.' } },
   { id: 'Projetos públicos', num: '05', title: { pt: 'Projetos públicos', en: 'Public projects' }, desc: { pt: 'Consultora de UX em licitações de tecnologia. Também em recursos hídricos e gestão prisional.', en: 'UX consultant for technology tenders. Also in water resources and prison management.' } }
 ];

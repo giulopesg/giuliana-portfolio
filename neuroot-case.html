@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neuroot — Post-Burnout Recovery App · Giuliana Lopes Galvão | UX Case Study</title>
   <meta name="description"
-    content="UX case study: Neuroot, a post-burnout recovery app from research to code. Behavioral Activation methodology and neuroplasticity-based design by Giuliana Lopes Galvão.">
+    content="UX case study: Neuroot, a post-burnout recovery app from research to code, with AI engineering. Behavioral Activation methodology and neuroplasticity-based design by Giuliana Lopes Galvão.">
   <meta name="keywords"
     content="UX case study, AI-native product, burnout recovery app, Figma Make, Claude Code, behavioral activation, neuroplasticity, product design, mobile PWA, Giuliana Lopes Galvão">
   <meta name="author" content="Giuliana Lopes Galvão">
@@ -19,7 +19,7 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Neuroot — Post-Burnout Recovery App · Giuliana Lopes Galvão | UX Case Study">
   <meta property="og:description"
-    content="Post-burnout recovery app, from research to code. Behavioral Activation methodology meets neuroplasticity-based UX design.">
+    content="Post-burnout recovery app, from research to code, with AI engineering. Behavioral Activation methodology meets neuroplasticity-based UX design.">
   <meta property="og:image" content="https://www.giulopesgalvao.com.br/cases/neuroot/neurootmock.png">
   <meta property="og:url" content="https://www.giulopesgalvao.com.br/neuroot-case.html">
   <meta property="og:type" content="article">
@@ -31,7 +31,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Neuroot — Post-Burnout Recovery App · Giuliana Lopes Galvão | UX Case Study">
   <meta name="twitter:description"
-    content="Post-burnout recovery app, from research to code. Behavioral Activation methodology meets neuroplasticity-based UX design.">
+    content="Post-burnout recovery app, from research to code, with AI engineering. Behavioral Activation methodology meets neuroplasticity-based UX design.">
   <meta name="twitter:image" content="https://www.giulopesgalvao.com.br/cases/neuroot/neurootmock.png">
 
   <!-- JSON-LD Structured Data -->
@@ -48,7 +48,7 @@
         "name": "Giuliana Lopes Galvão",
         "url": "https://www.giulopesgalvao.com.br"
       },
-      "description": "Post-burnout recovery app designed from personal experience, from research to code. Uses Behavioral Activation methodology and neuroplasticity as foundation. One practice a day with a defined end.",
+      "description": "Post-burnout recovery app designed from personal experience, from research to code, with AI engineering. Uses Behavioral Activation methodology and neuroplasticity as foundation. One practice a day with a defined end.",
       "datePublished": "2026-01-01",
       "dateModified": "2026-03-11",
       "keywords": ["AI-native product", "burnout recovery", "mobile PWA", "Claude Code", "Figma Make", "behavioral activation", "neuroplasticity", "product design"],
@@ -129,33 +129,11 @@
       display: block;
     }
 
-    .pt {
-      display: none;
-    }
-
-    .lang-pt .en {
-      display: none;
-    }
-
-    .lang-pt .pt {
-      display: block;
-    }
-
-    .en-inline {
-      display: inline;
-    }
-
-    .pt-inline {
-      display: none;
-    }
-
-    .lang-pt .en-inline {
-      display: none;
-    }
-
-    .lang-pt .pt-inline {
-      display: inline;
-    }
+    body:not(.lang-pt) .pt, body:not(.lang-pt) .pt-inline { display: none !important; }
+    body.lang-pt .en, body.lang-pt .en-inline { display: none !important; }
+    .lang-pt .pt { display: block; }
+    .en-inline { display: inline; }
+    .lang-pt .pt-inline { display: inline; }
 
     /* ── LANG TOGGLE ── */
     .lang-toggle {
@@ -1393,8 +1371,8 @@
         </div>
         <h1 class="case-hero-title">Neuroot</h1>
         <p class="case-hero-subtitle">
-          <span class="en">O caminho do meio.<br>A post-burnout recovery app, from research to code.</span>
-          <span class="pt">O caminho do meio.<br>Um app de recuperação pós-burnout, da pesquisa ao código.</span>
+          <span class="en">O caminho do meio.<br>A post-burnout recovery app, from research to code, with AI engineering.</span>
+          <span class="pt">O caminho do meio.<br>Um app de recupera&ccedil;&atilde;o p&oacute;s-burnout, da pesquisa ao c&oacute;digo, com engenharia de IA.</span>
         </p>
         <div class="case-meta-row">
           <div class="case-meta-item">
